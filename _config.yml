@@ -9,8 +9,10 @@ author: "龚警"
 email: gonj15@mails.tsinghua.edu.cn
 name: "龚警个人博客"
 all_categories: [
-["Python", "python编程","/posts/python.html"], 
-["linux", "Linux相关","/posts/linux.html"],
+["genomics", "基因组学","/posts/genomics.html"], 
+["python", "Python","/posts/python.html"], 
+["linux", "Linux","/posts/linux.html"],
+["visualization", "可视化","/posts/visualization.html"], 
 ["read", "读书笔记","/posts/read.html"], 
 ["other", "杂记","/posts/other.html"],
 ["about", "关于","/about.html"]
