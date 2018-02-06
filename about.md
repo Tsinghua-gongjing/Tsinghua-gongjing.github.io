@@ -2,107 +2,74 @@
 layout: page
 title: "关于：About"
 ---
+
 Welcome to visit my blog!
+=========================
 
-#### 1.Personal Info
-Name: Jing Gong(龚警)  
-Gender: Male  
-City: Beijing, China  
 
- 
-#### 2.Contract
-Email: gongj15@mails.tsinghua.edu.cn 
 
-Johnny Coder
-============
+Personal Information
+------
+* Name: Jing Gong (龚警)  
 
--------------------     ----------------------------
-1 MyAddress                        email@example.com
-MyTown 1000                          @twitter_handle
-MyCountry                           1800 my-phone-nr
--------------------     ----------------------------
+* Gender: Male
+  
+* City: Beijing, China  
+
+* Email: gongj15@mails.tsinghua.edu.cn 
+
+---------------
+
 
 Education
 ---------
+* 2011 - 2015,   School of Life Science, Huazhong University of Science and Technology, China, B. Sc.
 
-2010-2014 (expected)
-:   **PhD, Computer Science**; Awesome University (MyTown)
+* 2015 - current,    School of Life Science, Tsinghua University, China     
 
-    *Thesis title: Deep Learning Approaches to the Self-Awesomeness
-     Estimation Problem*
 
-2007-2010
-:   **BSc, Computer Science and Electrical Engineering**; University of
-    HomeTown (HomeTown)
+---------------
 
-    *Minor: Awesomeology*
 
-Experience
-----------
+Skill
+---------
+* Biology:
 
-**Your Most Recent Work Experience:**
+  - molecular biology 
+  
+  - next generation sequencing
+  
 
-Short text containing the type of work done, results obtained,
-lessons learned and other remarks. Can also include lists and
-links:
+* Programming
 
-* First item
+  - Linux (familar): shell, awk, sed, grep  
 
-* Item with [link](http://www.example.com). Links will work both in
-  the html and pdf versions.
+  - Python (familar): data cleaning and visualization
 
-**That Other Job You Had**
+  - R (basic): data cleaning and visualization
+  
+  - MySQL (basic): creat database, and basic query
 
-Also with a short description.
+---------------
 
-Technical Experience
---------------------
+Research 
+-------
+My study focus on RNA molecules, including RNA secondary structure and RNA-RNA interactions. By combination of next generation sequencing and computational analysis, I aims to identify the underlying regulatory roles of RNAs.
 
-My Cool Side Project
-:   For items which don't have a clear time ordering, a definition
-    list can be used to have named items.
 
-    * These items can also contain lists, but you need to mind the
-      indentation levels in the markdown source.
-    * Second item.
+---------------
 
-Open Source
-:   List open source contributions here, perhaps placing emphasis on
-    the project names, for example the **Linux Kernel**, where you
-    implemented multithreading over a long weekend, or **node.js**
-    (with [link](http://nodejs.org)) which was actually totally
-    your idea...
 
-Programming Languages
-:   **first-lang:** Here, we have an itemization, where we only want
-    to add descriptions to the first few items, but still want to
-    mention some others together at the end. A format that works well
-    here is a description list where the first few items have their
-    first word emphasized, and the last item contains the final few
-    emphasized terms. Notice the reasonably nice page break in the pdf
-    version, which wouldn't happen if we generated the pdf via html.
+Publication
+-----------
 
-:   **second-lang:** Description of your experience with second-lang,
-    perhaps again including a [link] [ref], this time placing the url
-    reference elsewhere in the document to reduce clutter (see source
-    file). 
+Zhipeng Lu, Jing Gong, Qiangfeng Cliff Zhang. [PARIS: Psoralen Analysis of RNA Interactions and Structures with High Throughput and Resolution](https://link.springer.com/protocol/10.1007/978-1-4939-7213-5_4). RNA Detection, 2018
 
-:   **obscure-but-impressive-lang:** We both know this one's pushing
-    it.
+**Jing Gong**\*, Di Shao\*, Kui Xu, Zhipeng Lu, Zhi John Lu, Yucheng T. Yang, and Qiangfeng Cliff Zhang. [RISE: a database of RNA interactome from sequencing experiments](https://www.ncbi.nlm.nih.gov/pubmed/29040625). Nucleic Acids Res. 2018
 
-:   Basic knowledge of **C**, **x86 assembly**, **forth**, **Common Lisp**
+Li Fu\*, Yan-Ru Qin\*, Xiao-Yan Ming\*, Xian-Bo Zuo\*, Yu-Wen Diao\*, Li-Yi Zhang, Jiaoyu Ai, Bei-Lei Liu, Tu-Xiong Huang, Ting-Ting Cao, Bin-Bin Tan, Di Xiang, Chui-Mian Zeng, **Jing Gong**, Qiangfeng Zhang, Sui-Sui Dong, Juan Chen, Haibo Liu, Jian-Lin Wu, Robert Z. Qi, Dan Xie, Li-Dong Wang and Xin-Yuan Guan. [RNA editing of SLC22A3 drives early tumor invasion and metastasis in familial esophageal cancer](https://www.ncbi.nlm.nih.gov/pubmed/28533408). Proc Natl Acad Sci U S A. 2017
 
-[ref]: https://github.com/githubuser/superlongprojectname
+贺选, **龚警**, 王超颖, 汤欣祎, 夏炎枝. [应用aCGH技术对胎儿染色体大片段重复进行产前诊断](http://www.cnki.com.cn/Article/CJFDTOTAL-ZXDY201508008.htm). 中国现代医学杂志, 2015
 
-Extra Section, Call it Whatever You Want
-----------------------------------------
-
-* Human Languages:
-
-     * English (native speaker)
-     * ???
-     * This is what a nested list looks like.
-
-* Random tidbit
-
-* Other sort of impressive-sounding thing you did
+(* Co-first authorship)
+ 
