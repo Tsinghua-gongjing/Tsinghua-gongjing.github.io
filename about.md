@@ -16,7 +16,7 @@ Personal Information
   
 * City: Beijing, China  
 
-* Email: gongj15@mails.tsinghua.edu.cn 
+* Email: [gongj15@mails.tsinghua.edu.cn](mailto:gongj15@mails.tsinghua.edu.cn) 
 
 ---------------
 
