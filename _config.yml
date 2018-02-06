@@ -1,6 +1,7 @@
 markdown: kramdown
 highlighter: pygments
 permalink: /posts/:title.html
+exclude: ["README.md"]
 excerpt_separator: "<!-- more -->"
 
 github: Tsinghua-gongjing
