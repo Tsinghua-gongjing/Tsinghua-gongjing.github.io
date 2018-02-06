@@ -1,4 +1,4 @@
 ---
 layout: category
-category: Visualization
+category: visualization
 ---
