@@ -11,5 +11,5 @@ City: Beijing, China
 
  
 #### 2.Contract
-Email: gonj15@mails.tsinghua.edu.cn 
+Email: gongj15@mails.tsinghua.edu.cn 
 
