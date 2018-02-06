@@ -1,3 +1,10 @@
+---
+layout: post
+category: "linux"
+title:  "grep的使用方法"
+tags: [grep, awk, sed]
+---
+
 ### grep的用法
 
 同时匹配多个pattern中的某一个 (OR)
