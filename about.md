@@ -63,7 +63,7 @@ My study focus on RNA molecules, including RNA secondary structure and RNA-RNA i
 Publication
 -----------
 
-Zhipeng Lu, Jing Gong, Qiangfeng Cliff Zhang. [PARIS: Psoralen Analysis of RNA Interactions and Structures with High Throughput and Resolution](https://link.springer.com/protocol/10.1007/978-1-4939-7213-5_4). RNA Detection, 2018
+Zhipeng Lu, **Jing Gong**, Qiangfeng Cliff Zhang. [PARIS: Psoralen Analysis of RNA Interactions and Structures with High Throughput and Resolution](https://link.springer.com/protocol/10.1007/978-1-4939-7213-5_4). RNA Detection, 2018
 
 **Jing Gong**\*, Di Shao\*, Kui Xu, Zhipeng Lu, Zhi John Lu, Yucheng T. Yang, and Qiangfeng Cliff Zhang. [RISE: a database of RNA interactome from sequencing experiments](https://www.ncbi.nlm.nih.gov/pubmed/29040625). Nucleic Acids Res. 2018
 
