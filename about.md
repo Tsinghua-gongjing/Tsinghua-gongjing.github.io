@@ -35,20 +35,27 @@ Skill
 ---------
 * Biology:
 
-  - molecular biology 
+  - Molecular biology (basic)
   
-  - next generation sequencing
+  - Next generation sequencing (basic)
+
+  - Bioinformatics (familiar)
   
 
 * Programming
 
-  - Linux (familar): shell, awk, sed, grep  
+  - Linux (familiar): shell, awk, sed, grep  
 
-  - Python (familar): data cleaning and visualization
+  - Python (familiar): data cleaning and visualisation
 
-  - R (basic): data cleaning and visualization
+  - R (basic): data cleaning and visualisation
   
-  - MySQL (basic): creat database, and basic query
+  - MySQL (basic): create database, and basic query
+
+
+* Statistics & machine learning (basic)
+
+  
 
 ---------------
 
