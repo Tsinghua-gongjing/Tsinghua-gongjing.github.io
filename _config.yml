@@ -30,11 +30,5 @@ kramdown:
   input: GFM
   syntax_highlighter: rouge
 
----
-layout: default
-comments: true
-# other options
-# ---
-
 disqus:
     shortname: JingGong
