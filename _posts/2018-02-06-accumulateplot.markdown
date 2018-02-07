@@ -17,7 +17,7 @@ tags: [plot, visualization]
 
 ## python implementation
 
-~~~ python
+``` python
 import numpy as np
 import seaborn as sns
 
@@ -73,8 +73,20 @@ def cumulate_dist_plot(ls_ls,ls_ls_label,bins=40,title=None,ax=None,savefn=None,
     if savefn is not None:
         plt.savefig(savefn)
         plt.close()
+```
 
-~~~
+``` python
+mu1, sigma1 = 0, 0.1
+mu2, sigma2 = 0, 0.4
+mu3, sigma3 = 0, 0.8
+
+s1 = np.random.normal(mu1, sigma1, 1000)
+s2 = np.random.normal(mu2, sigma2, 1000)
+s3 = np.random.normal(mu3, sigma3, 1000)
+
+cumulate_dist_plot(ls_ls=[s1,s2,s3],ls_ls_label=['S1','S2','S3'],bins=40)
+```
+[![cumulative_plot_bin40.png](https://i.loli.net/2018/02/07/5a7ab76a037df.png)](https://i.loli.net/2018/02/07/5a7ab76a037df.png)
 
 ---------------------------------------------------
 
