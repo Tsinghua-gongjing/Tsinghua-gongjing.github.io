@@ -32,3 +32,4 @@ kramdown:
 
 disqus:
     shortname: https-tsinghua-gongjing-github-io
+    # the short name is website's rather than accounts
