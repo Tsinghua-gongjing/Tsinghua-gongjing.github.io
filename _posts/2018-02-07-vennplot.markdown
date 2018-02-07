@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "visualization"
-title:  "韦恩图"
+title:  "venn plot"
 tags: [plot, visualization]
 ---
 

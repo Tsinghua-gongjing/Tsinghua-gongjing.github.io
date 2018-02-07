@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "visualization"
-title:  "气泡图"
+title:  "bubble plot"
 tags: [plot, visualization]
 ---
 

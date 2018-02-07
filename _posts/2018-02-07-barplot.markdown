@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "visualization"
-title:  "柱状图"
+title:  "bar plot"
 tags: [plot, visualization]
 ---
 

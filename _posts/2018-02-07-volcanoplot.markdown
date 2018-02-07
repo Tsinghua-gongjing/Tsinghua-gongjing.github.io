@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "visualization"
-title:  "火山图"
+title:  "volcano plot"
 tags: [plot, visualization]
 ---
 
