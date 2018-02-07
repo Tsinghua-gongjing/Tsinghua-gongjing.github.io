@@ -26,3 +26,6 @@ collections:
   docs:
     output: true
 
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
