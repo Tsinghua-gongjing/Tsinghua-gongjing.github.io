@@ -1,29 +1,41 @@
 --- 
 layout: default 
---- 
+---
+
+<div class="post-frame">
+
+<div class="post-navi">
 <!-- Navi -->
 {% for cat in site.all_categories %}{% if page.category == cat[0] %}<a href="/">首页</a>&nbsp;>&nbsp;<a href="{{cat[2]}}">{{cat[1]}}</a>&nbsp;>&nbsp;正文{% endif %}{% endfor %}
+</div>
+
+<div class="post-titlearea">
 <!-- Title -->
 <h2>{{ page.title }}</h2>
+<hr class="hrline">
 {% if page.tags.size > 0%}<b>标签：</b>{% for tag in page.tags %}{% if tag != "" %}<a href="/tags.html#{{ tag }}"><i>{{ tag }}</i></a>{% if forloop.index != page.tags.size %}, {% endif %}{% endif %}{% endfor %}{% endif %}
 <div class="post-date">
 	<span class="glyphicon glyphicon-time"></span>
 	{{ page.date | date:"%Y-%m-%d" }}
 </div>
+</div>
 <br/>
 
 <!-- content -->
-<div style="text-indent:2em;">
+<div style="text-indent:2em; margin:10px">
 {{ content }}
 </div>
 
+<div style="margin:10px">
 <br/>
 <b>原创文章，转载请注明出处！</b>
 <br/>
 <b>本文链接：</b><a href="{{site.url}}{{page.url}}" title="{{page.name}}">{{site.url}}{{page.url}}</a>
+</div>
 
+<hr>
 <!-- next and previous -->
-<div style="margin-top:15px; margin-bottom:10px">
+<div style="margin:10px">
   {%if page.previous%}
   <span class="next">
     上篇：
@@ -43,8 +55,10 @@ layout: default
   </div>
   {%endif%}
 </div>
-<hr>
+
 <!-- Blog Comments -->
 <div class="media">
   {% include comment.html %} 
+</div>
+
 </div>
