@@ -36,3 +36,5 @@ comments: true
 # other options
 # ---
 
+disqus:
+    shortname: JingGong
