@@ -6,8 +6,6 @@ title: "关于：About"
 Welcome to visit my blog!
 =========================
 
-
-
 Personal Information
 ------
 * Name: Jing Gong (龚警)  
@@ -61,7 +59,7 @@ Skill
 
 Research 
 -------
-My study focus on RNA molecules, including RNA secondary structure and RNA-RNA interactions. By combination of next generation sequencing and computational analysis, I aims to identify the underlying regulatory roles of RNAs.
+My study focus on RNA molecules, major including RNA secondary structure and RNA-RNA interactions. By combination of next generation sequencing and computational analysis, I aim to disect the underlying regulatory roles of RNAs.
 
 
 ---------------
@@ -79,15 +77,3 @@ Publication
 * 贺选, **龚警**, 王超颖, 汤欣祎, 夏炎枝. [应用aCGH技术对胎儿染色体大片段重复进行产前诊断](http://www.cnki.com.cn/Article/CJFDTOTAL-ZXDY201508008.htm). 中国现代医学杂志, 2015
 
 (* Co-first authorship)
-
-
-| Header1 | Header2 | Header3 |
-|:--------:|:-------:|:--------:|
-| cell1   | cell2   | cell3   |
-| cell4   | cell5   | cell6   |
-|----
-| cell1   | cell2   | cell3   |
-| cell4   | cell5   | cell6   |
-|=====
-| Foot1   | Foot2   | Foot3
-{: rules="groups"}
