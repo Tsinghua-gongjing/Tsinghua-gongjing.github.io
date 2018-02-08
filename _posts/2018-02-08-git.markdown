@@ -1,0 +1,121 @@
+---
+layout: post
+category: "linux"
+title:  "git的安装及使用"
+tags: [linux, git]
+---
+
+## 历史
+
+什么是Git：
+
+```
+Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
+```
+
+谁写了这个免费的开源软件：
+
+```
+Linus在1991年创建了开源的Linux；
+Linus在2005年花了两周时间自己用C写了一个分布式版本控制系统；
+2008年，GitHub网站上线。
+```
+
+-------------------------
+
+## 安装
+
+在mac上用[homebrew](https://brew.sh/)命令直接安装
+
+配置(自己的电脑上的库都使用，或者不太的库使用不同的配置)：
+
+~~~
+$ git config --global user.name "Your Name"
+$ git config --global user.email "email@example.com"
+~~~
+
+-------------------------
+
+
+## 命令
+
+### 创建仓库，添加文件，提交
+
+~~~
+$ mkdir learngit
+$ cd learngit
+$ git init
+Initialized empty Git repository in /Users/michael/learngit/.git/
+
+$ git add readme.txt
+
+$ git commit -m "wrote a readme file"
+[master (root-commit) cb926e7] wrote a readme file
+ 1 file changed, 2 insertions(+)
+ create mode 100644 readme.txt
+ 
+# 一次添加多个文件后，再提交 
+$ git add file1.txt
+$ git add file2.txt file3.txt
+$ git commit -m "add 3 files."
+~~~
+
+### 仓库状态查询
+
+~~~
+# 修改上面的readme文件后
+
+$ git status
+# On branch master
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#    modified:   readme.txt
+#
+no changes added to commit (use "git add" and/or "git commit -a")
+
+# 表明：readme.txt被修改过了，但还没有准备提交的修改
+
+# 修改的具体内容
+
+$ git diff readme.txt 
+diff --git a/readme.txt b/readme.txt
+index 46d49bf..9247db6 100644
+--- a/readme.txt
++++ b/readme.txt
+@@ -1,2 +1,2 @@
+-Git is a version control system.
++Git is a distributed version control system.
+ Git is free software.
+ 
+# diff的输出和linux的diff命令一样
+
+# 准备提交
+$ git add readme.txt
+
+$ git status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#       modified:   readme.txt
+#
+
+$ git commit -m "add distributed"
+[master ea34578] add distributed
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+# 查看提交后的状态
+$ git status
+# On branch master
+nothing to commit (working directory clean)
+~~~
+
+-------------------------
+
+
+## 参考
+
+* [廖雪峰的git教程](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
+
