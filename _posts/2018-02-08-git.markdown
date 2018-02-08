@@ -226,6 +226,31 @@ $ git commit -m "remove test.txt"
 $ git checkout -- test.txt
 ~~~
 
+### 关联一个远程库
+
+先有本地库，后有远程库的时候，如何关联远程库
+
+~~~
+# 关联
+git remote add origin git@github.com:user_name/repo-name.git
+
+# 推送。第一次用u参数，同步且建立关联
+git push -u origin master
+
+# 以后的推送
+git push origin master
+~~~
+-------------------------
+
+### 克隆远程库
+Git支持多种协议，包括https，但通过ssh支持的**原生git协议速度最快**。
+
+~~~
+# clone remote repo
+$ git clone git@github.com:michaelliao/gitskills.git
+Cloning into 'gitskills'...
+~~~
+
 ## 参考
 
 * [廖雪峰的git教程](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
