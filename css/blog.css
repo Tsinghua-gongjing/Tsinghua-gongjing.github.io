@@ -48,15 +48,22 @@ footer {
 table{
     border-collapse: collapse;
     border-spacing: 0;
-    border:2px solid #ff0000;
+    table-layout: fixed;
+    width: 100%;
 }
+tr:hover { background:lightgrey;}
 
 th{
-    border:2px solid #000000;
+    border:1px solid grey; padding: 5px;
 }
 
 td{
-    border:1px solid #000000;
+    border:1px solid grey; padding: 5px;
+}
+
+td.last {
+    width: 1px;
+    white-space: nowrap;
 }
 
 img {

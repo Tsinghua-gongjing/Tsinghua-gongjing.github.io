@@ -53,4 +53,3 @@ grep -v 'pattern1' file.txt
 awk '!/pattern1/' file.txt
 sed -n '/pattern1/!p' file.txt
 ```
-
