@@ -112,8 +112,118 @@ $ git status
 nothing to commit (working directory clean)
 ~~~
 
+### 查看commit日志
+
+~~~
+# 按照时间顺序，列举出最近的10个commit
+gongjing@hekekedeiMac ~/Dropbox/Tsinghua-gongjing.github.io (git)-[master] % git log
+commit 78fcc24813d8ef5b7cde2cb81470ac9e12e58393
+Author: Tsinghua-gongjing <gongj15@mails.tsinghua.edu.cn>
+Date:   Thu Feb 8 16:44:27 2018 +0800
+
+    add blog git
+
+commit 9aec7c9da7607d805fd25a1bd544669a1e3d210f
+Author: Tsinghua-gongjing <gongj15@mails.tsinghua.edu.cn>
+Date:   Thu Feb 8 15:45:12 2018 +0800
+
+    add visulization collections
+
+commit e0a711baaee4a8eee76320cbf0e97949e8cb682d
+Author: Tsinghua-gongjing <gongj15@mails.tsinghua.edu.cn>
+Date:   Thu Feb 8 13:14:06 2018 +0800
+
+    add python blogs
+    
+# 只显示commit的message信息，其他的不输出
+gongjing@hekekedeiMac ~/Dropbox/Tsinghua-gongjing.github.io (git)-[master] % git log --pretty=oneline
+78fcc24813d8ef5b7cde2cb81470ac9e12e58393 add blog git
+9aec7c9da7607d805fd25a1bd544669a1e3d210f add visulization collections
+e0a711baaee4a8eee76320cbf0e97949e8cb682d add python blogs
+49269b5c7eecb61e576e60106d77bce1db89045f test table format
+19dc28d723e6fdf4a9a67c6c86003bc8939bdea8 set comment
+21a38c17722712d50448c6de4901d1ffa895aa54 set comment
+e9d562309f5abdad39ce42ea04344df2f16c3ccf set comment
+4899527ab459cde41220e88b34cad40de179251b test
+b12f39df607be5800f99caaef43c37036390b650 test
+6ad51d0f988d68e78797fef0a484ff23f5e52e7e test disqus.html
+~~~
+
+### 恢复以往版本
+
+~~~
+# 上一个版本就是HEAD^，上上一个版本就是HEAD^^，当然往上100个版本写100个^比较容易数不过来，所以写成HEAD~100。
+$ git reset --hard HEAD^
+HEAD is now at ea34578 add distributed
+
+# 现在再查看log，最新的日志不见了，只有上个版本及之前的
+$ git log
+commit ea34578d5496d7dd233c827ed32a8cd576c5ee85
+Author: Michael Liao <askxuefeng@gmail.com>
+Date:   Tue Aug 20 14:53:12 2013 +0800
+
+    add distributed
+
+commit cb926e7ea50ad11b8f9e909c05226233bf755030
+Author: Michael Liao <askxuefeng@gmail.com>
+Date:   Mon Aug 19 17:51:55 2013 +0800
+
+    wrote a readme file
+    
+# 直接指定commit的版本号，这里写了前几位（3628164），然后可以恢复到对应的版本。
+# 版本恢复，速度快，指针操作
+$ git reset --hard 3628164
+HEAD is now at 3628164 append GPL
+
+# reflog 记录自己的每一次操作及对应的版本号，可以直接恢复到之前的任何版本
+$ git reflog
+ea34578 HEAD@{0}: reset: moving to HEAD^
+3628164 HEAD@{1}: commit: append GPL
+ea34578 HEAD@{2}: commit: add distributed
+cb926e7 HEAD@{3}: commit (initial): wrote a readme file
+~~~
+
+### 工作原理
+
+我们修改的文件，或者新增加的文件，通过git add命令是先提交到本地的缓存区(Stage)，然后通过commit命令才是提交到具体的分支（比如默认构建的分支master）上，更新到最新的文件状态。
+
+![git_work_flow](https://cdn.liaoxuefeng.com/cdn/files/attachments/001384907702917346729e9afbf4127b6dfbae9207af016000/0)
+
+另外，git管理的是修改，而不是文件本身。[这一页的教程](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001374829472990293f16b45df14f35b94b3e8a026220c5000)很好的说明了这个例子。主要是做了这么个实验：修改文件 -》git add -》修改文件 -》 git commit。 最后只执行添加了第一次的修改，因为第二次的还没有添加到缓存区。(Git是跟踪修改的，每次修改，如果不add到暂存区，那就不会加入到commit中。)
+
 -------------------------
 
+
+### 撤销修改
+
+~~~
+# 改乱了工作区某个文件的内容，想直接丢弃工作区的修改，该没有git add
+git checkout -- file
+
+# 改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改
+git reset HEAD file
+git checkout -- file
+~~~
+
+### 删除文件
+
+~~~
+# 用linux的命令删除，同步
+$ remove test.txt
+$ git add .
+$ git commit -m "delete test"
+
+# 用git rm删除，直接同步
+$ git rm test.txt
+rm 'test.txt'
+$ git commit -m "remove test.txt"
+[master d17efd8] remove test.txt
+ 1 file changed, 1 deletion(-)
+ delete mode 100644 test.txt
+ 
+# 恢复刚才删除的文件（checkout是撤销修改，删除操作也是一种修改）
+$ git checkout -- test.txt
+~~~
 
 ## 参考
 
