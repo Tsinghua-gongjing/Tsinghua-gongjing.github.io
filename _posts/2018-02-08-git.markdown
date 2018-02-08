@@ -5,6 +5,10 @@ title:  "git的安装及使用"
 tags: [linux, git]
 ---
 
+- TOC
+{:toc}
+
+
 ## 历史
 
 什么是Git：
@@ -240,7 +244,6 @@ git push -u origin master
 # 以后的推送
 git push origin master
 ~~~
--------------------------
 
 ### 克隆远程库
 Git支持多种协议，包括https，但通过ssh支持的**原生git协议速度最快**。
@@ -250,6 +253,117 @@ Git支持多种协议，包括https，但通过ssh支持的**原生git协议速�
 $ git clone git@github.com:michaelliao/gitskills.git
 Cloning into 'gitskills'...
 ~~~
+
+### 创建与合并分支
+
+[这里](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001375840038939c291467cc7c747b1810aab2fb8863508000)有一系列的图，来形象的说明分支相关的概念和操作
+
+~~~
+# -b 创建并切换到一个新的分支
+$ git checkout -b dev
+Switched to a new branch 'dev'
+
+# 查看所有的分支， * 表示当前正在使用的分支
+$ git branch
+* dev
+  master
+  
+# 在branch分支完成add操作
+$ git add readme.txt 
+$ git commit -m "branch test"
+[dev fec145a] branch test
+ 1 file changed, 1 insertion(+)
+
+# 切换分支
+$ git checkout master
+Switched to branch 'master'
+
+# 合并指定分支到当前所在分支
+$ git merge dev
+Updating d17efd8..fec145a
+Fast-forward
+ readme.txt |    1 +
+ 1 file changed, 1 insertion(+)
+ 
+# 删除分支
+$ git branch -d dev
+Deleted branch dev (was fec145a).
+~~~
+
+### 多人协作
+
+查看远程
+
+~~~
+$ git remote
+origin
+
+# 查看远程库的详细信息
+gongjing@hekekedeiMac ~/Dropbox/test (git)-[master] % git remote -v
+origin	https://github.com/Tsinghua-gongjing/test.git (fetch)
+origin	https://github.com/Tsinghua-gongjing/test.git (push)
+~~~
+
+推送分支
+
+~~~
+# origin（远程分支名称）， master（本地分支名称）
+$ git push origin master  
+~~~
+
+抓取、合并分支
+
+~~~
+# 当本地和远程的不一致的时候，比如在远程网页界面修改过代码（远程分支比你的本地更新），此时本地的修改不能直接推送
+$ git push origin dev
+To git@github.com:michaelliao/learngit.git
+ ! [rejected]        dev -> dev (non-fast-forward)
+error: failed to push some refs to 'git@github.com:michaelliao/learngit.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Merge the remote changes (e.g. 'git pull')
+hint: before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+# 需要先抓取下来，再进行本地修改的推送
+$ git pull
+$ git add
+$ git push
+~~~
+
+## 标签
+
+~~~
+# 本来commit id是一窜无意义的字符窜，所以可以打上标签；默认标签是打在最新提交的commit上的
+$ git tag v1.0
+
+# 对之前的某个commit进行打标签，6224937就是commit id 
+$ git tag v0.9 6224937
+
+$ git show v0.9
+
+# 删除标签
+$ git tag -d v0.1
+Deleted tag 'v0.1' (was e078af9)
+
+# 推送某个标签到远程
+$ git push origin v1.0
+Total 0 (delta 0), reused 0 (delta 0)
+To git@github.com:michaelliao/learngit.git
+ * [new tag]         v1.0 -> v1.0
+
+# 把所有的标签都推送
+$ git push origin --tags
+~~~
+
+## 参加开源项目：pull-request
+
+先把想参与的项目Fork到自己的仓库，然后从自己的仓库clone下来，修改提交；再向源发一个pull request(不一定会被接收)。
+
+## 搭建git服务器
+
+[这里](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137583770360579bc4b458f044ce7afed3df579123eca000)是教如何自己搭建一个git服务器的，其实git相当于也是一个软件，可以在各个地方安装。
+
+-------------------------
 
 ## 参考
 
