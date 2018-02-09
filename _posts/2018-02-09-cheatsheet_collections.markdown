@@ -1,8 +1,8 @@
 ---
 layout: post
 category: "other"
-title:  "Build personal public blog based on Github Pages"
-tags: [github, blog]
+title:  "collected cheatsheet for quick reference"
+tags: [cheatsheet, linux, python]
 ---
 
 ## python import data
