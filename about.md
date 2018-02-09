@@ -21,9 +21,9 @@ Personal Information
 
 Education
 ---------
-* 2011 - 2015,   School of Life Science, Huazhong University of Science and Technology, China, B.D.
+* 2011 - 2015,   College of Life Science & Technology, Huazhong University of Science and Technology, China, B.D.
 
-* 2015 - current,    School of Life Science, Tsinghua University, China, Ph. D. candidate
+* 2015 - current,    School of Life Sciences, Tsinghua University, China, Ph. D. candidate
 
 
 ---------------
