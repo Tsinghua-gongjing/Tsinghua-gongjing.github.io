@@ -19,3 +19,4 @@ Alt+F  ## move forward one word at a time
 Alt+C  ## capitalizes letter where cursor is and moves to the end of word
 ```
 
+![kk](https://s3.amazonaws.com/assets.datacamp.com/blog_assets/PythonForDataScience.pdf)
