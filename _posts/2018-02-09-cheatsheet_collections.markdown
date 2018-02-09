@@ -53,7 +53,9 @@ tags: [cheatsheet, linux, python]
 
 ## github
 
+[![github-git-cheat-sheet-p1.png](https://i.loli.net/2018/02/09/5a7d6231da2d7.png)](https://i.loli.net/2018/02/09/5a7d6231da2d7.png)
+
 [![github-git-cheat-sheet-p2.png](https://i.loli.net/2018/02/09/5a7d6231d79ee.png)](https://i.loli.net/2018/02/09/5a7d6231d79ee.png)
 
-[![github-git-cheat-sheet-p1.png](https://i.loli.net/2018/02/09/5a7d6231da2d7.png)](https://i.loli.net/2018/02/09/5a7d6231da2d7.png)
+
 
