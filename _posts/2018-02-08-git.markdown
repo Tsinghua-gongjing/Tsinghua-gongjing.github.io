@@ -363,6 +363,57 @@ $ git push origin --tags
 
 [这里](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137583770360579bc4b458f044ce7afed3df579123eca000)是教如何自己搭建一个git服务器的，其实git相当于也是一个软件，可以在各个地方安装。
 
+
+## 注意
+
+1. 当初始化一个项目时，如果只是先添加空文件夹，然后提交，是不能正常推送的，因为此时没有文件的添加或者修改（虽然有新建文件夹）。
+
+clone一个仓库，只有初始化的一个README.MD文件
+
+~~~
+gongjing@hekekedeiMac ~/Dropbox % git clone https://github.com/Tsinghua-gongjing/blog_codes.git
+Cloning into 'blog_codes'...
+remote: Counting objects: 3, done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+Checking connectivity... done.
+
+gongjing@hekekedeiMac ~/Dropbox/blog_codes (git)-[master] % ll
+total 4.0K
+-rw-r--r-- 1 gongjing staff 46 Feb 10 00:20 README.md
+~~~
+
+新建三个文件夹，里面没有文件，直接提交，说已经是最新的，没有更新。
+
+~~~
+gongjing@hekekedeiMac ~/Dropbox/blog_codes (git)-[master] % mkdir data scripts notebooks
+
+gongjing@hekekedeiMac ~/Dropbox/blog_codes (git)-[master] % lazygit "add 3 basic dirs"
+On branch master
+Your branch is up-to-date with 'origin/master'.
+nothing to commit, working directory clean
+Everything up-to-date
+~~~
+
+在script文件夹下面新建文件，且编辑，可正常提交
+
+~~~
+gongjing@hekekedeiMac ~/Dropbox/blog_codes (git)-[master] % cd scripts
+gongjing@hekekedeiMac ~/Dropbox/blog_codes/scripts (git)-[master] % touch test.py
+
+gongjing@hekekedeiMac ~/Dropbox/blog_codes (git)-[master] % lazygit "add test.py in scripts"
+[master 2158936] add test.py in scripts
+ 1 file changed, 1 insertion(+)
+ create mode 100644 scripts/test.py
+Counting objects: 4, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (4/4), 354 bytes | 0 bytes/s, done.
+Total 4 (delta 0), reused 0 (delta 0)
+To https://github.com/Tsinghua-gongjing/blog_codes.git
+   da377b7..2158936  master -> master
+~~~
+
 -------------------------
 
 ## 参考
