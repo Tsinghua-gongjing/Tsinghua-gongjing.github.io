@@ -51,6 +51,10 @@ tags: [cheatsheet, linux, python]
 [![Python_jupyter_Cheat_Sheet.png](https://i.loli.net/2018/02/09/5a7d6483a2038.png)](https://i.loli.net/2018/02/09/5a7d6483a2038.png)
 
 
+## python scikit-learn
+
+[![Scikit_Learn_Cheat_Sheet_Python.png](https://i.loli.net/2018/02/09/5a7d66397391e.png)](https://i.loli.net/2018/02/09/5a7d66397391e.png)
+
 ## github
 
 [![github-git-cheat-sheet-p1.png](https://i.loli.net/2018/02/09/5a7d6231da2d7.png)](https://i.loli.net/2018/02/09/5a7d6231da2d7.png)
@@ -58,4 +62,14 @@ tags: [cheatsheet, linux, python]
 [![github-git-cheat-sheet-p2.png](https://i.loli.net/2018/02/09/5a7d6231d79ee.png)](https://i.loli.net/2018/02/09/5a7d6231d79ee.png)
 
 
+## github markdown
 
+[![markdown-cheatsheet-online-p1.png](https://i.loli.net/2018/02/09/5a7d6842155c7.png)](https://i.loli.net/2018/02/09/5a7d6842155c7.png)
+
+[![markdown-cheatsheet-online-p2.png](https://i.loli.net/2018/02/09/5a7d68424feb5.png)](https://i.loli.net/2018/02/09/5a7d68424feb5.png)
+
+## R ggplot2
+
+[![ggplot2-cheatsheet-p1.png](https://i.loli.net/2018/02/09/5a7d65b3994bc.png)](https://i.loli.net/2018/02/09/5a7d65b3994bc.png)
+
+[![ggplot2-cheatsheet-p2.png](https://i.loli.net/2018/02/09/5a7d65b3cb627.png)](https://i.loli.net/2018/02/09/5a7d65b3cb627.png)
