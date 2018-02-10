@@ -33,7 +33,7 @@ plt.savefig(savefn)
 [![box_plot.png](https://i.loli.net/2018/02/10/5a7e763574140.png)](https://i.loli.net/2018/02/10/5a7e763574140.png)
 
 根据species进行分类，画某一列的数值的分布；这个只能是seaborn来画；
-**添加每个box对应的observation数目**
+**添加每个box对应的observation数目** [参考这里](https://python-graph-gallery.com/38-show-number-of-observation-on-boxplot/)
 
 ~~~
 fig, ax= plt.subplots(figsize=(5,5))
@@ -62,3 +62,57 @@ plt.savefig(savefn)
 ~~~
 
 [![box_plot2.png](https://i.loli.net/2018/02/10/5a7e76358c596.png)](https://i.loli.net/2018/02/10/5a7e76358c596.png)
+
+
+调整box图里面的部分元素：比如下面的line width， type（box or notch），box width
+
+~~~
+fig, ax = plt.subplots(1, 3, figsize=(12,4))
+sns.boxplot( x="species", y="sepal_length", data=iris, linewidth=5, ax=ax[0])
+sns.boxplot( x="species", y="sepal_length", data=iris, notch=True, ax=ax[1])
+sns.boxplot( x="species", y="sepal_length", data=iris, width=0.3, ax=ax[2])
+ax[0].set(title='control line width')
+ax[1].set(title='add notch')
+ax[2].set(title='control box width')
+plt.tight_layout()
+savefn = '/Users/gongjing/Dropbox/blog_codes/images/box_plot3.png'
+plt.savefig(savefn)
+~~~
+
+[![box_plot3.png](https://i.loli.net/2018/02/10/5a7eff1e94be7.png)](https://i.loli.net/2018/02/10/5a7eff1e94be7.png)
+
+在box中添加具体的点的分布：
+
+~~~
+fig, ax= plt.subplots(figsize=(5,5))
+ax = sns.boxplot(x='species', y='sepal_length', data=iris)
+ax = sns.swarmplot(x='species', y='sepal_length', data=iris, color="grey")
+plt.tight_layout()
+savefn = '/Users/gongjing/Dropbox/blog_codes/images/box_plot4.png'
+plt.savefig(savefn)
+~~~
+
+[![box_plot4.png](https://i.loli.net/2018/02/10/5a7f00d45209b.png)](https://i.loli.net/2018/02/10/5a7f00d45209b.png)
+
+分组并列的box：
+
+~~~
+df = sns.load_dataset('tips')
+print df.head()
+
+ total_bill   tip     sex smoker  day    time  size
+0       16.99  1.01  Female     No  Sun  Dinner     2
+1       10.34  1.66    Male     No  Sun  Dinner     3
+2       21.01  3.50    Male     No  Sun  Dinner     3
+3       23.68  3.31    Male     No  Sun  Dinner     2
+4       24.59  3.61  Female     No  Sun  Dinner     4
+
+fig, ax= plt.subplots(figsize=(5,5))
+sns.boxplot(x="day", y="total_bill", hue="smoker", data=df, palette="Set1")
+
+plt.tight_layout()
+savefn = '/Users/gongjing/Dropbox/blog_codes/images/box_plot5.png'
+plt.savefig(savefn)
+~~~
+
+[![box_plot5.png](https://i.loli.net/2018/02/10/5a7f00f9c35fb.png)](https://i.loli.net/2018/02/10/5a7f00f9c35fb.png)
