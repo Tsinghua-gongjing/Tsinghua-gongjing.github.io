@@ -5,17 +5,42 @@ title:  "scatter plot"
 tags: [plot, visualization]
 ---
 
-一些常用操作的快捷键
+
 
 ```
-ctrl+A ## move cursor to the start of a line
-ctrl+E ## move cursor to the end of a line
-Esc+B  ## move to beginning of previous or current word
-ctrl+K ## delete from current cursor to the end 
-ctrl+U ## delete from beginning to the current cursor
-ctrl+W ## delete the word before the cursor
-Alt+B  ## goes back one word at a time
-Alt+F  ## move forward one word at a time
-Alt+C  ## capitalizes letter where cursor is and moves to the end of word
+df = sns.load_dataset('tips')
+print df.head()
+
+total_bill   tip     sex smoker  day    time  size
+0       16.99  1.01  Female     No  Sun  Dinner     2
+1       10.34  1.66    Male     No  Sun  Dinner     3
+2       21.01  3.50    Male     No  Sun  Dinner     3
+3       23.68  3.31    Male     No  Sun  Dinner     2
+4       24.59  3.61  Female     No  Sun  Dinner     4
 ```
+
+seaborn的pointplot适合画，单一变量在不同类别中的变化趋势，不适合直接展示两个变量之间的相关性：
+
+```
+sns.pointplot(x='total_bill', y='tip', data=df)
+```
+
+[![scatter_plot1.png](https://i.loli.net/2018/02/25/5a92c24e544f8.png)](https://i.loli.net/2018/02/25/5a92c24e544f8.png)
+
+默认的点与点之间是有连线的，可以指定为没有：
+
+```
+sns.pointplot(x="total_bill", y="tip", data=df, linestyles='', )
+```
+
+[![scatter_plot1.png](https://i.loli.net/2018/02/25/5a92c2a1a3a42.png)](https://i.loli.net/2018/02/25/5a92c2a1a3a42.png)
+
+所以直接展示两个变量之间的相关性时，可以直接使用pandas的关于df的函数plot：
+
+```
+df.plot(kind='scatter', x='total_bill', y='tip')
+```
+
+[![scatter_plot1.png](https://i.loli.net/2018/02/25/5a92c34709dd4.png)](https://i.loli.net/2018/02/25/5a92c34709dd4.png)
+
 
