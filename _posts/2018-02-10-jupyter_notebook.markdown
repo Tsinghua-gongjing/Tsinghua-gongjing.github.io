@@ -5,7 +5,7 @@ title:  "Set up config for jupyter notebook"
 tags: [python, jupyter, notebok]
 ---
 
-## notebook的配置
+## jupyter notebook的配置
 
 ### 新建配置文件
 
