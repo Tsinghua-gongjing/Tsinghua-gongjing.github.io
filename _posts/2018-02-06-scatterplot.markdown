@@ -44,3 +44,12 @@ df.plot(kind='scatter', x='total_bill', y='tip')
 [![scatter_plot1.png](https://i.loli.net/2018/02/25/5a92c34709dd4.png)](https://i.loli.net/2018/02/25/5a92c34709dd4.png)
 
 
+也可用matplot自带的实现，但是默认的效果没有基于df的好：
+
+```
+plt.scatter(x=df['total_bill'], y=df['tip'])
+```
+
+[![scatter_plot1.png](https://i.loli.net/2018/02/26/5a93b2d55fdae.png)](https://i.loli.net/2018/02/26/5a93b2d55fdae.png)
+
+在[这里](https://python-graph-gallery.com/scatter-plot/)还有很多调试其他的参数的例子，如果需要，可以参考。
