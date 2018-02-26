@@ -5,17 +5,69 @@ title:  "bubble plot"
 tags: [plot, visualization]
 ---
 
-一些常用操作的快捷键
+bubble plot可以结合展示三个变量之间的关系，本文主要是演练了[这里](https://python-graph-gallery.com/271-custom-your-bubble-plot/)这里的代码：
 
 ```
-ctrl+A ## move cursor to the start of a line
-ctrl+E ## move cursor to the end of a line
-Esc+B  ## move to beginning of previous or current word
-ctrl+K ## delete from current cursor to the end 
-ctrl+U ## delete from beginning to the current cursor
-ctrl+W ## delete the word before the cursor
-Alt+B  ## goes back one word at a time
-Alt+F  ## move forward one word at a time
-Alt+C  ## capitalizes letter where cursor is and moves to the end of word
+# create data
+x = np.random.rand(5)
+y = np.random.rand(5)
+z = np.random.rand(5)
 ```
 
+---------------------------
+
+控制bubble的颜色、透明度：
+
+```
+# Change color with c and alpha
+plt.scatter(x, y, s=z*4000, c="red", alpha=0.4)
+```
+
+![](https://python-graph-gallery.com/wp-content/uploads/271_Bubble_plot_customization1.png)
+
+---------------------------
+
+
+控制bubble的形状：
+
+```
+plt.scatter(x, y, s=z*4000, marker="D")
+```
+
+![](https://python-graph-gallery.com/wp-content/uploads/271_Bubble_plot_customization2.png)
+
+---------------------------
+
+
+控制bubble的大小:
+
+```
+plt.scatter(x, y, s=z*200)
+```
+
+![](https://python-graph-gallery.com/wp-content/uploads/271_Bubble_plot_customization3.png)
+
+---------------------------
+
+
+控制bubble的边缘（线条粗细等）：
+
+```
+plt.scatter(x, y, s=z*4000, c="green", alpha=0.4, linewidth=6)
+```
+
+![](https://python-graph-gallery.com/wp-content/uploads/271_Bubble_plot_customization4.png)
+
+---------------------------
+
+
+先导入seaborn，则采用seaborn的主题：
+
+```
+import seaborn as sns
+plt.scatter(x, y, s=z*4000, c="green", alpha=0.4, linewidth=6)
+
+
+```
+
+![](https://python-graph-gallery.com/wp-content/uploads/271_Bubble_plot_customization5.png)
