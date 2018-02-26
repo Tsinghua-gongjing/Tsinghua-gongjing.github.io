@@ -53,3 +53,13 @@ plt.scatter(x=df['total_bill'], y=df['tip'])
 [![scatter_plot1.png](https://i.loli.net/2018/02/26/5a93b2d55fdae.png)](https://i.loli.net/2018/02/26/5a93b2d55fdae.png)
 
 在[这里](https://python-graph-gallery.com/scatter-plot/)还有很多调试其他的参数的例子，如果需要，可以参考。
+
+
+连接型的scatter plot，直接用plot函数即可实现：
+
+```
+df=pd.DataFrame({'x': range(1,10), 'y': np.random.randn(9)*80+range(1,10) })
+plt.plot( 'x', 'y', data=df, linestyle='-', marker='o')
+```
+
+![](https://python-graph-gallery.com/wp-content/uploads/132_Matplotlib-connected-scatterplot.png)
