@@ -63,3 +63,13 @@ plt.plot( 'x', 'y', data=df, linestyle='-', marker='o')
 ```
 
 ![](https://python-graph-gallery.com/wp-content/uploads/132_Matplotlib-connected-scatterplot.png)
+
+
+也可用df.plot或者seaborn的pointplot直接画，默认的pointplot看起来效果更好：
+
+```
+df2.plot(ax=ax[0], x='x', y='y',linestyle='-', marker='o')
+sns.pointplot(x='x', y='y', data=df2, ax=ax[1])
+```
+
+[![scatter_plot2.png](https://i.loli.net/2018/02/26/5a93b814168c9.png)](https://i.loli.net/2018/02/26/5a93b814168c9.png)
