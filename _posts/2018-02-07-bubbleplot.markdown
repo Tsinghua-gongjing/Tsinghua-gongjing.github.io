@@ -71,3 +71,20 @@ plt.scatter(x, y, s=z*4000, c="green", alpha=0.4, linewidth=6)
 ```
 
 ![](https://python-graph-gallery.com/wp-content/uploads/271_Bubble_plot_customization5.png)
+
+---------------------------
+
+同时给气泡上颜色和大小，相当于展示了4个变量：
+
+```
+# create data
+x = np.random.rand(15)
+y = x+np.random.rand(15)
+z = x+np.random.rand(15)
+z=z*z
+ 
+# Change color with c and alpha. I map the color to the X axis value.
+plt.scatter(x, y, s=z*2000, c=x, cmap="Blues", alpha=0.4, edgecolors="grey", linewidth=2)
+```
+
+![](https://python-graph-gallery.com/wp-content/uploads/272_Bubble_plot_with_mapped_color.png)
