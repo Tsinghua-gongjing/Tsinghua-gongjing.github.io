@@ -18,6 +18,7 @@ tags: [genomics, plot]
 
 ```
 sort -k1,1 -k2,2n  in.bed > out.sort.bed (bedtools 推荐)
+sort -k1,1 -k2,2n -o in.bed in.bed  # 直接sort原文件并保存
 igvtools sort in.bed out.sort.bed
 igvtools index sort.bed
 ```
