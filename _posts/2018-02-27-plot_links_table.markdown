@@ -12,7 +12,7 @@ tags: [plot, visualization]
 |-----------------+------------+-----------------|
 | Category |Type| Description  | 
 |-----------------|:-----------|:---------------:|
-| Distribution |violin    | [one or more numeric variables for one or several groups](https://tsinghua-gongjing.github.io/posts/violinplot.htmlp)      | 
+| Distribution |violin    | [one or more numeric variables for one or several groups](https://tsinghua-gongjing.github.io/posts/violinplot.html)      | 
 | Distribution |density   | **strong**      |
 | Distribution |boxplot   | baz             | 
 | Distribution |histogram | baz             | 
