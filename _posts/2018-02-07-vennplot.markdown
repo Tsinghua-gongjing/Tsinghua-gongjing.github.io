@@ -5,17 +5,13 @@ title:  "venn plot"
 tags: [plot, visualization]
 ---
 
-一些常用操作的快捷键
+推荐2个online版本的venn工具，画出来的图是很漂亮的：
 
-```
-ctrl+A ## move cursor to the start of a line
-ctrl+E ## move cursor to the end of a line
-Esc+B  ## move to beginning of previous or current word
-ctrl+K ## delete from current cursor to the end 
-ctrl+U ## delete from beginning to the current cursor
-ctrl+W ## delete the word before the cursor
-Alt+B  ## goes back one word at a time
-Alt+F  ## move forward one word at a time
-Alt+C  ## capitalizes letter where cursor is and moves to the end of word
-```
+* http://bioinformatics.psb.ugent.be/webtools/Venn/         可以提供很多个；
 
+[![venn.jpeg](https://i.loli.net/2018/04/18/5ad73101245d5.jpeg)](https://i.loli.net/2018/04/18/5ad73101245d5.jpeg)
+
+* http://bioinfogp.cnb.csic.es/tools/venny_old/index.html   最多画4个集合的；
+* http://bioinfogp.cnb.csic.es/tools/venny/   这是上面的工具的2.0版本，可以用这个；
+
+  ![img](http://4.bp.blogspot.com/-lGzMnp5ryLw/UNG59AgxlhI/AAAAAAAAA14/jYcivDoOZIM/s1600/4-way_venn.jpg)
