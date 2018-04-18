@@ -54,3 +54,10 @@ awk '!/pattern1/' file.txt
 sed -n '/pattern1/!p' file.txt
 ```
 
+-----------------------------------
+
+只输出匹配的字符: -o
+
+```
+grep -o NM_001131052 utr3.bed
+```
