@@ -1,0 +1,15 @@
+---
+layout: post
+category: "visualization"
+title:  "pie plot"
+tags: [plot, visualization]
+---
+
+一个简便易用的工具：
+
+[rapid table chart maker](https://www.rapidtables.com/tools/pie-chart.html)
+
+[![rapidtable_piechart.jpeg](https://i.loli.net/2018/04/23/5addcdb795954.jpeg)](https://i.loli.net/2018/04/23/5addcdb795954.jpeg)
+
+
+
