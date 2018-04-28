@@ -5,17 +5,17 @@ title:  "python pandas"
 tags: [python, pandas]
 ---
 
-一些常用操作的快捷键
+## python pandas v1
 
-```
-ctrl+A ## move cursor to the start of a line
-ctrl+E ## move cursor to the end of a line
-Esc+B  ## move to beginning of previous or current word
-ctrl+K ## delete from current cursor to the end 
-ctrl+U ## delete from beginning to the current cursor
-ctrl+W ## delete the word before the cursor
-Alt+B  ## goes back one word at a time
-Alt+F  ## move forward one word at a time
-Alt+C  ## capitalizes letter where cursor is and moves to the end of word
-```
+[![Python_Pandas_Cheat_Sheet_2.png](https://i.loli.net/2018/02/09/5a7d61113900e.png)](https://i.loli.net/2018/02/09/5a7d61113900e.png)
 
+## python pandas v2
+
+[![pandas-cheat-sheet-v2.png](https://i.loli.net/2018/02/09/5a7d62edf39ef.png)](https://i.loli.net/2018/02/09/5a7d62edf39ef.png)
+
+
+## python pandas v3
+
+[![pandas-cheat-sheet-v3-p1.png](https://i.loli.net/2018/02/09/5a7d635467064.png)](https://i.loli.net/2018/02/09/5a7d635467064.png)
+
+[![pandas-cheat-sheet-v3-p2.png](https://i.loli.net/2018/02/09/5a7d63549dfd1.png)](https://i.loli.net/2018/02/09/5a7d63549dfd1.png)

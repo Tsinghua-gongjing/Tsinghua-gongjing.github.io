@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "visualization"
-title:  "python画图的一些基本概念"
+title:  "python plot concetpts"
 tags: [python, plot, visualization]
 ---
 
@@ -14,6 +14,10 @@ tags: [python, plot, visualization]
 通过不同的设置，可以实现图形的**高度定制化**，比如：
 ![定制的图片](http://pbpython.com/images/matplotlib-pbpython-example.png)
 
+
+## python matplotlib
+
+[![Python_Matplotlib_Cheat_Sheet.png](https://i.loli.net/2018/02/09/5a7d613f31797.png)](https://i.loli.net/2018/02/09/5a7d613f31797.png)
 
 参考：
 
