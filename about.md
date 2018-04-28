@@ -49,6 +49,8 @@ Skill
   - R (basic): data cleaning and visualisation
   
   - MySQL (basic): create database, and basic query
+  
+  - HTML/JavaScript (basic): create static or interactive page with some common elements
 
 
 * Statistics & machine learning (basic)
