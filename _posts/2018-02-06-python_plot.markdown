@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "visualization"
-title:  "python plot concetpts"
+title:  "python plot concepts"
 tags: [python, plot, visualization]
 ---
 
