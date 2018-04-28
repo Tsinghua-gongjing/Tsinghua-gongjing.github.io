@@ -63,6 +63,13 @@ df_plot_mean = df_plot.loc[:, compare_cell_ls].mean(axis=0)
 ax.plot(range(0, len(compare_cell_ls)), df_plot_mean, color='blue')
 ```
 
+* remove legend (also work in seaborn)
+
+```
+ax.legend_.remove()
+```
+
+
 ## seaborn plot
 
 * set color list instead of seaborn default
