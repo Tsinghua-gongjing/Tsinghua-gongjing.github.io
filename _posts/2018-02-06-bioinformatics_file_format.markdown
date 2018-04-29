@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "genomics"
-title:  "生物信息学分析常用的文件格式"
+title:  "Common file format in bioinformatics"
 tags: [genomics, bioinformatics, format]
 ---
 

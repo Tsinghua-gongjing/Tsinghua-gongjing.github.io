@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "genomics"
-title:  "生物信息分析中坐标的区分"
+title:  "Coordinate systems in different file formats"
 tags: [genomics, coordinate, format]
 ---
 

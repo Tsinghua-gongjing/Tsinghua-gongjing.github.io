@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "genomics"
-title:  "用IGV加载多个bed track文件"
+title:  "Use IGV to load .bed track file"
 tags: [genomics, plot]
 ---
 
