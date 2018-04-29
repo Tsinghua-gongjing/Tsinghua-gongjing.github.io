@@ -19,3 +19,35 @@ awk 'NR==FNR{a[$1];next} $1 in a{print $1}' file1 file2
 awk 'BEGIN{info="it is a test";lens=split(info,tA," ");print length(tA),lens;}'
 4 4
 ```
+
+### by default awk array is not sorted, use *asort*
+
+```
+awk 'BEGIN{info="it is a test";split(info,tA," ");for(k in tA){print k,tA[k];}}'
+4 test
+1 it
+2 is
+3 a
+
+# sort by element in alphabeta
+awk 'BEGIN{info="it is a test";split(info,tA," ");asort(tA);for(k in tA){print k,tA[k];}}'
+1 a
+2 is
+3 it
+4 test
+```
+
+### check element in a array 
+
+```
+awk 'BEGIN{tB["a"]="a1";tB["b"]="b1";if( "c" in tB){print "ok";};for(k in tB){print k,tB[k];}}' 
+a a1
+b b1
+```
+
+### delete element in an array
+
+```
+awk 'BEGIN{tB["a"]="a1";tB["b"]="b1";delete tB["a"];for(k in tB){print k,tB[k];}}' 
+b b1
+```
