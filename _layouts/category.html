@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="description" content="{{ page.title }} - {{ site.name }} - 作者:{{ site.author }}"/>
-    <title>{% for cat in site.all_categories %}{% if page.category == cat[0] %}栏目：{{cat[1]}} - {{ site.name }}{% endif %}{% endfor %}</title>
+    <title>{% for cat in site.all_categories %}{% if page.category == cat[0] %}Category：{{cat[1]}} - {{ site.name }}{% endif %}{% endfor %}</title>
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->
@@ -61,7 +61,7 @@
         <!-- Blog Entries Column -->
         <div class="col-md-8">
 			<!-- Navi -->
-			{% for cat in site.all_categories %}{% if page.category == cat[0] %}<a href="/">首页</a>&nbsp;>&nbsp;<a href="{{cat[2]}}">{{cat[1]}}</a>&nbsp;>&nbsp;列表{% endif %}{% endfor %}
+			{% for cat in site.all_categories %}{% if page.category == cat[0] %}<a href="/">Home</a>&nbsp;>&nbsp;<a href="{{cat[2]}}">{{cat[1]}}</a>&nbsp;>&nbsp;List{% endif %}{% endfor %}
 			<!-- List -->
 			<ul class="list-unstyled">
 			{% for post in site.categories[page.category] %}

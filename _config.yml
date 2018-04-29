@@ -7,7 +7,7 @@ excerpt_separator: "<!-- more -->"
 github: Tsinghua-gongjing
 author: "龚警"
 email: gonj15@mails.tsinghua.edu.cn
-name: "龚警个人博客"
+name: "Jing's blog"
 all_categories: [
 ["genomics", "Genomics","/posts/genomics.html"], 
 ["python", "Python","/posts/python.html"], 
