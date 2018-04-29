@@ -1,8 +1,8 @@
 ---
 layout: post
 category: "genomics"
-title:  "Sequencing techniques: from first to third generation"
-tags: [genomics, sequencing]
+title:  "Sequencing adapter: mode and trimming"
+tags: [genomics, sequencing, adapter]
 ---
 
 
