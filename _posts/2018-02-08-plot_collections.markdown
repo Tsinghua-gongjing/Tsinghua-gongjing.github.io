@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "visualization"
-title:  "visualisation collections"
+title:  "Visualization collections"
 tags: [collections, plot]
 ---
 

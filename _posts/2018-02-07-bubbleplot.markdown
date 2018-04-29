@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "visualization"
-title:  "bubble plot"
+title:  "Bubble plot"
 tags: [plot, visualization]
 ---
 

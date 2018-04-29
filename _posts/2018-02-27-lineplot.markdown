@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "visualization"
-title:  "line plot"
+title:  "Line plot"
 tags: [plot, visualization]
 ---
 

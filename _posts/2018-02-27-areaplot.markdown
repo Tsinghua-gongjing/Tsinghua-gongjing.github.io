@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "visualization"
-title:  "area plot"
+title:  "Area plot"
 tags: [plot, visualization]
 ---
 
