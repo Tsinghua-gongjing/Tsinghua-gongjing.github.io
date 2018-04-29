@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "python"
-title:  "python numpy"
+title:  "Python module numpy"
 tags: [python, numpy]
 ---
 

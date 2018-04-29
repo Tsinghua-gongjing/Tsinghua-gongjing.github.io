@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "python"
-title:  "python list"
+title:  "Python element list"
 tags: [python, list, 列表]
 ---
 

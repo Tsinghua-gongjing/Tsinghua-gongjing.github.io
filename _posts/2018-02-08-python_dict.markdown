@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "python"
-title:  "python dict"
+title:  "Python element dict"
 tags: [python, dict]
 ---
 

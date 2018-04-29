@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "python"
-title:  "python seaborn"
+title:  "Python module seaborn"
 tags: [python, seaborn, plot]
 ---
 

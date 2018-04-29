@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "python"
-title:  "python pandas"
+title:  "Python module pandas"
 tags: [python, pandas]
 ---
 

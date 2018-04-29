@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "python"
-title:  "python scipy"
+title:  "Python module scipy"
 tags: [python, scipy]
 ---
 
