@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "other"
-title:  "collected cheatsheet for quick reference"
+title:  "Collected cheatsheet for quick reference"
 tags: [cheatsheet, linux, python]
 ---
 

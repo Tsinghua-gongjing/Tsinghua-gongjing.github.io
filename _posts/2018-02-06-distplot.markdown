@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "visualization"
-title:  "distribution plot"
+title:  "Distribution plot"
 tags: [plot, visualization]
 ---
 

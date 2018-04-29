@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "visualization"
-title:  "accumulation plot"
+title:  "Accumulation plot"
 tags: [plot, visualization]
 ---
 

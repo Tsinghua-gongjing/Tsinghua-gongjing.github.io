@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "visualization"
-title:  "joint plot"
+title:  "Joint plot"
 tags: [plot, visualization]
 ---
 

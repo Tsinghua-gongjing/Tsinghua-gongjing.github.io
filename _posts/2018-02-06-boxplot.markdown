@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "visualization"
-title:  "box plot"
+title:  "Box plot"
 tags: [plot, visualization]
 ---
 

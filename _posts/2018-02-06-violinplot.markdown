@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "visualization"
-title:  "violin plot"
+title:  "Violin plot"
 tags: [plot, visualization]
 ---
 

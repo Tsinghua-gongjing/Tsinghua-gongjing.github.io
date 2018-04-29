@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "visualization"
-title:  "heatmap plot"
+title:  "Heatmap plot"
 tags: [plot, visualization]
 ---
 

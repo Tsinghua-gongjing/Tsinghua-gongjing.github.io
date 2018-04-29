@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "visualization"
-title:  "scatter plot"
+title:  "Scatter plot"
 tags: [plot, visualization]
 ---
 

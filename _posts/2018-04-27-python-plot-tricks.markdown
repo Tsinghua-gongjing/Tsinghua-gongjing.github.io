@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "visualization"
-title:  "frequently used ticks"
+title:  "Frequently used ticks"
 tags: [plot, visualization]
 ---
 

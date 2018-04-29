@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "visualization"
-title:  "color for plot"
+title:  "Color for plot"
 tags: [plot, visualization]
 ---
 

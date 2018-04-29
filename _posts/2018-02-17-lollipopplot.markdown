@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "visualization"
-title:  "lollipop plot"
+title:  "Lollipop plot"
 tags: [plot, visualization]
 ---
 
