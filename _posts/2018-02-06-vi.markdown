@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "linux"
-title:  "vi编辑器的使用方法"
+title:  "Syntax of Vim editor"
 tags: [linux, vi]
 ---
 

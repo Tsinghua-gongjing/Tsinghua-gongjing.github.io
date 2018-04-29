@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "linux"
-title:  "git的安装及使用"
+title:  "Install of Git and usage"
 tags: [linux, git]
 ---
 

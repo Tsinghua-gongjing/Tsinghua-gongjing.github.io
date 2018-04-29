@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "linux"
-title:  "grep的使用方法"
+title:  "Usage of grep command"
 tags: [grep, awk, sed]
 ---
 
