@@ -28,9 +28,9 @@ layout: default
 
 <div style="margin:10px">
 <br/>
-<b>原创文章，转载请注明出处！</b>
+<b>If you link this blog, Please note linkage, Thanks!</b>
 <br/>
-<b>本文链接：</b><a href="{{site.url}}{{page.url}}" title="{{page.name}}">{{site.url}}{{page.url}}</a>
+<b>Post link：</b><a href="{{site.url}}{{page.url}}" title="{{page.name}}">{{site.url}}{{page.url}}</a>
 </div>
 
 <hr>
@@ -38,7 +38,7 @@ layout: default
 <div style="margin:10px">
   {%if page.previous%}
   <span class="next">
-    上篇：
+    Previous:
     <a href="{{page.previous.url}}">
       {{page.previous.title}}
     </a>
@@ -47,7 +47,7 @@ layout: default
   {%if page.next%}
   <div style="float:right">
   <span class="prev" >
-    下篇：
+    Next:
     <a href="{{page.next.url}}">
       {{page.next.title}}
     </a>
