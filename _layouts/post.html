@@ -13,7 +13,7 @@ layout: default
 <!-- Title -->
 <h2>{{ page.title }}</h2>
 <hr class="hrline">
-{% if page.tags.size > 0%}<b>标签：</b>{% for tag in page.tags %}{% if tag != "" %}<a href="/tags.html#{{ tag }}"><i>{{ tag }}</i></a>{% if forloop.index != page.tags.size %}, {% endif %}{% endif %}{% endfor %}{% endif %}
+{% if page.tags.size > 0%}<b>Tag: </b>{% for tag in page.tags %}{% if tag != "" %}<a href="/tags.html#{{ tag }}"><i>{{ tag }}</i></a>{% if forloop.index != page.tags.size %}, {% endif %}{% endif %}{% endfor %}{% endif %}
 <div class="post-date">
 	<span class="glyphicon glyphicon-time"></span>
 	{{ page.date | date:"%Y-%m-%d" }}
