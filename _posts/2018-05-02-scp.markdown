@@ -1,0 +1,55 @@
+---
+layout: post
+category: "linux"
+title:  "Usage of scp command"
+tags: [linux, scp]
+---
+
+## scp的用法
+
+
+### basic synatx:
+
+```
+scp [option parameter] file_source file_target
+```
+
+### use the -p option to specific the port
+
+```
+scp -p port user@server_ip:/home/user/filename /home/user/filename
+```
+
+### copy file from local to remote
+
+```
+file:
+scp local_file remote_username@remote_ip:remote_folder
+scp local_file remote_username@remote_ip:remote_file
+scp local_file remote_ip:remote_folder
+scp local_file remote_ip:remote_file
+
+# first two command point the user and only password is 
+need later while the last two don't contains the user 
+information and the user name and password are both need
+```
+
+### copy file from remote to local
+
+```
+scp root@www.cumt.edu.cn:/home/root/others/music /home/space/music/i.mp3
+
+```
+
+### copy directory from local to remote
+
+```
+scp -r /home/space/music/ root@www.cumt.edu.cn:/home/root/others/
+cp -r /home/space/music/ www.cumt.edu.cn:/home/root/others/
+```
+
+### copy directory from remote to local
+
+```
+scp -r www.cumt.edu.cn:/home/root/others/ /home/space/music/
+```
