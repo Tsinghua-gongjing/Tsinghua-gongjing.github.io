@@ -1,0 +1,41 @@
+---
+layout: post
+category: "linux"
+title:  "Shortcut command in Sublime"
+tags: [linux, sublime, editor]
+---
+
+reference: [Sublime Text 3 Cheat Sheet](https://www.shortcutfoo.com/app/dojos/sublime-text-3-win/cheatsheet)
+
+## Text Editing Beginner
+
+|Command|Explain|
+|---|---|
+|⌃X |Cut line|
+|⌃↵ |Insert line after|
+|⇧⌃↵ |Insert line before|
+|⇧⌃UP| Move line/selection up|
+|⇧⌃DOWN| Move line/selection down|
+|⌃L| Select line - Repeat to select next lines|
+|⌃D| Select word - repeat select other occurrences|
+|⌃M| Go to matching parentheses|
+|⇧⌃M| Select all contents of the current parentheses|
+
+## Text Editing Intermediate
+
+|Command|Explain|
+|---|---|
+|⌃K⌃K| Delete from cursor to end of line|
+|⌃K⌃BACKSPACE| Delete from cursor to start of line|
+|⌃]| Indent current line(s)|
+|⌃[| Un-indent current line(s)|
+|⇧⌃D| Duplicate line(s)|
+|⌃J| Join line below to the end of the current line|
+|⌃/| Comment/un-comment current line|
+|⇧⌃/| Block comment current selection|
+|⌃Y| Redo or repeat last keyboard shortcut command|
+|⇧⌃V| Paste and indent correctly|
+|⌃[SPACE]| Select next auto-complete suggestion|
+|⌃U| Soft undo|
+
+
