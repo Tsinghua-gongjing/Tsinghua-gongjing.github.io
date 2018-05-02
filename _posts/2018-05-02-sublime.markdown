@@ -39,3 +39,86 @@ reference: [Sublime Text 3 Cheat Sheet](https://www.shortcutfoo.com/app/dojos/su
 |⌃U| Soft undo|
 
 
+## Text Navigation/Goto Anywhere
+
+|Command|Explain|
+|---|---|
+|⌃P| Quick-open files by name|
+|⌃;| Goto word in current file|
+|⌃R| Goto symbol|
+|⌃G| Goto line in current file|
+
+## General
+
+|Command|Explain|
+|---|---|
+|⌥.| Close tag|
+|⌃K⌃C| Scroll to selection|
+|⇧⌃A| Select tag|
+|⇧⌃J| Select indentation|
+|⇧⌃[SPACE]| Select scope|
+|⌃K⌃B| Toggle side bar|
+|⇧⌃P| Command prompt|
+
+## Find/Replace
+
+|Command|Explain|
+|---|---|
+⇧F3 Find previous
+F3 Find next
+⌃F Find
+⌃H Replace
+⇧⌃F Find in files
+
+## Split window
+
+|Command|Explain|
+|---|---|
+|⇧⌥2| Split view into two columns|
+|⇧⌥1| Revert view to single column|
+|⇧⌥5| Set view to grid (4 groups)|
+|⌃2| Jump to group 2|
+|⇧⌃2| Move file to group 2|
+
+
+## Text manipulation
+
+|Command|Explain|
+|---|---|
+|⌃K⌃L| Transform to lowercase|
+|⌃K⌃U| Transform to uppercase|
+|⇧⌃K| Delete line|
+|⌃BACKSPACE| Delete word backwords|
+|⌃DEL| Delete word forwards|
+
+## Text Selection
+
+|Command|Explain|
+|---|---|
+|⌥⌃DOWN| Add new line below with cursor|
+|⌃K⌃D| Skip selection|
+|⇧⌃L| Split selection into lines|
+|⌥F3| Add cursor at all occurrences of a word|
+|⌥⌃UP| Add new line above with cursor|
+|ESC| Return to single selection|
+
+## Code Folding and Marks
+
+|Command|Explain|
+|---|---|
+|⌃K⌃G| Clear mark|
+|⌃K⌃X| Switch location with mark|
+|⌃K⌃A| Select to mark|
+|⌃K⌃[SPACE]| Set mark|
+|⌃K⌃J| Unfold all|
+|⇧⌃]| Unfold code|
+|⇧⌃[| Fold code|
+
+## Bookmarks
+
+|Command|Explain|
+|---|---|
+|⌥F2| Select all bookmarks|
+|⇧F2| Previous bookmark|
+|F2| Next bookmark|
+|⌃F2| Toggle bookmark|
