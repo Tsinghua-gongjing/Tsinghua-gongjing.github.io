@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "visualization"
-title:  "Visualization collections"
+title:  "Seaborn plot collections"
 tags: [collections, plot]
 ---
 
