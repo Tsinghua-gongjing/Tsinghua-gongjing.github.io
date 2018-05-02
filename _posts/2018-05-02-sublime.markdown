@@ -64,11 +64,11 @@ reference: [Sublime Text 3 Cheat Sheet](https://www.shortcutfoo.com/app/dojos/su
 
 |Command|Explain|
 |---|---|
-⇧F3 Find previous
-F3 Find next
-⌃F Find
-⌃H Replace
-⇧⌃F Find in files
+|⇧F3| Find previous|
+|F3| Find next|
+|⌃F| Find|
+|⌃H| Replace|
+|⇧⌃F| Find in files|
 
 ## Split window
 
