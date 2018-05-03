@@ -1,6 +1,6 @@
 ---
 layout: post
-category: "Genomics"
+category: "genomics"
 title:  "Frequently used genome related data"
 tags: [genomics]
 ---
