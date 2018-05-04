@@ -7,12 +7,8 @@ tags: [genomics]
 
 ## public data
 
-------------------------------------------------------------------------------------------------
+### Ensembl
 
-
-### Ensembl download
-
-------------------------------------------------------------------------------------------------
 
 
 ### UCSC download
@@ -33,7 +29,6 @@ Note:
 |refMrna.fa.gz|RefSeq mRNA from the same species as the genome.This sequence data is updated once a week via automatic GenBank updates.|
 
 
-------------------------------------------------------------------------------------------------
 
 Reference:
 
