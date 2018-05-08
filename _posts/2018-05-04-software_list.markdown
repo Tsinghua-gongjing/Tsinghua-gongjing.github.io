@@ -9,39 +9,41 @@ Here list some of the softwares in work:
 
 |Software|What to do|Local location|Frequency|
 |---|---|---|---|
-|Adobe Reader|open pdf, print on noth page mode||*****|
-|Alfred|find app, files||*****|
-|Cytoscape|network visualization||*|
-|Dropbox|sync files||*****|
-|Endnote X8|store papers||****|
-|Evernote|web clip based note||****|
-|Firefox|test website||***|
-|Foxit Reader|open pdf, cann't print on noth page mode||*****|
-|Google Chrome|explore website||*****|
-|Inkscape|edit picture||*|
-|iTerm 2|terminal, more powerful||*****|
-|Lantern|free network, not used after SS installed||**|
-|MacPyMOL|visulize protein structure||*|
+|Adobe Reader|open pdf, print on noth page mode|AdobeReader_dc_en_a_install.dmg|*****|
+|Alfred|find app, files|Alfred301.dmg|*****|
+|Cytoscape|network visualization|Cytoscape_3_4_0_macos.dmg|*|
+|Dropbox|sync files|DropboxInstaller.dmg|*****|
+|Endnote X8|store papers|EndNote_X8_Mac.dmg|****|
+|Evernote|web clip based note|Evernote_RELEASE_6.5_453172.dmg|****|
+|Firefox|test website|Firefox 57.0.1.dmg|***|
+|Foxit Reader|open pdf, cann't print on noth page mode|FoxitReader1.11.0301.enu.Setup.pkg|*****|
+|Google Chrome|explore website|googlechrome.dmg|*****|
+|Inkscape|edit picture|Inkscape-0.91-1-x11-10.5-i386_1.dmg|*|
+|iTerm 2|terminal, more powerful|iTerm2-3_0_4.zip|*****|
+|Lantern|free network, not used after SS installed|lantern-installer-beta.dmg|**|
+|MacPyMOL|visulize protein structure|EduPyMOL-v1.7.4.5.dmg|*|
 |MagicPrefs|set mouse short keys||*****|
-|Microsoft Excel|table, simple plot||*****|
-|Microsoft OneNote|note||***|
-|Microsoft Word|text file||*****|
-|Microsoft PowerPoint|ppt, layout picture||*****|
-|NeteaseMusic|music||***|
-|Parallels Desktop|run windows on Mac platform||**|
+|Microsoft Excel|table, simple plot|office2016-mac|*****|
+|Microsoft OneNote|note|office2016-mac|***|
+|Microsoft Word|text file|office2016-mac|*****|
+|Microsoft PowerPoint|ppt, layout picture|office2016-mac|*****|
+|NeteaseMusic|music|NeteaseMusic_1.4.4_470_web.dmg|***|
+|Parallels Desktop|run windows on Mac platform|pd12.2.dmg|**|
 |Prism 6|generate publishable biology plot||*|
-|QQ|communication||*****|
-|QQ music|music||**|
-|RStudio|R coding environment||***|
+|QQ|communication|QQ_V5.5.1.dmg|*****|
+|QQ music|music|QQMusicMac_Mgr.dmg|**|
+|RStudio|R coding environment|RStudio-1.1.383.dmg|***|
 |Safari|Mac explorer||**|
-|Seafile Client|sync file in THU||****|
-|ShadowsocksX|free network (most stable)||*****|
-|Skype|meeting||**|
-|Sublime Text|code editor||*****|
-|TeamViewer|screen sharing and control between different computers||****|
+|Seafile Client|sync file in THU|seafile-client-6.1.7.dmg|****|
+|ShadowsocksX|free network (most stable)|ShadowsocksX-2.6.3.dmg|*****|
+|Skype|meeting|Skype_7.50.461.dmg|**|
+|Sublime Text|code editor|Sublime Text Build 3114.dmg|*****|
+|TeamViewer|screen sharing and control between different computers|TeamViewer.dmg|****|
 |The Unarchiver|de-compress files||*****|
-|Thunderbird|emails||*****|
-|Transmit|file connection between remote server and local||*****|
-|VLC|video||*|
+|Thunderbird|emails|Thunderbird 45.1.1.dmg|*****|
+|Transmit|file connection between remote server and local|Transmit|*****|
+|VLC|video|vlc-2.2.4.dmg|*|
 |WeChat|communicate, file transfer||*****|
-|搜狗输入法|for Chinese traditional text||****|
+|搜狗输入法|for Chinese traditional text|sogou_mac_35e.dmg|****|
+
+(under dir: /Users/gongjing/SeafileSyn/software/mac)
