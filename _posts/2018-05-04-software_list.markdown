@@ -34,7 +34,7 @@ Here list some of the softwares in work:
 |QQ music|music|QQMusicMac_Mgr.dmg|**|
 |RStudio|R coding environment|RStudio-1.1.383.dmg|***|
 |Safari|Mac explorer||**|
-|Seafile Client|sync file in THU|seafile-client-6.1.7.dmg|****|
+|Seafile Client|sync file in THU|seafile-client-6.1.7.dmg, [manual](https://cloud.tsinghua.edu.cn/help)|****|
 |ShadowsocksX|free network (most stable)|ShadowsocksX-2.6.3.dmg|*****|
 |Skype|meeting|Skype_7.50.461.dmg|**|
 |Sublime Text|code editor|Sublime Text Build 3114.dmg|*****|
