@@ -9,12 +9,12 @@ Here list some of the softwares in work:
 
 |Software|What to do|Local location|Frequency|
 |---|---|---|---|
-|Adobe Reader|open pdf, print on noth page mode|AdobeReader_dc_en_a_install.dmg|*****|
+|Adobe Reader|open pdf, print on noth page mode|AdobeReader\_dc\_en\_a_install.dmg|*****|
 |Alfred|find app, files|Alfred301.dmg|*****|
-|Cytoscape|network visualization|Cytoscape_3_4_0_macos.dmg|*|
+|Cytoscape|network visualization|Cytoscape\_3\_4\_0\_macos.dmg|*|
 |Dropbox|sync files|DropboxInstaller.dmg|*****|
-|Endnote X8|store papers|EndNote_X8_Mac.dmg|****|
-|Evernote|web clip based note|Evernote_RELEASE_6.5_453172.dmg|****|
+|Endnote X8|store papers|EndNote\_X8\_Mac.dmg|****|
+|Evernote|web clip based note|Evernote\_RELEASE\_6.5\_453172.dmg|****|
 |Firefox|test website|Firefox 57.0.1.dmg|***|
 |Foxit Reader|open pdf, cann't print on noth page mode|FoxitReader1.11.0301.enu.Setup.pkg|*****|
 |Google Chrome|explore website|googlechrome.dmg|*****|
@@ -27,7 +27,7 @@ Here list some of the softwares in work:
 |Microsoft OneNote|note|office2016-mac|***|
 |Microsoft Word|text file|office2016-mac|*****|
 |Microsoft PowerPoint|ppt, layout picture|office2016-mac|*****|
-|NeteaseMusic|music|NeteaseMusic_1.4.4_470_web.dmg|***|
+|NeteaseMusic|music|NeteaseMusic\_1.4.4\_470\_web.dmg|***|
 |Parallels Desktop|run windows on Mac platform|pd12.2.dmg|**|
 |Prism 6|generate publishable biology plot||*|
 |QQ|communication|QQ_V5.5.1.dmg|*****|
@@ -44,7 +44,7 @@ Here list some of the softwares in work:
 |Transmit|file connection between remote server and local|Transmit|*****|
 |VLC|video|vlc-2.2.4.dmg|*|
 |WeChat|communicate, file transfer||*****|
-|搜狗输入法|for Chinese traditional text|sogou_mac_35e.dmg|****|
+|搜狗输入法|for Chinese traditional text|sogou\_mac\_35e.dmg|****|
 
 Download: 
 
