@@ -9,17 +9,17 @@ Here list some of the softwares in work:
 
 |Software|What to do|Local location|Frequency|
 |---|---|---|---|
-|Adobe Reader|open pdf, print on noth page mode|AdobeReader\_dc\_en\_a_install.dmg|*****|
+|Adobe Reader|open pdf, print on noth page mode|AdobeReader-dc-en-a-install.dmg|*****|
 |Alfred|find app, files|Alfred301.dmg|*****|
-|Cytoscape|network visualization|Cytoscape\_3\_4\_0\_macos.dmg|*|
+|Cytoscape|network visualization|Cytoscape-3.4.0-macos.dmg|*|
 |Dropbox|sync files|DropboxInstaller.dmg|*****|
-|Endnote X8|store papers|EndNote\_X8\_Mac.dmg|****|
-|Evernote|web clip based note|Evernote\_RELEASE\_6.5\_453172.dmg|****|
+|Endnote X8|store papers|EndNote-X8-Mac.dmg|****|
+|Evernote|web clip based note|Evernote-RELEASE-6.5-453172.dmg|****|
 |Firefox|test website|Firefox 57.0.1.dmg|***|
 |Foxit Reader|open pdf, cann't print on noth page mode|FoxitReader1.11.0301.enu.Setup.pkg|*****|
 |Google Chrome|explore website|googlechrome.dmg|*****|
 |Inkscape|edit picture|Inkscape-0.91-1-x11-10.5-i386_1.dmg|*|
-|iTerm 2|terminal, more powerful|iTerm2-3_0_4.zip|*****|
+|iTerm 2|terminal, more powerful|iTerm2-3.0.4.zip|*****|
 |Lantern|free network, not used after SS installed|lantern-installer-beta.dmg|**|
 |MacPyMOL|visulize protein structure|EduPyMOL-v1.7.4.5.dmg|*|
 |MagicPrefs|set mouse short keys||*****|
@@ -27,7 +27,7 @@ Here list some of the softwares in work:
 |Microsoft OneNote|note|office2016-mac|***|
 |Microsoft Word|text file|office2016-mac|*****|
 |Microsoft PowerPoint|ppt, layout picture|office2016-mac|*****|
-|NeteaseMusic|music|NeteaseMusic\_1.4.4\_470\_web.dmg|***|
+|NeteaseMusic|music|NeteaseMusic-1.4.4-470-web.dmg|***|
 |Parallels Desktop|run windows on Mac platform|pd12.2.dmg|**|
 |Prism 6|generate publishable biology plot||*|
 |QQ|communication|QQ_V5.5.1.dmg|*****|
@@ -44,7 +44,7 @@ Here list some of the softwares in work:
 |Transmit|file connection between remote server and local|Transmit|*****|
 |VLC|video|vlc-2.2.4.dmg|*|
 |WeChat|communicate, file transfer||*****|
-|搜狗输入法|for Chinese traditional text|sogou\_mac\_35e.dmg|****|
+|搜狗输入法|for Chinese traditional text|sogou-mac-35e.dmg|****|
 
 Download: 
 
