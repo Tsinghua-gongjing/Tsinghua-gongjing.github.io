@@ -16,7 +16,7 @@ Here list some of the softwares in work:
 |Endnote X8|store papers|EndNote-X8-Mac.dmg|****|
 |Evernote|web clip based note|Evernote-RELEASE-6.5-453172.dmg|****|
 |Firefox|test website|Firefox 57.0.1.dmg|***|
-|Foxit Reader|open pdf, cann't print on noth page mode|FoxitReader1.11.0301.enu.Setup.pkg|*****|
+|Foxit Reader|open pdf, can not print on noth page mode|FoxitReader1.11.0301-enu-Setup.pkg|*****|
 |Google Chrome|explore website|googlechrome.dmg|*****|
 |Inkscape|edit picture|Inkscape-0.91-1-x11-10.5-i386_1.dmg|*|
 |iTerm 2|terminal, more powerful|iTerm2-3.0.4.zip|*****|
