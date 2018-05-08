@@ -46,6 +46,8 @@ Here list some of the softwares in work:
 |WeChat|communicate, file transfer||*****|
 |搜狗输入法|for Chinese traditional text|sogou-mac-35e.dmg|****|
 
+<br>
+
 Download: 
 
 All the softwares are under dir: /Users/gongjing/SeafileSyn/software/mac.
