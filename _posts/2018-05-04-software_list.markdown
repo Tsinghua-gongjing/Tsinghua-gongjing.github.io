@@ -10,7 +10,7 @@ Here list some of the softwares in work:
 |Software|What to do|Local location|Frequency|
 |---|---|---|---|
 |Adobe Reader|open pdf, print on noth page mode|AdobeReader-dc-en-a-install.dmg|*****|
-|Alfred|find app, files|Alfred301.dmg|*****|
+|Alfred|find app, files|Alfred301.dmg, [install](http://www.sdifen.com/alfred361.html)|*****|
 |Cytoscape|network visualization|Cytoscape-3.4.0-macos.dmg|*|
 |Dropbox|sync files|DropboxInstaller.dmg|*****|
 |Endnote X8|store papers|EndNote-X8-Mac.dmg|****|
