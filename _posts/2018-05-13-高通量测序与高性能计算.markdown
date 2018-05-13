@@ -1,6 +1,6 @@
 ---
 layout: post
-category: "reading"
+category: "read"
 title:  "高通量测序和高性能计算理论与实践"
 tags: [reading]
 ---
