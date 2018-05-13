@@ -1,0 +1,8 @@
+---
+layout: post
+category: "reading"
+title:  "高通量测序和高性能计算理论与实践"
+tags: [reading]
+---
+
+最近看到很多公众号文章([图书售卖](https://mp.weixin.qq.com/s/WHvMudvuQZg_ldQbTFQ7SQ))在推荐一本介绍测序原理和实践的书籍，主要是北京市计算中心生物学部分的老师们编写的，这是自己读这本书做的一些笔记。
