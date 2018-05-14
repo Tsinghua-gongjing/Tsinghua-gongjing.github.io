@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "read"
-title:  "生物信息分析环境构建"
+title:  "高通量测序与高性能计算-3-生物信息分析环境构建"
 tags: [reading, genomics]
 ---
 
