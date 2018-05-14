@@ -1,0 +1,54 @@
+---
+layout: post
+category: "genomics"
+title:  "Motif analysis: MEME suit"
+tags: [genomics, motif]
+---
+
+### FIMO error: base frequency
+
+根据指定的motif文件，对query的fasta文件，用fimo扫潜在的RBP binding site：
+
+```
+fimo -oc combine_all_full \
+     --thresh 0.001 \
+     /Share/home/zhangqf7/gongjing/zebrafish/script/zhangting/paris_RBP/motif_CISBP_RNA_narrow/Collapsed.meme \
+     combine_all.full.fa
+```
+
+motif .meme 文件的头文件（修改之前）：
+
+```
+MEME version 4.10.1
+
+ALPHABET= ACGU
+
+Background letter frequencies (from uniform background):
+A 0.25000 C 0.25000 G 0.25000 U 0.25000
+```
+
+报错：
+
+```
+Errors from MEME text parser:
+The frequency letter U at position 4 is invalid for the DNA alphabet.
+Errors from MEME XML parser:
+Expected state IN_MEME not found!
+MEME XML parser returned error code 4.
+FATAL: No motifs could be read.
+```
+
+
+motif .meme 文件的头文件（修改之后）：
+
+```
+MEME version 4.10.1
+
+ALPHABET= ACGT
+
+Background letter frequencies (from uniform background):
+A 0.25000 C 0.25000 G 0.25000 T 0.25000
+```
+
+
+

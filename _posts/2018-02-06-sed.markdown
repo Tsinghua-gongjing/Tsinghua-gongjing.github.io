@@ -5,7 +5,7 @@ title:  "Usage of sed command"
 tags: [grep, awk, sed]
 ---
 
-### convert DNA to RNA
+### convert DNA to RNA ([source](https://biocozy.blogspot.com/2012/04/convert-fasta-file-rna-to-dna-using-sed.html))
 
 ```
 sed '/^[^>]/ y/uT/tU/' combine_all.full.fa > combine_all.full.RNA.fa
