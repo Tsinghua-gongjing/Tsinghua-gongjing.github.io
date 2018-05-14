@@ -5,52 +5,8 @@ title:  "Usage of sed command"
 tags: [grep, awk, sed]
 ---
 
-### grep的用法
-
-同时匹配多个pattern中的某一个 (OR)
+### convert DNA to RNA
 
 ```
-grep "pattern1\|pattern2" file.txt
-grep -E "pattern1|pattern2" file.txt
-grep -e pattern1 -e pattern2 file.txt
-egrep "pattern1|pattern2" file.txt
-
+sed '/^[^>]/ y/uT/tU/' combine_all.full.fa > combine_all.full.RNA.fa
 ```
-
-这种操作用其他的命令也可以实现，比如：
-
-```
-awk '/pattern1|pattern2/' file.txt
-sed -e '/pattern1/b' -e '/pattern2/b' -e d file.txt
-```
-
------------------------------------
-
-同时满足多个模式 （AND）
-
-```
-grep -E 'pattern1.*pattern2' file.txt # in that order
-grep -E 'pattern1.*pattern2|pattern2.*pattern1' file.txt # in any order
-grep 'pattern1' file.txt | grep 'pattern2' # in any order
-```
-
-用其他命令实现：
-
-```
-awk '/pattern1.*pattern2/' file.txt # in that order
-awk '/pattern1/ && /pattern2/' file.txt # in any order
-
-sed '/pattern1.*pattern2/!d' file.txt # in that order
-sed '/pattern1/!d; /pattern2/!d' file.txt # in any order
-```
-
------------------------------------
-
-匹配不满足给定模式的行：
-
-```
-grep -v 'pattern1' file.txt
-awk '!/pattern1/' file.txt
-sed -n '/pattern1/!p' file.txt
-```
-
