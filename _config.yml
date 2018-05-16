@@ -13,6 +13,8 @@ all_categories: [
 ["python", "Python","/posts/python.html"], 
 ["linux", "Linux","/posts/linux.html"],
 ["visualization", "Visualization","/posts/visualization.html"], 
+["statistics", "Statistics", "/posts/statistics.html"],
+["machinelearning", "MachineLearning", "/posts/machinelearning.html"],
 ["read", "Reading","/posts/read.html"], 
 ["other", "Other","/posts/other.html"],
 ["about", "About","/about.html"]
