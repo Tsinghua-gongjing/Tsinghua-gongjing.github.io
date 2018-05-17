@@ -5,7 +5,7 @@ title:  "How to plot circos graph in RISE database"
 tags: [genomics, RISE]
 ---
 
-[Circos plot](http://circos.ca/) has been widely used to display genomic element interactions along with annotations. In [RISE database](http://rise.life.tsinghua.edu.cn/index.html) we also apply visualise RNA-RNA interactions in this format.
+[Circos plot](http://circos.ca/) has been widely used to display genomic element interactions along with annotations. In [RISE database](http://rise.life.tsinghua.edu.cn/index.html) we also visualise RNA-RNA interactions in this format.
 
 ![img](http://rise.life.tsinghua.edu.cn/circos-data/human/ENSG00000100320.convert.svg)
 
