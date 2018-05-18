@@ -24,4 +24,4 @@ columns: 12 (some are optional correspond to different style)
 11. **blockSizes** - A comma-separated list of the block sizes.
 12. **blockStarts** - A comma-separated list of block starts.
 
-[![bed_file_format_example.jpeg](https://i.loli.net/2018/05/18/5afe41ba4edc4.jpeg)](https://i.loli.net/2018/05/18/5afe41ba4edc4.jpeg)
+![bed](/assets/bed_file_format_example.jpeg)
