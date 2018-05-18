@@ -24,10 +24,4 @@ columns: 12 (some are optional correspond to different style)
 11. **blockSizes** - A comma-separated list of the block sizes.
 12. **blockStarts** - A comma-separated list of block starts.
 
-|BED_N|chrom|start|end|name|score|strand|thickStart|thickEnd|itemRgb|blockCount|blockSizes|blockStarts|
-|---|---|---|---|---|---|---|---|---|---|---|---|---|
-|BED3|chr1|11873|14409||||||||||
-|BED4| chr1 | 11873 | 14409 |uc001aaa.3|||||||||
-|BED5| chr1 | 11873 | 14409 |uc001aaa.3|0||||||||
-|BED6| chr1 | 11873 | 14409 |uc001aaa.3|0|+|||||||
-|BED12| chr1 | 11873 | 14409 |uc001aaa.3|0|+| 11873 | 11873 |0|3|354,109,1189,|0,739,1347,|
+[![bed_file_format_example.jpeg](https://i.loli.net/2018/05/18/5afe41ba4edc4.jpeg)](https://i.loli.net/2018/05/18/5afe41ba4edc4.jpeg)
