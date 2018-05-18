@@ -1,0 +1,58 @@
+---
+layout: post
+category: "genomics"
+title:  "BEDTOOLS"
+tags: [genomics, bedtools]
+---
+
+### [pybedtools](https://daler.github.io/pybedtools/index.html)
+
+Python version of [Bedtools](https://bedtools.readthedocs.io/en/latest/index.html) to deal with bed format files.
+
+#### read a bed file into class object
+
+```
+from pybedtools import BedTool
+
+bed12 = '/Share/home/zhangqf7/gongjing/zebrafish/data/reference/gtf/xiongtl/Delete_coding_danRer_merge_transcript.200.bed'
+
+BED = BedTool(bed12)
+```
+
+#### fields of each entry
+
+**chrom, start, end, name, score, strand** attribute can be retrieved directly. All columns following 6 columns are stored in **fields** as element of list object.
+
+```
+class Interval(__builtin__.object)
+ |  Class to represent a genomic interval.
+ |
+ |  Constructor::
+ |
+ |      Interval(chrom, start, end, name=".", score=".", strand=".", otherfields=None)
+```
+
+```
+>>> i = BED[0]
+>>>
+>>> i.name
+u'TCONS_00052481_- gene_id "XLOC_019131"; transcript_id "TCONS_00052481"; exon_number "8"; oId "CPAT16329"; tss_id "TSS29925";'
+>>> i.chrom
+u'NC_007118.6'
+>>> i.start
+71143916
+>>> i.end
+71166706
+>>> i.score
+u'.'
+>>> i.strand
+u'-'
+>>> i.thickStart  # Not exactly same as definition in bed12 
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'pybedtools.cbedtools.Interval' object has no attribute 'thickStart'
+
+# list all fields and parse
+>>> i.fields
+[u'NC_007118.6', u'71143916', u'71166706', u'TCONS_00052481_- gene_id "XLOC_019131"; transcript_id "TCONS_00052481"; exon_number "8"; oId "CPAT16329"; tss_id "TSS29925";', u'.', u'-', u'.', u'.', u'.', u'8', u'888,101,130,221,36,107,1981,24', u'0,1065,1568,2078,3812,16675,18264,22766']
+```
