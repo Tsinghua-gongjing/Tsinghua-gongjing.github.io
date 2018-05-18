@@ -109,8 +109,7 @@ drwxr-x--- 2 zhangqf5 zhangqf 4.0K Jul  6  2017 results
 drwxr-x--- 2 zhangqf5 zhangqf 4.0K Jul  6  2017 samples
 drwxr-x--- 2 zhangqf5 zhangqf 4.0K Jul  6  2017 uploads
 
-[zhangqf5@loginview02 tableviewer2]$ python makeimage.py /Share/home/zhangqf5/gongjing/DNA-RNA-Protein-interaction-correlation-12-18/data/RRI_union_deduplicates.split_full.type_dis.
-human.txt
+[zhangqf5@loginview02 tableviewer2]$ python makeimage.py /Share/home/zhangqf5/gongjing/DNA-RNA-Protein-interaction-correlation-12-18/data/RRI_union_deduplicates.split_full.type_dis.human.txt
 ```
 
 We get plot like this:
