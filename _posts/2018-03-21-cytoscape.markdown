@@ -9,7 +9,7 @@ tags: [plot, cytoscape, network]
 
 导入相关的模块和基本的配置：
 
-~~~
+~~~python
 from py2cytoscape.data.cynetwork import CyNetwork
 from py2cytoscape.data.cyrest_client import CyRestClient
 from py2cytoscape.data.style import StyleUtil
@@ -26,14 +26,14 @@ import scipy
 
 清空当前的session：
 
-~~~
+~~~python
 cy = CyRestClient()
 cy.session.delete()
 ~~~
 
 读入一个pandas dataframe：
 
-~~~
+~~~python
 f = '/Users/gongjing/Dropbox/Zebrafish_development/results/plots/cytoscape/nx_merge_12345.txt'
 df = pd.read_csv(f, header=0, sep='\t')
 df.head()
@@ -48,7 +48,7 @@ source	target	egg	1cell	4cell	64cell	1k
 
 从pandas dataframe读入为一个网络：
 
-~~~
+~~~python
 nx_inter_RRI = nx.from_pandas_dataframe(df, 'source', 'target', edge_attr=['egg', '1cell', '4cell','64cell', '1k'])
 
 net_module = cy.network.create_from_networkx(nx_inter_RRI)
@@ -56,13 +56,13 @@ net_module = cy.network.create_from_networkx(nx_inter_RRI)
 
 控制网络的layout：
 
-~~~
+~~~python
 cy.layout.apply(name='circular', network=net_module)
 ~~~
 
 读入节点的注释数据：
 
-~~~
+~~~python
 node_anno = node_anno_dict['all']
 df_node_anno = pd.read_csv(node_anno, header=0, sep='\t')
 df_node_anno.head()
@@ -77,13 +77,13 @@ name	type	first_occur	node_degree	egg	1cell	4cell	64cell	1K
 
 更新node table， 属性列用于后面网络特征的映射：
 
-~~~
+~~~python
 net_module.update_node_table(df=df_node_anno, network_key_col='name',data_key_col='name')
 ~~~
 
 定义颜色集合：
 
-~~~
+~~~python
 RNA_type_ls = ['mRNA', 'lncRNA', 'miRNA', 'misc_RNA', 'pseudogene', 'rRNA', 'snRNA', 'snoRNA', 'other']
 RNA_type_color_ls = ['202,75,78', '83,169,102', '205,185,111', '98,180,208', '129,112,182', '238,130,238', 
                      '255,140,0', '74,113,178', '169,169,169']
@@ -92,7 +92,7 @@ RNA_type_color_dict = {i:j for i,j in zip(RNA_type_ls, RNA_type_color_ls)}
 
 给不同类型的节点上不同的颜色：
 
-~~~
+~~~python
 my_module_style = cy.style.create('RRI Module Style')
 my_module_style.create_discrete_mapping(column='type',vp='NODE_FILL_COLOR',
             col_type='String',mappings=RNA_type_color_dict)
@@ -104,7 +104,7 @@ cy.style.apply(my_module_style, n)
 
 如果已经通过cytoscape的菜单，把某一次的操作保存为了.cys文件，也可以直接load进来，获取对应的网络，并更新node table， 应用新的配置等：
 
-~~~
+~~~python
 cy = CyRestClient()
 cy.session.delete()
 
