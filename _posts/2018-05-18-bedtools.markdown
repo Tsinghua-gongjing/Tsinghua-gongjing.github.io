@@ -11,7 +11,7 @@ Python version of [Bedtools](https://bedtools.readthedocs.io/en/latest/index.htm
 
 #### read a bed file into class object
 
-```
+```python
 from pybedtools import BedTool
 
 bed12 = '/Share/home/zhangqf7/gongjing/zebrafish/data/reference/gtf/xiongtl/Delete_coding_danRer_merge_transcript.200.bed'
@@ -23,7 +23,7 @@ BED = BedTool(bed12)
 
 **chrom, start, end, name, score, strand** attribute can be retrieved directly. All columns following 6 columns are stored in **fields** as element of list object.
 
-```
+```python
 class Interval(__builtin__.object)
  |  Class to represent a genomic interval.
  |
@@ -32,7 +32,7 @@ class Interval(__builtin__.object)
  |      Interval(chrom, start, end, name=".", score=".", strand=".", otherfields=None)
 ```
 
-```
+```python
 >>> i = BED[0]
 >>>
 >>> i.name
