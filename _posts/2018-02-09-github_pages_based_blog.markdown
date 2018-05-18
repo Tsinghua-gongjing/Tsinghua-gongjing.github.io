@@ -66,6 +66,11 @@ clone的这个模板没有评论部分的代码，看了一下原来的网站，
 
 博客会有很多图片，使得传达信息更加直接，为了使自己的网站不臃肿，可以把图片都放在一些图床上，然后在post中放图片的链接，生成网页时会直接加载。目前正在申请[七牛云](https://www.qiniu.com/)的账号，免费账号10G存储（需要拿着身份证拍正反面照片，上传）。
 
+**更新**：对于图片直接放在assets(比如：/Users/gongjing/Dropbox/Tsinghua-gongjing.github.io/assets)目录下面即可，然后在md文件写相对链接(因为jekyll会自动解析相对网站域名的路径， 可参考[这里](https://sgeos.github.io/github/jekyll/2016/08/30/adding_images_and_downloads_to_a_github_pages_jekyll_blog.html)，PDF文件也可以直接放在这个目录下，在浏览器中直接打开或者下载)，比如：
+
+```
+![bed](/assets/bed_file_format_example.jpeg)
+```
 
 ## 更换网站tab图片
 
