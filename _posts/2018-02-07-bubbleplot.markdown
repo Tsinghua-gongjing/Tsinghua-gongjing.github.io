@@ -7,7 +7,7 @@ tags: [plot, visualization]
 
 bubble plot可以结合展示三个变量之间的关系，本文主要是演练了[这里](https://python-graph-gallery.com/271-custom-your-bubble-plot/)这里的代码：
 
-```
+```python
 # create data
 x = np.random.rand(5)
 y = np.random.rand(5)
@@ -18,7 +18,7 @@ z = np.random.rand(5)
 
 控制bubble的颜色、透明度：
 
-```
+```python
 # Change color with c and alpha
 plt.scatter(x, y, s=z*4000, c="red", alpha=0.4)
 ```
@@ -30,7 +30,7 @@ plt.scatter(x, y, s=z*4000, c="red", alpha=0.4)
 
 控制bubble的形状：
 
-```
+```python
 plt.scatter(x, y, s=z*4000, marker="D")
 ```
 
@@ -41,7 +41,7 @@ plt.scatter(x, y, s=z*4000, marker="D")
 
 控制bubble的大小:
 
-```
+```python
 plt.scatter(x, y, s=z*200)
 ```
 
@@ -52,7 +52,7 @@ plt.scatter(x, y, s=z*200)
 
 控制bubble的边缘（线条粗细等）：
 
-```
+```python
 plt.scatter(x, y, s=z*4000, c="green", alpha=0.4, linewidth=6)
 ```
 
@@ -63,7 +63,7 @@ plt.scatter(x, y, s=z*4000, c="green", alpha=0.4, linewidth=6)
 
 先导入seaborn，则采用seaborn的主题：
 
-```
+```python
 import seaborn as sns
 plt.scatter(x, y, s=z*4000, c="green", alpha=0.4, linewidth=6)
 
@@ -76,7 +76,7 @@ plt.scatter(x, y, s=z*4000, c="green", alpha=0.4, linewidth=6)
 
 同时给气泡上颜色和大小，相当于展示了4个变量：
 
-```
+```python
 # create data
 x = np.random.rand(15)
 y = x+np.random.rand(15)

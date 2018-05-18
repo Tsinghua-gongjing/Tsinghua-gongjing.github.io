@@ -22,7 +22,7 @@ STAR --runThreadN $runThreadN \
 
 output files:
 
-```bash
+```bash 
 [zhangqf7@bnode02 xiongtl]$ ll
 total 1.1G
 -rw-rw----+ 1 zhangqf7 zhangqf 8.3M May 18 15:31 Log.out

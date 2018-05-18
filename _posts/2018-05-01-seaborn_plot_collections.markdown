@@ -10,7 +10,7 @@ tags: [collections, plot]
 
 source: [stack overflow](https://stackoverflow.com/questions/48947656/combine-two-seaborn-plots)
 
-```
+```python
 import numpy as np
 import pandas as pd
 import seaborn as sns

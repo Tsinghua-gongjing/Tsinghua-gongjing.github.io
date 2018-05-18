@@ -13,7 +13,7 @@ A lollipop(棒糖) plot is an hybrid between a scatter plot and a barplot, which
 [lillopop gally]() also show the basic usage of python to achieve this.
 
 
-```
+```python
 # library
  import matplotlib.pyplot as plt
  import numpy as np

@@ -7,7 +7,7 @@ tags: [plot, visualization]
 
 
 
-```
+```python
 df = sns.load_dataset('tips')
 print df.head()
 
@@ -21,7 +21,7 @@ total_bill   tip     sex smoker  day    time  size
 
 seaborn的pointplot适合画，单一变量在不同类别中的变化趋势，不适合直接展示两个变量之间的相关性：
 
-```
+```python
 sns.pointplot(x='total_bill', y='tip', data=df)
 ```
 
@@ -29,7 +29,7 @@ sns.pointplot(x='total_bill', y='tip', data=df)
 
 默认的点与点之间是有连线的，可以指定为没有：
 
-```
+```python
 sns.pointplot(x="total_bill", y="tip", data=df, linestyles='', )
 ```
 
@@ -37,7 +37,7 @@ sns.pointplot(x="total_bill", y="tip", data=df, linestyles='', )
 
 所以直接展示两个变量之间的相关性时，可以直接使用pandas的关于df的函数plot：
 
-```
+```python
 df.plot(kind='scatter', x='total_bill', y='tip')
 ```
 
@@ -46,7 +46,7 @@ df.plot(kind='scatter', x='total_bill', y='tip')
 
 也可用matplot自带的实现，但是默认的效果没有基于df的好：
 
-```
+```python
 plt.scatter(x=df['total_bill'], y=df['tip'])
 ```
 
@@ -57,7 +57,7 @@ plt.scatter(x=df['total_bill'], y=df['tip'])
 
 连接型的scatter plot，直接用plot函数即可实现：
 
-```
+```python
 df=pd.DataFrame({'x': range(1,10), 'y': np.random.randn(9)*80+range(1,10) })
 plt.plot( 'x', 'y', data=df, linestyle='-', marker='o')
 ```
@@ -67,7 +67,7 @@ plt.plot( 'x', 'y', data=df, linestyle='-', marker='o')
 
 也可用df.plot或者seaborn的pointplot直接画，默认的pointplot看起来效果更好：
 
-```
+```python
 df2.plot(ax=ax[0], x='x', y='y',linestyle='-', marker='o')
 sns.pointplot(x='x', y='y', data=df2, ax=ax[1])
 ```

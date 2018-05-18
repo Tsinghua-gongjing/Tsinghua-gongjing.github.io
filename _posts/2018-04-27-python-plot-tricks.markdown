@@ -12,7 +12,7 @@ tags: [plot, visualization]
 
 * set x axis tick labels
 
-```
+```python
 # assign tick position and label
 # especially for bar plot or time series plot
 plt.xticks(range(0, len(compare_cell_ls)), compare_cell_ls, rotation=45)
@@ -23,21 +23,21 @@ ax.set_xticklabels(compare_cell_ls, rotation=45)
 
 * rotate x tick labels
 
-```
+```python
 # auto get & rotate
 ax[0].set_xticklabels(ax[0].xaxis.get_majorticklabels(), rotation=45)
 ```
 
 * rotate x tick labels in seaborn 
 
-```
+```python
 # work for last row graph, not Every plots (in FacetGrid)
 g.set_xticklabels(rotation=45)
 ```
 
 * time series plot
 
-```
+```python
 # data format
 # each row denote a gene's expression under different condition
 [zhangqf7@loginview02 HuR]$ head predict_RBP_binding_combine.compare.txt|cut -f 4-7
@@ -65,7 +65,7 @@ ax.plot(range(0, len(compare_cell_ls)), df_plot_mean, color='blue')
 
 * remove legend (also work in seaborn)
 
-```
+```python
 ax.legend_.remove()
 ```
 
@@ -74,14 +74,15 @@ ax.legend_.remove()
 
 * set color list instead of seaborn default
 
-```
+```python
 color_stages = sns.color_palette('Set1',n_colors=7, desat=0.8)
 my_pal = {'egg':color_stages[0], '1cell': color_stages[1], '4cell': color_stages[2], '64cell': color_stages[3], '1K': color_stages[4], 'sphere':color_stages[5], 'shield':color_stages[6]}
 
 ```
 
 * set specific color for each cell/category
-```
+
+```python
 sns.boxplot(x='cell', y='gini', data=df_save_all, ax=ax[0], palette=file_info_dict['my_pal'])
 ```
 
