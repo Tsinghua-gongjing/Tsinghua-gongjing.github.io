@@ -17,7 +17,7 @@ genomeFastaFiles=/Share/home/zhangqf7/gongjing/zebrafish/data/reference/gtf/xion
 STAR --runThreadN $runThreadN \
      --runMode genomeGenerate \
      --genomeDir $genomeDir \
-     --genomeFastaFiles $genomeFastaFiles
+     --genomeFastaFiles $genomeFastaFiles  
 ```
 
 output files:

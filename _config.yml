@@ -35,3 +35,6 @@ kramdown:
 disqus:
     shortname: https-tsinghua-gongjing-github-io
     # the short name is website's rather than accounts
+
+# improved code highlighter: https://demisx.github.io/jekyll/2014/01/13/improve-code-highlighting-in-jekyll.html
+# syntax: https://gist.github.com/demisx/8408522
