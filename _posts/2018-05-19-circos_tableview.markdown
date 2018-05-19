@@ -5,11 +5,16 @@ title:  "Circos tableview tool to visualize interaction correlation or distribut
 tags: [genomics, circos]
 ---
 
-### [circos tableview](http://mkweb.bcgsc.ca/tableviewer/)
+- TOC
+{:toc}
+
+### [Circos tableview](http://mkweb.bcgsc.ca/tableviewer/)
 
 Circos can show the connections between different elements, e.g., genomic regions, RNA molecules and so on. Another userful tool tableviewer can be used to display the percentage of each crosslinks among multiple relationships. In [RISE database](http://rise.life.tsinghua.edu.cn/statistics.html) we collected RNA-RNA interactions (RRIs) from various sources, and [tableviewer](http://mkweb.bcgsc.ca/tableviewer/) are used for visualization of the landscape of RRIs. Here is the example:
 
 ![](http://rise.life.tsinghua.edu.cn/static/data/RRI_union_deduplicates.split_full.type_dis.human.revise.svg)
+
+#### Generate stats data from data frame
 
 Generally we can read any txt file into pandas data frame, and use function **groupby** & **count** to count the entry for each pair of two variables. Here is the saved data frame:
 
@@ -27,12 +32,16 @@ NoncanonicalRNA 6010.0 705.0 1076.0 69.0 104.0 69.0 1.0 1132.0 271.0
 others 2850.0 384.0 328.0 74.0 12.0 43.0 5.0 262.0 400.0
 ```
 
+#### Define color for your data
+
 Then we can add header (more details can be found [here](http://mkweb.bcgsc.ca/tableviewer/)) to define color for each element (RNA type here):
 
 ```bash
 data 1 2 3 4 5 6 7 8 9
 data 202,75,78 83,169,102 205,185,111 98,180,208 129,112,182 238,130,238 255,140,0 74,113,178 169,169,169
 ```
+
+#### Concatenate data for plot
 
 Once concatenate header and data frame, the combined data is ready for plot:
 
@@ -51,6 +60,8 @@ tRNA 22.0 1.0 0.0 3.0 1.0 1.0 210.0 3.0 23.0
 NoncanonicalRNA 6010.0 705.0 1076.0 69.0 104.0 69.0 1.0 1132.0 271.0
 others 2850.0 384.0 328.0 74.0 12.0 43.0 5.0 262.0 400.0
 ```
+
+#### Calling tableviewer to plot
 
 I wrote a python script to call tableviewer:
 
@@ -116,7 +127,11 @@ We get plot like this:
 
 ![img](/assets/RRI_union_deduplicates.split_full.type_dis.human.svg)
 
+#### Issue: link direction ?
+
 However, there is a issue. The connection between RNAs actually has no direction, thus the ribbon color from RNA1 to RNA2 must be the same as from RNA2 to RNA1. In the graph above, for example, there are two bands connect mRNA (red) and others (grey), but these two colors are different. In this case, we need to parse the data table to make all count values apear in only one side of the diagonal (upper or lower).
+
+#### Data format conversion
 
 Here is the function to transform the data format:
 
@@ -194,6 +209,8 @@ tRNA 0 0 0 0 0 0 210.0 4.0 28.0
 NoncanonicalRNA 0 0 0 0 0 0 0 1132.0 533.0
 others 0 0 0 0 0 0 0 0 400.0
 ```
+
+#### Comparison of original & transformed data frame
 
 That is:
 
