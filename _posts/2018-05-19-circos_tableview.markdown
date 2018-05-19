@@ -7,11 +7,11 @@ tags: [genomics, circos]
 
 ### [circos tableview](http://mkweb.bcgsc.ca/tableviewer/)
 
-Circos can not only show the connections between different elements, e.g., genomic regions, RNA molecules and so on. Another userful too tablevier can be used to display the percentage of each crosslinks among multiple relationships. In [RISE database](http://rise.life.tsinghua.edu.cn/statistics.html) we collected RNA-RNA interactions (RRIs) from various sources, and [tableviewer](http://mkweb.bcgsc.ca/tableviewer/) are suitable for visualization of the landscape of RRIs. Here is the example:
+Circos can show the connections between different elements, e.g., genomic regions, RNA molecules and so on. Another userful tool tableviewer can be used to display the percentage of each crosslinks among multiple relationships. In [RISE database](http://rise.life.tsinghua.edu.cn/statistics.html) we collected RNA-RNA interactions (RRIs) from various sources, and [tableviewer](http://mkweb.bcgsc.ca/tableviewer/) are used for visualization of the landscape of RRIs. Here is the example:
 
 ![](http://rise.life.tsinghua.edu.cn/static/data/RRI_union_deduplicates.split_full.type_dis.human.revise.svg)
 
-Generally we can read the txt file into pandas data frame, and use function **groupby** & **count** to count the entry for each pair of two variables. Here is the saved data frame:
+Generally we can read any txt file into pandas data frame, and use function **groupby** & **count** to count the entry for each pair of two variables. Here is the saved data frame:
 
 ```bash
 [zhangqf5@loginview02 data]$ cat RRI_union_deduplicates.split_full.type_dis.human.txt
@@ -27,14 +27,14 @@ NoncanonicalRNA 6010.0 705.0 1076.0 69.0 104.0 69.0 1.0 1132.0 271.0
 others 2850.0 384.0 328.0 74.0 12.0 43.0 5.0 262.0 400.0
 ```
 
-Then we can add header to define color for each element (RNA type here):
+Then we can add header (more details can be found [here](http://mkweb.bcgsc.ca/tableviewer/)) to define color for each element (RNA type here):
 
 ```bash
 data 1 2 3 4 5 6 7 8 9
 data 202,75,78 83,169,102 205,185,111 98,180,208 129,112,182 238,130,238 255,140,0 74,113,178 169,169,169
 ```
 
-Once concante header and data frame, the combined data is ready for plot:
+Once concatenate header and data frame, the combined data is ready for plot:
 
 ```bash
 [zhangqf5@loginview02 data]$ cat RRI_union_deduplicates.split_full.type_dis.human.txt
@@ -52,7 +52,7 @@ NoncanonicalRNA 6010.0 705.0 1076.0 69.0 104.0 69.0 1.0 1132.0 271.0
 others 2850.0 384.0 328.0 74.0 12.0 43.0 5.0 262.0 400.0
 ```
 
-I wrote a script to call tableviewer:
+I wrote a python script to call tableviewer:
 
 ```python
 import subprocess, os
@@ -116,9 +116,68 @@ We get plot like this:
 
 ![img](/assets/RRI_union_deduplicates.split_full.type_dis.human.svg)
 
-However, there is a issue. The connection actually has no direction, thus the ribbon color from RNA1 to RNA2 must be the same as from RNA2 to RNA1. In the graph above, for example, there are two bands connect mRNA (red) and others (grey), but these two colors are different. In this case, we need to parse the data table to keep all count values apear in one side of the diagonal (upper or lower).
+However, there is a issue. The connection between RNAs actually has no direction, thus the ribbon color from RNA1 to RNA2 must be the same as from RNA2 to RNA1. In the graph above, for example, there are two bands connect mRNA (red) and others (grey), but these two colors are different. In this case, we need to parse the data table to make all count values apear in only one side of the diagonal (upper or lower).
 
-After revise, we get the data with all value on upper triangle:
+Here is the function to transform the data format:
+
+```python
+from nested_dict import nested_dict
+
+def read_txt(txt='/Share/home/zhangqf5/gongjing/DNA-RNA-Protein-interaction-correlation-12-18/data/type_dis/RRI_union_deduplicates.split_full.type_dis.human.txt'):
+	dis_dict = nested_dict(2, int)
+	dis_revise_dict = nested_dict(2, int)
+	with open(txt, 'r') as TXT:
+		for n,line in enumerate(TXT):
+			line = line.strip()
+			print n,line
+			if n == 0:
+				dis_dict['row_order'] = line
+			elif n == 1:
+				dis_dict['row_color'] = line
+			elif n == 2:
+				dis_dict['row_rnas'] = line
+				col_rna_ls = line.split()[1:]
+			else:
+				row_rna = line.split()[0]
+				val_ls = map(float, line.split()[1:])
+				for col_rna, val in zip(col_rna_ls, val_ls):
+					dis_dict[row_rna][col_rna] = val
+	print dis_dict
+
+	rna_pair_ls = []
+	for row_rna in col_rna_ls:
+		for col_rna in col_rna_ls:
+			dis_revise_dict[row_rna][col_rna] = 0
+
+	for row_rna in col_rna_ls:
+		for col_rna in col_rna_ls:
+			rna_pair1 = row_rna + '-' + col_rna
+			rna_pair2 = col_rna + '-' + row_rna
+			if rna_pair1 in rna_pair_ls: 
+				continue
+			if rna_pair2 in rna_pair_ls:
+				continue
+			rna_pair_ls.append(rna_pair1)
+			rna_pair_ls.append(rna_pair2)
+			dis_revise_dict[row_rna][col_rna] += dis_dict[row_rna][col_rna]
+			if row_rna == col_rna:
+				continue
+			dis_revise_dict[row_rna][col_rna] += dis_dict[col_rna][row_rna]
+	print dis_revise_dict
+
+	savefn = txt.replace('txt', 'revise.txt')
+	with open(savefn, 'w') as SAVEFN:
+		print >>SAVEFN, dis_dict['row_order']
+		print >>SAVEFN, dis_dict['row_color']
+		print >>SAVEFN, dis_dict['row_rnas']
+		for row_rna in col_rna_ls:
+			row_rna_ls = [dis_revise_dict[row_rna][col_rna] for col_rna in col_rna_ls]
+			print >>SAVEFN,row_rna+' '+' '.join(map(str, row_rna_ls))
+
+	return savefn
+```
+
+After converting, we get the data with all value on upper triangle:
 
 ```bash
 [zhangqf5@loginview02 data]$ cat RRI_union_deduplicates.split_full.type_dis.human.revise.txt
@@ -136,6 +195,10 @@ NoncanonicalRNA 0 0 0 0 0 0 0 1132.0 533.0
 others 0 0 0 0 0 0 0 0 400.0
 ```
 
-Then using these data we can connect the elements without direction as below:
+That is:
+
+![rise_circos_tableviewer_data_transform.png](/assets/rise_circos_tableviewer_data_transform.png)
+
+Then using these data we can visualize the links without direction as below:
 
 ![](http://rise.life.tsinghua.edu.cn/static/data/RRI_union_deduplicates.split_full.type_dis.human.revise.svg)
