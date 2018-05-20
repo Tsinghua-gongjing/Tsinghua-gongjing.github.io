@@ -3,10 +3,6 @@ layout: index
 title: "pyiomatics"
 ---
 
-{% if page.paginator %}
-  {% assign paginator = page.paginator %}
-{% endif %}
-
 <!-- Loop output paged posts -->
 {% for post in paginator.posts %}
 <h2>
