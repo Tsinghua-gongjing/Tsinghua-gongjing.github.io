@@ -5,7 +5,7 @@ title:  "Using DESeq2 to do differential expression analysis"
 tags: [genomics, sequencing]
 ---
 
-### DESeq2
+### DESeq2 ([full manual](https://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#quick-start))
 
 #### Calling differential expression (DE) genes based on read count among different conditions, for instance, medicine treatment versus mock. Generally we used both fold change and pvalue to filter DE genes, e.g., |log2(Fold change)| >=2 and pvalue <=0.05. Here is an simple script to run DE analysis as described [here: Template for analysis with DESeq2](https://gist.github.com/stephenturner/f60c1934405c127f09a6).
 
