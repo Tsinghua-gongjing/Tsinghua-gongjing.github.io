@@ -16,13 +16,13 @@
     <!-- HTML elements for search -->
     
     <script src="/js/search-script.js"></script>
-    <script>
-      SimpleJekyllSearch({
-      searchInput: document.querySelector('.search-input'),
-      resultsContainer: document.getElementById('results-container'),
-      dataSource: '/search.json',
-      searchResultTemplate: '<li><a href="{{ site.url }}{url}">{title}</a></li>'
-      })
+    <script> 
+        SimpleJekyllSearch({
+        searchInput: document.querySelector('search-input'),
+        resultsContainer: document.getElementById('results-container'),
+        json: '/search.json',
+        searchResultTemplate: '<li><a href="{{ site.url }}{url}">{title}</a></li>'
+        })
     </script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media
@@ -82,8 +82,8 @@
           <!-- Blog Categories Well -->
           <div class="well">
             <div id="search-container">
-            <input type="text" id="search-input" placeholder="Search my blog posts..">
-            <ul id="results-container"></ul>
+                  <input type="text" id="search-input" placeholder="search...">
+                  <ul id="results-container"></ul>
             </div>
             <!-- /.row -->
           </div>
