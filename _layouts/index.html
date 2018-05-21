@@ -59,8 +59,16 @@
     <div class="container">
       <div class="row">
         <!-- Blog Entries Column -->
-        <div style="padding:10px">
-          {{ content }}
+        <div class="col-md-8">
+          <div class="post_frame">
+            <div class="post_navi">
+              <a href="/">Home</a>&nbsp;>&nbsp;
+              <span class="post_navi_span">List</span>
+            </div>
+            <div style="padding:10px">
+            {{ content }}
+            </div>
+          </div>
         </div>
         <!-- Blog Sidebar Widgets Column -->
         <div class="col-md-4">
