@@ -61,7 +61,11 @@
         <!-- Blog Entries Column -->
         <div class="col-md-8">
 			<!-- Navi -->
-			{% for cat in site.all_categories %}{% if page.category == cat[0] %}<a href="/">Home</a>&nbsp;>&nbsp;<a href="{{cat[2]}}">{{cat[1]}}</a>&nbsp;>&nbsp;List{% endif %}{% endfor %}
+                        <div class="post-frame">
+                           <div class="post-navi">
+			     {% for cat in site.all_categories %}{% if page.category == cat[0] %}<a href="/">Home</a>&nbsp;>&nbsp;<a href="{{cat[2]}}">{{cat[1]}}</a>&nbsp;>&nbsp;List{% endif %}{% endfor %}
+                           </div>
+                        <div style="padding:10px">
 			<!-- List -->
 			<ul class="list-unstyled">
 			{% for post in site.categories[page.category] %}
@@ -76,6 +80,8 @@
 			  </li> 
 			{% endfor %}
 			</ul>
+                        </div>
+                        </div>
         </div>
         <!-- Blog Sidebar Widgets Column -->
         <div class="col-md-4">
