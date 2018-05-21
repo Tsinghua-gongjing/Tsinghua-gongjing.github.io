@@ -59,7 +59,7 @@
     <div class="container">
       <div class="row">
         <!-- Blog Entries Column -->
-        <div style="padding:10px">
+        <div class="col-md-8">
           {{ content }}
         </div>
         <!-- Blog Sidebar Widgets Column -->
