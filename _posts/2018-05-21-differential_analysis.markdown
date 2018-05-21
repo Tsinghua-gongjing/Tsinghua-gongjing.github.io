@@ -51,7 +51,7 @@ resdata = resdata[resdata$pvalue<0.05,]
 write.csv(resdata, file="/Share/home/zhangqf7/gongjing/zebrafish/data/RIP/readcount_h2.DE.csv")
 ```
 
-Finally the content of result object `resdate`, and can be saved to a csv file: 
+Finally the content of result object `resdata`, and can be saved to a csv file: 
 
 ```
           Transcript   baseMean log2FoldChange    lfcSE      stat     pvalue
