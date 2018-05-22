@@ -32,3 +32,16 @@ NM_201059       1880    1886    0.01    common  sphere  NM_201059       1880    
 NM_001077537    3425    3431    0.1821428571428572      common  sphere  NM_001077537    3425    3431    0.15214285714285716     common  shield
 NM_001256642    1533    1539    0.07742857142857143     common  sphere  NM_001256642    1533    1539    0.11457142857142855     common  shield
 ```
+
+### Calling from python subprocess ([source](https://stackoverflow.com/questions/11106394/sed-unterminated-s-command))
+
+```python
+subprocess.call(['''grep -v "^tx" %s|sed "N;s/\n/\t/" > %s'''%(savefn, savefn.replace('.txt', '.merge.txt'))], shell=True)
+```
+
+cause error: `sed: -e expression #1, char 2: extra characters after command`, beacuse there is slash `\` in the regular expression, which should be escaped as below, now it works:
+
+
+```python
+subprocess.call(['''grep -v "^tx" %s|sed "N;s/\\n/\\t/" > %s'''%(savefn, savefn.replace('.txt', '.merge.txt'))], shell=True)
+```
