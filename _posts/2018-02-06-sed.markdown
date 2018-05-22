@@ -7,6 +7,28 @@ tags: [grep, awk, sed]
 
 ### convert DNA to RNA ([source](https://biocozy.blogspot.com/2012/04/convert-fasta-file-rna-to-dna-using-sed.html))
 
-```
+```bash
 sed '/^[^>]/ y/uT/tU/' combine_all.full.fa > combine_all.full.RNA.fa
+```
+
+### combine every two lines ([source](https://stackoverflow.com/questions/9605232/how-to-merge-every-two-lines-into-one-from-the-command-line))
+
+```bash
+[zhangqf7@loginview02 RIP]$ grep -v "^tx" predict_MO_decay.overlap.inall.motif.decay.txt|head
+NM_001077537    3657    3663    0.2578571428571429      common  sphere
+NM_001077537    3657    3663    0.19057142857142856     common  shield
+NM_201059       2029    2035    0.2177142857142857      common  sphere
+NM_201059       2029    2035    0.15457142857142858     common  shield
+NM_201059       1880    1886    0.01    common  sphere
+NM_201059       1880    1886    0.022857142857142857    common  shield
+NM_001077537    3425    3431    0.1821428571428572      common  sphere
+NM_001077537    3425    3431    0.15214285714285716     common  shield
+NM_001256642    1533    1539    0.07742857142857143     common  sphere
+NM_001256642    1533    1539    0.11457142857142855     common  shield
+[zhangqf7@loginview02 RIP]$ grep -v "^tx" predict_MO_decay.overlap.inall.motif.decay.txt|head|sed 'N;s/\n/\t/'
+NM_001077537    3657    3663    0.2578571428571429      common  sphere  NM_001077537    3657    3663    0.19057142857142856     common  shield
+NM_201059       2029    2035    0.2177142857142857      common  sphere  NM_201059       2029    2035    0.15457142857142858     common  shield
+NM_201059       1880    1886    0.01    common  sphere  NM_201059       1880    1886    0.022857142857142857    common  shield
+NM_001077537    3425    3431    0.1821428571428572      common  sphere  NM_001077537    3425    3431    0.15214285714285716     common  shield
+NM_001256642    1533    1539    0.07742857142857143     common  sphere  NM_001256642    1533    1539    0.11457142857142855     common  shield
 ```
