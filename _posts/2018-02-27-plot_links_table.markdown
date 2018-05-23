@@ -53,7 +53,3 @@ tags: [plot, visualization]
 | Flow  |Network chart  |            |
 | Flow  |Sankey diagram  |            |
 
-
-
-
-{% include Python_graph.html %}
