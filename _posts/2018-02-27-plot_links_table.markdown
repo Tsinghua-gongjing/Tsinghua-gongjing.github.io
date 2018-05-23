@@ -55,3 +55,5 @@ tags: [plot, visualization]
 
 
 
+
+{% include Python_graph.html %}
