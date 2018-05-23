@@ -7,14 +7,13 @@ tags: [grep, awk, sed]
 
 ### grep的用法
 
-同时匹配多个pattern中的某一个 (OR)
+#### 同时匹配多个pattern中的某一个 (OR)
 
-```
+```bash
 grep "pattern1\|pattern2" file.txt
 grep -E "pattern1|pattern2" file.txt
 grep -e pattern1 -e pattern2 file.txt
 egrep "pattern1|pattern2" file.txt
-
 ```
 
 这种操作用其他的命令也可以实现，比如：
@@ -26,9 +25,9 @@ sed -e '/pattern1/b' -e '/pattern2/b' -e d file.txt
 
 -----------------------------------
 
-同时满足多个模式 （AND）
+#### 同时满足多个模式 （AND）
 
-```
+```bash
 grep -E 'pattern1.*pattern2' file.txt # in that order
 grep -E 'pattern1.*pattern2|pattern2.*pattern1' file.txt # in any order
 grep 'pattern1' file.txt | grep 'pattern2' # in any order
@@ -46,9 +45,9 @@ sed '/pattern1/!d; /pattern2/!d' file.txt # in any order
 
 -----------------------------------
 
-匹配不满足给定模式的行：
+#### 匹配不满足给定模式的行：
 
-```
+```bash
 grep -v 'pattern1' file.txt
 awk '!/pattern1/' file.txt
 sed -n '/pattern1/!p' file.txt
@@ -56,7 +55,7 @@ sed -n '/pattern1/!p' file.txt
 
 -----------------------------------
 
-只输出匹配的字符: -o
+#### 只输出匹配的字符: 参数`-o`
 
 ```
 grep -o NM_001131052 utr3.bed
