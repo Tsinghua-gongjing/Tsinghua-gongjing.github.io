@@ -57,6 +57,6 @@ sed -n '/pattern1/!p' file.txt
 
 #### 只输出匹配的字符: 参数`-o`
 
-```
+```bash
 grep -o NM_001131052 utr3.bed
 ```
