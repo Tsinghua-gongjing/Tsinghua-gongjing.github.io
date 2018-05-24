@@ -5,7 +5,7 @@ title:  "Links to all types of plot"
 tags: [plot, visualization]
 ---
 
-<iframe src="https://docs.google.com/file/d/0B8aGkJVsdqiJamVpUnJ1TDlFbFU/preview" width="100%" height="100%"></iframe>
+<iframe src="/assets/Python_graph.pdf" width="100%" height="100%"></iframe>
 
 
 这里列举了这个网站的可视化的类型和链接：
