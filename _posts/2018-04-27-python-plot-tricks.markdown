@@ -86,3 +86,10 @@ my_pal = {'egg':color_stages[0], '1cell': color_stages[1], '4cell': color_stages
 sns.boxplot(x='cell', y='gini', data=df_save_all, ax=ax[0], palette=file_info_dict['my_pal'])
 ```
 
+## inkscape
+
+* convert pdf to svg ([stackoverflow](https://stackoverflow.com/questions/4120567/convert-pdf-to-svg)), only for first page
+
+```bash
+/Applications/Inkscape.app/Contents/Resources/bin/inkscape -l Python_graph.svg Python_graph.pdf
+```
