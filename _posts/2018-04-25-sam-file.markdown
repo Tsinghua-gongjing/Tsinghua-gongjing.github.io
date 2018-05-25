@@ -35,7 +35,7 @@ tags: [genomics, sam, bam]
 
 `If no regions or options: print all`
 
-`If specific one or more regions: print restricted ` Note: **need sorted and indexed**
+`If specific one or more regions (space separted): print restricted ` Note: **need sorted and indexed**
 
 
 ```bash
@@ -43,4 +43,7 @@ samtools view -h hur_MO-h6_rep2.sorted.bam NM_001002366 > test.sam
 
 # convert bam directly
 samtools view -bS HG00096.chr20.sam > HG00096.chr20.bam
+
+# specific multiple chromosome or regions by space
+samtools view -bS *bam chr1 chr2 chr3 > test.bam
 ```
