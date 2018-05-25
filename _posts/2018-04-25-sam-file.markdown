@@ -40,4 +40,7 @@ tags: [genomics, sam, bam]
 
 ```bash
 samtools view -h hur_MO-h6_rep2.sorted.bam NM_001002366 > test.sam
+
+# convert bam directly
+samtools view -bS HG00096.chr20.sam > HG00096.chr20.bam
 ```
