@@ -27,3 +27,17 @@ tags: [genomics, sam, bam]
 # one liner parser
  
  1. [SAM and BAM filtering oneliners (github)](https://gist.github.com/davfre/8596159) 
+
+ 
+# example operation
+
+#### Extracting reads for a single chromosome from BAM/SAM [source](https://carleshf87.wordpress.com/2013/10/28/extracting-reads-for-a-single-chromosome-from-bamsam-file-with-samtools/)
+
+`If no regions or options: print all`
+
+`If specific one or more regions: print restricted ` Note: **need sorted and indexed**
+
+
+```bash
+samtools view -h hur_MO-h6_rep2.sorted.bam NM_001002366 > test.sam
+```
