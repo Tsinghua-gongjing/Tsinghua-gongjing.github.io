@@ -93,3 +93,15 @@ sns.boxplot(x='cell', y='gini', data=df_save_all, ax=ax[0], palette=file_info_di
 ```bash
 /Applications/Inkscape.app/Contents/Resources/bin/inkscape -l Python_graph.svg Python_graph.pdf
 ```
+
+## MagicImage
+
+* conbine multiple image into one figure/pdf file
+
+```bash
+# auto rows and columns
+montage *png out.pdf
+
+# 4 columns x multiple rows
+montage *.png -mode concatenate -tile 4x out.pdf
+```
