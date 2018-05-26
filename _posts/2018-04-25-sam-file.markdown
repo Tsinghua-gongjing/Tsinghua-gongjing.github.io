@@ -78,3 +78,24 @@ samtools view -bS *bam chr1 chr2 chr3 > test.bam
 [zhangqf7@bnode02 decay]$ samtools view -F 0x4 RIP_h4.bam| cut -f1 | sort | uniq | wc -l
 104971
 ```
+
+#### Compute coverage of each base
+
+bamCoverage from [deeptools](https://deeptools.readthedocs.io/en/latest/content/tools/bamCoverage.html) [slow]
+
+```bash
+# old version
+bamCoverage --bam RIP_h6.bam --outFileName RIP_h6.bam.bw --binSize 1 --normalizeTo1x 37421801
+# 37421801, the total bases in our merge reference
+
+# new version of bamCoverage (DeepTools)
+bamCoverage --bam RIP_h6.bam --outFileName RIP_h6.bam.bw --binSize 1 --effectiveGenomeSize 37421801 --normalizeUsing RPGC
+
+# RPGC: RPGC (per bin) = number of reads per bin / scaling factor for 1x average coverage. This scaling factor, in turn, is determined from the sequencing depth: (total number of mapped reads * fragment length) / effective genome size. The scaling factor used is the inverse of the sequencing depth computed for the sample to match the 1x coverage. This option requires –effectiveGenomeSize. 
+```
+
+igvtools `count` command in [igvtools](https://software.broadinstitute.org/software/igv/igvtools_commandline) [fast]
+
+```bash
+igvtools count -w 1 RIP_h4.bam RIP_h4.wig /Share/home/zhangqf7/gongjing/zebrafish/data/reference/gtf/refseq_ensembl91_merge.tarns.fa
+```
