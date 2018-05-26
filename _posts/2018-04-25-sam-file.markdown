@@ -47,3 +47,34 @@ samtools view -bS HG00096.chr20.sam > HG00096.chr20.bam
 # specific multiple chromosome or regions by space
 samtools view -bS *bam chr1 chr2 chr3 > test.bam
 ```
+
+#### Calculate number of mapped reads [biostar](https://www.biostars.org/p/138116/)
+
+```bash
+# number of entries excluding those marked as read #1 in a pair
+[zhangqf7@bnode02 decay]$ samtools view -F 0x40 RIP_h4.bam| cut -f1 | sort | uniq | wc -l
+104336
+
+[zhangqf7@bnode02 decay]$ samtools flagstat RIP_h4.bam
+208877 + 0 in total (QC-passed reads + QC-failed reads)
+0 + 0 secondary
+0 + 0 supplementary
+0 + 0 duplicates
+208877 + 0 mapped (100.00% : N/A)
+208877 + 0 paired in sequencing
+104541 + 0 read1
+104336 + 0 read2
+200984 + 0 properly paired (96.22% : N/A)
+207883 + 0 with itself and mate mapped
+994 + 0 singletons (0.48% : N/A)
+71 + 0 with mate mapped to a different chr
+71 + 0 with mate mapped to a different chr (mapQ>=5)
+
+# for single-end data
+[zhangqf7@bnode02 decay]$ samtools view -F 0x904 RIP_h4.bam| cut -f1 | sort | uniq | wc -l
+104971
+
+# for pair-end data
+[zhangqf7@bnode02 decay]$ samtools view -F 0x4 RIP_h4.bam| cut -f1 | sort | uniq | wc -l
+104971
+```
