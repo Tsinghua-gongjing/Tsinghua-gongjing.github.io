@@ -75,3 +75,30 @@ clone的这个模板没有评论部分的代码，看了一下原来的网站，
 ## 更换网站tab图片
 
 设计一个图片后，上传到[favicon](http://www.favicon.cc/)生成，对应的icon文件，放在root目录下即可。（如果更换后，加载没有更新，需要清理一下网站的缓存）
+
+
+## 在kramdown中添加LATEX
+
+目前实现的是在单个post(.md文件)中添加，需要在开头显式指定调用[MathJax](http://www.mathjax.org/)，因为其本身不提供解析。kramdown的[math-block](https://kramdown.gettalong.org/syntax.html#math-blocks)，参考[github render math blocks](https://github.com/mmistakes/minimal-mistakes/issues/735)。
+比如在写.md文件时，先调用，效果参见[post](https://tsinghua-gongjing.github.io//posts/ThinkStats_descriptive_statistic.html)。
+
+```
+---
+layout: post
+category: "read"
+title:  "Think Stats: descriptive statistics?"
+tags: [reading, statistics]
+---
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+1. 均值（mean）：值的总和除以值的数量；平均值（average）：若干种可以用于描述样本的典型值或**集中趋势（central tendency）**的汇总统计量之一。注意根据样本的范围选择合适的描述量。
+2. 方差：描述分散情况。
+
+$$
+ \begin{align}\sigma^2 = \frac{1}{n}∑(X\_i-\mu)^2\end{align} 
+$$
+```
+
