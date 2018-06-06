@@ -13,7 +13,7 @@ tags: [reading, statistics]
 2. 方差：描述分散情况。
 
 $$
- \begin{align}\sigma^2 = \frac{1}{n}∑(X\_i-\mu)^2\end{align} 
+ \begin{align}\sigma^2 = \frac{1}{n}∑(X_i-\mu)^2\end{align} 
 $$
 
 
