@@ -51,7 +51,7 @@ tags: [reading, statistics]
 1. 随机变量：随机实验的结果用数字表示的结果
 2. 概率分布的平均数：sum(x * p(x))
 3. 连续型随机变量：平均数或者方差可以用积分来定义。对于概率密度函数的积分。
-   ![img](https://surfstat.anu.edu.au/surfstat-home/gifs/3_7_13.gif)
+   ![img](assets/calc_mean_var_from_probability.gif)
    
 #### 五、两种随机变量的分布
 
