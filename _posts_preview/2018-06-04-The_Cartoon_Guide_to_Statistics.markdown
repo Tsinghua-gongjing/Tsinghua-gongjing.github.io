@@ -33,11 +33,22 @@ tags: [reading, statistics]
    * 3）个别概率：个人对某种结果发生的主观估计；
    * 4）客观主义：古典概率、相对频率；主观主义：个别概率、贝叶斯主义
 5. 概率运算：
-   * 1）加法法则：对于任意事件，P(E | F) = P(E) + P(F) - P(E & F)
+   * 1）加法法则：对于任意事件，P(E or F) = P(E) + P(F) - P(E & F)
    * 2）如果E和F相互排斥，P(E & F) = 0
-   * 3）如果E和F相互排斥，P(E | F) = P(E) + P(F) - P(E & F) = P(E | F) = P(E) + P(F)
+   * 3）如果E和F相互排斥，P(E or F) = P(E) + P(F) - P(E & F) = P(E | F) = P(E) + P(F)
    * 4）减法法则：对于任意事件，P(E) = 1 - P(E的反面)
 6. 条件概率：
    * 1）P(A|C),给定C条件下，A的概率。
    * 2）P(E|F) = P(E & F) / P(F)。 P(E|E)=1 => 一旦E发生，它就是确定的；当E、F相互排斥时，P(E|F)=0 => 若F发生，E就不可能发生。
 7. 乘法法则：P(E&F) = P(E|F) * P(F)
+8. E和F相互独立，则P(E|F) = P(E)P(F)
+9. 贝叶斯法则：
+  ![img](https://www.gaussianwaves.com/gaussianwaves/wp-content/uploads/2013/10/Bayes_theorem_1.png)
+  
+  
+#### 四、随机变量
+
+1. 随机变量：随机实验的结果用数字表示的结果
+2. 概率分布的平均数：sum(x * p(x))
+3. 连续型随机变量：平均数或者方差可以用积分来定义。对于概率密度函数的积分。
+   ![img](https://surfstat.anu.edu.au/surfstat-home/gifs/3_7_13.gif)
