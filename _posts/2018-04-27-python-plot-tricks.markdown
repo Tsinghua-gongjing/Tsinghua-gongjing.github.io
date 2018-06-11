@@ -77,6 +77,12 @@ ax.axis('square')
 ax.set_xlim(0.1, 0.3)
 ```
 
+* remove spines on the right and top
+
+```python
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+```
 
 ## seaborn plot
 
