@@ -69,6 +69,14 @@ ax.plot(range(0, len(compare_cell_ls)), df_plot_mean, color='blue')
 ax.legend_.remove()
 ```
 
+* set equal axis and x_lim/ylim [github: set_ylim not working with plt.axis('equal') ](https://github.com/matplotlib/matplotlib/issues/8093)
+
+```python
+plt.plot((.1, .3))
+ax.axis('square')
+ax.set_xlim(0.1, 0.3)
+```
+
 
 ## seaborn plot
 
