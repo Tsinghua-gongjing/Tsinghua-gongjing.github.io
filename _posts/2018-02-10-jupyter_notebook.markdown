@@ -11,7 +11,7 @@ tags: [python, jupyter, notebok]
 
 参考[这篇文章](https://segmentfault.com/a/1190000009305646)，对自己的notebook进行配置，方便快捷。比如可以在打开notebook时直接先加载一些模块等。
 
-~~~
+~~~bash
 # creat新建配置文件
 gongjing@MBP ~/.ipython/profile_default % ipython profile create
 [ProfileCreate] Generating default config file: u'/Users/gongjing/.ipython/profile_default/ipython_config.py'
@@ -36,21 +36,21 @@ ipython_kernel_config.py 这个文件是配置notebook的；
 
 加载常用模块，matplot设置成inline
 
-~~~
-  1 # Configuration file for ipython-kernel.
-  2
-  3 c = get_config()
-  4
-  5 c.InteractiveShellApp.exec_lines = [
-  6         "import pandas as pd",
-  7         "import numpy as np",
-  8         "import scipy.stats as spstats",
-  9         "import scipy as sp",
- 10         "import matplotlib.pyplot as plt",
- 11         "import seaborn as sns",
- 12         "sns.set(style='white')",
- 13         "sns.set_context('poster')",
- 14         ]
- 15
- 16 c.IPKernelApp.matplotlib = 'inline'
+~~~python
+# Configuration file for ipython-kernel.
+
+c = get_config()
+
+c.InteractiveShellApp.exec_lines = [
+        "import pandas as pd",
+        "import numpy as np",
+        "import scipy.stats as spstats",
+        "import scipy as sp",
+        "import matplotlib.pyplot as plt",
+        "import seaborn as sns",
+        "sns.set(style='white')",
+        "sns.set_context('poster')",
+        ]
+
+c.IPKernelApp.matplotlib = 'inline'
 ~~~
