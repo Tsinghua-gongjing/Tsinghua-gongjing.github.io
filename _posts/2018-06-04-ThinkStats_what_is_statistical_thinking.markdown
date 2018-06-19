@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "read"
-title:  "Think Stats: what's statistical thinking?"
+title:  "Think Stats: what is statistical thinking?"
 tags: [reading, statistics]
 ---
 
