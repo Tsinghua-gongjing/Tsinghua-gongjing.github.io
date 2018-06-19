@@ -116,6 +116,9 @@ sns.boxplot(x='cell', y='gini', data=df_save_all, ax=ax[0], palette=file_info_di
 # auto rows and columns
 montage *png out.pdf
 
+# use filename to label each image
+montage -label '%f' * out.pdf
+
 # 4 columns x multiple rows
 montage *.png -mode concatenate -tile 4x out.pdf
 ```
