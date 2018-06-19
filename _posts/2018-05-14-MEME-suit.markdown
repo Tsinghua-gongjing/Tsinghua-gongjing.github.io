@@ -50,5 +50,40 @@ Background letter frequencies (from uniform background):
 A 0.25000 C 0.25000 G 0.25000 T 0.25000
 ```
 
+### Plot motif logo
+
+```bash
+[zhangqf7@loginview02 MolCel2018_RBP]$ cat test.meme
+MEME version 4.10.1
+
+ALPHABET
+P
+Q
+S
+Z
+END ALPHABET
+
+strands: +
+
+MOTIF DGCR8_1_str
+letter-probability matrix: alength= 4 w= 8 nsites= 269 E= 3.3e-302
+ 0.096655  0.111524  0.639405  0.152416
+ 0.048326  0.022304  0.866174  0.063196
+ 0.037174  0.044609  0.836433  0.081784
+ 0.052045  0.066914  0.788104  0.092937
+ 0.085501  0.078066  0.765801  0.070632
+ 0.059479  0.130111  0.698886  0.111524
+ 0.122676  0.122677  0.657993  0.096654
+ 0.208179  0.193309  0.397770  0.200743
+ 
+# generate wrong character 
+[zhangqf7@loginview02 MolCel2018_RBP]$ which meme2images
+/Share/home/zhangqf/usr/meme_4.10.1/bin/meme2images
+[zhangqf7@loginview02 MolCel2018_RBP]$ meme2images test.meme -eps test
+
+# generate correct plot
+[zhangqf7@loginview02 MolCel2018_RBP]$ /Share/home/zhangqf/usr/meme_4.11.2-app/bin/meme2images test.meme -eps test
+``` 
 
 
+[![meme2img_test.jpeg](https://i.loli.net/2018/06/19/5b28997eb4853.jpeg)](https://i.loli.net/2018/06/19/5b28997eb4853.jpeg)
