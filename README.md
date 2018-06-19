@@ -1,22 +1,13 @@
+# Personal blog
 
-Jekyll博客模板
-================
+Hi, here is my [blog](https://tsinghua-gongjing.github.io/) to record some of my learning notes in study and problems met in research. Most of the posts are for my own use, so the format or content may be not professional. If you have any suggestions or find any issues, please drop me a line by email (<gongj15@mails.tsinghua.edu.cn>). 
 
-#### 1.浏览
-http://www.panxw.com, 支持PC与智能机访问。  
+The main goal to set up the blog is to track my study. I believe writing what you learn and sharing what you have will greatly advance your understandings.
 
-#### 2.模板使用
-修改_config.yml与_includes目录下相关文件进行配置。  
-模板可任意使用，但请保留本站**[友情链接](www.baidu.com)**。  
+The topics will cover 3 aspects:
 
+1. Genomics or biology: concepts, papers, bioinformatics
+2. Progamming: text processing, sequencing data analysis, visualization
+3. Reading: book on scientific topic, interesting novel
 
-=======
-# gongjing.github.io
-记录学习的点滴。
-
-想通过这个平台记录自己在研究生期间的学习和收获。虽然起步比较晚，但是希望能够以这种方式更深入的理解所学所得。
-
-可能主要包含两个部分：
-1. 关于生物学的学习，比如做的比较好的文章，自己不太懂得概念等；
-2. 关于编程的学习。
-
+The whole website is based on [Github Pages](https://pages.github.com/) and [Jekyll](https://jekyllrb.com/), designed by [panxw](http://www.panxw.com).
