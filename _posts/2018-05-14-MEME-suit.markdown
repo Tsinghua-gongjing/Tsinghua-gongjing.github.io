@@ -53,6 +53,11 @@ A 0.25000 C 0.25000 G 0.25000 T 0.25000
 ### Plot motif logo
 
 ```bash
+[zhangqf7@loginview02 ]$ meme2images
+Usage:    meme2images [options] <motifs file> <output directory>Options:    -motif <ID>      output only a selected motif; repeatable    -eps             output logos in eps format    -png             output logos in png format    -rc              output reverse complement logos    -help            print this usage messageDescription:    Creates motif logos from any MEME or DREME motif format.
+```
+
+```bash
 [zhangqf7@loginview02 MolCel2018_RBP]$ cat test.meme
 MEME version 4.10.1
 
