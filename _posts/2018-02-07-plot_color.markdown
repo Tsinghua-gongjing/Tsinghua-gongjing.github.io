@@ -11,7 +11,9 @@ tags: [plot, visualization]
 
 这里选取的颜色主要是来自于seaborn的，感觉这个颜色比较饱和，没有那么鲜艳： 
 
+<!---
 [![seaborn_colors.png](https://i.loli.net/2018/02/07/5a7ab8d0b9787.png)](https://i.loli.net/2018/02/07/5a7ab8d0b9787.png)
+--->
 
 <table border = "1">
          <tr>
