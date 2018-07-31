@@ -1,6 +1,6 @@
 ---
 layout: post
-category: "read"
+category: "statistics"
 title:  "Think Stats: probability"
 tags: [reading, statistics]
 ---
