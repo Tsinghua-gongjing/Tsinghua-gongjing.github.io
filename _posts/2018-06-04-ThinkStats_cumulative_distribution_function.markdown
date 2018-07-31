@@ -1,6 +1,6 @@
 ---
 layout: post
-category: "read"
+category: "statistics"
 title:  "Think Stats: cumulative disribution function?"
 tags: [reading, statistics]
 ---
