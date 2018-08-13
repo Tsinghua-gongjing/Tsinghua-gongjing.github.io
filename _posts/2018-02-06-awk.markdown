@@ -51,3 +51,16 @@ b b1
 awk 'BEGIN{tB["a"]="a1";tB["b"]="b1";delete tB["a"];for(k in tB){print k,tB[k];}}' 
 b b1
 ```
+
+### swap two variables [stackoverflow](https://stackoverflow.com/questions/11967776/swap-two-columns-awk-sed-python-perl)
+
+```bash
+awk ' { t = $1; $1 = $2; $2 = t; print; } ' input_file
+```
+
+### set output filed separator [stackoverflow](https://stackoverflow.com/questions/20844666/setting-the-output-field-separator-in-awk)
+
+```bash
+# swap two columns, also keep tab as separator
+awk 'BEGIN{FS="\t";OFS="\t";}{if($2>$3){t=$2;$2=$3;$3=t};if($5>$6){t=$5;$5=$6;$6=t;};print}' HEK293T.bedpe > HEK293T.sort.bedpe
+```

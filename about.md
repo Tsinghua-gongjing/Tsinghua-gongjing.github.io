@@ -71,6 +71,8 @@ My study focus on RNA molecules, major including RNA secondary structure and RNA
 Publication
 -----------
 
+* **Jing Gong**\*, Yanyan Ju\*, Di Shao and Qiangfeng Cliff Zhang. [Advances and challenges towards the study of RNA-RNA interactions in a transcriptome-wide scale](https://link.springer.com/article/10.1007/s40484-018-0146-5). Quantitative Biology. 2018 [PDF](https://github.com/Tsinghua-gongjing/blog_codes/blob/master/files/publications/Advances%20and%20challenges%20towards%20the%20study%20ofRNA-RNA%20interactions%20in%20a%20transcriptome-wide%20scale.pdf)
+
 * Zhipeng Lu, **Jing Gong**, Qiangfeng Cliff Zhang. [PARIS: Psoralen Analysis of RNA Interactions and Structures with High Throughput and Resolution](https://link.springer.com/protocol/10.1007/978-1-4939-7213-5_4). RNA Detection, 2018  [PDF](https://github.com/Tsinghua-gongjing/blog_codes/blob/master/files/publications/PARIS-%20Psoralen%20Analysis%20of%20RNA%20Interactions%20and%20Structures%20with%20High%20Throughput%20and%20Resolution.pdf)
 
 * **Jing Gong**\*, Di Shao\*, Kui Xu, Zhipeng Lu, Zhi John Lu, Yucheng T. Yang, and Qiangfeng Cliff Zhang. [RISE: a database of RNA interactome from sequencing experiments](https://www.ncbi.nlm.nih.gov/pubmed/29040625). Nucleic Acids Res. 2018 [PDF](https://github.com/Tsinghua-gongjing/blog_codes/blob/master/files/publications/RISE-%20a%20database%20of%20RNA%20interactome%20from%20sequencing%20experiments.pdf)
