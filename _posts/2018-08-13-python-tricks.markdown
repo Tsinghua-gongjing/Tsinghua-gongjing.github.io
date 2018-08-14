@@ -27,3 +27,15 @@ def solve(r1, r2):
 >>> solve([5,10],[1,4])
 1
 ```
+
+### Sort a column by specific order in a df [stackoverflow](https://stackoverflow.com/questions/23482668/sorting-by-a-custom-list-in-pandas)
+
+```python
+# the specific order
+sorter = ['a', 'c', 'b']
+
+df['column'] = df['column'].astype("category")
+df['column'].cat.set_categories(sorter, inplace=True)
+
+df.sort_values(["column"], inplace=True)
+```
