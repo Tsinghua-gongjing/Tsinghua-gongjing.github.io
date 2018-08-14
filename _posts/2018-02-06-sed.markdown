@@ -45,3 +45,21 @@ cause error: `sed: -e expression #1, char 2: extra characters after command`, be
 ```python
 subprocess.call(['''grep -v "^tx" %s|sed "N;s/\\n/\\t/" > %s'''%(savefn, savefn.replace('.txt', '.merge.txt'))], shell=True)
 ```
+
+### Replace new line with coma [stackexchange](https://unix.stackexchange.com/questions/114943/can-sed-replace-new-line-characters)
+
+```bash
+[zhangqf7@loginview02 60]$ ll|awk '{print $9}'|cut -d "_" -f 1-2|sort|uniq|head
+
+NM_001003422
+NM_001003429
+NM_001004577
+NM_001017572
+NM_001025520
+NM_001025533
+NM_001033107
+NM_001044395
+NM_001045231
+[zhangqf7@loginview02 60]$ ll|awk '{print $9}'|cut -d "_" -f 1-2|sort|uniq|head|sed ':a;N;$!ba;s/\n/,/g'
+,NM_001003422,NM_001003429,NM_001004577,NM_001017572,NM_001025520,NM_001025533,NM_001033107,NM_001044395,NM_001045231
+```
