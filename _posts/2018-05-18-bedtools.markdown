@@ -56,3 +56,37 @@ AttributeError: 'pybedtools.cbedtools.Interval' object has no attribute 'thickSt
 >>> i.fields
 [u'NC_007118.6', u'71143916', u'71166706', u'TCONS_00052481_- gene_id "XLOC_019131"; transcript_id "TCONS_00052481"; exon_number "8"; oId "CPAT16329"; tss_id "TSS29925";', u'.', u'-', u'.', u'.', u'.', u'8', u'888,101,130,221,36,107,1981,24', u'0,1065,1568,2078,3812,16675,18264,22766']
 ```
+
+### BEDtools
+
+#### bed file region extend [biostar](https://www.biostars.org/p/58381/)
+
+```bash
+bedtools slop -i all_peaks2 -g /Share/home/zhangqf/database/GenomeAnnotation/size/hg38.genome.size -b 50 > all_peaks.ext50
+
+Tool:    bedtools slop (aka slopBed)
+Version: v2.26.0
+Summary: Add requested base pairs of "slop" to each feature.
+
+Usage:   bedtools slop [OPTIONS] -i <bed/gff/vcf> -g <genome> [-b <int> or (-l and -r)]
+
+Options:
+        -b      Increase the BED/GFF/VCF entry -b base pairs in each direction.
+                - (Integer) or (Float, e.g. 0.1) if used with -pct.
+
+        -l      The number of base pairs to subtract from the start coordinate.
+                - (Integer) or (Float, e.g. 0.1) if used with -pct.
+
+        -r      The number of base pairs to add to the end coordinate.
+                - (Integer) or (Float, e.g. 0.1) if used with -pct.
+
+        -s      Define -l and -r based on strand.
+                E.g. if used, -l 500 for a negative-stranded feature,
+                it will add 500 bp downstream.  Default = false.
+
+        -pct    Define -l and -r as a fraction of the feature's length.
+                E.g. if used on a 1000bp feature, -l 0.50,
+                will add 500 bp "upstream".  Default = false.
+
+        -header Print the header from the input file prior to results.
+```
