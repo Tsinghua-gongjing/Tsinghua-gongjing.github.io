@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "python"
-title:  "Some common problems"
+title:  "Python common used tricks"
 tags: [python]
 ---
 
