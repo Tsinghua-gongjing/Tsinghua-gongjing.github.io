@@ -84,6 +84,20 @@ ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
 ```
 
+* annotate point/position with text [stackoverflow](https://stackoverflow.com/questions/14432557/matplotlib-scatter-plot-with-different-text-at-each-data-point)
+
+```python
+y = [2.56422, 3.77284, 3.52623, 3.51468, 3.02199]
+z = [0.15, 0.3, 0.45, 0.6, 0.75]
+n = [58, 651, 393, 203, 123]
+
+fig, ax = plt.subplots()
+ax.scatter(z, y)
+
+for i, txt in enumerate(n):
+    ax.annotate(txt, (z[i], y[i]))
+```
+
 ## seaborn plot
 
 * set color list instead of seaborn default
@@ -99,6 +113,8 @@ my_pal = {'egg':color_stages[0], '1cell': color_stages[1], '4cell': color_stages
 ```python
 sns.boxplot(x='cell', y='gini', data=df_save_all, ax=ax[0], palette=file_info_dict['my_pal'])
 ```
+
+
 
 ## inkscape
 

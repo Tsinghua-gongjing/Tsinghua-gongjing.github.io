@@ -87,6 +87,7 @@ z=z*z
 plt.scatter(x, y, s=z*2000, c=x, cmap="Blues", alpha=0.4, edgecolors="grey", linewidth=2)
 
 ### plot color bar
+### https://stackoverflow.com/questions/6063876/matplotlib-colorbar-for-scatter
 sc = plt.scatter(x, y, s=z*2000, c=x, cmap="Blues", alpha=0.4, edgecolors="grey", linewidth=2)
 plt.colorbar(sc)
 ```
