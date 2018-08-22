@@ -85,6 +85,10 @@ z=z*z
  
 # Change color with c and alpha. I map the color to the X axis value.
 plt.scatter(x, y, s=z*2000, c=x, cmap="Blues", alpha=0.4, edgecolors="grey", linewidth=2)
+
+### plot color bar
+sc = plt.scatter(x, y, s=z*2000, c=x, cmap="Blues", alpha=0.4, edgecolors="grey", linewidth=2)
+plt.colorbar(sc)
 ```
 
 ![](https://python-graph-gallery.com/wp-content/uploads/272_Bubble_plot_with_mapped_color.png)
