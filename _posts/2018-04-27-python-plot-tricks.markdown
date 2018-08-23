@@ -159,6 +159,36 @@ plt.close()
 
 [![multuple_heatmap](https://i.loli.net/2018/08/23/5b7e1fbbc40c1.png)](https://i.loli.net/2018/08/23/5b7e1fbbc40c1.png)
 
+* merge symmetry matrix to one side 
+
+```python
+def merge_symmetry_df_to_diagonal_lower(df=None):
+    if df is None:
+        df = pd.DataFrame({0:[1, 0.3, 0.8], 1:[0.3, 1, 0.3], 2:[0.8, 0.3, 1]})
+    df_twice = df + df.T
+    # df_twice.values[[np.arange(df.shape[0])]*2] = df_twice.values[[np.arange(df.shape[0])]*2] / 2
+    df_twice.values[[np.arange(df.shape[0])]*2] = np.diagonal(df)
+    
+    return df_twice
+
+d1 = pd.DataFrame({0:[1, 0.3, 0.8], 1:[0.3, 1, 0.3], 2:[0.8, 0.3, 1]})
+d = merge_symmetry_df_to_diagonal_lower()
+
+fig, ax = plt.subplots(1,3, figsize=(12,3))
+
+sns.heatmap(d1, ax=ax[0], square=True, annot=True)
+sns.heatmap(d, ax=ax[1], square=True, annot=True)
+
+mask = np.zeros_like(d)
+mask[np.triu_indices_from(mask)] = True
+mask[np.diag_indices_from(mask)] = False
+sns.heatmap(d, ax=ax[2], square=True, annot=True, mask=mask)
+
+plt.tight_layout()
+```
+
+[![heatmap_matrix_symmetry.png](https://i.loli.net/2018/08/23/5b7eaa39414e5.png)](https://i.loli.net/2018/08/23/5b7eaa39414e5.png)
+
 
 ## inkscape
 
