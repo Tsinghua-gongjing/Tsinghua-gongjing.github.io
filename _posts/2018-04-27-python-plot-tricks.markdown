@@ -148,6 +148,7 @@ ax[2].set_yticklabels(ax[2].yaxis.get_majorticklabels(), rotation=0)
 ax[2].set_xticklabels(ax[2].xaxis.get_majorticklabels(), rotation=90)
 
 ### set tick label color individually
+### https://stackoverflow.com/questions/21936014/set-color-for-xticklabels-individually-in-matplotlib
 # color_ls = ['red']*10+['black']*19
 # [t.set_color(i) for (i,t) in zip(color_ls,ax[2].xaxis.get_ticklabels())]
 
