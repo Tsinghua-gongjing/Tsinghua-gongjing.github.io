@@ -100,7 +100,7 @@ for i, txt in enumerate(n):
     ax.annotate(txt, (z[i], y[i]))
 ```
 
-## 2. seaborn plot
+## 2. Seaborn plot
 
 ### Set color list instead of seaborn default
 
@@ -192,7 +192,7 @@ plt.tight_layout()
 [![heatmap_matrix_symmetry.png](https://i.loli.net/2018/08/23/5b7eaa39414e5.png)](https://i.loli.net/2018/08/23/5b7eaa39414e5.png)
 
 
-## 3. inkscape
+## 3. Inkscape
 
 ### Convert pdf to svg ([stackoverflow](https://stackoverflow.com/questions/4120567/convert-pdf-to-svg)), only for first page
 
