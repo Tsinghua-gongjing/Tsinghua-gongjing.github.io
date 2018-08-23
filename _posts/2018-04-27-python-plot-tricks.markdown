@@ -5,12 +5,14 @@ title:  "Frequently used ticks"
 tags: [plot, visualization]
 ---
 
-# record some of the frequently used tricks
+- TOC
+{:toc}
 
-## python plot
+
+## 1. Python plot
 
 
-* set x axis tick labels
+### Set x axis tick labels
 
 ```python
 # assign tick position and label
@@ -21,21 +23,21 @@ plt.xticks(range(0, len(compare_cell_ls)), compare_cell_ls, rotation=45)
 ax.set_xticklabels(compare_cell_ls, rotation=45)
 ``` 
 
-* rotate x tick labels
+### Rotate x tick labels with axis
 
 ```python
 # auto get & rotate
 ax[0].set_xticklabels(ax[0].xaxis.get_majorticklabels(), rotation=45)
 ```
 
-* rotate x tick labels in seaborn 
+### Rotate x tick labels in seaborn 
 
 ```python
 # work for last row graph, not Every plots (in FacetGrid)
 g.set_xticklabels(rotation=45)
 ```
 
-* time series plot
+### Time series line plot
 
 ```python
 # data format
@@ -63,13 +65,13 @@ df_plot_mean = df_plot.loc[:, compare_cell_ls].mean(axis=0)
 ax.plot(range(0, len(compare_cell_ls)), df_plot_mean, color='blue')
 ```
 
-* remove legend (also work in seaborn)
+### Remove legend (also work in seaborn)
 
 ```python
 ax.legend_.remove()
 ```
 
-* set equal axis and x_lim/ylim [github: set_ylim not working with plt.axis('equal') ](https://github.com/matplotlib/matplotlib/issues/8093)
+### Set equal axis and x_lim/ylim [github: set_ylim not working with plt.axis('equal') ](https://github.com/matplotlib/matplotlib/issues/8093)
 
 ```python
 plt.plot((.1, .3))
@@ -77,14 +79,14 @@ ax.axis('square')
 ax.set_xlim(0.1, 0.3)
 ```
 
-* remove spines on the right and top
+### Remove spines on the right and top
 
 ```python
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
 ```
 
-* annotate point/position with text [stackoverflow](https://stackoverflow.com/questions/14432557/matplotlib-scatter-plot-with-different-text-at-each-data-point)
+### Annotate point/position with text [stackoverflow](https://stackoverflow.com/questions/14432557/matplotlib-scatter-plot-with-different-text-at-each-data-point)
 
 ```python
 y = [2.56422, 3.77284, 3.52623, 3.51468, 3.02199]
@@ -98,9 +100,9 @@ for i, txt in enumerate(n):
     ax.annotate(txt, (z[i], y[i]))
 ```
 
-## seaborn plot
+## 2. seaborn plot
 
-* set color list instead of seaborn default
+### Set color list instead of seaborn default
 
 ```python
 color_stages = sns.color_palette('Set1',n_colors=7, desat=0.8)
@@ -108,13 +110,13 @@ my_pal = {'egg':color_stages[0], '1cell': color_stages[1], '4cell': color_stages
 
 ```
 
-* set specific color for each cell/category
+### Set specific color for different category using dict
 
 ```python
 sns.boxplot(x='cell', y='gini', data=df_save_all, ax=ax[0], palette=file_info_dict['my_pal'])
 ```
 
-* plot multiple heatmap
+### Plot multiple heatmap with subplots
 
 ```python
 
@@ -159,7 +161,7 @@ plt.close()
 
 [![multuple_heatmap](https://i.loli.net/2018/08/23/5b7e1fbbc40c1.png)](https://i.loli.net/2018/08/23/5b7e1fbbc40c1.png)
 
-* merge symmetry matrix to one side 
+### Merge symmetry matrix value to one side 
 
 ```python
 def merge_symmetry_df_to_diagonal_lower(df=None):
@@ -190,17 +192,17 @@ plt.tight_layout()
 [![heatmap_matrix_symmetry.png](https://i.loli.net/2018/08/23/5b7eaa39414e5.png)](https://i.loli.net/2018/08/23/5b7eaa39414e5.png)
 
 
-## inkscape
+## 3. inkscape
 
-* convert pdf to svg ([stackoverflow](https://stackoverflow.com/questions/4120567/convert-pdf-to-svg)), only for first page
+### Convert pdf to svg ([stackoverflow](https://stackoverflow.com/questions/4120567/convert-pdf-to-svg)), only for first page
 
 ```bash
 /Applications/Inkscape.app/Contents/Resources/bin/inkscape -l Python_graph.svg Python_graph.pdf
 ```
 
-## MagicImage
+## 4. MagicImage
 
-* conbine multiple image into one figure/pdf file
+### Combine multiple image into one figure/pdf file
 
 ```bash
 # auto rows and columns
