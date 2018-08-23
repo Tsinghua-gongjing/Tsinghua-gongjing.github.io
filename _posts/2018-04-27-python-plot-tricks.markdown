@@ -114,6 +114,45 @@ my_pal = {'egg':color_stages[0], '1cell': color_stages[1], '4cell': color_stages
 sns.boxplot(x='cell', y='gini', data=df_save_all, ax=ax[0], palette=file_info_dict['my_pal'])
 ```
 
+* plot multiple heatmap
+
+```python
+
+### 指定height_ratios，一般根据每个集合具有的feature的数目
+fig, ax = plt.subplots(3,1,figsize=(32, 25), gridspec_kw = {'height_ratios':[19, 15, 7]}, sharey=False, sharex=True)
+
+### plot heatmap
+h1 = sns.heatmap(df_plot_all[function_ls[1:]].T,linecolor='grey', linewidths=0.1, cbar=False, square=True, cmap="Greens", ax=ax[0])
+h2 = sns.heatmap(df_plot_all[localization_ls].T,linecolor='grey', linewidths=0.1, cbar=False, square=True, cmap="Greens", ax=ax[1])
+h3 = sns.heatmap(df_plot_all[domain_ls].T,linecolor='grey', linewidths=0.1, cbar=False, square=True, cmap="Greens", ax=ax[2])
+
+### keep one xlabel for all, also keep yticklabels
+# h1.set(xlabel='', ylabel='Heatmap1')
+# h2.set(xlabel='', ylabel='Heatmap2')
+# h3.set(xlabel='Columns', ylabel='Heatmap3')
+
+### keep one xlabel for all, remove yticklabels
+h1.set(xlabel='', ylabel='Heatmap1', yticks=[])
+h2.set(xlabel='', ylabel='Heatmap2', yticks=[])
+h3.set(xlabel='Columns', ylabel='Heatmap3', yticks=[], xticks=[])
+
+### set yticklabels on the right
+ax[0].yaxis.tick_right()
+ax[0].set_yticklabels(ax[0].yaxis.get_majorticklabels(), rotation=0)
+
+ax[1].yaxis.tick_right()
+ax[1].set_yticklabels(ax[1].yaxis.get_majorticklabels(), rotation=0)
+
+ax[2].yaxis.tick_right()
+ax[2].set_yticklabels(ax[2].yaxis.get_majorticklabels(), rotation=0)
+ax[2].set_xticklabels(ax[2].xaxis.get_majorticklabels(), rotation=90)
+
+plt.tight_layout()
+plt.savefig('./test.png')
+plt.close()
+```
+
+[![multuple_heatmap](https://i.loli.net/2018/08/23/5b7e1fbbc40c1.png)](https://i.loli.net/2018/08/23/5b7e1fbbc40c1.png)
 
 
 ## inkscape
