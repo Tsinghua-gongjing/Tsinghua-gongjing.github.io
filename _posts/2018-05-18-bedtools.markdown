@@ -91,7 +91,7 @@ Options:
         -header Print the header from the input file prior to results.
 ```
 
-#### shuffleBed: segmentation fault, due to region restriction
+#### shuffleBed: segmentation fault, due to region restriction, also see [bedtools google group discussion](https://groups.google.com/forum/#!msg/bedtools-discuss/agPudqrxYKY/PZc9UNd2FgwJ;context-place=forum/bedtools-discuss)
 
 ```bash
 # foreground bed file with regions
