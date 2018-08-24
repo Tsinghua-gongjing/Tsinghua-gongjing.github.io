@@ -90,3 +90,16 @@ Options:
 
         -header Print the header from the input file prior to results.
 ```
+
+#### shuffleBed: segmentation fault, due to region restriction
+
+```bash
+### foreground bed file with regions
+$ cat window-anno_utr3.bed6NM_001002873	2822	2851	NM_001002873	2845	2868	-	utr3	*### run shuffleBed, cause error
+### shuffle within 3UTR context
+[zhangting@appa1 Figure2B-Dreme]$ 
+shuffleBed -i window-anno_utr3.bed6 -chrom -g transcript-length.txt -incl utr3.bed > test.bed
+/software/biosoft/software/MeRIP-PF/tools/BEDTools-Version-2.16.2/bin/shuffleBed: line 2: 19639 Segmentation fault      (core dumped) ${0%/*}/bedtools shuffle "$@"### 想要shuffle的region是2822-2851（长度=29），但是限定的3UTR区域是2845-2868（长度=23），所以限定区域的长度小于原始的，在这个限制下不可能找到满足条件的shuffle region，所以报错
+# tx, start, end, tx, UTR3_start, UTR3_end, strand, element, *
+NM_001002873	2822	2851	NM_001002873	2845	2868	-	utr3	*
+```
