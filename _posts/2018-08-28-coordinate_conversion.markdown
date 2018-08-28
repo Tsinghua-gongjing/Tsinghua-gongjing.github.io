@@ -86,6 +86,7 @@ CrossMap supports more file formats than liftOver, like wig/bigWig. However, whe
 ```bash
 # download phastCons score of zebrafish (only z7 provide)
 # link: //hgdownload.cse.ucsc.edu/goldenPath/danRer7/phastCons8way/
+# currently there is no z10 version: https://www.biostars.org/p/282330/
 
 # convert from z7 to z10
 # output: fish.phastCons8way.bw.bgr, fish.phastCons8way.bw.bw, fish.phastCons8way.bw.sorted.bgr 
