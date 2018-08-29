@@ -5,7 +5,7 @@ title:  "Google machine learning"
 tags: [python, machine learning, google]
 ---
 
-最近，[google](https://developers.google.com/machine-learning/crash-course)在其开发网站上，公开了用于内部人员进行机器学习培训的材料，可以快速帮助了解机器学习及其框架TensorFlow。近期会学习这个系列的材料，做一点后续的笔记。
+最近，[google](https://developers.google.com/machine-learning/crash-course)在其开发网站上，公开了用于内部人员进行机器学习培训的材料，可以快速帮助了解机器学习及其框架TensorFlow。量子位提供了一个相关材料的连接[（别翻墙了，谷歌机器学习速成课25讲视频全集在此）](https://mp.weixin.qq.com/s?__biz=MzIzNjc1NzUzMw==&mid=2247495096&idx=1&sn=cb25eec7088e96f416bc1df2a6c2df10&chksm=e8d05acadfa7d3dca298cef87ed9bf836a81d9501be6210cac5c9a2f6fdc1a4dc81b10348229&mpshare=1&scene=23&srcid=0304E57F5bWLPOV7AUtjemDr#rd)。近期会学习这个系列的材料，做一点后续的笔记。
 
 
 ## 课程概览
