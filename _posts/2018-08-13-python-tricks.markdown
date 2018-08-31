@@ -39,3 +39,7 @@ df['column'].cat.set_categories(sorter, inplace=True)
 
 df.sort_values(["column"], inplace=True)
 ```
+
+### [Free online jupyter](https://jupyter.org/try)
+
+![online_jupyter_free](https://github.com/Tsinghua-gongjing/blog_codes/blob/master/images/online_jupyter_free.jpeg)
