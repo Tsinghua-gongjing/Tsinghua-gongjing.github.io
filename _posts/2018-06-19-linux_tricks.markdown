@@ -1,9 +1,12 @@
 ---
 layout: post
 category: "linux"
-title:  "Common used tricks"
+title:  "Linux common used tricks"
 tags: [linux]
 ---
+
+- TOC
+{:toc}
 
 ## Rename multiple filenames [reference](https://www.tecmint.com/rename-multiple-files-in-linux/)
 
