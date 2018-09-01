@@ -5,6 +5,9 @@ title:  "Python common used tricks"
 tags: [python]
 ---
 
+- TOC
+{:toc}
+
 ### Calculate distance between two intervals [stackoverflow](https://stackoverflow.com/questions/16843409/finding-integer-distance-between-two-intervals)
 
 ```python
