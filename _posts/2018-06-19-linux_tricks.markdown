@@ -64,7 +64,7 @@ total 1.3M
 30
 ```
 
-### Mac OS general compress/decompress command line tool
+## Mac OS general compress/decompress command line tool
 ```bash
 # https://theunarchiver.com/command-line
 $ wget https://cdn.theunarchiver.com/downloads/unarMac.zip
