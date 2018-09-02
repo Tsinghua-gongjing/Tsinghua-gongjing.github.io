@@ -103,6 +103,20 @@ for i, txt in enumerate(n):
     ax.annotate(txt, (z[i], y[i]))
 ```
 
+### Add horizontal or vertical lines
+
+```python
+# 这个是画水平或者竖直的线，只指定x或者y时，跨越坐标轴
+# 指定比如xmin/xmax时，画对应的比例。这些值取值为[0,1]之间
+# https://stackoverflow.com/questions/16930328/vertical-horizontal-lines-in-matplotlib/16930526
+plt.axhline(y=0, xmin=0, xmax=1, hold=None, **kwargs)
+plt.axvline(x=0, ymin=0, ymax=1, hold=None, **kwargs)
+
+# 直接连接任意两点，指定两点的坐标时
+plt.plot((x1, x2), (y1, y2), 'k-')
+
+```
+
 ## 2. Seaborn plot
 
 ### Set color list instead of seaborn default
