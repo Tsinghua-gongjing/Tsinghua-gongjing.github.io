@@ -69,6 +69,9 @@ ax.plot(range(0, len(compare_cell_ls)), df_plot_mean, color='blue')
 
 ```python
 ax.legend_.remove()
+
+# show legend
+plt.legend()
 ```
 
 ### Set equal axis and x_lim/ylim [github: set_ylim not working with plt.axis('equal') ](https://github.com/matplotlib/matplotlib/issues/8093)
