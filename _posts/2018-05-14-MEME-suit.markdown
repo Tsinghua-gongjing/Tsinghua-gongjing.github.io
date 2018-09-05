@@ -92,3 +92,73 @@ letter-probability matrix: alength= 4 w= 8 nsites= 269 E= 3.3e-302
 
 
 [![meme2img_test.jpeg](https://i.loli.net/2018/06/19/5b28997eb4853.jpeg)](https://i.loli.net/2018/06/19/5b28997eb4853.jpeg)
+
+
+### TOMOM: identify motif against known motif source
+
+```bash
+[zhangqf7@loginview02 bin]$ /Share/home/zhangqf7/bin/tomtom --version
+5.0.2
+
+# 最新的版本比之前的版本添加了 -norc 参数
+# 指定这个参数，只输出正链的，
+# 对于扫RNA motif链的方向性很重要（一般不要负链上的） 
+
+[zhangqf7@loginview02 bin]$ /Share/home/zhangqf7/bin/tomtom
+No query motif database supplied
+
+Usage:
+  tomtom [options] <query file> <target file>+
+Options:
+  -o <output dir>  Name of directory for output files;
+                    will not replace existing directory
+  -oc <output dir> Name of directory for output files;
+                    will replace existing directory
+  -xalph           Convert the alphabet of the target motif databases
+                    to the alphabet of the query motif database
+                    assuming the core symbols of the target motif
+                    alphabet are a subset; default: reject differences
+  -bfile <background file>
+                   Name of background file;
+                    default: use the background from the query
+                    motif database
+  -motif-pseudo <pseudo count>
+                   Apply the pseudocount to the query and target motifs;
+                    default: apply a pseudocount of 0.1
+  -m <id>          Use only query motifs with a specified id;
+                    may be repeated
+  -mi <index>      Use only query motifs with a specifed index;
+                    may be repeated
+  -thresh <float>  Significance threshold; default: 0.5
+  -evalue          Use E-value threshold; default: q-value
+  -dist allr|ed|kullback|pearson|sandelin|blic1|blic5|llr1|llr5
+                   Distance metric for scoring alignments;
+                    default: pearson
+  -internal        Only allow internal alignments;
+                    default: allow overhangs
+  -min-overlap <int>
+                   Minimum overlap between query and target;
+                    default: 1
+  -norc            Do not score the reverse complements of targets
+  -incomplete-scores
+                   Ignore unaligned columns in computing scores
+                    default: use complete set of columns
+  -text            Output in text format (default is HTML)
+  -png             Create PNG logos; default: don't create PNG logos
+  -eps             Create EPS logos; default: don't create EPS logos
+  -no-ssc          Don't apply small-sample correction to logos;
+                    default: use small-sample correction
+  -verbosity [1|2|3|4]
+                   Set the verbosity of the program; default: 2 (normal)
+  -version         Print the version and exit
+  
+$ tomtom -no-ssc 
+		  -oc ./tomom_5_Collapsed-used 
+		  -verbosity 1 
+		  -min-overlap 5 
+		  -dist pearson 
+		  -evalue 
+		  -thresh 5 
+		  ./dreme.meme 
+		  /path/to/motif/source
+```
