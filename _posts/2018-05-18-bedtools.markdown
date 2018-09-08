@@ -5,6 +5,9 @@ title:  "BEDTOOLS"
 tags: [genomics, bedtools]
 ---
 
+- TOC
+{:toc}
+
 ### [pybedtools](https://daler.github.io/pybedtools/index.html)
 
 Python version of [Bedtools](https://bedtools.readthedocs.io/en/latest/index.html) to deal with bed format files.
