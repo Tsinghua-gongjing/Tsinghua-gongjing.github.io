@@ -5,6 +5,9 @@ title:  "Motif analysis: MEME suit"
 tags: [genomics, motif]
 ---
 
+- TOC
+{:toc}
+
 ### FIMO error: base frequency
 
 根据指定的motif文件，对query的fasta文件，用fimo扫潜在的RBP binding site：
