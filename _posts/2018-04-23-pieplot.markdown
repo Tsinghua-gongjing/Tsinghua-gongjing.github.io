@@ -5,11 +5,34 @@ title:  "Pie plot"
 tags: [plot, visualization]
 ---
 
-一个简便易用的工具：
+### 一个简便易用的工具 online version：
 
 [rapid table chart maker](https://www.rapidtables.com/tools/pie-chart.html)
 
 [![rapidtable_piechart.jpeg](https://i.loli.net/2018/04/23/5addcdb795954.jpeg)](https://i.loli.net/2018/04/23/5addcdb795954.jpeg)
+
+### Python: [pie plot example](https://pythonspot.com/matplotlib-pie-chart/)
+
+```python
+import matplotlib.pyplot as plt
+ 
+# Data to plot
+labels = 'Python', 'C++', 'Ruby', 'Java'
+sizes = [215, 130, 245, 210]
+colors = ['gold', 'yellowgreen', 'lightcoral', 'lightskyblue']
+explode = (0.1, 0, 0, 0)  # explode 1st slice
+ 
+# Plot
+plt.pie(sizes, explode=explode, labels=labels, colors=colors,
+        autopct='%1.1f%%', shadow=True, startangle=140)
+ 
+plt.axis('equal')
+plt.show()
+```
+
+The output looks like:
+
+![img](https://pythonspot-9329.kxcdn.com/wp-content/uploads/2015/07/matplotlib_pie.png)
 
 
 
