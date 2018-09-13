@@ -46,3 +46,34 @@ df.sort_values(["column"], inplace=True)
 ### [Free online jupyter](https://jupyter.org/try)
 
 [![online_jupyter_free.jpeg](https://i.loli.net/2018/08/31/5b88bd74ed303.jpeg)](https://i.loli.net/2018/08/31/5b88bd74ed303.jpeg)
+
+
+### Normalize data frame by row/column sum [stackoverflow](https://stackoverflow.com/questions/35678874/normalize-rows-of-pandas-data-frame-by-their-sums/35679163)
+
+```python
+t = pd.DataFrame({1:[1,2,3], 2:[3,4,5], 3:[6,7,8]})
+t
+
+	1	2	3
+0	0.100000	0.300000	0.600000
+1	0.153846	0.307692	0.538462
+2	0.187500	0.312500	0.500000
+```
+
+```python
+# by row sum
+t.div(t.sum(axis=1), axis=0)
+
+	1	2	3
+0	0.100000	0.300000	0.600000
+1	0.153846	0.307692	0.538462
+2	0.187500	0.312500	0.500000
+
+# by column sum
+t.div(t.sum(axis=0), axis=1)
+
+	1	2	3
+0	0.166667	0.250000	0.285714
+1	0.333333	0.333333	0.333333
+2	0.500000	0.416667	0.380952
+```
