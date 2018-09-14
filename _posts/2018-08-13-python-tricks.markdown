@@ -47,6 +47,8 @@ df.sort_values(["column"], inplace=True)
 
 [![online_jupyter_free.jpeg](https://i.loli.net/2018/08/31/5b88bd74ed303.jpeg)](https://i.loli.net/2018/08/31/5b88bd74ed303.jpeg)
 
+A free Python/R notebook can also be created online at [https://rdrr.io/](https://rdrr.io/).
+
 
 ### Normalize data frame by row/column sum [stackoverflow](https://stackoverflow.com/questions/35678874/normalize-rows-of-pandas-data-frame-by-their-sums/35679163)
 
