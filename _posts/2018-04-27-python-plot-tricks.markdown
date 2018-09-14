@@ -89,7 +89,7 @@ ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
 ```
 
-### Annotate point/position with text [stackoverflow](https://stackoverflow.com/questions/14432557/matplotlib-scatter-plot-with-different-text-at-each-data-point)
+### Annotate point/position with non-overlapped text [stackoverflow](https://stackoverflow.com/questions/14432557/matplotlib-scatter-plot-with-different-text-at-each-data-point)
 
 ```python
 y = [2.56422, 3.77284, 3.52623, 3.51468, 3.02199]
@@ -101,6 +101,10 @@ ax.scatter(z, y)
 
 for i, txt in enumerate(n):
     ax.annotate(txt, (z[i], y[i]))
+    
+# here is a very useful library to adjust overlapped text
+# https://stackoverflow.com/questions/19073683/matplotlib-overlapping-annotations-text
+# https://github.com/Phlya/adjustText
 ```
 
 ### Add horizontal or vertical lines
