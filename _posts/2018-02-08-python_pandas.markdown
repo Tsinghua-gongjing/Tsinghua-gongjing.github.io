@@ -14,7 +14,7 @@ tags: [python, pandas]
 [![pandas-cheat-sheet-v2.png](https://i.loli.net/2018/02/09/5a7d62edf39ef.png)](https://i.loli.net/2018/02/09/5a7d62edf39ef.png)
 
 
-## Python pandas v3
+## Python pandas [v3](chrome-extension://oemmndcbldboiebfnladdacbdfmadadm/https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf)
 
 [![pandas-cheat-sheet-v3-p1.png](https://i.loli.net/2018/02/09/5a7d635467064.png)](https://i.loli.net/2018/02/09/5a7d635467064.png)
 
