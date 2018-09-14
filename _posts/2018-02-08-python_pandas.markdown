@@ -5,16 +5,16 @@ title:  "Python module pandas"
 tags: [python, pandas]
 ---
 
-## python pandas v1
+## Python pandas [v1](https://www.datacamp.com/community/blog/python-pandas-cheat-sheet)
 
 [![Python_Pandas_Cheat_Sheet_2.png](https://i.loli.net/2018/02/09/5a7d61113900e.png)](https://i.loli.net/2018/02/09/5a7d61113900e.png)
 
-## python pandas v2
+## Python pandas v2
 
 [![pandas-cheat-sheet-v2.png](https://i.loli.net/2018/02/09/5a7d62edf39ef.png)](https://i.loli.net/2018/02/09/5a7d62edf39ef.png)
 
 
-## python pandas v3
+## Python pandas v3
 
 [![pandas-cheat-sheet-v3-p1.png](https://i.loli.net/2018/02/09/5a7d635467064.png)](https://i.loli.net/2018/02/09/5a7d635467064.png)
 
