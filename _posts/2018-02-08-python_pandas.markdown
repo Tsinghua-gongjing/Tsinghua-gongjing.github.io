@@ -9,7 +9,7 @@ tags: [python, pandas]
 
 [![Python_Pandas_Cheat_Sheet_2.png](https://i.loli.net/2018/02/09/5a7d61113900e.png)](https://i.loli.net/2018/02/09/5a7d61113900e.png)
 
-## Python pandas v2
+## Python pandas [v2](https://www.dataquest.io/blog/pandas-cheat-sheet/)
 
 [![pandas-cheat-sheet-v2.png](https://i.loli.net/2018/02/09/5a7d62edf39ef.png)](https://i.loli.net/2018/02/09/5a7d62edf39ef.png)
 
