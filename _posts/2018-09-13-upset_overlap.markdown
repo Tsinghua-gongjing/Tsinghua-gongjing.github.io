@@ -64,3 +64,56 @@ upset(df, sets=c('set1', 'set2', 'set3', 'set4', 'set5'),
 An example output like [this](https://guangchuangyu.github.io/2015/07/upsetplot-in-chipseeker/):
 
 ![](http://guangchuangyu.github.io/blog_images/Bioconductor/ChIPseeker/upset.png)
+
+### Display cross-way percentage for each set:
+
+```python
+import pandas as pd
+from nested_dict import nested_dict
+import matplotlib as mpl
+mpl.use('Agg')
+import matplotlib.pyplot as plt
+import seaborn as sns
+import matplotlib.colors as mcolors
+sns.set(style="ticks")
+sns.set_context("poster")
+
+def load_upset_file(txt=None, header_ls=None,):
+	if txt is None:
+		txt = 'all.base.set.txt'
+	if header_ls is None:
+		header_ls = ['set1', 'set2', 'set3', 'set4', 'set5']
+	set_category_stat_dict = nested_dict(2, int)
+	with open(txt, 'r') as TXT:
+		for n,line in enumerate(TXT):
+			line = line.strip()
+			if not line or line.startswith('#'):
+				continue
+			arr = line.split('\t')
+			entry_in = sum(map(int, arr[1:]))
+			for i,j in zip(arr[1:], header_ls):
+				if int(i) == 1:
+					set_category_stat_dict[j][entry_in] += 1
+	set_category_stat_df = pd.DataFrame.from_dict(set_category_stat_dict, orient='index')
+	set_category_stat_df = set_category_stat_df.loc[header_ls, :]
+	print set_category_stat_df
+
+	set_category_stat_df_ratio = set_category_stat_df.div(set_category_stat_df.sum(axis=1), axis=0)
+	print set_category_stat_df_ratio
+
+	fig, ax = plt.subplots(1, 2)
+	set_category_stat_df.plot(kind='bar', stacked=True, ax=ax[0])
+	set_category_stat_df_ratio.plot(kind='bar', stacked=True, ax=ax[1])
+	plt.tight_layout()
+	savefn = txt.replace('.txt', '.ratio.pdf')
+	plt.savefig(savefn)
+	plt.close()
+
+def main():
+	load_upset_file()
+
+if __name__ == '__main__':
+	main()
+```
+
+![upset_set_percentage](https://github.com/Tsinghua-gongjing/blog_codes/blob/master/images/upset_set_percentage.jpeg)
