@@ -73,3 +73,21 @@ sns.pointplot(x='x', y='y', data=df2, ax=ax[1])
 ```
 
 [![scatter_plot2.png](https://i.loli.net/2018/02/26/5a93b814168c9.png)](https://i.loli.net/2018/02/26/5a93b814168c9.png)
+
+指定点的颜色按照某一列的属性进行上色（[参考这里](https://stackoverflow.com/questions/21654635/scatter-plots-in-pandas-pyplot-how-to-plot-by-category)）：
+
+```python
+# specify the category columns and grouping
+groups = df.groupby('sex')
+
+# Plot
+fig, ax = plt.subplots()
+ax.margins(0.05) # Optional, just adds 5% padding to the autoscaling
+for name, group in groups:
+    ax.plot(group.total_bill, group.tip, marker='o', linestyle='', ms=12, label=name)
+ax.legend()
+
+plt.show()
+```
+
+[![scatter_color_catgeory.jpeg](https://i.loli.net/2018/09/15/5b9cb500853e6.jpeg)](https://i.loli.net/2018/09/15/5b9cb500853e6.jpeg)
