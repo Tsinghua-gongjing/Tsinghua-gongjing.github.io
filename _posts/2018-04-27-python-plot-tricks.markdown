@@ -74,6 +74,32 @@ ax.legend_.remove()
 plt.legend()
 ```
 
+### Plot ax legend out of graph [stackoverflow](https://stackoverflow.com/questions/4700614/how-to-put-the-legend-out-of-the-plot)
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.arange(10)
+
+fig = plt.figure()
+ax = plt.subplot(111)
+
+for i in xrange(5):
+    ax.plot(x, i * x, label='$y = %ix$'%i)
+
+# Shrink current axis by 20%
+box = ax.get_position()
+ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
+
+# Put a legend to the right of the current axis
+ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+
+plt.show()
+```
+
+![](https://i.stack.imgur.com/v34g8.png)
+
 ### Set equal axis and x_lim/ylim [github: set_ylim not working with plt.axis('equal') ](https://github.com/matplotlib/matplotlib/issues/8093)
 
 ```python
