@@ -165,3 +165,111 @@ $ tomtom -no-ssc
 		  ./dreme.meme 
 		  /path/to/motif/source
 ```
+
+### Prepare .meme file from .fa file
+
+Prepare the .fa file:
+
+```bash
+[zhangqf7@loginview02 motif_CISBP_RNA_narrow]$ head miR_Family_Info.fa
+>let-7
+GAGGUAG
+>miR-1/206
+GGAAUGU
+>miR-10
+ACCCUGU
+>miR-101
+ACAGUAC
+>miR-103/107
+GCAGCAU
+```
+The output .meme file:
+
+```bash
+[zhangqf7@loginview02 motif_CISBP_RNA_narrow]$ head -30 miR_Family_Info.meme
+MEME version 4
+
+ALPHABET= ACGT
+
+Background letter frequencies (from uniform background):
+A 0.25000 C 0.25000 G 0.25000 T 0.25000
+
+MOTIF miR-214 (miR-214)
+
+letter-probability matrix: alength= 4 w= 7 nsites= 20 E= 0
+ 0      1       0       0
+ 1      0       0       0
+ 0      0       1       0
+ 0      1       0       0
+ 1      0       0       0
+ 0      0       1       0
+ 0      0       1       0
+
+MOTIF miR-217 (miR-217)
+
+letter-probability matrix: alength= 4 w= 7 nsites= 20 E= 0
+ 1      0       0       0
+ 0      1       0       0
+ 0      0       0       1
+ 0      0       1       0
+ 0      1       0       0
+ 1      0       0       0
+ 0      0       0       1
+
+MOTIF miR-740 (miR-740)
+```
+
+The script:
+
+```python
+from pyfasta import Fasta
+
+def read_fa(fa):
+    fa_dict1 = Fasta(fa, key_fn=lambda key: key.split("\t")[0])
+    fa_dict = {i.split()[0]: j[0:] for i, j in fa_dict1.items()}
+    print fa_dict.keys()[0:3]
+    return fa_dict
+
+def write_pwm(seq=None, motif_name=None):
+	if seq is None:
+		seq = 'AGGUAAGU'
+	if motif_name is None:
+		motif_name = 'Novel'
+	s = 'MOTIF %s (%s)'%(motif_name, motif_name)
+	s += '\n\n'
+	s += 'letter-probability matrix: alength= 4 w= %s nsites= 20 E= 0'%(len(seq))
+	s += '\n'
+	for n in seq:
+		n_s = [1 if n.upper() == b else 0 for b in ['A', 'C', 'G', 'U']]
+		s += ' '+'\t'.join(map(str, n_s))
+		s += '\n'
+	s += '\n'
+	return s
+
+def meme_header():
+	header = 'MEME version 4\n\nALPHABET= ACGT\n\nBackground letter frequencies (from uniform background):\nA 0.25000 C 0.25000 G 0.25000 T 0.25000\n\n'
+	return header
+
+def write_fa_all(fa=None):
+	savefn = fa.replace('.fa', '.meme')
+	SAVEFN = open(savefn, 'w')
+	fa_dict = read_fa(fa)
+	s_all = ''
+	header = meme_header()
+	s_all += header
+	for i in fa_dict:
+		seq = fa_dict[i]
+		s = write_pwm(seq, motif_name=i)
+		s_all += s
+	print >>SAVEFN, s_all
+	SAVEFN.close()
+
+def main():
+	# header = meme_header()
+	# s = write_pwm()
+	# print header + s
+	write_fa_all()
+
+if __name__ == '__main__':
+	main()
+```
