@@ -183,7 +183,7 @@ ACAGUAC
 >miR-103/107
 GCAGCAU
 ```
-The output .meme file:
+The output .meme file (not in order as provides as using dict object):
 
 ```bash
 [zhangqf7@loginview02 motif_CISBP_RNA_narrow]$ head -30 miR_Family_Info.meme
