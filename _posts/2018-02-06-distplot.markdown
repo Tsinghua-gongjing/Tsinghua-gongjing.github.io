@@ -29,8 +29,8 @@ ax.spines['right'].set_visible(False)
 ```python
 fig,ax = plt.subplots()
 
-sns.distplot(d_g['col1'].dropna(), bins=100,kde=False, norm_hist=0, color='#d02e30',ax=ax, label='1cell')
-sns.distplot(d_g['col2'].dropna(), bins=100,kde=False, norm_hist=0, color='#447dab',ax=ax, label='RK33')
+sns.distplot(d_g['col1'].dropna(), bins=100,kde=False, norm_hist=0, color='#d02e30',ax=ax, label='col1')
+sns.distplot(d_g['col2'].dropna(), bins=100,kde=False, norm_hist=0, color='#447dab',ax=ax, label='col2')
 
 mean1 = np.mean(d_g['col1'])
 mean2 = np.mean(d_g['col2'])
