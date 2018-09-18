@@ -1,8 +1,43 @@
 ---
 layout: post
 category: "visualization"
-title:  "Distribution plot"
+title:  "Distribution/hist plot"
 tags: [plot, visualization]
 ---
 
+### Call hist function from plt [stackoverflow](https://stackoverflow.com/questions/6871201/plot-two-histograms-at-the-same-time-with-matplotlib)
 
+```python
+fig,ax = plt.subplots()
+
+bins = np.linspace(0.3, 0.8, 70)
+
+ax.hist(d_g['col1'], bins=bins)
+mean1 = np.mean(d_g['col1'])
+ax.hist(d_g['col2'], bins=bins)
+mean2 = np.mean(d_g['col2'])
+
+plt.axvline(x=mean1, ymin=0, ymax=1, ls='--')
+plt.axvline(x=mean2, ymin=0, ymax=1, ls='--')
+
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+```
+
+### Call from [sns.dist](https://seaborn.pydata.org/generated/seaborn.distplot.html#seaborn.distplot) function
+
+```python
+fig,ax = plt.subplots()
+
+sns.distplot(d_g['col1'].dropna(), bins=100,kde=False, norm_hist=0, color='#d02e30',ax=ax, label='1cell')
+sns.distplot(d_g['col2'].dropna(), bins=100,kde=False, norm_hist=0, color='#447dab',ax=ax, label='RK33')
+
+mean1 = np.mean(d_g['col1'])
+mean2 = np.mean(d_g['col2'])
+
+ax.axvline(x=mean1, ymin=0, ymax=1, ls='--', color='#d02e30', )
+ax.axvline(x=mean2, ymin=0, ymax=1, ls='--', color='#447dab', )
+
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+```
