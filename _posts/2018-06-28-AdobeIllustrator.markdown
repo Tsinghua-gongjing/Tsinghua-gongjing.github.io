@@ -51,3 +51,7 @@ Refer to [Adobe Illustrator CC 2017 MAC中文破解版](http://www.web3.xin/soft
 ## 常规操作
 
 shift+option+cmd+d: 变换所选对象，比如尺寸、旋转等
+
+## 快捷键
+
+![](/assets/AI_cheatsheet.jpeg)
