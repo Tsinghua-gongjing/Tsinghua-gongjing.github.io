@@ -56,6 +56,6 @@ shift+option+cmd+d: 变换所选对象，比如尺寸、旋转等
 
 [官方网页](https://helpx.adobe.com/illustrator/using/default-keyboard-shortcuts.html)
 
-官方博客图片：
+[官方博客](https://blogs.adobe.com/contentcorner/2017/03/17/illustrator-keyboard-shortcuts-a-cheat-sheet/)图片：
 
 ![](/assets/AI_cheatsheet.jpeg)
