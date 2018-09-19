@@ -106,6 +106,12 @@ plt.show()
 plt.plot((.1, .3))
 ax.axis('square')
 ax.set_xlim(0.1, 0.3)
+
+# in seaborn like jointplot also works
+g = sns.jointplot(x='col1', y='col2', data=d_g, kind="reg", stat_func=stats.pearsonr, size=10)
+g.ax_joint.set_xlim(0.35, 0.9)
+g.ax_joint.set_ylim(0.35, 0.9)
+
 ```
 
 ### Remove spines on the right and top
