@@ -273,3 +273,28 @@ def main():
 if __name__ == '__main__':
 	main()
 ```
+
+### Multiple peak region (.bed file) overlap
+
+* [biostar](https://www.biostars.org/p/192217/): Tutorial: Visualization of ChIP-Seq peak overlaps using HOMER mergePeaks and UpSetR
+
+* [github](https://github.com/stevekm/Bioinformatics/tree/91710b8b597af385ec3af381c953ca4a271e4e5e/HOMER_mergePeaks_pipeline/HOMER_mergePeaks_venn_UpSetR): Calling mergePeaks to calculate overlap and UpSetR to plot
+
+* [HOMER mergePeaks](http://homer.ucsd.edu/homer/ngs/mergePeaks.html): Finding Overlapping and Differentially Bound Peaks
+
+```bash
+# Quick example
+# calculate overlapping
+mergePeaks H3K27AC.bed \
+           H3K27ME3.bed \
+           H3K4ME3.bed \
+           H3K9AC.bed \
+           gencode.bed \
+           -prefix mergepeaks \
+           -venn venn.txt \
+           -matrix matrix.txt
+
+# plot overlapping
+# SampleID:: output file name (same dir as venn.txt)   
+Rscript --vanilla multi_peaks_UpSet_plot.R "SampleID" venn.txt
+```
