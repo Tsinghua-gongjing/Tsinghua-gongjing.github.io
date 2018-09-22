@@ -298,6 +298,8 @@ mergePeaks H3K27AC.bed \
 # SampleID:: output file name (same dir as venn.txt)   
 Rscript --vanilla multi_peaks_UpSet_plot.R "SampleID" venn.txt
 ```
+
+
 The number of merged peaks are less than original peaks number, as overlapping regions will bed merged: 
 
 ```bash
