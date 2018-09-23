@@ -311,3 +311,60 @@ NM_001017557    1111    1139    NM_001017557    84      1373    +       cds     
 # in this case, the final number of entry is <= original
 Merged-NM_001017557-1116-2      NM_001017557    1093    1139    +       0.000000        window.bed       2       NM_001017557--18,NM_001017557--19
 ```
+
+The [example](https://github.com/stevekm/Bioinformatics/blob/91710b8b597af385ec3af381c953ca4a271e4e5e/HOMER_mergePeaks_pipeline/HOMER_mergePeaks_venn_UpSetR/venn.txt) `venn.txt` file output is as below:
+
+```bash
+H3K27AC.bed	H3K27ME3.bed	H3K4ME3.bed	H3K9AC.bed	gencode.bed	Total	Name
+X	X				1690	H3K27AC.bed|H3K27ME3.bed
+X	X			X	758	H3K27AC.bed|H3K27ME3.bed|gencode.bed
+X	X		X		147	H3K27AC.bed|H3K27ME3.bed|H3K9AC.bed
+X	X		X	X	87	H3K27AC.bed|H3K27ME3.bed|H3K9AC.bed|gencode.bed
+X	X	X			1420	H3K27AC.bed|H3K27ME3.bed|H3K4ME3.bed
+X	X	X		X	1797	H3K27AC.bed|H3K27ME3.bed|H3K4ME3.bed|gencode.bed
+X	X	X	X		1187	H3K27AC.bed|H3K27ME3.bed|H3K4ME3.bed|H3K9AC.bed
+```
+
+We can also calculate the cross-way percentage using these scripts, which is comparable with the section [Display cross-way percentage for each set](https://tsinghua-gongjing.github.io/posts/upset_overlap.html)
+
+```python
+import pandas as pd
+from nested_dict import nested_dict
+import matplotlib as mpl
+mpl.use('Agg')
+import matplotlib.pyplot as plt
+import seaborn as sns
+import matplotlib.colors as mcolors
+sns.set(style="ticks")
+sns.set_context("poster")
+
+def load_upset_file(txt=None, header_ls=None,):
+	if txt is None:
+		txt = '/Share/home/zhangqf7/gongjing/zebrafish/result/dynamic_merge_region/005_005_new/abs/venn.txt'
+	set_category_stat_dict = nested_dict(2, int)
+	df = pd.read_csv(txt, header=0, sep='\t')
+	for sample in df.columns[0:-2]:
+		for label,count,name in zip(df[sample], df['Total'], df['Name']):
+			if label == 'X' and sample in name:
+				set_category_stat_dict[sample][len(name.split('|'))] += count
+	set_category_stat_df = pd.DataFrame.from_dict(set_category_stat_dict, orient='index')
+	set_category_stat_df = set_category_stat_df.loc[df.columns[0:-2], :]
+	print set_category_stat_df
+
+	set_category_stat_df_ratio = set_category_stat_df.div(set_category_stat_df.sum(axis=1), axis=0)
+	print set_category_stat_df_ratio
+
+	fig, ax = plt.subplots(1, 2)
+	set_category_stat_df.plot(kind='bar', stacked=True, ax=ax[0])
+	set_category_stat_df_ratio.plot(kind='bar', stacked=True, ax=ax[1])
+	plt.tight_layout()
+	savefn = txt.replace('.txt', '.ratio.pdf')
+	plt.savefig(savefn)
+	plt.close()
+
+def main():
+	load_upset_file()
+
+if __name__ == '__main__':
+	main()
+```
