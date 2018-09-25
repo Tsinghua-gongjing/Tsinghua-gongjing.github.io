@@ -79,3 +79,14 @@ t.div(t.sum(axis=0), axis=1)
 1	0.333333	0.333333	0.333333
 2	0.500000	0.416667	0.380952
 ```
+
+### Write multiple df to one sheet with multiple tab [stackoverflow](https://stackoverflow.com/questions/32957441/putting-many-python-pandas-dataframes-to-one-excel-worksheet)
+
+
+```python
+def dfs_tabs(df_list, sheet_list, file_name):
+    writer = pd.ExcelWriter(file_name,engine='xlsxwriter')   
+    for dataframe, sheet in zip(df_list, sheet_list):
+        dataframe.to_excel(writer, sheet_name=sheet, startrow=0 , startcol=0, index=False)   
+    writer.save()
+```
