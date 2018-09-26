@@ -153,6 +153,16 @@ plt.plot((x1, x2), (y1, y2), 'k-')
 
 ```
 
+### Insert image file into axis [stackoverflow](https://stackoverflow.com/questions/3609585/how-to-insert-a-small-image-on-the-corner-of-a-plot-with-matplotlib)
+
+```python
+im = plt.imread('grace_hopper.jpg')
+newax = fig.add_axes([0.8, 0.8, 0.2, 0.2], anchor='NE', zorder=-1)
+newax.imshow(im)
+newax.axis('off')
+
+```
+
 ## 2. Seaborn plot
 
 ### Set color list instead of seaborn default
