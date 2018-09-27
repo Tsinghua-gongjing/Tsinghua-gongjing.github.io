@@ -60,3 +60,10 @@ sed -n '/pattern1/!p' file.txt
 ```bash
 grep -o NM_001131052 utr3.bed
 ```
+
+#### Grep Compressed .gz Files At A Shell Prompt [zgrep](https://www.cyberciti.biz/faq/unix-linux-grepping-compressed-files/)
+
+```bash
+$ zgrep 'word-to-search' /path/to/test.gz
+$ zgrep 'GET /faq/a-long-url/' /path/to/access.log.gz
+```
