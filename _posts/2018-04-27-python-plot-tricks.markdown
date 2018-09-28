@@ -114,6 +114,23 @@ g.ax_joint.set_ylim(0.35, 0.9)
 
 ```
 
+### Add y=x without tracking the data points [stackoverflow](https://stackoverflow.com/questions/25497402/adding-y-x-to-a-matplotlib-scatter-plot-if-i-havent-kept-track-of-all-the-data)
+
+```python
+lims = [
+    np.min([ax.get_xlim(), ax.get_ylim()]),  # min of both axes
+    np.max([ax.get_xlim(), ax.get_ylim()]),  # max of both axes
+]
+
+# now plot both limits against eachother
+ax.plot(lims, lims, 'k-', alpha=0.75, zorder=0)
+ax.set_aspect('equal')
+ax.set_xlim(lims)
+ax.set_ylim(lims)
+```
+
+![](https://i.stack.imgur.com/6Y6tt.png)
+
 ### Remove spines on the right and top
 
 ```python
