@@ -1,12 +1,30 @@
 ---
 layout: post
 category: "genomics"
-title:  "Motif analysis: MEME suit"
+title:  "Motif analysis: MEME suit & HOMER"
 tags: [genomics, motif]
 ---
 
 - TOC
 {:toc}
+
+### Common tools for motif analysis
+
+* Motif **discovery**:
+
+  * [MEME](http://meme-suite.org/tools/meme): **Multiple EM for Motif Elicitation**, discovers novel, ungapped motifs (recurring, fixed-length patterns) in your sequences (sample output from sequences).   
+  * [DREME](http://meme-suite.org/doc/dreme.html?man_type=web): **Discriminative Regular Expression Motif Elicitation**, discovers short, ungapped motifs (recurring, fixed-length patterns) that are relatively enriched in your sequences compared with shuffled sequences or your control sequences (sample output from sequences). 
+  * [MEME-ChIP](http://meme-suite.org/doc/meme-chip.html?man_type=web): **Motif Analysis of Large Nucleotide Datasets**, performs comprehensive motif analysis (including motif discovery) on LARGE (50MB maximum) sets of sequences (typically nucleotide) such as those identified by ChIP-seq or CLIP-seq experiments. 
+
+* Motif **scanning**:
+
+   * [FIMO](http://meme-suite.org/doc/fimo.html?man_type=web): **Find Individual Motif Occurrences**, scans a set of sequences for individual matches to each of the motifs you provide. 
+
+* Motif **comparison**:
+
+  * [TOMTOM](http://meme-suite.org/doc/tomtom.html?man_type=web): compares one or more motifs against a database of known motifs (e.g., JASPAR). Tomtom will rank the motifs in the database and produce an alignment for each significant match.  
+ 
+
 
 ### FIMO error: base frequency
 
