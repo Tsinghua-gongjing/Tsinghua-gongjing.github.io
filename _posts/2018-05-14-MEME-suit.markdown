@@ -465,4 +465,6 @@ test1.bed       test2.bed       Total   Name
 X       X       1       test1.bed|test2.bed
 ```
 
-看起来是这样的，当设置一个`-d`时，会对每一个peak用一个长度等于d的region去替代，然后看替代后的region之间是否有overlap(不是这个的centre)，如果有overlap，就merge在一起。因为在`-d=45`时，替代后的region，首尾相差很小，但是没有overlap，所以没有merge，而取更大的时候，就merge在一起了。
+看起来是这样的，当设置一个`-d`时，会对每一个peak用一个长度等于d的region去替代，然后看替代后的region之间是否有overlap(不是这个的centre)，如果有overlap，就merge在一起。因为在`-d=45`时，替代后的region，首尾相差很小，但是没有overlap，所以没有merge，而取更大的时候，就merge在一起了。**如其manual所写，peak centre的距离小于d时会被合并，合并后的起始很大程度会发生改变**。
+
+[![HOMER_mergepeaks_distance.jpeg](https://i.loli.net/2018/09/28/5bae1d1848d67.jpeg)](https://i.loli.net/2018/09/28/5bae1d1848d67.jpeg)
