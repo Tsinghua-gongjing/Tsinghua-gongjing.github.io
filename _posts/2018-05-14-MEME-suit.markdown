@@ -368,3 +368,101 @@ def main():
 if __name__ == '__main__':
 	main()
 ```
+
+What's the meaning of `-d` parameter:
+
+[HOMER manual](http://homer.ucsd.edu/homer/ngs/mergePeaks.html): Maximum distance between **peak centers** to merge, default: 100
+
+Also asked in biostar [HOMER mergePeaks -d value definition](https://www.biostars.org/p/170252/): no answer till now.
+
+Prepare the test region bed file:
+
+```bash
+[zhangqf7@bnode02 abs]$ cat test1.bed
+ch1     100     150
+[zhangqf7@bnode02 abs]$ cat test2.bed
+ch1     70      90
+```
+
+Run using `-d 10`, the two region are not merged:
+
+```bash
+[zhangqf7@bnode02 abs]$ mergePeaks test1.bed test2.bed -prefix test10 -venn test10.venn.txt -d 10
+        Max distance to merge: 10 bp
+        Merging peaks...
+        Comparing test1.bed (1 total) and test1.bed (1 total)
+        Comparing test1.bed (1 total) and test2.bed (1 total)
+        Comparing test2.bed (1 total) and test1.bed (1 total)
+        Comparing test2.bed (1 total) and test2.bed (1 total)
+
+[zhangqf7@bnode02 abs]$ cat test10_test1.bed
+#name (cmd = mergePeaks test1.bed test2.bed -prefix test10 -venn test10.venn.txt -d 10) chr     start   end     strand  Stat    Parent files    Total subpeakstest1.bed       test2.bed
+Merged-ch1-125-1        ch1     120     130     +       0.000000        test1.bed       1       default-1
+
+[zhangqf7@bnode02 abs]$ cat test10_test2.bed
+#name (cmd = mergePeaks test1.bed test2.bed -prefix test10 -venn test10.venn.txt -d 10) chr     start   end     strand  Stat    Parent files    Total subpeakstest1.bed       test2.bed
+Merged-ch1-80-1 ch1     75      85      +       0.000000        test2.bed       1               default-1
+
+[zhangqf7@bnode02 abs]$ cat test10.venn.txt
+test1.bed       test2.bed       Total   Name
+        X       1       test2.bed
+X               1       test1.bed
+```
+
+Run using `-d 35`, the two region are **still not merged**:
+
+```bash
+[zhangqf7@bnode02 abs]$ mergePeaks test1.bed test2.bed -prefix test35 -venn test35.venn.txt -d 35
+        Max distance to merge: 35 bp
+        Merging peaks...
+        Comparing test1.bed (1 total) and test1.bed (1 total)
+        Comparing test1.bed (1 total) and test2.bed (1 total)
+        Comparing test2.bed (1 total) and test1.bed (1 total)
+        Comparing test2.bed (1 total) and test2.bed (1 total)
+
+[zhangqf7@bnode02 abs]$ cat test35.venn.txt
+test1.bed       test2.bed       Total   Name
+        X       1       test2.bed
+X               1       test1.bed
+```
+
+For `-d` less equal than 45, the regions are not merged. 
+
+```bash
+[zhangqf7@bnode02 abs]$ ll test45*
+-rw-rw----+ 1 zhangqf7 zhangqf 225 Sep 28 20:00 test45_test1.bed
+-rw-rw----+ 1 zhangqf7 zhangqf 223 Sep 28 20:00 test45_test2.bed
+-rw-rw----+ 1 zhangqf7 zhangqf  61 Sep 28 20:00 test45.venn.txt
+[zhangqf7@bnode02 abs]$ cat test45_test1.bed
+#name (cmd = mergePeaks test1.bed test2.bed -prefix test45 -venn test45.venn.txt -d 45) chr     start   end     strand  Stat    Parent files    Total subpeaks  test1.bed       test2.bed
+Merged-ch1-125-1        ch1     103     147     +       0.000000        test1.bed       1       default-1
+[zhangqf7@bnode02 abs]$ cat test45_test2.bed
+#name (cmd = mergePeaks test1.bed test2.bed -prefix test45 -venn test45.venn.txt -d 45) chr     start   end     strand  Stat    Parent files    Total subpeaks  test1.bed       test2.bed
+Merged-ch1-80-1 ch1     58      102     +       0.000000        test2.bed       1               default-1
+```
+
+If we set `-d >=46` here, here is the **merged** result:
+
+```bash
+[zhangqf7@bnode02 abs]$ mergePeaks test1.bed test2.bed -prefix test46 -venn test46.venn.txt -d 46
+        Max distance to merge: 46 bp
+        Merging peaks...
+        Comparing test1.bed (1 total) and test1.bed (1 total)
+        Comparing test1.bed (1 total) and test2.bed (1 total)
+        Comparing test2.bed (1 total) and test1.bed (1 total)
+        Comparing test2.bed (1 total) and test2.bed (1 total)
+
+[zhangqf7@bnode02 abs]$ ll test46*
+-rw-rw----+ 1 zhangqf7 zhangqf 243 Sep 28 20:01 test46_test1.bed_test2.bed
+-rw-rw----+ 1 zhangqf7 zhangqf  57 Sep 28 20:01 test46.venn.txt
+
+[zhangqf7@bnode02 abs]$ cat test46_test1.bed_test2.bed
+#name (cmd = mergePeaks test1.bed test2.bed -prefix test46 -venn test46.venn.txt -d 46) chr     start   end     strand  Stat    Parent files    Total subpeaks  test1.bed       test2.bed
+Merged-ch1-102-2        ch1     57      148     +       0.000000        test1.bed|test2.bed     2       default-1       default-1
+
+[zhangqf7@bnode02 abs]$ cat test46.venn.txt
+test1.bed       test2.bed       Total   Name
+X       X       1       test1.bed|test2.bed
+```
+
+看起来是这样的，当设置一个`-d`时，会对每一个peak用一个长度等于d的region去替代，然后看替代后的region之间是否有overlap(不是这个的centre)，如果有overlap，就merge在一起。因为在`-d=45`时，替代后的region，首尾相差很小，但是没有overlap，所以没有merge，而取更大的时候，就merge在一起了。
