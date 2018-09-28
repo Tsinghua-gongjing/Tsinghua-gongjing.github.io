@@ -300,7 +300,7 @@ Rscript --vanilla multi_peaks_UpSet_plot.R "SampleID" venn.txt
 ```
 
 
-The number of merged peaks are less than original peaks number, as overlapping regions will bed merged: 
+The number of merged peaks are less than original peaks number, as overlapping regions will bed merged (asked in biostar: [HOMER mergePeaks totals don't add up to peaks input](https://www.biostars.org/p/189867/)): 
 
 ```bash
 # original: two entry region overlapped
