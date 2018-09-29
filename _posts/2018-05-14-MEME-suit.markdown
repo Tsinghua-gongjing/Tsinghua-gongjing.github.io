@@ -71,7 +71,7 @@ Background letter frequencies (from uniform background):
 A 0.25000 C 0.25000 G 0.25000 T 0.25000
 ```
 
-### Plot motif logo
+### Plot motif logo using meme2img
 
 ```bash
 [zhangqf7@loginview02 ]$ meme2images
