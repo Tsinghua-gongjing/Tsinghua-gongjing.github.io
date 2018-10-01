@@ -5,6 +5,9 @@ title:  "Convert coordinates"
 tags: [genomics, coordinate, format]
 ---
 
+- TOC
+{:toc}
+
 ### [liftOver](https://genome.sph.umich.edu/wiki/LiftOver) command usage
 
 ```bash
