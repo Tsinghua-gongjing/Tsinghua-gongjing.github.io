@@ -430,6 +430,9 @@ origin  git@github.com:someuser/someproject.git
 ```bash
 # set repo links with new name
 $ git remote set-url origin git@github.com:someuser/newprojectname.git
+
+# use http directly
+$ git remote set-url origin https://github.com/Tsinghua-gongjing/zebrafish_structure.git
 ```
 
 ## 参考
