@@ -102,3 +102,19 @@ $$
 $$
 ```
 
+## 在kramdown中添加html表格，带图片的
+
+```html
+<div>
+<table>
+  <tr>
+    <th align="middle">Not smooth</th>
+    <th align="middle">Smooth</th>
+  </tr>
+  <tr>
+    <td><img src="https://i.stack.imgur.com/dSLtt.png"></td>
+    <td><img src="https://i.stack.imgur.com/olGAh.png"></td>
+  </tr>
+</table>
+</div>
+```
