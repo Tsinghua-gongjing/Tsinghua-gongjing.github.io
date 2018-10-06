@@ -5,6 +5,9 @@ title:  "Build personal public blog based on Github Pages"
 tags: [github, blog]
 ---
 
+- TOC
+{:toc}
+
 ## 搭建流程
 
 这个博客的搭建主要是基于github pages，使用jekyll模板。在线的流程有很多，我主要是参考了[这篇](http://www.abstractclass.org/tutorial/blog/2015/05/19/tutorial-personal-blog-with-github.html)文章。
