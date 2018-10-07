@@ -32,7 +32,7 @@ plt.show()
 
 The output looks like:
 
-![img](https://pythonspot-9329.kxcdn.com/wp-content/uploads/2015/07/matplotlib_pie.png)
+[![matplotlib_pie.png](https://i.loli.net/2018/10/07/5bb9fc3134bfb.png)](https://i.loli.net/2018/10/07/5bb9fc3134bfb.png)
 
 
 ```python
