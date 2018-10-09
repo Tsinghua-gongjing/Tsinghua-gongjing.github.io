@@ -92,3 +92,14 @@ igvtools `count` command in [igvtools](https://software.broadinstitute.org/softw
 ```bash
 igvtools count -w 1 RIP_h4.bam RIP_h4.wig /Share/home/zhangqf7/gongjing/zebrafish/data/reference/gtf/refseq_ensembl91_merge.tarns.fa
 ```
+
+#### Add tag using pysam 
+
+ref: [biostar](https://www.biostars.org/p/251993/)
+
+```python
+r = pysam.AlignedRead()
+
+# add alignment end ad tag 'EN' which can be used for color
+r.tags += [('EN', read.reference_end)]
+```
