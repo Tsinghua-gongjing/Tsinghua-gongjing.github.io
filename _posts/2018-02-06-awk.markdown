@@ -5,6 +5,9 @@ title:  "Usage of awk command"
 tags: [grep, awk, sed]
 ---
 
+- TOC
+{:toc}
+
 ## Basic usage
 
 ### check common elements in two files of specific fields
