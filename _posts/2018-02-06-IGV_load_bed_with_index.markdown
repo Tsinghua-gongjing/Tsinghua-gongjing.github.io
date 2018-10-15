@@ -10,6 +10,28 @@ tags: [genomics, plot]
 
 # 使用IGV加载bed文件
 
+## command line: igvtools
+
+```bash
+% ~/Downloads/IGVTools/igvtools help
+
+Program: igvtools. IGV Version 2.3.98 (141)07/25/2017 12:12 AM
+
+Usage: igvtools [command] [options] [input file/dir] [other arguments]
+
+Command: version print the version number
+	 sort    sort an alignment file by start position.
+	 index   index an alignment file
+	 toTDF    convert an input file (cn, gct, wig) to tiled data format (tdf)
+	 count   compute coverage density for an alignment file
+	 formatexp  center, scale, and log2 normalize an expression file
+	 gui      Start the gui
+	 help <command>     display this help message, or help on a specific command
+	 See http://www.broadinstitute.org/software/igv/igvtools_commandline for more detailed help
+
+Done
+```
+
 ## sort and index
 
 在加载之前，先用igvtools建立索引文件，尤其是对于比较大的bed文件，这样能节省加载时所耗用的内存，否则在加载多个track时容易出现加载失败。
