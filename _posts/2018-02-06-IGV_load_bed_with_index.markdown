@@ -57,3 +57,14 @@ igvtools index sort.bed
 [![IGV_error_solution.jpg](https://i.loli.net/2018/02/07/5a7a9f0cd0e7c.jpg)](https://i.loli.net/2018/02/07/5a7a9f0cd0e7c.jpg)
 
 
+## load bed file with color
+
+The .bed file should be defined like [this](https://genome.ucsc.edu/FAQ/FAQformat.html#format1), the `5` column should not be `.`, must specify a value.
+
+```bash
+track name="ItemRGBDemo" description="Item RGB demonstration" visibility=2 itemRgb="On"
+chr1    629885  629939  IGF2BP3 1       +       629885  629939  255,250,200
+chr1    629887  629940  IGF2BP1 1       +       629887  629940  170,110,40
+chr1    629891  629928  NOP56   1       +       629891  629928  0,0,0
+chr1    629891  629931  FBL     1       +       629891  629931  60,180,75
+```
