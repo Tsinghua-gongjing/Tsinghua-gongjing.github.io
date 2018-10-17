@@ -54,3 +54,21 @@ c.InteractiveShellApp.exec_lines = [
 
 c.IPKernelApp.matplotlib = 'inline'
 ~~~
+
+### Connect notebook server
+
+```bash
+# login the server
+$ ssh -X -p 12000 zhangqf7@166.111.152.116
+
+$ export PYTHONPATH=~/anaconda2/lib/python2.7/site-packages
+
+# specify a port
+$ jupyter-notebook --port 9988
+
+# local
+$ ssh -N -f -L localhost:9987:localhost:9988 zhangqf7@166.111.152.116 -p 12000
+
+# type url: localhost:9987
+# may need token
+```
