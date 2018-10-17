@@ -5,6 +5,9 @@ title:  "Set up config for jupyter notebook"
 tags: [python, jupyter, notebok]
 ---
 
+- TOC
+{:toc}
+
 ## jupyter notebook的配置
 
 ### 新建配置文件
