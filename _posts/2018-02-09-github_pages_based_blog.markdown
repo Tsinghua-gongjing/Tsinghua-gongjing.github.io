@@ -26,7 +26,7 @@ tags: [github, blog]
 
 参考博客[（GitHub教程 学生认证——学生包申请）](https://blog.csdn.net/qq_36667170/article/details/79084166)进行申请，因为用的是教育邮箱，所以不到两分钟就收到了通过邮件。
 
-
+```
 Hey XXX, we have some awesome news
 
 We've upgraded you to a plan with unlimited free private repositories, which will be free for the next two years. After that, you'll get an email saying that your coupon is expiring. You can reapply for another coupon if you still have academic status. We don't have any collaboration limits, so any group projects you may encounter can be hosted via your account.
@@ -49,7 +49,7 @@ https://education.github.com
 
 Have an Octotastic day!
 - The GitHub Education Team 
-
+```
 
 ## 成形文件
 
