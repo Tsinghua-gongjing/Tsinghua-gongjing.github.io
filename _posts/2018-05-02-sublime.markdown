@@ -5,6 +5,9 @@ title:  "Shortcut command in Sublime"
 tags: [linux, sublime, editor]
 ---
 
+- TOC
+{:toc}
+
 reference: [Sublime Text 3 Cheat Sheet](https://www.shortcutfoo.com/app/dojos/sublime-text-3-win/cheatsheet)
 
 ## Text Editing Beginner
