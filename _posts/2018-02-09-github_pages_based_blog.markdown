@@ -22,6 +22,35 @@ tags: [github, blog]
 * 本地查看，在本地仓库目录下执行：jekyll serve
 * 如果觉得效果还可以，推送到远程
 
+## 申请学生账户
+
+参考博客[（GitHub教程 学生认证——学生包申请）](https://blog.csdn.net/qq_36667170/article/details/79084166)进行申请，因为用的是教育邮箱，所以不到两分钟就收到了通过邮件。
+
+```
+Hey XXX, we have some awesome news
+
+We've upgraded you to a plan with unlimited free private repositories, which will be free for the next two years. After that, you'll get an email saying that your coupon is expiring. You can reapply for another coupon if you still have academic status. We don't have any collaboration limits, so any group projects you may encounter can be hosted via your account.
+
+If you need help getting started with Git and GitHub, check out:
+
+https://help.github.com/articles/good-resources-for-learning-git-and-github
+
+We've also given you access to the Student Developer Pack, available at:
+
+https://education.github.com/pack
+
+If you have any questions, contact us:
+
+https://education.github.com/contact
+
+Spread the word: we love giving educational discounts to students, teachers, administrators, and researchers! Please send them to:
+
+https://education.github.com
+
+Have an Octotastic day!
+- The GitHub Education Team 
+```
+
 ## 成形文件
 
 本地的文件目录大致如下：

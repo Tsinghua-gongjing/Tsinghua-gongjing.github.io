@@ -5,6 +5,9 @@ title:  "UpSet plot"
 tags: [plot, visualization]
 ---
 
+- TOC
+{:toc}
+
 ##  Explore overlapping landscape between multiple data sets
 
 * [Interactive set visualization for more than three sets](http://caleydo.org/tools/upset/)
