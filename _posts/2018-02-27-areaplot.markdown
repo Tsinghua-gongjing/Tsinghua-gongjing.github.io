@@ -9,3 +9,22 @@ tags: [plot, visualization]
 {:toc}
 
 ## Stacked area for multiple category [reference](https://python-graph-gallery.com/250-basic-stacked-area-chart/)
+
+```python
+# library
+import numpy as np
+import matplotlib.pyplot as plt
+ 
+# --- FORMAT 1
+ 
+# Your x and y axis
+x=range(1,6)
+y=[ [1,4,6,8,9], [2,2,7,10,12], [2,8,5,10,6] ]
+ 
+# Basic stacked area chart.
+plt.stackplot(x,y, labels=['A','B','C'])
+plt.legend(loc='upper left')
+#plt.show()
+```
+
+![](https://python-graph-gallery.com/wp-content/uploads/250_basic_stacked_area_chart.png)
