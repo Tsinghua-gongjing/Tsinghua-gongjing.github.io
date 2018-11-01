@@ -5,3 +5,7 @@ title:  "Area plot"
 tags: [plot, visualization]
 ---
 
+- TOC
+{:toc}
+
+## Stacked area for multiple category [reference](https://python-graph-gallery.com/250-basic-stacked-area-chart/)
