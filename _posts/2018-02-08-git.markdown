@@ -435,6 +435,113 @@ $ git remote set-url origin git@github.com:someuser/newprojectname.git
 $ git remote set-url origin https://github.com/Tsinghua-gongjing/zebrafish_structure.git
 ```
 
+## 在集群上管理自己的repo
+
+[![git_repo_pravite.jpeg](https://i.loli.net/2018/11/02/5bdc3ae51745d.jpeg)](https://i.loli.net/2018/11/02/5bdc3ae51745d.jpeg)
+
+Clone the created repo into cluster:
+
+```bash
+[zhangqf5@loginview02]$ git clone https://github.com/Tsinghua-gongjing/xxx.git
+Cloning into 'xxx'...
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+Checking connectivity... done.
+```
+
+Check current config, and set both my user name and emails:
+
+Note: set user name and email for the repo only instead of global mode [as explained here](https://help.github.com/articles/setting-your-username-in-git/) 
+
+```bash
+[zhangqf5@loginview02]$ git config --list
+http.sslverify=false
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+remote.origin.url=https://github.com/Tsinghua-gongjing/xxx.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+branch.master.remote=origin
+branch.master.merge=refs/heads/master
+
+[zhangqf5@loginview02]$ git config user.name "Tsinghua-gongjing"
+[zhangqf5@loginview02]$ git config user.email "gongj15@mails.tsinghua.edu.cn"
+
+[zhangqf5@loginview02]$ git config --list
+http.sslverify=false
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+remote.origin.url=https://github.com/Tsinghua-gongjing/xxx.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+branch.master.remote=origin
+branch.master.merge=refs/heads/master
+user.name=Tsinghua-gongjing
+user.email=gongj15@mails.tsinghua.edu.cn
+```
+
+To avoid type password every commit, the config should be revised (as [here](https://blog.csdn.net/qq_15437667/article/details/51029757)), add the credential:
+
+```
+[zhangqf5@loginview02]$ cat ./.git/config
+[core]
+        repositoryformatversion = 0
+        filemode = true
+        bare = false
+        logallrefupdates = true
+[remote "origin"]
+        url = https://github.com/Tsinghua-gongjing/xxx.git
+        fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+        remote = origin
+        merge = refs/heads/master
+[user]
+        name = Tsinghua-gongjing
+        email = gongj15@mails.tsinghua.edu.cn
+        
+[zhangqf5@loginview02]$ echo "[credential]" >> .git/config
+[zhangqf5@loginview02]$ echo "    helper = store" >> .git/config
+[zhangqf5@loginview02]$
+[zhangqf5@loginview02]$ cat ./.git/config
+[core]
+        repositoryformatversion = 0
+        filemode = true
+        bare = false
+        logallrefupdates = true
+[remote "origin"]
+        url = https://github.com/Tsinghua-gongjing/xxx.git
+        fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+        remote = origin
+        merge = refs/heads/master
+[user]
+        name = Tsinghua-gongjing
+        email = gongj15@mails.tsinghua.edu.cn
+[credential]
+    helper = store
+```
+
+Now the modified text can be submitted directly:
+
+```bash
+[zhangqf5@loginview02]$ git add ./README.md
+[zhangqf5@loginview02]$ git commit -m "Test1"
+[master bffc146] Test1
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+[zhangqf5@loginview02]$
+[zhangqf5@loginview02]$ git push origin master
+Counting objects: 3, done.
+Writing objects: 100% (3/3), 265 bytes | 0 bytes/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/Tsinghua-gongjing/xxx.git
+   74416aa..bffc146  master -> master
+```
+
+
 ## 参考
 
 * [廖雪峰的git教程](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
