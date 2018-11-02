@@ -150,10 +150,20 @@ ax.scatter(z, y)
 
 for i, txt in enumerate(n):
     ax.annotate(txt, (z[i], y[i]))
-    
+```
+
+Non-overlapped text based on module `adjustText` as example [here](https://stackoverflow.com/questions/19073683/matplotlib-overlapping-annotations-text):
+
+```python
 # here is a very useful library to adjust overlapped text
 # https://stackoverflow.com/questions/19073683/matplotlib-overlapping-annotations-text
 # https://github.com/Phlya/adjustText
+
+texts = []
+for x, y, s in zip(xs, ys, ss):
+    texts.append(plt.text(x, y, s))
+    
+adjust_text(texts, only_move={'text': 'y'})
 ```
 
 ### Add horizontal or vertical lines
