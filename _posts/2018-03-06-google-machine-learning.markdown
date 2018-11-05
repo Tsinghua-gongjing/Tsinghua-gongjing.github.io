@@ -55,6 +55,29 @@ tags: [python, machine learning, google]
 11. 小批量梯度下降：每批10-1000个样本，使得估算均值接近整体，且计算时间可接受
 
 #### 使用TF的基本步骤
+
+1. TF(TensorFlow) API:
+  - 面向对象的高级API：estimator
+  - 库：tf.layers, tf.losses, tf.metrics
+  - 可封装C++内核的指令：TensorFlow python/C++
+  - 多平台：CPU/GPU/TPU
+
+```python
+# tf.estimator API
+
+import tensorflow as tf
+
+# set up a classifier
+classifier = tf.estimator.LinearClassifier()
+
+# Train the model on some example data.
+# what does steps mean here?
+classifier.train(input_fn=train_input_fn, steps=2000)
+
+# Use it to predict.
+predictions = classifier.predict(input_fn=predict_input_fn)
+```
+
 #### 泛化
 #### 训练集和测试集
 #### 验证
