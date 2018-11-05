@@ -56,11 +56,12 @@ tags: [python, machine learning, google]
 
 #### 使用TF的基本步骤
 
-1. TF(TensorFlow) API:
+1. TF(TensorFlow) API(建议从高级API开始使用):
   - 面向对象的高级API：estimator
   - 库：tf.layers, tf.losses, tf.metrics
   - 可封装C++内核的指令：TensorFlow python/C++
   - 多平台：CPU/GPU/TPU
+2. TF线性回归：
 
 ```python
 # tf.estimator API
@@ -77,6 +78,11 @@ classifier.train(input_fn=train_input_fn, steps=2000)
 # Use it to predict.
 predictions = classifier.predict(input_fn=predict_input_fn)
 ```
+
+3. 常用参数：
+ - steps：训练迭代的总次数。一步计算一批样本产生的损失，然后使用该值修改模型权重
+ - batch size：单步的样本数量，如SGD批次大小为1.
+4. 通过[notebook](https://colab.research.google.com/notebooks/mlcc/first_steps_with_tensor_flow.ipynb?utm_source=mlcc&utm_campaign=colab-external&utm_medium=referral&utm_content=firststeps-colab&hl=zh-cn)介绍使用TF实现线性回归模型预测房屋价格
 
 #### 泛化
 #### 训练集和测试集
