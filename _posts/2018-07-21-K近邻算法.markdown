@@ -1,0 +1,28 @@
+---
+layout: post
+category: "machinelearning"
+title:  "K-近邻算法"
+tags: [python, machine learning]
+---
+
+## 概述
+
+K-近邻算法（k-nearest neighbors）：对于要进行分类的数据，与已知的数据进行比较，计算相似性，找出最相似的K个，然后看这个K个的所属类别，最高概率的类别即为目标变量的分类。
+
+* 原理：采用不同特征值之间的距离进行分类。
+* 优点：精度高，对异常值不敏感，无数据输入假定
+* 缺点：计算复杂性高，空间复杂度高
+* 适用：数值型，标称型
+
+## 实战
+
+
+## 参考
+
+* 机器学习实战第2章
+* [ApacheCN：第2章 k-近邻算法](http://ailearning.apachecn.org/ml/2.KNN/)
+
+
+
+
+
