@@ -50,5 +50,17 @@ k=2
 fcluster(Z, k, criterion='maxclust')
 ```
 
+Assign cluster id and plot [(stackoverflow)](https://stackoverflow.com/questions/48173798/additional-row-colors-in-seaborn-cluster-map):
+
+```python
+fcluster = hierarchy.fcluster(row_linkage, 10, criterion='maxclust')
+lut = dict(zip(set(fcluster), sns.hls_palette(len(set(fcluster)), l=0.5, s=0.8)))
+row_colors = pd.DataFrame(fcluster)[0].map(lut)
+
+sns.clustermap(df, row_linkage=row_linkage, col_linkage=col_linkage, 
+				  standard_scale=False, row_cluster=True, col_cluster=False, 
+				  figsize=(50, 80), yticklabels=False, method="average", 
+				  cmap=cmap, row_colors=[row_colors])
+```
 
 
