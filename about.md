@@ -71,6 +71,8 @@ My study focus on RNA molecules, major including RNA secondary structure and RNA
 Publication
 -----------
 
+* Yanyan Ju\*, **Jing Gong**\*, Yucheng T. Yang<sup>#</sup>, and Qiangfeng Cliff Zhang<sup>#</sup>. [Investigation of RNA‐RNA Interactions Using The RISE Database](https://currentprotocols.onlinelibrary.wiley.com/doi/abs/10.1002/cpbi.58). Current protocols in bioinformatics. 2018 [PDF](https://github.com/Tsinghua-gongjing/blog_codes/blob/master/files/publications/Investigation%20of%20RNA-RNA%20Interactions%20Using%20The%20RISE%20Database.pdf)
+
 * **Jing Gong**\*, Yanyan Ju\*, Di Shao and Qiangfeng Cliff Zhang<sup>#</sup>. [Advances and challenges towards the study of RNA-RNA interactions in a transcriptome-wide scale](https://link.springer.com/article/10.1007/s40484-018-0146-5). Quantitative Biology. 2018 [PDF](https://github.com/Tsinghua-gongjing/blog_codes/blob/master/files/publications/Advances%20and%20challenges%20towards%20the%20study%20ofRNA-RNA%20interactions%20in%20a%20transcriptome-wide%20scale.pdf)
 
 * Zhipeng Lu, **Jing Gong**, Qiangfeng Cliff Zhang<sup>#</sup>. [PARIS: Psoralen Analysis of RNA Interactions and Structures with High Throughput and Resolution](https://link.springer.com/protocol/10.1007/978-1-4939-7213-5_4). RNA Detection. 2018  [PDF](https://github.com/Tsinghua-gongjing/blog_codes/blob/master/files/publications/PARIS-%20Psoralen%20Analysis%20of%20RNA%20Interactions%20and%20Structures%20with%20High%20Throughput%20and%20Resolution.pdf)
