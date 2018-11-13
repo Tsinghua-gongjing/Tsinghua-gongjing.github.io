@@ -29,7 +29,9 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 body {
-  margin: 0;
+  margin: 0px;
+  margin-left: auto;
+  margin-right: auto;
 }
 article,
 aside,
