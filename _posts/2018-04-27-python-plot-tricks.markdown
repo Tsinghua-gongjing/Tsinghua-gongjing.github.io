@@ -94,8 +94,13 @@ ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
 
 # Put a legend to the right of the current axis
 ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
-
 plt.show()
+
+# Use plot with tight mode, or plot will be cut 
+plt.legend(bbox_to_anchor=(1, 1), loc=2)
+plt.savefig(savefn, bbox_inches='tight')
+
+
 ```
 
 ![](https://i.stack.imgur.com/v34g8.png)
