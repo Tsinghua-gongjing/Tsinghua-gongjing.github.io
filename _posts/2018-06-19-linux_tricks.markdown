@@ -116,3 +116,24 @@ for ((i=0;i<${#array[@]};++i)); do
     printf "%s is in %s\n" "${array[i]}" "${array2[i]}"
 done
 ```
+
+## GCC version
+
+Run binary command which depends on `GLIBC_2.14` and `GLIBC_2.17`:
+
+```bash
+[zhangqf5@loginview02 bin]$ ./clan_annotate
+./clan_annotate: /lib64/libc.so.6: version `GLIBC_2.14' not found (required by ./clan_annotate)
+./clan_annotate: /lib64/libc.so.6: version `GLIBC_2.17' not found (required by ./clan_annotate)
+```
+
+Check GCC version:
+ 
+```bash
+[zhangqf5@loginview02 bin]$ ldd --version
+ldd (GNU libc) 2.12
+Copyright (C) 2010 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+Written by Roland McGrath and Ulrich Drepper.
+```
