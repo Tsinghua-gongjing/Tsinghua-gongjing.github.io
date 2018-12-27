@@ -13,6 +13,7 @@ tags: [plot, visualization]
 * [Interactive set visualization for more than three sets](http://caleydo.org/tools/upset/)
 * R: UpSetR [manual](https://www.rdocumentation.org/packages/UpSetR/versions/1.3.3/topics/upset)
 * Python: py-upset [manual](https://github.com/ImSoErgodic/py-upset)
+* Overlap multiple bed: [HOMER\_mergePeaks\_venn\_UpSetR](https://github.com/stevekm/Bioinformatics/tree/91710b8b597af385ec3af381c953ca4a271e4e5e/HOMER_mergePeaks_pipeline/HOMER_mergePeaks_venn_UpSetR), [biostar](https://www.biostars.org/p/192217/)
 
 ### UpSetR input file format:
 
