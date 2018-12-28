@@ -1,0 +1,17 @@
+---
+layout: post
+category: "genomics"
+title:  "GTF files"
+tags: [genomics, gtf]
+---
+
+- TOC
+{:toc}
+
+### Extract intron, CDS, UTR5, UTR3 coordinates from gtf
+
+Ref: [onetipperday](http://onetipperday.sterding.com/2012/11/get-intron-utr-cds-from-bed12-format.html)
+
+
+
+
