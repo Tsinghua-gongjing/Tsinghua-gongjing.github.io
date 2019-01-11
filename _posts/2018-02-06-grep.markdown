@@ -48,12 +48,19 @@ sed '/pattern1/!d; /pattern2/!d' file.txt # in any order
 
 -----------------------------------
 
-#### 匹配不满足给定模式的行：
+#### 匹配不满足给定模式的行
 
 ```bash
 grep -v 'pattern1' file.txt
 awk '!/pattern1/' file.txt
 sed -n '/pattern1/!p' file.txt
+```
+
+#### 匹配不满足多个给定模式的行
+
+```bash
+# https://unix.stackexchange.com/questions/104770/grep-multiple-pattern-negative-match
+grep -vE 'pattern1|pattern2|pattern3' file.txt
 ```
 
 -----------------------------------
