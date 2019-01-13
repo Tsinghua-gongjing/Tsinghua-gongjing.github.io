@@ -137,3 +137,45 @@ This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 Written by Roland McGrath and Ulrich Drepper.
 ```
+
+## print every two lines as one line
+
+```bash
+# print lines of files matched with specific pattern
+[zhangqf7@loginview02 bwa]$ wl /Share/home/zhangqf7/jinsong_zhang/zebrafish/data/iclip/20181224/Rawdata/shi-zi-*/bwa/CTK_Procedure{1,2,3,4}/CITS/iCLIP.tag*p05.bed|awk '{print $1}'
+15450
+11876
+26860
+19994
+69867
+174233
+13396
+10204
+24288
+18042
+65161
+161563
+2059
+1369
+1983
+1569
+6291
+13434
+2329
+1535
+2171
+1758
+6762
+14614
+666808
+
+
+[zhangqf7@loginview02 bwa]$ wl /Share/home/zhangqf7/jinsong_zhang/zebrafish/data/iclip/20181224/Rawdata/shi-zi-*/bwa/CTK_Procedure{1,2,3,4}/CITS/iCLIP.tag*p05.bed|awk '{print $1}'|xargs -n4 -d'\n'
+15450 11876 26860 19994
+69867 174233 13396 10204
+24288 18042 65161 161563
+2059 1369 1983 1569
+6291 13434 2329 1535
+2171 1758 6762 14614
+666808
+```
