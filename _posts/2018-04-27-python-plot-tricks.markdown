@@ -185,6 +185,12 @@ plt.plot((x1, x2), (y1, y2), 'k-')
 
 ```
 
+### Add span regions [stackoverflow](https://stackoverflow.com/questions/8270981/in-a-matplotlib-plot-can-i-highlight-specific-x-value-ranges)
+
+```python
+plt.axvspan(3, 6, color='red', alpha=0.5)
+```
+
 ### Insert image file into axis [stackoverflow](https://stackoverflow.com/questions/3609585/how-to-insert-a-small-image-on-the-corner-of-a-plot-with-matplotlib)
 
 ```python
