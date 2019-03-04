@@ -66,6 +66,27 @@ tags: [other]
 
 ---------------------------
 
+**Janusz M. Bujnicki**, International Institute of Molecular and Cell Biology in Warsaw, Poland, [labpage](http://genesilico.pl/)
+
+* SimRNA: RNA 3D structure modeling (participate [RNA Puzzles](http://www.rnapuzzles.org/))
+* Our group is involved in theoretical and experimental research on nucleic acids and proteins. The current focus is on RNA sequence-structure-function relationships (in particular 3D modeling), RNA-protein complexes, and enzymes acting on RNA.
+
+---------------------------
+
+**SILVI ROUSKIN**, MIT, [labpage](https://www.rouskinlab.com/)
+
+* DMS-seq & DMS-MaPseq
+* Separating alternative structures formed from the same underlying sequence (RNA Structure Control of Alternative Splicing)
+
+---------------------------
+
+**Dan Herschlag**, STANFORD UNIVERSITY, [labpage](http://herschlaglab.stanford.edu/)
+
+* RNA folding, RNA catalysis, protein catalysis, in vivo RNA structure and interactions
+* We are particularly interested in questions of how enzymes work, how RNA folds, how proteins recognize RNA, and the roles of RNA/protein interactions in regulation and control, and the evolution of molecules and molecular interactions.
+
+---------------------------
+
 ### RNA-RNA interaction
 
 ---------------------------
@@ -76,6 +97,16 @@ tags: [other]
 * Our research is focused on “RNA machines” in living cells. We develop and apply novel technologies to understand the structures and functions of RNA molecules in basic cellular processes, with the ultimate goal of treating human diseases, including genetic disorders, cancers and viral infections.
 
 ---------------------------
+
+**Irmtraud Margret Meyer**, Max-Delbrück-Centrum für Molekulare Medizin, [labpage](https://www.mdc-berlin.de/meyer)
+
+* RNA structure and trans RNA-RNA interaction (recently review chapter: [Deciphering the Universe of RNA Structures and trans RNA–RNA Interactions of Transcriptomes In Vivo: From Experimental Protocols to Computational Analyses](https://link.springer.com/chapter/10.1007/978-3-319-92967-5_9))
+* Computational methods development (NAR, [A comprehensive comparison of general RNA-RNA interaction prediction methods](https://www.ncbi.nlm.nih.gov/pubmed/26673718))
+* The computational methods we devise employ machine learning techniques that are capable of detecting even subtle sequence (and other) signals in high-throughput transcriptome data. We typically employ fully probabilistic methods that enable us to assign reliability values to our predictions.
+* On the biological side, we are studying transcriptome regulation in a variety of exciting biological systems in vivo ranging from early human embryogenesis to neurogenesis in the fruit fly to how pathogens interact with different hosts. To this end, we closely collaborate with several experimental groups on and off campus. 
+
+---------------------------
+
 
 ### RNA-protein interaction
 
