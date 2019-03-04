@@ -73,7 +73,7 @@ tags: [other]
 
 ---------------------------
 
-**SILVI ROUSKIN**, MIT, [labpage](https://www.rouskinlab.com/)
+**Silvi Rouskin**, MIT, [labpage](https://www.rouskinlab.com/)
 
 * DMS-seq & DMS-MaPseq
 * Separating alternative structures formed from the same underlying sequence (RNA Structure Control of Alternative Splicing)
@@ -92,6 +92,22 @@ tags: [other]
 * dStruct, patteRNA, RNAprob
 * RNA structure and dynamics
 * Our lab develops novel computational methods for inferring RNA dynamics from experiments and theory, with applications ranging from basic research to biomolecular engineering and synthetic biology.
+
+---------------------------
+
+**David Mathews**, University of Rochester, [labpage](https://rna.urmc.rochester.edu/index.html)
+
+* RNAstructure
+* Our goal is to automate the modeling of RNA structure and function from genome sequence to 3D structure.
+
+---------------------------
+
+**Julius B. Lucks**, Northwestern University, [labpage](http://luckslab.org/)
+
+* SHAPE-Seq
+* Pushing the Limits of RNA Design with Cellular Engineering
+* Next Generation RNA Structure Characterization
+* Harvesting RNA Design Principles from Nature: RNA-protein interaction
 
 ---------------------------
 
