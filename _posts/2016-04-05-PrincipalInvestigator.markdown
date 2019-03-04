@@ -111,6 +111,20 @@ tags: [other]
 
 ---------------------------
 
+**Danny Incarnato**, University of Groningen (The Netherlands), [labpage](http://www.incarnatolab.com/index.php)
+
+* RNA folding dynamics research
+* CIRS-seq, RNAframework
+
+---------------------------
+
+**Salvatore Oliviero**, Italian institute fro genomic medicine, [labpage](http://epigenetics.hugef-research.org/index.php)
+
+* CIRS-seq
+* Main aim of our lab is the understanding of the mechanisms controlling the different histone modifications, and the deciphering of the histone code which contributes to the transcriptional control, to understand and eventually influence cells destiny.
+
+---------------------------
+
 ### RNA-RNA interaction
 
 ---------------------------
