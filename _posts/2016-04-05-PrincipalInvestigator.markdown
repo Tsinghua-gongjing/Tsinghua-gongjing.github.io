@@ -87,6 +87,14 @@ tags: [other]
 
 ---------------------------
 
+**Sharon Aviran**, UC Davis, [labpage](https://aviranlab.bme.ucdavis.edu/)
+
+* dStruct, patteRNA, RNAprob
+* RNA structure and dynamics
+* Our lab develops novel computational methods for inferring RNA dynamics from experiments and theory, with applications ranging from basic research to biomolecular engineering and synthetic biology.
+
+---------------------------
+
 ### RNA-RNA interaction
 
 ---------------------------
