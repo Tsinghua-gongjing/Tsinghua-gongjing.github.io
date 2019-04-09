@@ -157,7 +157,7 @@ predictions = classifier.predict(input_fn=predict_input_fn)
 
 8. [特征集合编程练习](https://colab.research.google.com/notebooks/mlcc/feature_sets.ipynb?utm_source=mlcc&utm_campaign=colab-external&utm_medium=referral&utm_content=featuresets-colab&hl=zh-cn)：挑选特征，使得用极少的特征搭建简单的模型，效果和使用多个特征相当。
   - 良好特征集：相关矩阵（比如Pearson coefficient），探索以挑选独立的特征。不同的特征、不同的参数，是的损失不同。
-  - 纬度：这种特征不直接，不能和其他feature或者结果直接相关，可进行转换。比如：1）latitude =》|latitude - 38|，38是洛杉矶的纬度，就转换为距离洛杉矶多远的地方；2）之前提过的分箱策略进行独热编码。
+  - 纬度：这种特征不直接，不能和其他feature或者结果直接相关，可进行转换。比如：1）latitude =》\|latitude - 38\|，38是洛杉矶的纬度，就转换为距离洛杉矶多远的地方；2）之前提过的分箱策略进行独热编码。
 
 ---
 
