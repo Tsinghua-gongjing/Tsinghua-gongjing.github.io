@@ -233,6 +233,29 @@ predictions = classifier.predict(input_fn=predict_input_fn)
 
 #### 分类
 
+1. 逻辑回归输出概率值，如何做分类问题？取分类阈值，高于此阈值的算作一类，低于此阈值的算作另一类（二元分类）。
+2. 评估分类模型：
+   - 准确率（accurancy）：正确的预测所占的比例（正确结果/总数）。如果类别失衡，准确率很高，但其实预测效果很差。
+   - 精确率（precision）：真正例次数/所有正类别预测次数
+   - 召回率（recall）：真正例次数/所有实际正类别数
+   - 精确率和召回率是此消彼长的，[示例](https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall)通过逻辑回归获得的结果，设定不同的分类阈值时，计算精确率和召回率。当改变阈值是，两者一个变大一个减小。
+   - ROC曲线：每一个点对应一个判定（分类）阈值所对应的TP率和FP率。
+3. 预测偏差：逻辑回归预测应该无偏差
+   - 预测平均值 = 观察平均值
+   - 零偏差 -> 并不说明系统一切完美
+   - 偏差可用[预测偏差曲线](https://developers.google.com/machine-learning/crash-course/classification/prediction-bias)展示：横轴是预测值，纵轴是标签值。也可用分批策略，横轴是一批预测值的平均值，纵轴是一批观测值的平均值。
+[![accuracy_precision_recall_ROC.jpeg](https://i.loli.net/2019/04/10/5cada52955745.jpeg)](https://i.loli.net/2019/04/10/5cada52955745.jpeg)
+
+4. 存在偏差：
+   - 特征集不完整？
+   - 数据集混乱？
+   - 模型实现中有错误？
+   - 训练样本存在偏差？（检测本身各部分数据是否存在偏差）
+   - 正则化过强？
+5. 修正偏差应该在模型中，不能在校准层（添加校准层，类似于添加惩罚项？）：
+   - 校准层修复的是症状，不是原因
+   - 添加校准层，建立了更脆弱的系统，并且需要持续更新
+
 ---
 
 #### 正则化：稀疏性
