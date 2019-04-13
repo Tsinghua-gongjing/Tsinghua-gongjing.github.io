@@ -18,6 +18,10 @@ K-近邻算法（k-nearest neighbors, KNN）：对于要进行分类的数据，
 * 缺点：计算复杂性高，空间复杂度高
 * 适用：数值型，标称型
 
+当选定不同的K值大小时，预测对应的分类可能不同，所以**需要尝试不同的K值**。[下图](https://towardsdatascience.com/knn-using-scikit-learn-c6bed765be75)中，当k=3时，会预测为B类型，当k=6时，会预测为A类型。
+
+![](https://cdn-images-1.medium.com/max/800/1*hncgU7vWLBsRvc8WJhxlkQ.png)
+
 ## 实现
 
 任务：改善约会网站的配对效果
@@ -116,11 +120,37 @@ the classifier came back with: smallDoses, the real answer is: smallDoses
 ......
 
 the total error rate is: 0.064000
-32.0
+32.0 # 当hold out数据比例为10%时，有5个预测错误了。
 ```
 
 ### sklearn版本
 
+```python
+df = pd.read_csv('./datingTestSet.txt', header=None, sep='\t')
+df.head()
+
+# 构建测试集和训练集
+# 前面10%的数据作为测试集，后面90%的数据作为训练集
+hoRatio = 0.1
+X_test = df.ix[0:hoRatio*df.shape[0]-1, 0:2]
+print X_test.shape
+y_test = df.ix[0:hoRatio*df.shape[0]-1, 3]
+print y_test.shape
+X_train = df.ix[hoRatio*df.shape[0]:, 0:2]
+print X_train.shape
+y_train = df.ix[hoRatio*df.shape[0]:, 3]
+print y_train.shape
+
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn import metrics
+
+knn = KNeighborsClassifier(n_neighbors=3)
+knn.fit(X_train, y_train)
+y_pred = knn.predict(X_test)
+metrics.accuracy_score(y_test, y_pred)
+
+# accuracy: 0.76, 有24个预测错误了
+```
 
 ## 参考
 
