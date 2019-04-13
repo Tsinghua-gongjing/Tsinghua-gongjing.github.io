@@ -1,3 +1,10 @@
+---
+layout: post
+category: "machinelearning"
+title:  "Google ML rules"
+tags: [python, machine learning]
+---
+
 机器学习规则（[google: Rules of ML](https://developers.google.com/machine-learning/guides/rules-of-ml/)）:
 
 ### 术语
