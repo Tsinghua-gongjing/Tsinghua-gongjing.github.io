@@ -5,6 +5,9 @@ title:  "Google ML excercises"
 tags: [python, machine learning]
 ---
 
+- TOC
+{:toc}
+
 谷歌机器学习课程对应的[练习](https://developers.google.com/machine-learning/crash-course/exercises)。
 
 ## 预热
@@ -351,9 +354,39 @@ Root Mean Squared Error: 237.417
 
 ## 神经网络简介
 
+1. [神经网络](https://developers.google.com/machine-learning/crash-course/exercises):在线性很难区分的数据集上，测试不同的神经网络结构（隐藏层、权重、激活函数等），查看效果。 
+
+2. [构建神经网络](): 函数`hidden_units`,例子`hidden_units=[3, 10]`表示指定了连个隐藏层，第一个隐藏层含有3个节点，第二个隐藏层含有10个节点，默认为全连接且使用ReLU激活函数。
+
+```python
+  # Create a DNNRegressor object.
+  my_optimizer = tf.train.GradientDescentOptimizer(learning_rate=learning_rate)
+  my_optimizer = tf.contrib.estimator.clip_gradients_by_norm(my_optimizer, 5.0)
+  dnn_regressor = tf.estimator.DNNRegressor(
+      feature_columns=construct_feature_columns(training_examples),
+      hidden_units=hidden_units,
+      optimizer=my_optimizer
+  )
+  
+  # Create input functions.
+  training_input_fn = lambda: my_input_fn(training_examples, 
+                                          training_targets["median_house_value"], 
+                                          batch_size=batch_size)
+  predict_training_input_fn = lambda: my_input_fn(training_examples, 
+                                                  training_targets["median_house_value"], 
+                                                  num_epochs=1, 
+                                                  shuffle=False)
+  predict_validation_input_fn = lambda: my_input_fn(validation_examples, 
+                                                    validation_targets["median_house_value"], 
+                                                    num_epochs=1, 
+                                                    shuffle=False)
+```
+
 ---
 
 ## 训练神经网络
+
+1. [反向传播算法的直观说明](https://google-developers.appspot.com/machine-learning/crash-course/backprop-scroll/)
 
 ---
 
