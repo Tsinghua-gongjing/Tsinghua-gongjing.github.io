@@ -255,25 +255,144 @@ Root Mean Squared Error: 237.417
 
 ## 特征组合
 
+1. [Feature Crosses练习](https://developers.google.com/machine-learning/crash-course/feature-crosses/playground-exercises): 对于线性不可分的问题，有时根据管擦的规律添加新的组合特征，可能解决问题，一个很经典的例子如下：
+  - ![](https://images.slideplayer.com/17/5379651/slides/slide_2.jpg)
+
+2. [Feature Crosses理解](https://developers.google.com/machine-learning/crash-course/feature-crosses/check-your-understanding)：加利福尼亚州不同城市的房价有很大差异。假设您必须创建一个模型来预测房价。以下哪组特征或特征组合可以反映出特定城市中 roomsPerPerson 与房价之间的关系？
+  - 两个特征组合：[binned latitude X binned roomsPerPerson] 和 [binned longitude X binned roomsPerPerson]
+  - `一个特征组合：[binned latitude X binned longitude X binned roomsPerPerson]`
+  - 一个特征组合：[latitude X longitude X roomsPerPerson]
+  - 三个独立的分箱特征：[binned latitude]、[binned longitude]、[binned roomsPerPerson]
+
+ 3. [Feature Crosses编程]()：
+   - 离散特征的独热编码：即在训练逻辑回归模型之前，离散（即字符串、枚举、整数）特征会转换为二元特征系列。
+   - 分桶（分箱）特征：函数`bucketized_column`，转换为对应的类别编码，然后再进行独热编码（成二元特征系列）。
+   - 特征组合及分桶处理特征有时能大幅度提升模型的效果。
+   - 特征分桶函数：`bucketized_longitude = tf.feature_column.bucketized_column(
+    longitude, boundaries=get_quantile_based_boundaries(
+      training_examples["longitude"], 10))`
+   - 特征组合函数：`long_x_lat = tf.feature_column.crossed_column(
+  set([bucketized_longitude, bucketized_latitude]), hash_bucket_size=1000) `
+
+[![bucket_and_featureCrosses.jpeg](https://i.loli.net/2019/04/13/5cb1a3eeb4aa5.jpeg)](https://i.loli.net/2019/04/13/5cb1a3eeb4aa5.jpeg)
+
+---
+
 ## 简化正则化
+
+1. [简化正则化练习](https://developers.google.com/machine-learning/crash-course/regularization-for-simplicity/playground-exercise-overcrossing)：对于某些问题，可能因为使用过多的特征或者特征组合，使得模型训练很好，但是泛化能力很低。通常模型的过拟合包含[多方面的原因](https://stackoverflow.com/questions/37776333/why-too-many-features-cause-over-fitting)，比如：1）模型太复杂；2）数据量太少；3）使用的特征太多。
+2. [简化正则化理解](https://developers.google.com/machine-learning/crash-course/regularization-for-simplicity/check-your-understanding)：
+   - 【L2正则化】：假设某个线性模型具有100个输入特征，其中10个特征信息丰富，另外90个特征信息比较缺乏，假设所有特征的值均介于 -1 和 1 之间。 以下哪些陈述属实？
+      - `L2 正则化可能会导致对于某些信息缺乏的特征，模型会学到适中的权重。`
+      - `L2 正则化会使很多信息缺乏的权重接近于（但并非正好是）0.0。`
+      - L2 正则化会使大多数信息缺乏的权重正好为 0.0。
+   - 【L2 正则化和相关特征】：假设某个线性模型具有两个密切相关的特征；也就是说，这两个特征几乎是彼此的副本，但其中一个特征包含少量的随机噪点。如果我们使用 L2 正则化训练该模型，这两个特征的权重将出现什么情况？
+      - 其中一个特征的权重较大，另一个特征的权重几乎为 0.0。
+      - 其中一个特征的权重较大，另一个特征的权重正好为 0.0。
+      - `这两个特征将拥有几乎相同的适中权重。`
+
+---
 
 ## 分类
 
+1. [理解模型评估的基本量](https://developers.google.com/machine-learning/crash-course/classification/check-your-understanding-accuracy-precision-recall)：
+  
+  - 【准确率】：在以下哪种情况下，高的准确率值表示机器学习模型表现出色？
+      - `在 roulette 游戏中，一只球会落在旋转轮上，并且最终落入 38 个槽的其中一个内。某个机器学习模型可以使用视觉特征（球的旋转方式、球落下时旋转轮所在的位置、球在旋转轮上方的高度）预测球会落入哪个槽中，准确率为 4%。`
+      - 一种致命但可治愈的疾病影响着 0.01% 的人群。某个机器学习模型使用其症状作为特征，预测这种疾病的准确率为 99.99%。
+      - 一只造价昂贵的机器鸡每天要穿过一条交通繁忙的道路一千次。某个机器学习模型评估交通模式，预测这只鸡何时可以安全穿过街道，准确率为 99.99%。
+  - 【精确率】：让我们以一种将电子邮件分为“垃圾邮件”或“非垃圾邮件”这两种类别的分类模型为例。如果提高分类阈值，精确率会怎样？
+     - `可能会提高。`
+     - 一定会提高。
+     - 可能会降低。
+     - 一定会降低。
+  - 【召回率】让我们以一种将电子邮件分为“垃圾邮件”或“非垃圾邮件”这两种类别的分类模型为例。如果提高分类阈值，召回率会怎样？
+     - `始终下降或保持不变。`
+     - 始终保持不变。
+     - 一定会提高。
+  - 【精确率和召回率】以两个模型（A 和 B）为例，这两个模型分别对同一数据集进行评估。 以下哪一项陈述属实？
+     - 如果模型 A 的精确率优于模型 B，则模型 A 更好。
+     - 如果模型 A 的召回率优于模型 B，则模型 A 更好。
+     - `如果模型 A 的精确率和召回率均优于模型 B，则模型 A 可能更好。`
+2. [理解ROC和AUC](https://developers.google.com/machine-learning/crash-course/classification/check-your-understanding-roc-and-auc)：
+  - 【ROC和AUC】：以下哪条 ROC 曲线可产生大于 0.5 的 AUC 值？
+  - [![ROC_AUC.jpeg](https://i.loli.net/2019/04/13/5cb1ab01ade35.jpeg)](https://i.loli.net/2019/04/13/5cb1ab01ade35.jpeg)
+  - 【AUC 和预测结果的尺度】：将给定模型的所有预测结果都乘以 2.0（例如，如果模型预测的结果为 0.4，我们将其乘以 2.0 得到 0.8），会使按 AUC 衡量的模型效果产生何种变化？
+     - 这会使 AUC 变得很糟糕，因为预测值现在相差太大。
+     - 这会使 AUC 变得更好，因为预测值之间相差都很大。
+     - `没有变化。AUC 只关注相对预测分数。` 
+
+---
+
 ## 稀疏正则化
+
+---
 
 ## 神经网络简介
 
+---
+
 ## 训练神经网络
+
+---
 
 ## 多类别神经网络
 
+---
+
 ## 嵌套
+
+---
 
 ## 静态训练和动态训练
 
+[静态训练与动态训练理解](https://developers.google.com/machine-learning/crash-course/static-vs-dynamic-training/check-your-understanding)：
+
+【在线训练】：以下哪个关于在线（动态）训练的表述是正确的？
+
+  - 几乎不需要对训练作业进行监控。
+  - 在推理时几乎不需要监控输入数据。
+  - `模型会在新数据出现时进行更新。`
+
+【离线训练】：以下哪些关于离线训练的表述是正确的？
+
+  - 模型会在收到新数据时进行更新。
+  - `与在线训练相比，离线训练需要对训练作业进行的监控较少。`
+  - 在推理时几乎不需要监控输入数据。
+  - `您可以先验证模型，然后再将其应用到生产中。`
+
+---
+
 ## 静态推理和动态推理
+
+[静态推理与动态推理理解](https://developers.google.com/machine-learning/crash-course/static-vs-dynamic-inference/check-your-understanding)：
+
+【在线推理】：在线推理指的是根据需要作出预测。也就是说，进行在线推理时，我们将训练后的模型放到服务器上，并根据需要发出推理请求。以下哪些关于在线推理的表述是正确的？
+
+   - `您可以为所有可能的条目提供预测。`
+   - 在进行在线推理时，您不需要像执行离线推理一样，过多地担心预测延迟问题（返回预测的延迟时间）。
+   - `您必须小心监控输入信号。`
+   - 您可以先对预测进行后期验证，然后再使用它们。
+
+【离线推理】：在离线推理中，我们会一次性根据大批量数据做出预测。然后将这些预测纳入查询表中，以供以后使用。以下哪些关于离线推理的表述是正确的？
+
+  - `对于给定的输入，离线推理能够比在线推理更快地提供预测。`
+  - `生成预测之后，我们可以先对预测进行验证，然后再应用。`
+  - 我们会对所有可能的输入提供预测。
+  - 我们将需要在长时间内小心监控输入信号。
+  - 我们将能够快速对世界上的变化作出响应。
+
+---
 
 ## 数据依赖关系
 
+[Data Dependencies理解](https://developers.google.com/machine-learning/crash-course/data-dependencies/check-your-understanding)：以下哪个模型容易受到反馈环的影响？
+
+  - `大学排名模型 - 将选择率（即申请某所学校并被录取的学生所占百分比）作为一项学校评分依据。`
+  - `图书推荐模型 - 根据小说的受欢迎程度（即图书的购买量）向用户推荐其可能喜欢的小说。`
+  - `交通状况预测模型 - 使用海滩上的人群规模作为特征之一预测海滩附近各个高速公路出口的拥堵情况。`
+  - 选举结果预测模型 - 在投票结束后对 2% 的投票者进行问卷调查，以预测市长竞选的获胜者。
+  - 住宅价值预测模型 - 使用建筑面积（以平方米为单位计算的面积）、卧室数量和地理位置作为特征预测房价。
+  - 人脸检测模型：检测照片中的人是否在微笑（根据每月自动更新的照片数据库定期进行训练）。
 
 
