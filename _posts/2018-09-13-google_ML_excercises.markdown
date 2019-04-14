@@ -358,6 +358,8 @@ Root Mean Squared Error: 237.417
 
 2. [构建神经网络](): 函数`hidden_units`,例子`hidden_units=[3, 10]`表示指定了连个隐藏层，第一个隐藏层含有3个节点，第二个隐藏层含有10个节点，默认为全连接且使用ReLU激活函数。
 
+3. [编程联系]()：**时间问题，神经网络的训练需要大量的时间和运算，所以最好在集群上进行，不要在本地电脑上。**
+
 ```python
   # Create a DNNRegressor object.
   my_optimizer = tf.train.GradientDescentOptimizer(learning_rate=learning_rate)
@@ -387,6 +389,40 @@ Root Mean Squared Error: 237.417
 ## 训练神经网络
 
 1. [反向传播算法的直观说明](https://google-developers.appspot.com/machine-learning/crash-course/backprop-scroll/)
+
+2. [提升神经网络的性能编程]()：
+   
+- 线性缩放：将输入缩放到(-1, 1)之间，SGD在不同维度中改变步长不受阻。
+
+```python
+def linear_scale(series):
+  min_val = series.min()
+  max_val = series.max()
+  scale = (max_val - min_val) / 2.0
+  return series.apply(lambda x:((x - min_val) / scale) - 1.0)
+```
+
+- 尝试不同的优化器：Adam适合非凸优化问题，AdaGrad适合凸优化问题。
+- 尝试其他的标准化方法：
+
+```python
+def log_normalize(series):
+  return series.apply(lambda x:math.log(x+1.0))
+
+def clip(series, clip_to_min, clip_to_max):
+  return series.apply(lambda x:(
+    min(max(x, clip_to_min), clip_to_max)))
+
+def z_score_normalize(series):
+  mean = series.mean()
+  std_dv = series.std()
+  return series.apply(lambda x:(x - mean) / std_dv)
+
+def binary_threshold(series, threshold):
+  return series.apply(lambda x:(1 if x > threshold else 0))
+```
+
+- 仅适用部分特征，这里也涉及到特征挑选？对于模型效果的提升能有多大的作用？
 
 ---
 
