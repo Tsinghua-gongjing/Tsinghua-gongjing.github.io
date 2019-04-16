@@ -1,0 +1,84 @@
+---
+layout: post
+category: "machinelearning"
+title:  "CS229 notes"
+tags: [python, machine learning]
+---
+
+# 课程信息
+
+* Stanford course material: http://cs229.stanford.edu/syllabus.html
+* Stanford video: https://see.stanford.edu/course/cs229
+* Webpage notes: http://www.holehouse.org/mlclass/
+* Coursera video: https://www.coursera.org/learn/machine-learning
+* Coursera video slides and quiz on Github (fork from [atinesh-s](https://github.com/atinesh-s/Coursera-Machine-Learning-Stanford)): https://github.com/Tsinghua-gongjing/Coursera-Machine-Learning-Stanford
+
+# 课程笔记
+
+* 注意：`很多介绍的内容都很详细，这里只记录一些自己觉得容易忘记或者难以理解的点`。
+
+## 01 and 02: Introduction, Regression Analysis and Gradient Descent
+
+1. definition: a computer program is said to learn from experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, improves with experience E . --- Tom Mitchell (1998)
+2. supervised learning:
+   - supervised learning: "right answers" given
+   - regression: predict continuous valued output (e.g., house price)
+   - classification: predict discrete valued output (e.g., cancer type)
+3. unsupervised learning: 
+   - unlabelled data, using various clustering methods to structure it
+   - examples: google news, gene expressions, organise computer clusters, social network analysis, astronomical data analysis
+   - **cocktail party problem**: overlapped voice, how to separate?
+4. linear regression one variable (univariate): 
+   - m : number of training examples
+   - X's : input variable / features
+   - Y's : output variable / target variable
+   - cost function: squared error function:
+   - ![](http://www.holehouse.org/mlclass/01_02_Introduction_regression_analysis_and_gr_files/Image%20[9].png)
+   - [![linear_regression.jpeg](https://i.loli.net/2019/04/15/5cb468d5c76f0.jpeg)](https://i.loli.net/2019/04/15/5cb468d5c76f0.jpeg)
+5. parameter estimation: gradient decent algorithm
+   - [![gradient_decent.jpeg](https://i.loli.net/2019/04/15/5cb4691e99e8d.jpeg)](https://i.loli.net/2019/04/15/5cb4691e99e8d.jpeg)
+
+## 03: Linear Algebra - review
+
+1. 概念：
+   - matrix: rectangular array of numbers: rows x columns
+   - element: i -> ith row, j -> jth column
+   - vector: a nx1 matrix
+2. 操作：
+   - 加和: 需要相同的维，才能元素级别的相加减。
+   - 标量乘积
+   - 混合运算
+   - [![matrix_calculus.jpeg](https://i.loli.net/2019/04/16/5cb53ac91b736.jpeg)](https://i.loli.net/2019/04/16/5cb53ac91b736.jpeg)
+ 
+
+## 04: Linear Regression with Multiple Variables
+
+## 05: Octave[incomplete]
+
+## 06: Logistic Regression
+
+## 07: Regularization
+
+## 08: Neural Networks - Representation
+
+## 09: Neural Networks - Learning
+
+## 10: Advice for applying machine learning techniques
+
+## 11: Machine Learning System Design
+
+## 12: Support Vector Machines
+
+## 13: Clustering
+
+## 14: Dimensionality Reduction
+
+## 15: Anomaly Detection
+
+## 16: Recommender Systems
+
+## 17: Large Scale Machine Learning
+
+## 18: Application Example - Photo OCR
+
+## 19: Course Summary
