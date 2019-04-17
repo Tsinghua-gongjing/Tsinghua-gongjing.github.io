@@ -20,7 +20,7 @@ K-近邻算法（k-nearest neighbors, KNN）：对于要进行分类的数据，
 
 当选定不同的K值大小时，预测对应的分类可能不同，所以**需要尝试不同的K值**。[下图](https://towardsdatascience.com/knn-using-scikit-learn-c6bed765be75)中，当k=3时，会预测为B类型，当k=6时，会预测为A类型。
 
-![](https://cdn-images-1.medium.com/max/800/1*hncgU7vWLBsRvc8WJhxlkQ.png)
+[![kmeans.png](https://i.loli.net/2019/04/17/5cb70a70e414b.png)](https://i.loli.net/2019/04/17/5cb70a70e414b.png)
 
 ## 实现
 
