@@ -1,0 +1,93 @@
+---
+layout: post
+category: "machinelearning"
+title:  "tSNE分析"
+tags: [python, machine learning]
+---
+
+## 概述
+
+T 分布随机近邻嵌入（t-distributed Stochastic Neighbor Embedding）：对高维的数据进行降维可视化。
+
+## 实现
+
+因为tSNE在生物学的单细胞分析里比较多，所以利用已发表的数据重现一下文章的图。
+
+  - 文章：Jindal et al. Discovery of rare cells from voluminous single cell expression data. Nature Communications. 2018
+  - 数据：[preprocessedData\_jurkat\_two\_species\_1580.txt.gz](https://github.com/princethewinner/FiRE/tree/master/data)
+
+### sklearn版本
+
+导入模块：
+
+```python
+import seaborn as sns
+import pandas as pd
+import sklearn.manifold as skma
+import gzip
+import numpy as np
+```
+
+读取数据：
+
+```python
+with gzip.GzipFile('./preprocessedData_jurkat_two_species_1580.txt.gz', 'r') as fid:
+    preprocessedData = np.genfromtxt(fid)
+ 
+print type(preprocessedData)
+print preprocessedData.shape
+
+# <type 'numpy.ndarray'>
+# (1580, 1000)
+```
+
+做tSNE并保存结果：
+
+```python
+tsne = skma.TSNE()
+projs = tsne.fit_transform(preprocessedData)
+np.savetxt('preprocessedData_jurkat_two_species_1580.tsne.txt', projs)
+```
+
+可视化的结果：
+
+```python
+f = './preprocessedData_jurkat_two_species_1580.tsne.txt'
+df1 = pd.read_csv(f, header=None, sep=' ')
+df1.columns = ['tSNE-1', 'tSNE-2']
+df1.head()
+
+sns.scatterplot(x='tSNE-1', y='tSNE-2', data=df1)
+```
+
+可以看到有两个离群值，将其去除后在可视化：
+
+```python
+df1_filterOutliner = df1[df1['tSNE-1']>-20]
+sns.scatterplot(x='tSNE-1', y='tSNE-2', data=df1_filterOutliner)
+```
+
+文章提供的结果：
+
+```python
+f = './tsne_jurkat_1k_outlierRemoved.txt'
+df2 = pd.read_csv(f, header=None, sep=' ')
+df2.columns = ['tSNE-1', 'tSNE-2']
+df2.head()
+
+sns.scatterplot(x='tSNE-1', y='tSNE-2', data=df2)
+```
+
+可以看到，**两个图不完全一样，因为tSNE函数会设置初始状态值，不同的值结果存在偏差，可以结合聚类的结果看是不是大致相似**。
+
+[![tSNE.png](https://i.loli.net/2019/04/19/5cb9c2cf3a01b.png)](https://i.loli.net/2019/04/19/5cb9c2cf3a01b.png)
+
+
+## 参考
+
+1. [详解可视化利器 t-SNE 算法：数无形时少直觉](https://www.jiqizhixin.com/articles/2017-11-13-7)
+
+
+
+
+
