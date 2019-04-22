@@ -53,11 +53,71 @@ tags: [python, machine learning]
 
 ## 04: Linear Regression with Multiple Variables
 
+1. 多特征使得fitting函数变得更复杂，多元线性回归。
+2. 多元线性回归的损失函数：
+   - ![](http://www.holehouse.org/mlclass/04_Linear_Regression_with_multiple_variables_files/Image.png)
+3. 多变量的梯度递减：
+   - ![](http://www.holehouse.org/mlclass/04_Linear_Regression_with_multiple_variables_files/Image%20[1].png)
+   - 规则1：feature scaling。对于不同的feature范围，通过特征缩减到可比较的范围，通常[-1, 1]之间。
+   - 归一化：1）除以各自特征最大值；2）mean normalization(如下)：
+   - ![](http://www.holehouse.org/mlclass/04_Linear_Regression_with_multiple_variables_files/Image%20[6].png)
+   - 规则2：learning rate。选取合适的学习速率，太小则收敛太慢，太大则损失函数不一定会随着迭代次数减小（甚至不收敛）。
+   - 损失函数曲线：直观判断训练多久时模型会达到收敛
+   - ![](http://www.holehouse.org/mlclass/04_Linear_Regression_with_multiple_variables_files/Image%20[7].png)
+4. 特征和多项式回归：对于非线性问题，也可以尝试用多项式的线性回归，基于已有feature构建额外的特征，比如房间size的三次方或者开根号等，但是要注意与模型是否符合。比如size的三次方作为一个特征，随着size增大到一定值后，其模型输出值是减小的，这显然不符合size越大房价越高。
+5. Normal equation：根据损失函数，求解最小损失岁对应的theta向量的，类似于求导，但是这里采用的是矩阵运算的方式。
+   - 求解方程式如下：
+   - ![](http://www.holehouse.org/mlclass/04_Linear_Regression_with_multiple_variables_files/Image%20[13].png)
+   - 这里就**直接根据训练集和label值矩阵求解出最小损失对对应的各个参数（权重）**。
+6. 什么时候用梯度递减，什么时候用normal equation去求解最小损失函数处对应的theta向量？
+   - [![gradient_decent_vs_normal_equation.jpeg](https://i.loli.net/2019/04/17/5cb60508a1790.jpeg)](https://i.loli.net/2019/04/17/5cb60508a1790.jpeg)
+
 ## 05: Octave[incomplete]
 
 ## 06: Logistic Regression
 
+1. 逻辑回归：分类，比如email是不是垃圾邮件，肿瘤是不是恶性的。预测y值（label），=1（positive class），=0（negative class）。
+2. 分类 vs 逻辑回归（逻辑回归转换为分类）：
+   - 分类：值为0或1（是离散的，且只能取这两个值）。
+   - 逻辑回归：预测值在[0,1之间]。
+   - 阈值法：用逻辑回归模型，预测值>=0.5，则y=1，预测值<0.5，则y=0.
+3. 逻辑回归函数（假设，hypothesis）：
+   - 公式：![](http://www.holehouse.org/mlclass/06_Logistic_Regression_files/Image%20[1].png)
+   - 分布：![](http://www.holehouse.org/mlclass/06_Logistic_Regression_files/Image%20[2].png)
+4. 决策边界（decision boundary）：区分概率值（0.5）对应的theta值=0，所以函数=0所对应的线。
+   - 线性区分的边界：![](http://www.holehouse.org/mlclass/06_Logistic_Regression_files/Image%20[5].png)
+   - 非线性区分的边界：![](http://www.holehouse.org/mlclass/06_Logistic_Regression_files/Image%20[6].png)
+5. 损失函数:
+   - 问题：
+   - ![](http://www.holehouse.org/mlclass/06_Logistic_Regression_files/Image%20[8].png)
+   - 如果延续线性函数的损失函数，则可写成如下，但是当把逻辑函数代入时，这个损失函数是一个非凸优化（non-convex，有很多局部最优，难以找到全局最优）的函数。
+   - ![](http://www.holehouse.org/mlclass/06_Logistic_Regression_files/Image%20[9].png)
+   - 因此，需要使用一个凸函数作为逻辑函数的损失函数：
+   - ![](http://www.holehouse.org/mlclass/06_Logistic_Regression_files/Image%20[12].png)
+
 ## 07: Regularization
+
+1. 过拟合的问题：
+  - 线性过拟合：预测房价的问题，从一阶到二阶到四阶的线性拟合【之前的学习也知道，如果模型中的特征数目很多，那么损失函数有可能越接近于0】，损失越来越小大，但是缺乏泛化到新数据的能力。
+  - 欠拟合（underfitting）：高偏差。
+  - 过拟合（overfitting）：高方差，假设空间太大。
+  - 逻辑回归的过拟合：其函数经过逻辑函数之前可以简单或者复杂，从而欠拟合或者过拟合。
+  - [![overfitting_and_underfitting.png](https://i.loli.net/2019/04/22/5cbd84635925f.png)](https://i.loli.net/2019/04/22/5cbd84635925f.png)
+2. 如何解决过拟合：
+  - 如何鉴定是否过拟合？泛化能力很差，对新样本的预测效果很糟糕。
+  - 低维时可以画出来，看拟合的好坏？高维时不能很好的展示。
+  - 特征太多，数据太少容易过拟合。
+  - 方案【1】减少特征数目。1）手动挑选特征；2）算法模型挑选；3）挑选特征会带来信息丢失
+  - 方案【2】正则化。1）保留所有特征，但是减小权重函数的量级；2）当有很多特征时，每一个特征对于预测都贡献一点点。
+4. 正则化：
+  - 参数值较小时模型越简单
+  - 简单的模型更不容易过拟合
+  - 加入正则项，减小每个参数的值
+  - 加入正则项后的损失函数：
+  - ![](http://www.holehouse.org/mlclass/07_Regularization_files/Image%20[4].png)
+5. λ正则化参数：平衡模型对于训练数据的拟合程度，和所有参数趋于小（模型趋向于简单）
+  - 如果λ很大，所有的参数就都很小，各个特征项没啥用，模型预测效果不好 =》欠拟合。
+  - [![cost_function_with_regularization.png](https://i.loli.net/2019/04/22/5cbd9cd87ef8a.png)](https://i.loli.net/2019/04/22/5cbd9cd87ef8a.png)
 
 ## 08: Neural Networks - Representation
 
