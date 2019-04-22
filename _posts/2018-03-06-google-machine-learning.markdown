@@ -58,6 +58,15 @@ tags: [python, machine learning, google]
 9. 批量：单次迭代中计算梯度的样本总数。一般是总的样本，但是海量数据过于庞大。
 10. 随机梯度下降（SGD）：一次抽取一个样本
 11. 小批量梯度下降：每批10-1000个样本，使得估算均值接近整体，且计算时间可接受
+12. 关于理解梯度下降，机器之心翻译了一篇[浅显易懂！「高中数学」读懂梯度下降的数学原理](https://www.jiqizhixin.com/articles/2019-04-07-6)，来源于[towarddatascience](https://towardsdatascience.com/understanding-the-mathematics-behind-gradient-descent-dde5dc9be06e)：
+   - 梯度下降的公式：
+   - ![](https://image.jiqizhixin.com/uploads/editor/28c777e8-9c6d-4e0c-80ca-1efa1c5ca30d/640.png)
+   - 成本函数 vs 损失函数：损失函数是单个训练样本的误差，成本函数则是损失函数在整个训练集上的平均。
+   - 任何机器学习算法的目标都是最小化成本函数。（实际值与预测值之间的误差越低，算法越好）
+   - 求导幂规则：
+   - ![](https://image.jiqizhixin.com/uploads/editor/b28d7824-5b54-4842-a611-5aa921168153/640.png)
+   - 求导链式规则：
+   - ![](https://image.jiqizhixin.com/uploads/editor/fd19e22b-cf86-40bb-ab4f-c63736db4768/640.png)
 
 ---
 
