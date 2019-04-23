@@ -50,6 +50,8 @@ require "/full/path/to/XXX.pm";
 For example here below works for me:
 
 ```bash
+#! /usr/bin/perl
+
 use strict;
 use warnings;
 use File::Basename;
@@ -57,4 +59,20 @@ use Getopt::Std;
 
 # add a lib to search path
 use lib "/Share/home/zhangqf/usr/perl-df/perls/perl-5.22.1";
+```
+
+但是这个显性的指定`lib`的方式有问题，虽然模块`Statistics::Basic`可以正常的导入，但是其每个模块对应的函数无法正常使用。在这个脚本中，后面调用了`Statistics::Basic`中的一个函数`correlation`，因而报错。后面发现，在执行脚本时使用`perl script.py`是可以的，原因在于调用的perl命令路径不一样。脚本默认的perl是`/usr/bin/perl`，但是这个其实是有很多模块没有安装的，所以使用集群正常使用的perl可以正常运行。
+
+查看默认的perl路径及其模块搜索路径：
+
+```bash
+$ which perl
+/Share/home/zhangqf/usr/perl-df/perls/perl-5.22.1/bin/perl
+
+$ perl -e 'print join "\n", @INC;'
+/Share/home/zhangqf/usr/perl-df/perls/perl-5.22.1
+/Share/home/zhangqf/usr/perl-df/perls/perl-5.22.1/lib/site_perl/5.22.1/x86_64-linux-thread-multi
+/Share/home/zhangqf/usr/perl-df/perls/perl-5.22.1/lib/site_perl/5.22.1
+/Share/home/zhangqf/usr/perl-df/perls/perl-5.22.1/lib/5.22.1/x86_64-linux-thread-multi
+/Share/home/zhangqf/usr/perl-df/perls/perl-5.22.1/lib/5.22.1
 ```
