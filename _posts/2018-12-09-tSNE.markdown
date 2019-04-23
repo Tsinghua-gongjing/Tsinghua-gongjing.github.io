@@ -7,7 +7,23 @@ tags: [python, machine learning]
 
 ## 概述
 
-T 分布随机近邻嵌入（t-distributed Stochastic Neighbor Embedding）：对高维的数据进行降维可视化。
+T 分布随机近邻嵌入（t-distributed Stochastic Neighbor Embedding）：对高维的数据进行降维可视化，识别相关联的模式，保持局部结构（高维空间中距离相近的点投影到低维中扔然相近）。
+
+## 原理
+
+1. 对数据点近邻分布进行建模。高维空间：高斯分布 =》低维空间（比如二维空间）：t分布（更长的尾部，更均匀分布）。
+  - 下图红色为t分布，蓝色为正太分布：
+  - ![](https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/T_distribution_1df_enhanced.svg/480px-T_distribution_1df_enhanced.svg.png)
+2. 目标：找到一个变换，将高维空间投射到二维空间，最小化所有点在这两个分布之间的差距。
+3. 困惑度（Perplexity）：拟合分布时考虑的近邻数。低困惑度：最近的几个近邻。
+4. 分布时基于距离的，需要所有数据为数值型。类别变量：二值编码等进行转换。
+5. 随机近邻嵌入：
+  - 数据点的欧几里德距离转换为条件概率而表征相似性。如果两个点相近，则一个呗选为另一个的近邻的条件概率高。
+  - ![](https://image.jiqizhixin.com/uploads/wangeditor/40d1bbf8-94d8-464c-b6be-54534c1c509e/91665image.png)
+  - 引入矩阵（低维空间的）Y，同样计算条件概率：
+  - ![](https://image.jiqizhixin.com/uploads/wangeditor/40d1bbf8-94d8-464c-b6be-54534c1c509e/27934image%20(1).png)
+  - 整体目标是对于Y中的点，使其条件概率分布近似于原始高维空间，所以可以构建损失函数如下，并用梯度下降寻找最小值。
+  - ![](https://image.jiqizhixin.com/uploads/wangeditor/40d1bbf8-94d8-464c-b6be-54534c1c509e/46259image%20(2).png)
 
 ## 实现
 
