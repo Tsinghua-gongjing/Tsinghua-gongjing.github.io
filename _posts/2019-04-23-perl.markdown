@@ -1,0 +1,60 @@
+---
+layout: post
+category: "linux"
+title:  "Perl related info"
+tags: [linux]
+---
+
+- TOC
+{:toc}
+
+## Can't locate module
+
+Example error:
+
+```bash
+Can't locate Statistics/Basic.pm in @INC 
+(@INC contains: 
+/usr/local/lib64/perl5 
+/usr/local/share/perl5 
+/usr/lib64/perl5/vendor_perl 
+/usr/share/perl5/vendor_perl 
+/usr/lib64/perl5 /usr/share/perl5 .) 
+at /Share/home/zhangqf5/gongjing/Kethoxal_RNA_structure/scripts/icSHAPE-master/scripts/correlationRT.pl line 8.
+```
+
+Check whether the module has been installed as discussed [here](https://stackoverflow.com/questions/12320543/perl-library-path)?
+
+```bash
+#  display path to library if it's installed and found in PERL5LIB
+$ perldoc -l Statistics::Basic
+
+# /Share/home/zhangqf/usr/perl-df/perls/perl-5.22.1/lib/site_perl/5.22.1/Statistics/Basic.pod
+```
+
+So the installed module are not in `@INC` path.
+
+**3 ways to around** this error:
+
+```bash
+# push in @INC
+BEGIN { unshift @INC, "some/path"; }
+
+# addd lib
+use lib "some/path";
+
+# add .pm script (通常可用于指定自写的非依赖包)
+require "/full/path/to/XXX.pm";
+```
+
+For example here below works for me:
+
+```bash
+use strict;
+use warnings;
+use File::Basename;
+use Getopt::Std;
+
+# add a lib to search path
+use lib "/Share/home/zhangqf/usr/perl-df/perls/perl-5.22.1";
+```
