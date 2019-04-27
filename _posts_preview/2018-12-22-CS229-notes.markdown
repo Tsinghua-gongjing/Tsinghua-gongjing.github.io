@@ -158,6 +158,8 @@ tags: [python, machine learning]
 3. 反向传播（back propagation）：
    - 每一层的每个节点都会计算出一个值，但是这个值与真实值是有差异的，因此可以计算每个节点的错误。
    - 但是每个节点的真实值我们是不知道的，只知道最后的y值（输出值），因此需要从最后的输出值开始计算。
+4. 神经网络学习：
+   - [![neural_network_training.png](https://i.loli.net/2019/04/27/5cc401672148f.png)](https://i.loli.net/2019/04/27/5cc401672148f.png)
 
 ## 10: Advice for applying machine learning techniques
 
