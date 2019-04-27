@@ -159,8 +159,9 @@ tags: [python, machine learning]
    - 每一层的每个节点都会计算出一个值，但是这个值与真实值是有差异的，因此可以计算每个节点的错误。
    - 但是每个节点的真实值我们是不知道的，只知道最后的y值（输出值），因此需要从最后的输出值开始计算。
    - [这个文章: 一文弄懂神经网络中的反向传播法——BackPropagation](https://www.cnblogs.com/charlotte77/p/5629865.html)通过一个简单的3层网络的计算，演示了反向传播的过程，可以参考一下：
-   - [![back_propagation2.jpeg](https://i.loli.net/2019/04/28/5cc48a65e77e1.jpeg)](https://i.loli.net/2019/04/28/5cc48a65e77e1.jpeg)
    - [![back_propagation1.jpeg](https://i.loli.net/2019/04/28/5cc48a65ea9a6.jpeg)](https://i.loli.net/2019/04/28/5cc48a65ea9a6.jpeg)
+   - [![back_propagation2.jpeg](https://i.loli.net/2019/04/28/5cc48a65e77e1.jpeg)](https://i.loli.net/2019/04/28/5cc48a65e77e1.jpeg)
+   
 4. 神经网络学习：
    - [![neural_network_training.png](https://i.loli.net/2019/04/27/5cc401672148f.png)](https://i.loli.net/2019/04/27/5cc401672148f.png)
 
