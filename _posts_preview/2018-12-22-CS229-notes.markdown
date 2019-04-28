@@ -7,11 +7,18 @@ tags: [python, machine learning]
 
 # 课程信息
 
-* Stanford course material: http://cs229.stanford.edu/syllabus.html
-* Stanford video: https://see.stanford.edu/course/cs229
-* Webpage notes: http://www.holehouse.org/mlclass/
+机器学习入门，Coursera的课程内容和CS229的内容相似，但是后者的难度更大，有更多对于公式的推导，可以先看Coursera再补充看CS229的。
+
 * Coursera video: https://www.coursera.org/learn/machine-learning
 * Coursera video slides and quiz on Github (fork from [atinesh-s](https://github.com/atinesh-s/Coursera-Machine-Learning-Stanford)): https://github.com/Tsinghua-gongjing/Coursera-Machine-Learning-Stanford
+* Webpage notes: http://www.holehouse.org/mlclass/
+
+* Stanford course material: http://cs229.stanford.edu/syllabus.html
+* Stanford video: https://see.stanford.edu/course/cs229
+
+* CS229 cheatsheet：[English](https://github.com/afshinea/stanford-cs-229-machine-learning) & [Chinese](https://github.com/afshinea/stanford-cs-229-machine-learning/tree/master/zh)
+
+
 
 # 课程笔记
 
