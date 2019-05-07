@@ -16,7 +16,7 @@ tags: [python, machine learning]
 * Stanford course material: http://cs229.stanford.edu/syllabus.html
 * Stanford video: https://see.stanford.edu/course/cs229
 
-* CS229 cheatsheet：[English](https://github.com/afshinea/stanford-cs-229-machine-learning) & [Chinese](https://github.com/afshinea/stanford-cs-229-machine-learning/tree/master/zh)
+* CS229 cheatsheet：[English](https://github.com/afshinea/stanford-cs-229-machine-learning) & [Chinese](https://github.com/afshinea/stanford-cs-229-machine-learning/tree/master/zh) & [@Stanford](https://stanford.edu/~shervine/teaching/cs-229/)
 
 
 
