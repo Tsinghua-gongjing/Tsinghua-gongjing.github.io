@@ -19,7 +19,18 @@ pip install tensorflow-gpu
 ImportError: libcublas.so.10.0: cannot open shared object file: No such file or directory
 ```
 
-这是因为系统安装的`Cuda`版本不符合`tensorflow-gpu`的要求，所以按照[这里](https://github.com/tensorflow/tensorflow/issues/26209)，想要安装低版本的`tensorflow-gpu`。
+这是因为系统安装的`Cuda`版本不符合`tensorflow-gpu`的要求。首先查看系统中的可用的`libcublas.so`的版本：
+
+```bash
+$ ll /usr/local/cuda/lib64/libcublas*
+-rw-r--r--. 1 root root 53464088 Nov 16  2017 /usr/local/cuda/lib64/libcublas_device.a
+lrwxrwxrwx. 1 root root       16 Nov 16  2017 /usr/local/cuda/lib64/libcublas.so -> libcublas.so.8.0
+lrwxrwxrwx. 1 root root       19 Nov 16  2017 /usr/local/cuda/lib64/libcublas.so.8.0 -> libcublas.so.8.0.61
+-rwxr-xr-x. 1 root root 42505456 Nov 16  2017 /usr/local/cuda/lib64/libcublas.so.8.0.61
+-rw-r--r--. 1 root root 49080634 Nov 16  2017 /usr/local/cuda/lib64/libcublas_static.a
+```
+
+可以看到，这里最高的版本是`libcublas.so.8.0`，所以按照[这里](https://github.com/tensorflow/tensorflow/issues/26209)，想要安装低版本的`tensorflow-gpu`，以适配低版本的库。
 
 ```bash
 $ pip install tensorflow-gpu==1.12.0
