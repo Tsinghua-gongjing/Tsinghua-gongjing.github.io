@@ -9,7 +9,7 @@ tags: [jupyter]
 
 主要是参考了[这里](http://danielhnyk.cz/running-ipython-notebook-different-computer/)，这个是用的`ipython`，当时`jupyter notebook`还没完善，基本原理和操作是一样的，包括现在很多人使用的`jupyter-lab`，下面是连接`jupyter-lab`的例子：
 
-1. 在客户端打开一个指定端口的server：
+1、在客户端打开一个指定端口的server：
    
 ```bash
 jupyter-lab --port 8007
@@ -33,13 +33,13 @@ jupyter-lab --port 8007
 [W 13:42:18.565 LabApp] Could not determine jupyterlab build status without nodejs
 ```
 
-2. 在本地使用`ssh`用指定端口登录：
+2、在本地使用`ssh`用指定端口登录：
 
 ```bash
 ssh -Y username@remoteIP -L 8007:localhost:8007
 ```
 
-3. 在本地浏览器输入对应的地址：`http://localhost:8007`，有的时候需要指定一个`token`，所以可以直接复制完整第地址，比如这里的:
+3、在本地浏览器输入对应的地址：`http://localhost:8007`，有的时候需要指定一个`token`，所以可以直接复制完整第地址，比如这里的:
 
   `http://localhost:8007/?token=442494e19571582585464518668825f6ae1e4d4c3bdfc070`
 
