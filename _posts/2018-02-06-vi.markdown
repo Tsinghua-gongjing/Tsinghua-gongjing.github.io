@@ -27,3 +27,10 @@ Comment multiple lines as discussed [here](https://stackoverflow.com/questions/1
 4. `Shift + i (capital I)`：这时光标会在所选择的block的第一行的第一个字符处
 5. insert the text you want, i.e. `#`
 6. press `Esc` `Esc`，一定是两次`Esc`.
+
+Uncomment multiple lines
+
+1. press `Esc` (to leave editing or other mode)
+2. hit `ctrl + v` (visual block mode)
+3. use the `up/down arrow keys to select` lines 
+4. `Shift + x (capital X)`
