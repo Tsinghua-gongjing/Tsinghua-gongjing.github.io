@@ -1,0 +1,8 @@
+---
+layout: post
+category: "machinelearning"
+title:  "[CS229] 12: Support Vector Machines"
+tags: [python, machine learning]
+---
+
+## 12: Support Vector Machines

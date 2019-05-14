@@ -1,0 +1,27 @@
+---
+layout: post
+category: "machinelearning"
+title:  "[CS229] 01 and 02: Introduction, Regression Analysis and Gradient Descent"
+tags: [python, machine learning]
+---
+
+## 01 and 02: Introduction, Regression Analysis and Gradient Descent
+
+1. definition: a computer program is said to learn from experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, improves with experience E . --- Tom Mitchell (1998)
+2. supervised learning:
+   - supervised learning: "right answers" given
+   - regression: predict continuous valued output (e.g., house price)
+   - classification: predict discrete valued output (e.g., cancer type)
+3. unsupervised learning: 
+   - unlabelled data, using various clustering methods to structure it
+   - examples: google news, gene expressions, organise computer clusters, social network analysis, astronomical data analysis
+   - **cocktail party problem**: overlapped voice, how to separate?
+4. linear regression one variable (univariate): 
+   - m : number of training examples
+   - X's : input variable / features
+   - Y's : output variable / target variable
+   - cost function: squared error function:
+   - ![](http://www.holehouse.org/mlclass/01_02_Introduction_regression_analysis_and_gr_files/Image%20[9].png)
+   - [![linear_regression.jpeg](https://i.loli.net/2019/04/15/5cb468d5c76f0.jpeg)](https://i.loli.net/2019/04/15/5cb468d5c76f0.jpeg)
+5. parameter estimation: gradient decent algorithm
+   - [![gradient_decent.jpeg](https://i.loli.net/2019/04/15/5cb4691e99e8d.jpeg)](https://i.loli.net/2019/04/15/5cb4691e99e8d.jpeg)

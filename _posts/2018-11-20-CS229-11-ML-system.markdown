@@ -1,0 +1,23 @@
+---
+layout: post
+category: "machinelearning"
+title:  "[CS229] 11: Machine Learning System Design"
+tags: [python, machine learning]
+---
+
+## 11: Machine Learning System Design
+
+1. 垃圾邮件检测：
+   - 监督学习：单词作为特征
+   - 收集数据，email头信息提取特征，正文信息提取特征，错误拼写检测
+2. 误差分析：
+   - 实现简单模型，测试在验证数据集上的效果
+   - 画学习曲线，看数据量、增添特征能否提升模型性能
+   - 误差分析：focus那些预测错误的样本，看是否有什么明显的趋势或者共同特征？
+   - 分析需要在验证数据集上，不是测试集上
+3. skewd class的误差分析：
+   - precision: # true positive / # predicted positive = # true positive / (# true positive + # false positive)
+   - recall: # true positive / # actual positive = # true positive / (# true positive + # false negative)
+   - F1 score = 2 * (Precision * Recall) / (Precision + Recall)
+   - 在验证数据集上，计算F1 score，并使其最大化，对应于模型效果最佳
+4. large data rationale: 可以构建有更多参数的模型
