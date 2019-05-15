@@ -14,13 +14,115 @@ pytorch: 基于python的科学计算包
 
 ## 基本概念
 
+### 张量（tensor）：类似于numpy里面的数组array，在GPU上可实现加速计算。
+
+张量的基本操作：
+
+```python
+from __future__ import print_function
+import torch
+
+# 把生成的memory返回到x，不同批次调用此函数返回值是不同的
+# https://stackoverflow.com/questions/51140927/what-is-uninitialized-data-in-pytorch-empty-function
+x = torch.empty(5, 3)
+
+# 随机初始化一个矩阵
+x = torch.rand(5, 3)
+
+# 全0矩阵
+x = torch.zeros(5, 3, dtype=torch.long)
+
+# 直接张量赋值
+x = torch.tensor([5.5, 3])
+
+# 全1矩阵
+x = x.new_ones(5, 3, dtype=torch.double)
+
+# 获取x的shape，随机生成矩阵
+# x = torch.randn_like(x, dtype=torch.float)
+```
+
+张量的基本运算：
+
+```python
+# 加法
+x = torch.tensor([5.5, 3])
+y = torch.rand(5, 3)
+print(x + y)
+
+# 加法
+print(torch.add(x, y))
+
+# 加法
+result = torch.empty(5, 3)
+torch.add(x, y, out=result)
+
+# 原位加法，此时y的值是改变的
+y.add_(x)
+
+# 取值
+print(x[:, 1])
+
+# 改变array形状
+x = torch.randn(4, 4)
+y = x.view(16)
+```
+
+### Autograd：自动求导
+
+张量的求导是可追踪的，即某个张量的求导设置为true时，基于此张量的操作或者后续张量，其也是具有可求导属性的。
+
+```python
+a = torch.randn(2, 2)
+a = ((a * 3) / (a - 1))
+print(a.requires_grad)
+a.requires_grad_(True)
+print(a.requires_grad)
+b = (a * a).sum()
+print(b.grad_fn)
+
+# False
+# True
+# <SumBackward0 object at 0x7f1b24845f98>
+```
+
+## 示例: 手写数字识别的LeNet5卷积神经网络
+
+![](https://cuijiahua.com/wp-content/uploads/2018/01/dl_3_4.jpg)
+
+### 准备数据
+
+```python
+import torchvision.datasets as dset
+import torchvision.transforms as transforms
+
+root = './data'
+if not os.path.exists(root):
+    os.mkdir(root)
+    
+trans = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,), (1.0,))])
+# if not exist, download mnist dataset
+train_set = dset.MNIST(root=root, train=True, transform=trans, download=True)
+test_set = dset.MNIST(root=root, train=False, transform=trans, download=True)
+
+batch_size = 100
+
+train_loader = torch.utils.data.DataLoader(
+                 dataset=train_set,
+                 batch_size=batch_size,
+                 shuffle=True)
+test_loader = torch.utils.data.DataLoader(
+                dataset=test_set,
+                batch_size=batch_size,
+                shuffle=False)
+```
+
 ### 定义网络
 
 ```python
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-
 
 class Net(nn.Module):
 
@@ -55,6 +157,7 @@ class Net(nn.Module):
 net = Net()
 print(net)
 
+# 构建的网络
 # Net(
 #   (conv1): Conv2d(1, 6, kernel_size=(5, 5), stride=(1, 1))
 #   (conv2): Conv2d(6, 16, kernel_size=(5, 5), stride=(1, 1))
@@ -64,11 +167,33 @@ print(net)
 # )
 ```
 
+这里卷积层的构建调用的是`.Conv2d()`函数：
+
+```python
+# https://pytorch.org/docs/stable/nn.html#conv2d
+
+torch.nn.Conv2d(in_channels, out_channels, kernel_size, stride=1, padding=0, dilation=1, 
+                groups=1, bias=True, padding_mode='zeros')
+
+# 参数列表                
+# in_channels (int) – Number of channels in the input image
+# out_channels (int) – Number of channels produced by the convolution
+# kernel_size (int or tuple) – Size of the convolving kernel
+# stride (int or tuple, optional) – Stride of the convolution. Default: 1
+# padding (int or tuple, optional) – Zero-padding added to both sides of the input. Default: 0
+# padding_mode (string, optional) – zeros
+# dilation (int or tuple, optional) – Spacing between kernel elements. Default: 1
+# groups (int, optional) – Number of blocked connections from input channels to output channels. Default: 1
+# bias (bool, optional) – If True, adds a learnable bias to the output. Default: True
+```
+
 ### 定义损失函数和优化器
 
 ```python
 import torch.optim as optim
 
+# https://pytorch.org/docs/stable/nn.html#loss-functions
+# 这里定义了各种不同的损失函数
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
 ``` 
@@ -115,7 +240,6 @@ print('Finished Training')
 # Finished Training
 ```
 
-
 ### 评估模型
 
 ```python
@@ -137,7 +261,8 @@ print('Accuracy of the network on the 10000 test images: %d %%' % (
 
 ## cheatsheet
 
-
+* [Pytorch official](https://pytorch.org/tutorials/beginner/ptcheat.html) : https://pytorch.org/tutorials/beginner/ptcheat.html
+* [Pytorch_Tutorial](https://web.cs.ucdavis.edu/~yjlee/teaching/ecs289g-winter2018/Pytorch_Tutorial.pdf) : https://web.cs.ucdavis.edu/~yjlee/teaching/ecs289g-winter2018/Pytorch_Tutorial.pdf
 
 ## 参考
 
