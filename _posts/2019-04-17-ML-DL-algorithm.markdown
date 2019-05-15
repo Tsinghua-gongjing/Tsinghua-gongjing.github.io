@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "machinelearning"
-title:  "Resources of learning algorithms summay"
+title:  "Resources of learning algorithms summary"
 tags: [python, machine learning, deep learning]
 ---
 
