@@ -262,6 +262,27 @@ plt.close()
 
 [![multuple_heatmap](https://i.loli.net/2018/08/23/5b7e1fbbc40c1.png)](https://i.loli.net/2018/08/23/5b7e1fbbc40c1.png)
 
+### Reverse y axis of heatmap
+
+As discussed [here](https://stackoverflow.com/questions/34232073/seaborn-heatmap-y-axis-reverse-order/34444939)
+
+```python
+import numpy as np; np.random.seed(0)
+import seaborn as sns; sns.set()
+uniform_data = np.random.rand(10, 12)
+ax = sns.heatmap(uniform_data)
+ax.invert_yaxis()
+```
+
+### change heatmap size
+
+No `size` argument in `sns.heatmap` function, can only set by `plt` as discussed [here](https://stackoverflow.com/questions/41519991/how-to-make-seaborn-heatmap-larger-normal-size/41520179)
+
+```python
+fig,ax = plt.subplots(figsize=(10, 16))
+sns.heatmap(..., ax=ax)
+```
+
 ### Merge symmetry matrix value to one side 
 
 ```python

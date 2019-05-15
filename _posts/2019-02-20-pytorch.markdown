@@ -1,0 +1,149 @@
+---
+layout: post
+category: "machinelearning"
+title:  "pytorch"
+tags: [python, machine learning]
+---
+
+## 概述
+
+pytorch: 基于python的科学计算包
+
+ - 替代numpy，利用GPU性能进行计算
+ - 高灵活性、速度快的深度学习平台 
+
+## 基本概念
+
+### 定义网络
+
+```python
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+
+class Net(nn.Module):
+
+    def __init__(self):
+        super(Net, self).__init__()
+        # 输入图像channel：1；输出channel：6；5x5卷积核
+        self.conv1 = nn.Conv2d(1, 6, 5)
+        self.conv2 = nn.Conv2d(6, 16, 5)
+        # an affine operation: y = Wx + b
+        self.fc1 = nn.Linear(16 * 5 * 5, 120)
+        self.fc2 = nn.Linear(120, 84)
+        self.fc3 = nn.Linear(84, 10)
+
+    def forward(self, x):
+        # 2x2 Max pooling
+        x = F.max_pool2d(F.relu(self.conv1(x)), (2, 2))
+        # If the size is a square you can only specify a single number
+        x = F.max_pool2d(F.relu(self.conv2(x)), 2)
+        x = x.view(-1, self.num_flat_features(x))
+        x = F.relu(self.fc1(x))
+        x = F.relu(self.fc2(x))
+        x = self.fc3(x)
+        return x
+
+    def num_flat_features(self, x):
+        size = x.size()[1:]  # 除去批大小维度的其余维度
+        num_features = 1
+        for s in size:
+            num_features *= s
+        return num_features
+        
+net = Net()
+print(net)
+
+# Net(
+#   (conv1): Conv2d(1, 6, kernel_size=(5, 5), stride=(1, 1))
+#   (conv2): Conv2d(6, 16, kernel_size=(5, 5), stride=(1, 1))
+#   (fc1): Linear(in_features=400, out_features=120, bias=True)
+#   (fc2): Linear(in_features=120, out_features=84, bias=True)
+#   (fc3): Linear(in_features=84, out_features=10, bias=True)
+# )
+```
+
+### 定义损失函数和优化器
+
+```python
+import torch.optim as optim
+
+criterion = nn.CrossEntropyLoss()
+optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
+``` 
+
+### 训练网络：
+
+```python
+for epoch in range(2):  # loop over the dataset multiple times
+
+    running_loss = 0.0
+    for i, data in enumerate(trainloader, 0):
+        # get the inputs
+        inputs, labels = data
+
+        # zero the parameter gradients
+        optimizer.zero_grad()
+
+        # forward + backward + optimize
+        outputs = net(inputs)
+        loss = criterion(outputs, labels)
+        loss.backward()
+        optimizer.step()
+
+        # print statistics
+        running_loss += loss.item()
+        if i % 2000 == 1999:    # print every 2000 mini-batches
+            print('[%d, %5d] loss: %.3f' % (epoch + 1, i + 1, running_loss / 2000))
+            running_loss = 0.0
+
+print('Finished Training')
+
+# [1,  2000] loss: 2.182
+# [1,  4000] loss: 1.819
+# [1,  6000] loss: 1.648
+# [1,  8000] loss: 1.569
+# [1, 10000] loss: 1.511
+# [1, 12000] loss: 1.473
+# [2,  2000] loss: 1.414
+# [2,  4000] loss: 1.365
+# [2,  6000] loss: 1.358
+# [2,  8000] loss: 1.322
+# [2, 10000] loss: 1.298
+# [2, 12000] loss: 1.282
+# Finished Training
+```
+
+
+### 评估模型
+
+```python
+correct = 0
+total = 0
+with torch.no_grad():
+    for data in testloader:
+        images, labels = data
+        outputs = net(images)
+        _, predicted = torch.max(outputs.data, 1)
+        total += labels.size(0)
+        correct += (predicted == labels).sum().item()
+
+print('Accuracy of the network on the 10000 test images: %d %%' % (
+    100 * correct / total))
+    
+# Accuracy of the network on the 10000 test images: 55 %
+```
+
+## cheatsheet
+
+
+
+## 参考
+
+* [DEEP LEARNING WITH PYTORCH: A 60 MINUTE BLITZ](https://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html)
+* [PyTorch 深度学习: 60 分钟极速入门](https://pytorch.apachecn.org/docs/1.0/#/deep_learning_60min_blitz)
+
+
+
+
