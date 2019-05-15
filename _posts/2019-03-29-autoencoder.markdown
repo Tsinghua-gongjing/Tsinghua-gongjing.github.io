@@ -7,13 +7,25 @@ tags: [python, machine learning]
 
 ## 概述
 
-自编码（auto encoder）：把输入数据进行一个压缩和解压缩的过程。
+自编码（auto encoder）：把输入数据进行一个压缩和解压缩的过程，对高维数据的一个低维表示，同时最大限度的保留原始数据信息。
 
-包含3个部分：
+1、框架（包含3个部分）：
+	
+  - ![img](https://www.alanzucconi.com/wp-content/uploads/2018/02/nn_04.png)
+  - **Encoding Architecture** :包含一些列的层，层里的节点数目是减少的，最后得到一个隐藏特征的表示。
+  - **Latent View Repersentation** : 隐藏特征的视图，最小的特征空间，保留原始的数据信息。
+  - **Decoding Architecture** : 编码结构的镜像，包含一些列的层，层里的节点数目是减少的，通过对隐藏特征空间的变换，恢复到（近似）原始的数据。
 
-  - **Encoding Architecture** : The encoder architecture comprises of series of layers with decreasing number of nodes and ultimately reduces to a latent view repersentation.
-  - **Latent View Repersentation** : Latent view repersents the lowest level space in which the inputs are reduced and information is preserved.
-  - **Decoding Architecture** : The decoding architecture is the mirro image of the encoding architecture but in which number of nodes in every layer increases and ultimately outputs the similar (almost) input.
+2、例子：[这里](https://www.kaggle.com/shivamb/how-autoencoders-work-intro-and-usecases#How-Autoencoders-work---Understanding-the-math-and-implementation)通过一个二维线性分布的数据点，进行编码转换到一维，从而实现自编码过程，可以参考一下。
+
+3、优缺点：
+   - 大数据降维
+   - 解决非线性问题
+
+   - 训练是计算消耗大
+   - 解释性差
+   - 低层的数学模型较复杂
+   - 容易过拟合
 
 ## 实现
 
@@ -260,6 +272,8 @@ with tf.Session() as sess:
 
 ## 参考
 
+* [An Introduction to Neural Networks and Autoencoders](https://www.alanzucconi.com/2018/03/14/an-introduction-to-autoencoders/)
+* [PCA & Autoencoders: Algorithms Everyone Can Understand](https://towardsdatascience.com/understanding-pca-autoencoders-algorithms-everyone-can-understand-28ee89b570e2)
 * [How Autoencoders work - Understanding the math and implementation](https://www.kaggle.com/shivamb/how-autoencoders-work-intro-and-usecases)
 * [Autoencoder 自编码](https://morvanzhou.github.io/tutorials/machine-learning/keras/2-6-autoencoder/)
 * [AutoEncoder (自编码/非监督学习)](https://morvanzhou.github.io/tutorials/machine-learning/torch/4-04-autoencoder/)
