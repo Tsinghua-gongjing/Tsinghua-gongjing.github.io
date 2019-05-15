@@ -1,0 +1,127 @@
+---
+layout: post
+category: "machinelearning"
+title:  "keras"
+tags: [python, machine learning]
+---
+
+## 概述
+
+Keras: means horn in Greek。用python编写的，是高层的封装器，可以调用不同的后台，比如tensorflow，CNTK，Theano。目的就是为了更快的构建机器学习模型。
+
+## 基本概念
+
+基本的数据结构：`model`，构建网络层用的。最简单的模型是`Sequential`，线性堆叠的层。
+
+### 构建模型
+
+定义`Sequential`模型：
+
+```python
+from keras.models import Sequential
+
+model = Sequential()
+```
+
+添加层`.add()`：
+
+```python
+from keras.layers import Dense
+
+model.add(Dense(units=64, activation='relu', input_dim=100))
+model.add(Dense(units=10, activation='softmax'))
+```
+
+### 编译模型 
+
+基于网络编译模型`.compile()`，编译模型函数`.compile()`包含3个参数：
+
+ - 优化器（optimizer）：已定义的优化器名称或者类对象
+ - 损失函数（loss）：已定义的损失函数名称或者自定义的损失函数
+ - 指标列表（metric）：对于分类问题，一般设为`[accuracy]`
+
+```python
+model.compile(loss='categorical_crossentropy',
+              optimizer='sgd',
+              metrics=['accuracy'])
+```
+
+在构建模型时刻自定义loss函数，优化函数的参数等：
+
+```python
+model.compile(loss=keras.losses.categorical_crossentropy,
+              optimizer=keras.optimizers.SGD(lr=0.01, momentum=0.9, nesterov=True))
+```
+
+### 训练模型：
+
+```python
+# x_train and y_train are Numpy arrays --just like in the Scikit-Learn API.
+model.fit(x_train, y_train, epochs=5, batch_size=32)
+
+# 手动batch训练
+model.train_on_batch(x_batch, y_batch)
+```
+
+### 评估模型
+
+```python
+loss_and_metrics = model.evaluate(x_test, y_test, batch_size=128)
+```
+
+预测新数据：
+
+```python
+classes = model.predict(x_test, batch_size=128)
+```
+
+## 示例：Multilayer Perceptron (MLP) for multi-class softmax classification
+
+```python
+import keras
+from keras.models import Sequential
+from keras.layers import Dense, Dropout, Activation
+from keras.optimizers import SGD
+
+# Generate dummy data
+import numpy as np
+x_train = np.random.random((1000, 20))
+y_train = keras.utils.to_categorical(np.random.randint(10, size=(1000, 1)), num_classes=10)
+x_test = np.random.random((100, 20))
+y_test = keras.utils.to_categorical(np.random.randint(10, size=(100, 1)), num_classes=10)
+
+model = Sequential()
+# Dense(64) is a fully-connected layer with 64 hidden units.
+# in the first layer, you must specify the expected input data shape:
+# here, 20-dimensional vectors.
+model.add(Dense(64, activation='relu', input_dim=20))
+model.add(Dropout(0.5))
+model.add(Dense(64, activation='relu'))
+model.add(Dropout(0.5))
+model.add(Dense(10, activation='softmax'))
+
+sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
+model.compile(loss='categorical_crossentropy',
+              optimizer=sgd,
+              metrics=['accuracy'])
+
+model.fit(x_train, y_train,
+          epochs=20,
+          batch_size=128)
+score = model.evaluate(x_test, y_test, batch_size=128)
+```
+
+## cheatsheet
+
+[![keras_cheatsheet.png](https://i.loli.net/2019/05/15/5cdbb6cb0067534410.png)](https://i.loli.net/2019/05/15/5cdbb6cb0067534410.png)
+
+## 参考
+
+* [keras @ github](https://github.com/keras-team/keras)
+* [Getting started with the Keras Sequential model](https://keras.io/getting-started/sequential-model-guide/)
+* [快速开始序贯（Sequential）模型](https://keras-cn.readthedocs.io/en/latest/getting_started/sequential_model/)
+
+
+
+
+
