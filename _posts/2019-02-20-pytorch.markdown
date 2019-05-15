@@ -14,6 +14,11 @@ pytorch: 基于python的科学计算包
 
 ## 基本概念
 
+3层抽象：
+ - tensor：imprerative array, but runs on GPU
+ - variable: node in a graph, store data and gradient 
+ - module: a neural network layer, store state or learnable weights
+
 ### 张量（tensor）：类似于numpy里面的数组array，在GPU上可实现加速计算。
 
 张量的基本操作：
@@ -68,6 +73,10 @@ x = torch.randn(4, 4)
 y = x.view(16)
 ```
 
+下面是一个使用底层张量实现的网络训练：
+
+[![pytorch_tensor.jpeg](https://i.loli.net/2019/05/16/5cdc3b63a5a1c92120.jpeg)](https://i.loli.net/2019/05/16/5cdc3b63a5a1c92120.jpeg)
+
 ### Autograd：自动求导
 
 张量的求导是可追踪的，即某个张量的求导设置为true时，基于此张量的操作或者后续张量，其也是具有可求导属性的。
@@ -86,11 +95,21 @@ print(b.grad_fn)
 # <SumBackward0 object at 0x7f1b24845f98>
 ```
 
+下面是对于变换过程中的求导，在`numpy`和`pytorch`中的实现，可以看到，后者能够实现追踪：
+
+[![autogradient.jpeg](https://i.loli.net/2019/05/16/5cdc3b0b1440323808.jpeg)](https://i.loli.net/2019/05/16/5cdc3b0b1440323808.jpeg)
+
 ## 示例: 手写数字识别的LeNet5卷积神经网络
 
 ![](https://cuijiahua.com/wp-content/uploads/2018/01/dl_3_4.jpg)
 
 ### 准备数据
+
+加载数据的方法有多种（如下图）：
+
+[![pytorch_load_data.jpeg](https://i.loli.net/2019/05/16/5cdc3b0b1dc1866911.jpeg)](https://i.loli.net/2019/05/16/5cdc3b0b1dc1866911.jpeg)
+
+这里使用的数据集都是比较经典的，一般使用`torch.utils.data.DataLoader`：
 
 ```python
 import torchvision.datasets as dset
@@ -197,6 +216,10 @@ import torch.optim as optim
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
 ``` 
+
+最好是直接调用优化器，但是最基础的也可手动指定更新（不推荐）：
+
+[![pytorch_optimizer.jpeg](https://i.loli.net/2019/05/16/5cdc3b0b1b8f387251.jpeg)](https://i.loli.net/2019/05/16/5cdc3b0b1b8f387251.jpeg)
 
 ### 训练网络：
 
