@@ -1,0 +1,158 @@
+---
+layout: post
+category: "machinelearning"
+title:  "CNN"
+tags: [python, machine learning, deep learning]
+---
+
+## 概述
+
+卷积神经网络（Convolutional Neural Network, CNN）：一种前馈神经网络，在图像处理里面很常用。
+
+## 概念
+
+### 1、网络结构（以LeNet5网络为例）
+
+![](https://cuijiahua.com/wp-content/uploads/2018/01/dl_3_4.jpg)
+
+### 2、概念说明
+
+  - 卷积（convolution）：使用滤波器（固定权重的一组神经元）与数据做內积（元素相乘再求和）
+  - 卷积核（convolution kenerl）：上面的滤波器，每个含有多个权重，这就是需要训练的参数
+  - 卷积层（convolutional layer）：进行卷积计算的层
+  - 池化层（pooling layer）：通常在卷积层后面，是一种非线性向下采样的方法，主要是减少网络的参数从而减小计算量，有最大池化、平均池化等。
+
+### 3、卷积计算说明
+
+下面的图说明了设置了两个滤波器，分别和输入的数据做卷积：
+
+![](https://cuijiahua.com/wp-content/uploads/2018/01/dl_3_12.gif)
+
+卷积计算：
+
+ - 卷积核与局部数据进行卷积计算；
+ - 数据窗口平移，直到计算完所有的数据，此时卷积核是固定不变（共享）的；
+ - 参数1：深度（depth），神经元个数，同时代表滤波器个数；比如上图中深度为2（有两个神经元）。
+ - 参数2：步长（stripe），滑动多少步可以到达数据边缘；比如上图是步长为2的，每次滑动为2.
+ - 参数3：填充值（zaro-padding），在数据外围边缘补充若干圈0，方便从初始位置以步长为单位可以刚好滑倒末尾位置，通俗地讲就是为了总长能被步长整除。 比如上图最外围填充了一圈0.
+
+卷积神经网络计算的特点：
+
+ - **局部感知**：每次滤波器都是针对某一局部的数据窗口进行卷积
+ - **参数（权重）共享**：数据窗口滑动，导致输入在变化，但中间滤波器的权重（即每个神经元连接数据窗口的权重）是固定不变的
+
+### 4、激励函数
+
+ - `ReLU`函数：收敛快，求梯度简单，较常用。
+ - `sigmoid`函数：容易饱和、造成终止梯度传递，且没有0中心化，在CNN中不太常用。
+ - 激活函数的总结([Activation function](https://en.wikipedia.org/wiki/Activation_function) & [Activation Functions in Neural Networks](https://towardsdatascience.com/activation-functions-neural-networks-1cbd9f8d91d6))：
+ - ![](https://cdn-images-1.medium.com/max/800/1*p_hyqAtyI8pbt2kEl6siOQ.png)
+
+### 5、池化层
+
+ - 减小网络参数
+ - 不同的pooling方法：max，mean等
+ - ![](https://qph.fs.quoracdn.net/main-qimg-cf2833a40f946faf04163bc28517959c)
+
+## 示例：LeNet5网络解析
+
+### 模型解读 
+
+LeNet5：美国银行里手写字体数字识别的高校的卷积神经网络模型，涵盖了深度学习的基本模块：卷积层，池化层，全链接层，可把这个作为例子深入解析：
+
+![](https://cuijiahua.com/wp-content/uploads/2018/01/dl_3_4.jpg)
+
+对这个网络里每一层的解释在[网络解析（一）：LeNet-5详解](https://cuijiahua.com/blog/2018/01/dl_3.html)有详细的说明，具体可参考。这里只对第一层做一下解读，其他的类似。
+
+C1是卷积层，
+
+ - 输入：32x32。输入层的图片的像素大小
+ - 卷积核大小：5x5。**【这个是为什么？卷积核的大小是自己预先设定的，可大可小】**
+ - 卷积核数目：6
+ - 卷积核输出的featuremap大小：28x28。featuremap的大小是由上面的卷积核大小确定的，因为数据在滑动，以所有数据卷积计算完，就知道滑动后有多少个feature。比如这里： 32-5+1=28，32是原始数据大小，5是卷积核大小，这里的步长stripe是1。
+ - 神经元数量：28x28x6
+ - 训练参数：（5x5+1) x 6=156。每个卷积核5*5=25个unit参数和一个bias参数，一共6个卷积核。
+ - 连接数：（5x5+1）x6x28x28 =122304
+ - 注意：有122304个连接，但是我们只需要学习156个参数，因为卷积核的**权值共享**。
+
+### 模型实现
+
+Keras实现LeNet5网络：
+
+```python
+# https://github.com/TaavishThaman/LeNet-5-with-Keras/blob/master/lenet_5.py
+
+model = keras.Sequential()
+model.add(layers.Conv2D(filters=6, kernel_size=(5, 5), strides = 1, activation='relu', input_shape=(32,32,1)))
+model.add(layers.AveragePooling2D())
+model.add(layers.Conv2D(filters=16, kernel_size=(5, 5), strides = 1, activation='relu'))
+model.add(layers.AveragePooling2D())
+model.add(layers.Flatten())
+model.add(layers.Dense(units=120, activation='relu'))
+model.add(layers.Dense(units=84, activation='relu'))
+model.add(layers.Dense(units=10, activation = 'softmax'))
+
+model.compile(optimizer = 'adam', loss = 'categorical_crossentropy', metrics = ['accuracy'])
+model.fit(X_train ,Y_train, steps_per_epoch = 10, epochs = 42)
+```
+pytorch实现LeNet5网络：
+
+```python
+# https://github.com/activatedgeek/LeNet-5/blob/master/lenet.py
+
+import torch.nn as nn
+from collections import OrderedDict
+
+class LeNet5(nn.Module):
+    """
+    Input - 1x32x32
+    C1 - 6@28x28 (5x5 kernel)
+    tanh
+    S2 - 6@14x14 (2x2 kernel, stride 2) Subsampling
+    C3 - 16@10x10 (5x5 kernel, complicated shit)
+    tanh
+    S4 - 16@5x5 (2x2 kernel, stride 2) Subsampling
+    C5 - 120@1x1 (5x5 kernel)
+    F6 - 84
+    tanh
+    F7 - 10 (Output)
+    """
+    def __init__(self):
+        super(LeNet5, self).__init__()
+
+        self.convnet = nn.Sequential(OrderedDict([
+            ('c1', nn.Conv2d(1, 6, kernel_size=(5, 5))),
+            ('relu1', nn.ReLU()),
+            ('s2', nn.MaxPool2d(kernel_size=(2, 2), stride=2)),
+            ('c3', nn.Conv2d(6, 16, kernel_size=(5, 5))),
+            ('relu3', nn.ReLU()),
+            ('s4', nn.MaxPool2d(kernel_size=(2, 2), stride=2)),
+            ('c5', nn.Conv2d(16, 120, kernel_size=(5, 5))),
+            ('relu5', nn.ReLU())
+        ]))
+
+        self.fc = nn.Sequential(OrderedDict([
+            ('f6', nn.Linear(120, 84)),
+            ('relu6', nn.ReLU()),
+            ('f7', nn.Linear(84, 10)),
+            ('sig7', nn.LogSoftmax(dim=-1))
+        ]))
+
+    def forward(self, img):
+        output = self.convnet(img)
+        output = output.view(img.size(0), -1)
+        output = self.fc(output)
+        return output
+```
+
+## 参考
+
+* [CNN笔记：通俗理解卷积神经网络](https://blog.csdn.net/v_JULY_v/article/details/51812459)
+* [网络解析（一）：LeNet-5详解](https://cuijiahua.com/blog/2018/01/dl_3.html)
+* [Activation function](https://en.wikipedia.org/wiki/Activation_function)
+* [Activation Functions in Neural Networks](https://towardsdatascience.com/activation-functions-neural-networks-1cbd9f8d91d6)
+
+
+
+
+
