@@ -120,7 +120,7 @@ score = model.evaluate(x_test, y_test, batch_size=128)
 * [keras @ github](https://github.com/keras-team/keras)
 * [Getting started with the Keras Sequential model](https://keras.io/getting-started/sequential-model-guide/)
 * [快速开始序贯（Sequential）模型](https://keras-cn.readthedocs.io/en/latest/getting_started/sequential_model/)
-
+* [keras-cheat-sheet](https://www.datacamp.com/community/blog/keras-cheat-sheet)
 
 
 
