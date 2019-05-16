@@ -41,6 +41,10 @@ tags: [python, machine learning]
 
 ## 示例：MNIST手写识别
 
+模型框架：
+
+![](https://cdn-images-1.medium.com/max/800/1*Sqhji7Zz4IK2HDgCOabhXQ.png)
+
 keras实现版本：
 
 ```python
