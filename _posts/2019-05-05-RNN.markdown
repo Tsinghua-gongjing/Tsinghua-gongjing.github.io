@@ -1,0 +1,241 @@
+---
+layout: post
+category: "machinelearning"
+title:  "RNN"
+tags: [python, machine learning]
+---
+
+## 概述
+
+循环神经网络（Recurrent neural network，RNN）：a class of artificial neural network where connections between nodes form a directed graph along a temporal sequence （from wiki）。 
+
+## 概念
+
+### 为什么需要RNN？
+
+  - 卷积神经网络或者人工神经网络，都基于假设：元素（样本）之间是相互独立的，输入输出也是独立的。
+  - 现实场景很多是不一定的？比如根据上下文预测后续的单词，股票价格的走势预测等，都是有影响的。
+  - 更好的处理序列问题，拥有记忆的能力，这样模型的输出就取决于**【当前的输入】**和**【记忆】**。
+
+### 网络结构
+
+结构类似于传统的神经网络，包括输入层、隐藏层和输出层，只是这里的隐藏层的值是取决于输入和上一次的隐藏层的值：
+
+ - Xt：t时刻的输入
+ - Ot：t时刻的输出
+ - St：t时刻的记忆（t时刻隐藏层的值？）
+ - U：输入层到隐藏层的权重矩阵
+ - V：隐藏层到输出层的权重矩阵
+ - W：隐藏层上一次的值到这一次的输入时的权重矩阵
+ - 【注意1】：从这里看出，类似于卷积神经网络，**权重矩阵U、V、W都是共享的**，极大的降低了所需训练的参数，减小了计算量。
+ - 【注意2】：St不能捕捉t时间点之前所有时间点的信息。
+
+![](https://pic2.zhimg.com/80/v2-b0175ebd3419f9a11a3d0d8b00e28675_hd.jpg)
+
+上面的结构展开是按照时间线展开的，下面这个是按照网络展开的：
+
+![](https://pic3.zhimg.com/80/v2-9e50e23bd3dff0d91b0198d0e6b6429a_hd.jpg)
+
+### 损失函数
+
+有了预测的结果，当然需要跟真实值进行对比，以确定损失值，从而更新参数（U，V，W）优化模型。下面就是RNN中的损失函数表示，这里采用的是交叉熵：
+
+[![RNN_loss.png](https://i.loli.net/2019/05/16/5cdd0e85d82d944498.png)](https://i.loli.net/2019/05/16/5cdd0e85d82d944498.png)
+
+上面关于E3对W的偏导数在[这里](https://blog.csdn.net/diligent_321/article/details/53365621)有详细的公式，可以参考一下。
+
+我们一般采用反向传播算法（BP）求解最优参数，但是在RNN里采用的是BPTT（back-propagation through time），它和反向传播算法的区别，也就是RNN和其他网络的区别，即RNN是具有记忆的，所以求导的时候也是依赖于之前的时间节点的。
+
+注意：BPTT基本原理类似于BP，BP是按照层来反向传播，BPTT按照时间进行反向传播。
+
+## 示例：根据字符预测相加的数值
+
+比如，输入: "535+61" 输出: "596" 
+
+```python
+# https://keras.io/examples/addition_rnn/
+
+from __future__ import print_function
+from keras.models import Sequential
+from keras import layers
+import numpy as np
+from six.moves import range
+
+
+class CharacterTable(object):
+    """Given a set of characters:
+    + Encode them to a one-hot integer representation
+    + Decode the one-hot or integer representation to their character output
+    + Decode a vector of probabilities to their character output
+    """
+    def __init__(self, chars):
+        """Initialize character table.
+
+        # Arguments
+            chars: Characters that can appear in the input.
+        """
+        self.chars = sorted(set(chars))
+        self.char_indices = dict((c, i) for i, c in enumerate(self.chars))
+        self.indices_char = dict((i, c) for i, c in enumerate(self.chars))
+
+    def encode(self, C, num_rows):
+        """One-hot encode given string C.
+
+        # Arguments
+            C: string, to be encoded.
+            num_rows: Number of rows in the returned one-hot encoding. This is
+                used to keep the # of rows for each data the same.
+        """
+        x = np.zeros((num_rows, len(self.chars)))
+        for i, c in enumerate(C):
+            x[i, self.char_indices[c]] = 1
+        return x
+
+    def decode(self, x, calc_argmax=True):
+        """Decode the given vector or 2D array to their character output.
+
+        # Arguments
+            x: A vector or a 2D array of probabilities or one-hot representations;
+                or a vector of character indices (used with `calc_argmax=False`).
+            calc_argmax: Whether to find the character index with maximum
+                probability, defaults to `True`.
+        """
+        if calc_argmax:
+            x = x.argmax(axis=-1)
+        return ''.join(self.indices_char[x] for x in x)
+
+
+class colors:
+    ok = '\033[92m'
+    fail = '\033[91m'
+    close = '\033[0m'
+
+# Parameters for the model and dataset.
+TRAINING_SIZE = 50000
+DIGITS = 3
+REVERSE = True
+
+# Maximum length of input is 'int + int' (e.g., '345+678'). Maximum length of
+# int is DIGITS.
+MAXLEN = DIGITS + 1 + DIGITS
+
+# All the numbers, plus sign and space for padding.
+chars = '0123456789+ '
+ctable = CharacterTable(chars)
+
+questions = []
+expected = []
+seen = set()
+print('Generating data...')
+while len(questions) < TRAINING_SIZE:
+    f = lambda: int(''.join(np.random.choice(list('0123456789'))
+                    for i in range(np.random.randint(1, DIGITS + 1))))
+    a, b = f(), f()
+    # Skip any addition questions we've already seen
+    # Also skip any such that x+Y == Y+x (hence the sorting).
+    key = tuple(sorted((a, b)))
+    if key in seen:
+        continue
+    seen.add(key)
+    # Pad the data with spaces such that it is always MAXLEN.
+    q = '{}+{}'.format(a, b)
+    query = q + ' ' * (MAXLEN - len(q))
+    ans = str(a + b)
+    # Answers can be of maximum size DIGITS + 1.
+    ans += ' ' * (DIGITS + 1 - len(ans))
+    if REVERSE:
+        # Reverse the query, e.g., '12+345  ' becomes '  543+21'. (Note the
+        # space used for padding.)
+        query = query[::-1]
+    questions.append(query)
+    expected.append(ans)
+print('Total addition questions:', len(questions))
+
+print('Vectorization...')
+x = np.zeros((len(questions), MAXLEN, len(chars)), dtype=np.bool)
+y = np.zeros((len(questions), DIGITS + 1, len(chars)), dtype=np.bool)
+for i, sentence in enumerate(questions):
+    x[i] = ctable.encode(sentence, MAXLEN)
+for i, sentence in enumerate(expected):
+    y[i] = ctable.encode(sentence, DIGITS + 1)
+
+# Shuffle (x, y) in unison as the later parts of x will almost all be larger
+# digits.
+indices = np.arange(len(y))
+np.random.shuffle(indices)
+x = x[indices]
+y = y[indices]
+
+# Explicitly set apart 10% for validation data that we never train over.
+split_at = len(x) - len(x) // 10
+(x_train, x_val) = x[:split_at], x[split_at:]
+(y_train, y_val) = y[:split_at], y[split_at:]
+
+print('Training Data:')
+print(x_train.shape)
+print(y_train.shape)
+
+print('Validation Data:')
+print(x_val.shape)
+print(y_val.shape)
+
+# Try replacing GRU, or SimpleRNN.
+RNN = layers.LSTM
+HIDDEN_SIZE = 128
+BATCH_SIZE = 128
+LAYERS = 1
+
+print('Build model...')
+model = Sequential()
+model.add(RNN(HIDDEN_SIZE, input_shape=(MAXLEN, len(chars))))
+model.add(layers.RepeatVector(DIGITS + 1))
+for _ in range(LAYERS):
+    model.add(RNN(HIDDEN_SIZE, return_sequences=True))
+
+# Apply a dense layer to the every temporal slice of an input. For each of step
+# of the output sequence, decide which character should be chosen.
+model.add(layers.TimeDistributed(layers.Dense(len(chars), activation='softmax')))
+model.compile(loss='categorical_crossentropy',
+              optimizer='adam',
+              metrics=['accuracy'])
+model.summary()
+
+# Train the model each generation and show predictions against the validation
+# dataset.
+for iteration in range(1, 200):
+    print()
+    print('-' * 50)
+    print('Iteration', iteration)
+    model.fit(x_train, y_train,
+              batch_size=BATCH_SIZE,
+              epochs=1,
+              validation_data=(x_val, y_val))
+    # Select 10 samples from the validation set at random so we can visualize
+    # errors.
+    for i in range(10):
+        ind = np.random.randint(0, len(x_val))
+        rowx, rowy = x_val[np.array([ind])], y_val[np.array([ind])]
+        preds = model.predict_classes(rowx, verbose=0)
+        q = ctable.decode(rowx[0])
+        correct = ctable.decode(rowy[0])
+        guess = ctable.decode(preds[0], calc_argmax=False)
+        print('Q', q[::-1] if REVERSE else q, end=' ')
+        print('T', correct, end=' ')
+        if correct == guess:
+            print(colors.ok + '☑' + colors.close, end=' ')
+        else:
+            print(colors.fail + '☒' + colors.close, end=' ')
+        print(guess)
+```
+
+## 参考
+
+* [一文搞懂RNN（循环神经网络）基础篇](https://zhuanlan.zhihu.com/p/30844905)
+* [循环神经网络（RNN）原理通俗解释](https://blog.csdn.net/qq_39422642/article/details/78676567)
+* [Fundamentals of Deep Learning – Introduction to Recurrent Neural Networks](https://www.analyticsvidhya.com/blog/2017/12/introduction-to-recurrent-neural-networks/)
+* [从循环神经网络（RNN）到LSTM网络](https://blog.csdn.net/diligent_321/article/details/53365621)
+
+
+
+
+
