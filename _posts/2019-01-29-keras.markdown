@@ -32,6 +32,38 @@ model.add(Dense(units=64, activation='relu', input_dim=100))
 model.add(Dense(units=10, activation='softmax'))
 ```
 
+`keras`的一个核心就是[`Dense`函数](https://keras.io/zh/layers/core/)，用于构建全连接层，其实现的操作是`output = activation(dot(input, kernel) + bias)`，全部参数如下：
+
+```python
+keras.layers.Dense(units, activation=None, use_bias=True, kernel_initializer='glorot_uniform', bias_initializer='zeros', kernel_regularizer=None, bias_regularizer=None, activity_regularizer=None, kernel_constraint=None, bias_constraint=None)
+
+
+```
+
+- units: 正整数，**输出空间维度[不是输入]**。
+- activation: 激活函数。若不指定，则不使用激活函数 (即，「线性」激活: a(x) = x)。
+- use_bias: 布尔值，该层是否使用偏置向量。
+- kernel_initializer: kernel 权值矩阵的初始化器。
+- bias_initializer: 偏置向量的初始化器.
+- kernel_regularizer: 运用到 kernel 权值矩阵的正则化函数。
+- bias_regularizer: 运用到偏置项的的正则化函数。
+- activity_regularizer: 运用到层的输出的正则化函数 (它的 "activation")。
+- kernel_constraint: 运用到 kernel 权值矩阵的约束函数。
+- bias_constraint: 运用到偏置向量的约束函数。
+
+使用例子，第一层显示指定输入的大小尺寸，必须和feed的数据的feature数目相同，否则无法导入数据：
+
+```python
+# 作为 Sequential 模型的第一层
+model = Sequential()
+model.add(Dense(32, input_shape=(16,)))
+# 现在模型就会以尺寸为 (*, 16) 的数组作为输入，
+# 其输出数组的尺寸为 (*, 32)
+
+# 在第一层之后，你就不再需要指定输入的尺寸了：
+model.add(Dense(32))
+```
+
 ### 编译模型 
 
 基于网络编译模型`.compile()`，编译模型函数`.compile()`包含3个参数：
