@@ -201,6 +201,45 @@ newax.axis('off')
 
 ```
 
+### Save multiple plot into a pdf [discuss here](https://community.esri.com/docs/DOC-10347-creating-multiple-graphs-per-page-using-matplotlib)
+
+比如下面的代码，可以把多个iteration的训练过程的loss和accuracy画在一个pdf文件中：
+
+```python
+from matplotlib.backends.backend_pdf import PdfPages
+
+def plot_history(history, pdf):
+    fig,ax = plt.subplots()
+    # Plot training & validation accuracy values
+    plt.plot(history['acc'])
+    plt.plot(history['val_acc'])
+    plt.title('Model accuracy')
+    plt.ylabel('Accuracy')
+    plt.xlabel('Epoch')
+    plt.legend(['Train', 'Test'], loc='upper left')
+    pdf.savefig(fig)
+    
+    fig,ax = plt.subplots()
+    # Plot training & validation loss values
+    plt.plot(history['loss'])
+    plt.plot(history['val_loss'])
+    plt.title('Model loss')
+    plt.ylabel('Loss')
+    plt.xlabel('Epoch')
+    plt.legend(['Train', 'Test'], loc='upper left')
+    pdf.savefig(fig)
+    
+pdf = matplotlib.backends.backend_pdf.PdfPages(plot_savefn)
+                
+for ite in range(n_ite):
+    X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=0.4,)
+    clf.fit(X_train)
+    history = clf.history_
+    plot_history(history, pdf)
+plt.close()
+pdf.close()
+```
+
 ## 2. Seaborn plot
 
 ### Set color list instead of seaborn default
