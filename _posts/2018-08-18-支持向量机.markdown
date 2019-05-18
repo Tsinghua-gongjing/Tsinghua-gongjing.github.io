@@ -33,7 +33,7 @@ tags: [python, machine learning]
    - 从逻辑回归的损失函数变换过来的（how？）
    - 当样本为正（y=1）时，想要损失函数最小，必须使得`z>=1`
    - 当样本为负（y=0）时，想要损失函数最小，必须使得`z<=-1`
-   - [![SVM_cost_function.png](https://i.loli.net/2019/05/18/5cdfc379aff5354128.png)](https://i.loli.net/2019/05/18/5cdfc379aff5354128.png)
+   - [![SVM_cost_function.png](https://i.loli.net/2019/05/18/5cdfd2215b60829997.png)](https://i.loli.net/2019/05/18/5cdfd2215b60829997.png)
 
 ## 实现
 
