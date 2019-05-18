@@ -1,0 +1,22 @@
+---
+layout: post
+category: "visualization"
+title:  "Bar plot"
+tags: [plot, visualization]
+---
+
+### plot use `plt.bar`
+
+```python
+import matplotlib.pyplot as plt
+
+xticklabels = ('A', 'B', 'C', 'D')
+x_pos = range(len(xticklabels))
+y_values = [1,2,3,4]
+
+plt.bar(x_pos, y_values, align='center', alpha=0.5)
+plt.xticks(x_pos, xticklabels)
+plt.ylabel('value')
+
+plt.show()
+```
