@@ -30,10 +30,20 @@ tags: [python, machine learning]
    - 点到超平面的距离：WX+b
    - 点到分割面的间隔：label *（WT+b），如果点在正向（+1，label为+1）且到超平面很远（正值），则此间隔值为一个很大的正数；如果点在负向（-1，label为-1）且到超平面很远（负值），则此间隔值也是一个很大的正数。
 5. 损失函数：
-   - 从逻辑回归的损失函数变换过来的（how？）
+   - 从逻辑回归的损失函数变换过来的（how？由曲线的变换为两段直线的。）
    - 当样本为正（y=1）时，想要损失函数最小，必须使得`z>=1`
    - 当样本为负（y=0）时，想要损失函数最小，必须使得`z<=-1`
    - [![SVM_cost_function.png](https://i.loli.net/2019/05/18/5cdfd2215b60829997.png)](https://i.loli.net/2019/05/18/5cdfd2215b60829997.png)
+   - 当CA+B中的C很大时，模型很容易受到outliner的影响，所以需要选择合适的C大小（模型能够忽略或者容忍少数的outliner，而选择相对比较稳定的决策边界）。
+   - SVM通常应用于比较容易可分割的数据。
+   - SVM的损失函数，就是在保证预测对的情况下，最小化theta量值：
+   - [![SVM_boundary.png](https://i.loli.net/2019/05/18/5ce00e082d6f239510.png)](https://i.loli.net/2019/05/18/5ce00e082d6f239510.png)
+   - 下图解释了为什么需要找最大margin的决策边界，因为这样能使得损失函数最小：
+   - [![SVM_boundary_max_margin.png](https://i.loli.net/2019/05/18/5ce00e07dfdd917525.png)](https://i.loli.net/2019/05/18/5ce00e07dfdd917525.png)
+6. SVM vs logistic regression:
+   - 与逻辑回归相比，SVM是更稳健的，因为其选择的是最大距离（large margin），比如下图中逻辑回归选择了黄绿的边界，能够将现有数据分隔开，但是泛化能力差；黑色的是SVM选择的边界（最大化距离）。
+   - ![](http://www.holehouse.org/mlclass/12_Support_Vector_Machines_files/Image%20[14].png)
+   
 
 ## 实现
 
