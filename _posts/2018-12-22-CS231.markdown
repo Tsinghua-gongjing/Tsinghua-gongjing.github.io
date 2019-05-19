@@ -1,0 +1,19 @@
+---
+layout: post
+category: "machinelearning"
+title:  "Stanford CS231 for Visual Recognition"
+tags: [python, machine learning]
+---
+
+## 课程信息
+
+* [CS231 @ Stanford](http://cs231n.stanford.edu/): http://cs231n.stanford.edu/
+* [CS231 @ github.io](https://cs231n.github.io/): https://cs231n.github.io/
+* [CS231 @ github](https://github.com/cs231n): https://github.com/cs231n
+
+
+
+
+
+
+
