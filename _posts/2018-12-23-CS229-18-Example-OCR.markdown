@@ -1,0 +1,63 @@
+---
+layout: post
+category: "machinelearning"
+title:  "[CS229] 18: Application Example OCR"
+tags: [python, machine learning]
+---
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+## 18: Application Example OCR
+
+1. photo OCR：图片光学字符识别
+   - 让计算机识别图片中的文字
+2. OCR流程：
+   - 1）文字检测
+   - 2）字符分割
+   - 3）字符分类
+   - 4）拼写检查（可选）
+   - ![](http://www.holehouse.org/mlclass/18_Application_Example_OCR_files/Image.png)
+3. 流程（pipeline）：多个不同的模块组成的，每个模块可以是单独的机器学习单元或者数据处理单元：
+   - 流程设计是一个很重要的问题
+   - 每个模块对于整体的性能都有影响
+   - 不同的工程师着力于不同的模块
+4. 滑动窗口图片分析：
+   - 文本检测：用特定长宽比的长方形在图片中滑动，以检测潜在的文字
+   - 行人识别：类似的例子。给定一个图片，找到里面的行人。同样的是特定长宽比（82x36）的长方形滑动检测。收集正负样本，构建神经网络模型，进行训练：
+   - ![](http://www.holehouse.org/mlclass/18_Application_Example_OCR_files/Image%20[3].png)
+   - 训练完后，就得到了模型。对于新的图片，一个个的滑框进行扫描，看预测的结果是否坚定道行人。
+   - 每次滑动的距离：步长（step size或者叫stride）通常为5-8个像素。
+5. 文本检测：类似于行人检测。
+   - 收集正负样本，训练模型
+   - ![](http://www.holehouse.org/mlclass/18_Application_Example_OCR_files/Image%20[6].png)
+   - 得到黑白图片：表征是否有图片的概率，黑（没有文字）和白（有文字）：
+   - ![](http://www.holehouse.org/mlclass/18_Application_Example_OCR_files/Image%20[7].png)
+   - 接下来对上面的黑白结果进行扩展（expansion algorithm）：就是对于白色（有文字）的像素，给定阈值，如果超过这个阈值（概率更大），就直接标记为白色，得到单存的黑白图片：
+   - ![](http://www.holehouse.org/mlclass/18_Application_Example_OCR_files/Image%20[8].png)
+   - 然后将图片中的白色区域用长方形框起来。
+   - ![](http://www.holehouse.org/mlclass/18_Application_Example_OCR_files/Image%20[9].png)
+6. 字符分割：
+   - 是否在字符之间存在分隔？
+   - 收集正负样本：
+   - ![](http://www.holehouse.org/mlclass/18_Application_Example_OCR_files/Image%20[10].png)
+   - 分类器训练：如果预测存在分隔，就插入一个分隔符。
+   - ![](http://www.holehouse.org/mlclass/18_Application_Example_OCR_files/Image%20[11].png)
+7. 字符分类：
+   - MNIST问题，识别数字或者字母
+8. 人工数据合成：
+   - 两个原则：1）随机生成，2）基于小训练集进行扩充。
+   - 比如对于字符，**【1】可以从其他字体的库里选取**，作为合成的数据：
+   - [![artificial_data.jpeg](https://i.loli.net/2019/05/20/5ce2ca448449031032.jpeg)](https://i.loli.net/2019/05/20/5ce2ca448449031032.jpeg)
+   - **【2】对原始数据进行变化，增加噪音（扭曲）**，如下是一个样本变为16个新样本：
+   - ![](http://www.holehouse.org/mlclass/18_Application_Example_OCR_files/Image%20[14].png)
+9. 获取更多数据：
+   - 在创建新数据之前，确保模型是low bias的，通过学习曲线判断。如果不是的，应该先增加特征，再想着增加训练数据。
+   - 多久能获得10倍的数据？
+10. ceiling analysis瓶颈分析：确定整个流程的哪一个模块是对于整个模型的效果最有影响的。
+   - 对于每一个模块，每次只优化一个部分，使其准确性达到最高（比如100%），然后看现在的整体效果是否有提升：
+   - ![](http://www.holehouse.org/mlclass/18_Application_Example_OCR_files/Image%20[15].png)
+   - 比如在OCR的例子中，现在的准确性是72%，文本检测最高使模型达到89%，接着优化字符分割，使模型最高到89%，最后是字符识别，使模型最高到100%。
+   - 那么，完美文本识别提升17%，完美字符分割提升1%，完美字符识别提升10%，所以得知第一部分【文本识别】是最值得去提高的。
+   - 【ceiling】：is that each module has a ceiling by which making it perfect would improve the system overall

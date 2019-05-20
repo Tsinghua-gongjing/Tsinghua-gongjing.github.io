@@ -9,7 +9,7 @@ tags: [python, machine learning]
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 
-## 16: Large Scale Machine Learning
+## 17: Large Scale Machine Learning
 
 1. 为什么需要大的数据集？
    - 模型取的好效果的最佳途径：小偏差的算法，在大数据上训练
