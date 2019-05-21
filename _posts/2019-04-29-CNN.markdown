@@ -39,7 +39,9 @@ tags: [python, machine learning, deep learning]
 卷积神经网络计算的特点：
 
  - **局部感知**：每次滤波器都是针对某一局部的数据窗口进行卷积
- - **参数（权重）共享**：数据窗口滑动，导致输入在变化，但中间滤波器的权重（即每个神经元连接数据窗口的权重）是固定不变的
+ - **参数（权重）共享**：数据窗口滑动，导致输入在变化，但中间滤波器的权重（即每个神经元连接数据窗口的权重）是固定不变的。这种特征能极大的减少需要训练的参数，[下图](https://arxiv.org/pdf/1706.09077.pdf)是一个比较：[![CNN_as_NN.jpeg](https://i.loli.net/2019/05/22/5ce4252b0cd7473792.jpeg)](https://i.loli.net/2019/05/22/5ce4252b0cd7473792.jpeg)
+ - 这个的出发点是：图片具有[静态（stationary）的特征](http://ufldl.stanford.edu/tutorial/supervised/FeatureExtractionUsingConvolution/)，就是说在一个部分学习的特征可以在其他的部分使用。所以对于大的图片（比如96x96），我们可以先取其上面的小的部分（比如8x8）进行训练学习，然后将学习的特征应用于其他的部分，卷积时参数的共享就是这个得体现。
+
 
 ### 4、激励函数
 
@@ -50,9 +52,9 @@ tags: [python, machine learning, deep learning]
 
 ### 5、池化层
 
- - 减小网络参数
- - 不同的pooling方法：max，mean等
- - ![](https://qph.fs.quoracdn.net/main-qimg-cf2833a40f946faf04163bc28517959c)
+ - 减小网络参数（如果参数超过3M，模型就容易过拟合的）
+ - 图片的静态性：可用不同位置的聚合特征来描述大的图片
+ - 不同的pooling方法：max，mean等 ![](https://qph.fs.quoracdn.net/main-qimg-cf2833a40f946faf04163bc28517959c)
 
 ## 示例：LeNet5网络解析
 

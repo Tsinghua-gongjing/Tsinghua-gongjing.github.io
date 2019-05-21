@@ -5,6 +5,10 @@ title:  "[CS229] 08: Neural Networks - Representation"
 tags: [python, machine learning]
 ---
 
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
 ## 08: Neural Networks - Representation
 
 1. 非线性问题：线性不可分，增加各种特征使得可分。比如根据图片检测汽车（计算机视觉）。当特征空间很大时，逻辑回归不再适用，而神经网络则是一个更好的非线性模型。
@@ -20,3 +24,7 @@ tags: [python, machine learning]
    - 实现的是逻辑，而非线性问题，所以神经网络能很好的用于非线性问题上。
    - 下面的是实现 XNOR （NOT XOR）：![](http://www.holehouse.org/mlclass/08_Neural_Networks_Representation_files/Image%20[17].png)
 7. 多分类问题：one-vs-all
+8. 常见的激活函数：
+   - sigmoid: $$f(z) = \frac{1}{1+\exp(-z)}$$
+   - tanh (hyperbolic tangent): $$f(z) = \tanh(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}}$$
+   - reLU (rectified linear): $$f(z) = \max(0,x)$$ ![](http://ufldl.stanford.edu/tutorial/images/Activation_functions.png)

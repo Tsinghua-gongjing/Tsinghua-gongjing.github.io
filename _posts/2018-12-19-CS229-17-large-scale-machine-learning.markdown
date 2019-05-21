@@ -27,7 +27,7 @@ tags: [python, machine learning]
 4. **随机梯度下降**：
    - 单个样本的损失（只看$$ \theta $$在单个样本上的损失表示）：![](http://www.holehouse.org/mlclass/17_Large_Scale_Machine_Learning_files/Image%20[9].png)
    - 总的损失(和上面的batch梯度递减的损失函数是一样的，最终的目的是一样的)：![](http://www.holehouse.org/mlclass/17_Large_Scale_Machine_Learning_files/Image%20[10].png)
-   - 算法步骤1：训练集数据随机打乱。保证$$ \theta $$的移动是不存在bias的。
+   - 算法步骤1：**训练集数据随机打乱**。保证$$ \theta $$的移动是不存在bias的。
    - 算法步骤2：从1到m（样本数），每次更新所有的$$ \theta $$，但是这里的$$ \theta $$是只与一个样本有关的【update the parameters on EVERY step through data】。$$ \theta $$值在不断的优化，但是每次都是对于一个样本最优，不是对全部样本最优：![](http://www.holehouse.org/mlclass/17_Large_Scale_Machine_Learning_files/Image%20[12].png)
    - 下面是批梯度下降和随机梯度下降的比较：[![SGD.png](https://i.loli.net/2019/05/20/5ce26c9fb0bd637581.png)](https://i.loli.net/2019/05/20/5ce26c9fb0bd637581.png)
    - SGD不一定能到达全局最优，可以运行多次在整个数据集上。
@@ -35,6 +35,9 @@ tags: [python, machine learning]
    - 【批量梯度下降】：每次迭代使用所有的m个样本
    - 【随机梯度下降】：每次迭代使用1个样本
    - 【小批量梯度下降】：每次迭代使用b个样本。b为批量数目（通常2-100，10较多），甚至比随机梯度下降更快。![](http://www.holehouse.org/mlclass/17_Large_Scale_Machine_Learning_files/Image%20[17].png)
+   - 小批量梯度下降并不是严格按照最小的方向，但是趋势是对的，[如下图](https://blog.csdn.net/weixin_36811328/article/details/83451096)：![](https://img-blog.csdnimg.cn/20181027200532713.png)
+   - 上面可以看到，小批量容易出现梯度震荡的情况（训练速度会很慢），为了解决这个问题，可以使用**动量梯度下降法**，其直观效果如下所示：![](https://img-blog.csdnimg.cn/20181027220607782.png)
+   - 动量梯度下降，就引入了一个动量，使得当次的梯度都包含了之前的梯度的信息（[这里](https://blog.csdn.net/weixin_36811328/article/details/83451096)有较详细的描述）：![](https://cdn-images-1.medium.com/max/1600/1*NUsiTtDy1C74jqH93L-RZg.png)
 6. 小批量 vs 随机梯度下降：
    - 向量化计算，实现更高效，并行计算
    - 需要优化参数b（batch size）
@@ -44,6 +47,7 @@ tags: [python, machine learning]
    - 【随机梯度下降】：比如可以看每1000次的迭代的损失变化
    - 检查学习曲线：迭代次数 vs loss，看模型随迭代次数的收敛情况：[![SGD_converge.png](https://i.loli.net/2019/05/20/5ce270bc60a8381996.png)](https://i.loli.net/2019/05/20/5ce270bc60a8381996.png)
 8. 学习速率：
+   - SGD中的学习速率通常比批地图下降更小，因为SGD的梯度更新的[差异性（variance）更大](http://ufldl.stanford.edu/tutorial/supervised/OptimizationStochasticGradientDescent/)（每次都是随机选取一个样本？）。
    - 通常学习速率是常量，但是为了达到全局最优，可以缓慢的减小学习速率
    - 通常：α = const1/(iterationNumber + const2)
 9. 在线学习（online learning）：
