@@ -14,11 +14,9 @@ tags: [python, machine learning]
 3. 逻辑单元：最简单的神经元。一个输入层，一个激活函数，一个输出层。
 4. 神经网络：激活函数，权重矩阵：
    - 输入层，输出层，隐藏层
-   - ai(j) - activation of unit i in layer j 
-   - ![](http://www.holehouse.org/mlclass/08_Neural_Networks_Representation_files/Image%20[7].png)
+   - ai(j) - activation of unit i in layer j ![](http://www.holehouse.org/mlclass/08_Neural_Networks_Representation_files/Image%20[7].png)
 5. 前向传播：向量化实现，使用向量表示每一层次的输出。
 6. 使用神经网络实现逻辑符号（逻辑与、逻辑或，逻辑和）：
    - 实现的是逻辑，而非线性问题，所以神经网络能很好的用于非线性问题上。
-   - 下面的是实现 XNOR （NOT XOR）：
-   - ![](http://www.holehouse.org/mlclass/08_Neural_Networks_Representation_files/Image%20[17].png)
+   - 下面的是实现 XNOR （NOT XOR）：![](http://www.holehouse.org/mlclass/08_Neural_Networks_Representation_files/Image%20[17].png)
 7. 多分类问题：one-vs-all

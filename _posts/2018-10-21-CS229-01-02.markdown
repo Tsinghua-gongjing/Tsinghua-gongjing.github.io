@@ -5,6 +5,10 @@ title:  "[CS229] 01 and 02: Introduction, Regression Analysis and Gradient Desce
 tags: [python, machine learning]
 ---
 
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
 ## 01 and 02: Introduction, Regression Analysis and Gradient Descent
 
 1. definition: a computer program is said to learn from experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, improves with experience E . --- Tom Mitchell (1998)
@@ -20,8 +24,5 @@ tags: [python, machine learning]
    - m : number of training examples
    - X's : input variable / features
    - Y's : output variable / target variable
-   - cost function: squared error function:
-   - ![](http://www.holehouse.org/mlclass/01_02_Introduction_regression_analysis_and_gr_files/Image%20[9].png)
-   - [![linear_regression.jpeg](https://i.loli.net/2019/04/15/5cb468d5c76f0.jpeg)](https://i.loli.net/2019/04/15/5cb468d5c76f0.jpeg)
-5. parameter estimation: gradient decent algorithm
-   - [![gradient_decent.jpeg](https://i.loli.net/2019/04/15/5cb4691e99e8d.jpeg)](https://i.loli.net/2019/04/15/5cb4691e99e8d.jpeg)
+   - cost function: squared error function: $$J(\theta) = \frac{1}{2} \sum_i \left( h_\theta(x^{(i)}) - y^{(i)} \right)^2 = \frac{1}{2} \sum_i \left( \theta^\top x^{(i)} - y^{(i)} \right)^2$$ [![linear_regression.jpeg](https://i.loli.net/2019/04/15/5cb468d5c76f0.jpeg)](https://i.loli.net/2019/04/15/5cb468d5c76f0.jpeg)
+5. parameter estimation: gradient decent algorithm [![gradient_decent.jpeg](https://i.loli.net/2019/04/15/5cb4691e99e8d.jpeg)](https://i.loli.net/2019/04/15/5cb4691e99e8d.jpeg)

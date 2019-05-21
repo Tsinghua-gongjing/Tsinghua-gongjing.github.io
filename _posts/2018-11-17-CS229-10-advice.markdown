@@ -40,5 +40,4 @@ tags: [python, machine learning]
    - 小网络：少的参数，容易欠拟合
    - 大网络：多的参数，容易过拟合（模型太复杂，不易推广到新的数据）
    - 大网络的过拟合可解决方式：正则化
-9. [知乎：Bias(偏差)，Error(误差)，和Variance(方差)](https://www.zhihu.com/question/27068705):
-   - ![](https://pic3.zhimg.com/80/v2-286539c808d9a429e69fd59fe33a16dd_hd.jpg)
+9. [知乎：Bias(偏差)，Error(误差)，和Variance(方差)](https://www.zhihu.com/question/27068705): [![bias_and_variance.png](https://i.loli.net/2019/05/21/5ce401cb0d91b31044.png)](https://i.loli.net/2019/05/21/5ce401cb0d91b31044.png)
