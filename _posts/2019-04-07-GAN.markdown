@@ -27,17 +27,14 @@ tags: [python, machine learning]
   - 1）初始化生成器（G）和判别器（D）的参数
   - 2）从真实样本中随机抽取n个样本，根据随机噪音使用生成器生成n个样本。保持生成器（参数）不变，训练判别器，使其能够很好的区分真实样本和生成样本。【现在判别器训练得很好了】
   - 3）更新生成器，使用较小的学习速率。训练生成器，使得生成样本和真实样本之间的误差尽可能的小（尽可能使判别器区分不出来）。
-  - 4）多次迭代，最终判别器不能区分输入来源（输出真实或生成概率为50%）。
-  - ![](http://static.zybuluo.com/fangyang970206/mj4i029dj7x8miuv83pl8j6l/25.jpg)
+  - 4）多次迭代，最终判别器不能区分输入来源（输出真实或生成概率为50%）。![](http://static.zybuluo.com/fangyang970206/mj4i029dj7x8miuv83pl8j6l/25.jpg)
 
 损失：
 
-  - 交叉熵（cross entropy）：在信息论中，基于相同事件测度的两个概率分布`p`和`q`的交叉熵是指，当基于一个“非自然”（相对于“真实”分布`p`而言）的概率分布`q`进行编码时，在事件集合中唯一标识一个事件所需要的平均比特数（bit）[from [wiki](https://zh.wikipedia.org/wiki/%E4%BA%A4%E5%8F%89%E7%86%B5)]。交叉熵越小，则两个分布越接近。
-  - [![cross_entropy.png](https://i.loli.net/2019/05/16/5cdcd20b9068b64379.png)](https://i.loli.net/2019/05/16/5cdcd20b9068b64379.png)
+  - 交叉熵（cross entropy）：在信息论中，基于相同事件测度的两个概率分布`p`和`q`的交叉熵是指，当基于一个“非自然”（相对于“真实”分布`p`而言）的概率分布`q`进行编码时，在事件集合中唯一标识一个事件所需要的平均比特数（bit）[from [wiki](https://zh.wikipedia.org/wiki/%E4%BA%A4%E5%8F%89%E7%86%B5)]。交叉熵越小，则两个分布越接近。[![cross_entropy.png](https://i.loli.net/2019/05/16/5cdcd20b9068b64379.png)](https://i.loli.net/2019/05/16/5cdcd20b9068b64379.png)
+  - 相对熵衡量两个分布的相似性，[这里](http://ufldl.stanford.edu/tutorial/unsupervised/Autoencoders/)在讨论autoencoder的时候也说了，两个分布越相近时，熵值越小。这里是固定其中的一个值p=0.2，当q取不同的值时，相对熵（KL散度）的大小，从图中可以看出，当q取和p相等的值（分布一样）时，熵值最小。 ![](http://ufldl.stanford.edu/tutorial/images/KLPenaltyExample.png)
 
-具体在GAN中，损失函数如下：
-
-  - [![GAN_loss.png](https://i.loli.net/2019/05/16/5cdcd73a204c291144.png)](https://i.loli.net/2019/05/16/5cdcd73a204c291144.png)
+具体在GAN中，损失函数如下：[![GAN_loss.png](https://i.loli.net/2019/05/16/5cdcd73a204c291144.png)](https://i.loli.net/2019/05/16/5cdcd73a204c291144.png)
 
 ## 示例：MNIST手写识别
 

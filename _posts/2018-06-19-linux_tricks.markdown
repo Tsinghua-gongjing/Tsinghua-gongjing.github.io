@@ -36,6 +36,25 @@ total 1.3M
 -rw-r--r-- 1 gongjing staff 14K Jun 19 14:47 CELF1
 ```
 
+有的时候`rename`命令不正常，可能是因为使用的命令来源不同，就像[这里](https://askubuntu.com/questions/1024960/rename-not-working)讨论的：
+
+首先要查看环境的`rename`是来源，然后写对应的命令，不能弄错了：
+
+```bash
+$ rename --version
+/usr/bin/rename using File::Rename version 0.20
+$ rename 's/\.jpeg$/.jpg/' *
+
+$ rename --version
+rename from util-linux 2.30.2
+$ rename .jpeg .jpg *
+
+# 集群上使用的是util-linux这个版本
+# 命令：rename pattern replace files
+$ rename --version
+rename (util-linux-ng 2.17.2)
+```
+
 ## Drop specific columns [linuxconfig](https://linuxconfig.org/how-to-remove-columns-from-csv-based-on-column-number-using-bash-shell)
 
 ```bash

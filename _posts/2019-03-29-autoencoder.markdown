@@ -10,7 +10,6 @@ tags: [python, machine learning]
 自编码（auto encoder）：把输入数据进行一个压缩和解压缩的过程，对高维数据的一个低维表示，同时最大限度的保留原始数据信息。
 
 1、框架（包含3个部分）：
-	
   - ![img](https://www.alanzucconi.com/wp-content/uploads/2018/02/nn_04.png)
   - **Encoding Architecture** :包含一些列的层，层里的节点数目是减少的，最后得到一个隐藏特征的表示。
   - **Latent View Repersentation** : 隐藏特征的视图，最小的特征空间，保留原始的数据信息。
@@ -26,6 +25,7 @@ tags: [python, machine learning]
    - 解释性差
    - 低层的数学模型较复杂
    - 容易过拟合
+4、可视化：通过可视化，可以看到不同的神经元是学习到图像不同的位置和角度的特征。下图是100个神经元的隐藏层可视化： ![](http://ufldl.stanford.edu/tutorial/images/ExampleSparseAutoencoderWeights.png)
 
 ## 实现
 
