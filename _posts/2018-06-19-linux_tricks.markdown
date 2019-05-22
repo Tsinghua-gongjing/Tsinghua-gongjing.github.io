@@ -157,7 +157,7 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 Written by Roland McGrath and Ulrich Drepper.
 ```
 
-## print every two lines as one line
+## Print every two lines as one line
 
 ```bash
 # print lines of files matched with specific pattern
@@ -197,4 +197,12 @@ Written by Roland McGrath and Ulrich Drepper.
 6291 13434 2329 1535
 2171 1758 6762 14614
 666808
+```
+
+## Update file soft link
+
+Use option `-sfn` of `ln` command as discussed [here](https://serverfault.com/questions/389997/how-to-override-update-a-symlink):
+
+```bash
+ln -sfn {path/to/file-name} {link-name}
 ```
