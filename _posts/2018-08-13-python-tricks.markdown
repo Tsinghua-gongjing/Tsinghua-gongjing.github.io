@@ -90,3 +90,28 @@ def dfs_tabs(df_list, sheet_list, file_name):
         dataframe.to_excel(writer, sheet_name=sheet, startrow=0 , startcol=0, index=False)   
     writer.save()
 ```
+
+### 根据df某一列的值，找到其最大值所对应的index
+
+As discussed [here](https://stackoverflow.com/questions/39964558/pandas-max-value-index):
+
+```python
+df = pd.DataFrame({'favcount':[1,2,3], 'sn':['a','b','c']})
+
+print (df)
+   favcount sn
+0         1  a
+1         2  b
+2         3  c
+
+print (df.favcount.idxmax())
+2
+
+print (df.ix[df.favcount.idxmax()])
+favcount    3
+sn          c
+Name: 2, dtype: object
+
+print (df.ix[df.favcount.idxmax(), 'sn'])
+c
+```
