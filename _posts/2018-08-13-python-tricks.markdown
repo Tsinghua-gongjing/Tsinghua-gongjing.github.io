@@ -115,3 +115,33 @@ Name: 2, dtype: object
 print (df.ix[df.favcount.idxmax(), 'sn'])
 c
 ```
+
+### 设置画图时使用Helvetica字体
+
+主要参考这篇文章：[Changing the sans-serif font to Helvetica](http://fowlerlab.org/2019/01/03/changing-the-sans-serif-font-to-helvetica/)。转换好的字体文件放在了[这里](https://github.com/Tsinghua-gongjing/blog_codes/tree/master/files/font)，可下载使用。
+
+```bash
+# 在mac上找到Helvetica字体
+$ ls /System/Library/Fonts/Helvetica.ttc
+
+# 复制到其他的位置
+$ cp /System/Library/Fonts/Helvetica.ttc ~/Desktop
+
+# 使用online的工具转换为.tff文件
+# 这里使用的是: https://www.files-conversion.com/font/ttc
+
+# 定位python库的字体文件
+$ python -c 'import matplotlib ; print(matplotlib.matplotlib_fname())'
+
+/Users/gongjing/usr/anaconda2/lib/python2.7/site-packages/matplotlib/mpl-data/matplotlibrc
+
+# 将tff文件放到上述路径的font目录下
+$ cp Helvetica.ttf /Users/gongjing/usr/anaconda2/lib/python2.7/site-packages/matplotlib/mpl-data/fonts/ttf
+
+# 修改matplotlibrc文件
+#font.sans-serif : DejaVu Sans, Bitstream Vera Sans, Computer Modern Sans Serif, Lucida Grande, Verdana, Geneva, Helvetica, Lucid, Arial, Avant Garde, sans-serif
+
+=》font.sans-serif : Helvetica, DejaVu Sans, Bitstream Vera Sans, Computer Modern Sans Serif, Lucida Grande, Verdana, Geneva, Lucid, Arial, Avant Garde, sans-serif
+
+# 重启jupyter即可
+```
