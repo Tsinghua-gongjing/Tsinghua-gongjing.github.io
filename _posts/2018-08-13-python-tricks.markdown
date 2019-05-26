@@ -145,3 +145,18 @@ $ cp Helvetica.ttf /Users/gongjing/usr/anaconda2/lib/python2.7/site-packages/mat
 
 # 重启jupyter即可
 ```
+
+上面是设置全局的，也可以显示的在代码中指定，可以参考[这里](https://stackoverflow.com/questions/21321670/how-to-change-fonts-in-matplotlib-python)：
+
+```python
+# 显示指定在此脚本中用某个字体
+import matplotlib.pyplot as plt
+plt.rcParams["font.family"] = "Helvetica"
+
+# 对于不同的部分（标题、刻度等）指定不同的字体
+csfont = {'fontname':'Comic Sans MS'}
+hfont = {'fontname':'Helvetica'}
+plt.title('title',**csfont)
+plt.xlabel('xlabel', **hfont)
+plt.show()
+```
