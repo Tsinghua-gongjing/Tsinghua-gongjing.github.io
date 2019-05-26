@@ -45,6 +45,14 @@ print(args[1]) # args[0] -> script anme
 [1] FALSE
 ```
 
+### 读取文件时列名称保持原有特殊字符
+
+函数：`read.table`的参数`check.names`默认对于特殊字符是要进行转换的，保持的例子[如下](https://stackoverflow.com/questions/10441437/why-am-i-getting-x-in-my-column-names-when-reading-a-data-frame)：
+
+```R
+read.csv(file, sep=",", header=T, check.names = FALSE)
+```
+
 ### 示例脚本：含有spike-ins的RNAseq差异分析
 
 ```R
