@@ -206,3 +206,11 @@ Use option `-sfn` of `ln` command as discussed [here](https://serverfault.com/qu
 ```bash
 ln -sfn {path/to/file-name} {link-name}
 ```
+
+## install software instead of default dir
+
+```bash
+./configure --prefix=/somewhere/else/than/usr/local
+make
+make install
+```
