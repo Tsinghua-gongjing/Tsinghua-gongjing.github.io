@@ -143,7 +143,9 @@ ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
 ```
 
-### Annotate point/position with non-overlapped text [stackoverflow](https://stackoverflow.com/questions/14432557/matplotlib-scatter-plot-with-different-text-at-each-data-point)
+### Annotate point/position with non-overlapped text 
+
+Use [`ax.annotate()`](https://matplotlib.org/3.1.0/api/_as_gen/matplotlib.pyplot.annotate.html) as [stackoverflow](https://stackoverflow.com/questions/14432557/matplotlib-scatter-plot-with-different-text-at-each-data-point), can ass marks like arrow etc.:
 
 ```python
 y = [2.56422, 3.77284, 3.52623, 3.51468, 3.02199]
@@ -155,6 +157,17 @@ ax.scatter(z, y)
 
 for i, txt in enumerate(n):
     ax.annotate(txt, (z[i], y[i]))
+```
+
+Can also use [`plt.text()`](https://matplotlib.org/3.1.0/api/_as_gen/matplotlib.pyplot.text.html) function:
+
+```python
+# with x,y denote absolute coordinates
+plt.text(x, y, s, fontsize=12)
+
+# with transform to project the axes
+# 这里的x，y就是相对于坐标轴的哪个位置的
+plt.text(0.5, 0.5, str, ha='center',va='center', transform=ax.transAxes)
 ```
 
 Non-overlapped text based on module `adjustText` as example [here](https://stackoverflow.com/questions/19073683/matplotlib-overlapping-annotations-text):
