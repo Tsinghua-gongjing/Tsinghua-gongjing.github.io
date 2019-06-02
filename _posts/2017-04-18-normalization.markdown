@@ -37,6 +37,8 @@ tags: [reading, statistics]
    - ICA：不需要归一化
    - 最小二乘法OLS：不需要
 
+--- 
+
 ## 方法
 
 ### 1. min-max normalization (Rescaling)
@@ -75,6 +77,15 @@ tags: [reading, statistics]
 
 结果：如果X都大于0，则区间映射到[0,1]，小于0的数据映射到[-1,0]之间。
 
+### 7. quantile normalization
+
+原理：
+
+   - 1）记录每个样本（列）中的每个数据的rank（原始rank）；
+   - 2）每个样本，从小到达排序，计算排序后每个rank的平均值（排序后rank平均值）；
+   - 3）根据原始rank从排序后rank平均值提取对应的值，取代原来的值，即为归一化之后的值。![](https://www.biorxiv.org/content/biorxiv/early/2014/12/04/012203/F1.large.jpg)
+
+结果：使得不同的数据集具有相同的分布，容易比较。（这个方法在microarray数据中使用得很多，原先叫quantile standardization，后来才叫做quantile normalization。[wiki](https://en.wikipedia.org/wiki/Quantile_normalization)给出了一个例子，说的是在不同的样本中，如果将基因的表达量归一化到同一水平。）。下面是不同样本中前后表达量分布的例子： ![](https://www.researchgate.net/profile/Saroj_Mohapatra/publication/47371361/figure/fig1/AS:306044065599492@1449977999233/Quantile-normalization-imposes-the-same-empirical-distribution-of-intensities-on-each.png)
 
 ### 例子比较
 
@@ -113,3 +124,4 @@ ax[2,0].set_title('unit length norm')
 - [标准化和归一化什么区别？](https://www.zhihu.com/question/20467170)
 - [About Feature Scaling and Normalization](https://sebastianraschka.com/Articles/2014_about_feature_scaling.html)
 - [Preprocessing data@sklearn](https://scikit-learn.org/stable/modules/preprocessing.html)
+- [Quantile_normalization @ wiki](https://en.wikipedia.org/wiki/Quantile_normalization)
