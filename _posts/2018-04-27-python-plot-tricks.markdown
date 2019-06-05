@@ -253,6 +253,27 @@ plt.close()
 pdf.close()
 ```
 
+### add annotations
+
+可以使用`ax.text`函数，在特定的位置添加注释。一个常用的场景是标注显著性，比如pvalue<=0.01的标注为`**`，但是需要注意的是，如果旋转为垂直方向，`**`通常是不会和其提供的x坐标位置对齐，因为`*`本身是不和字母对齐的，这个时候可以选用其他的字符，比如`+#`等：
+
+```python
+d1 = pd.DataFrame({'0':[1,2,3,4], '1':[4,5,6,5]})
+
+fig,ax=plt.subplots(1,2,figsize=(16,6))
+
+ax[0].plot(d1['0'], marker='.')
+for n,i in enumerate(d1['0']):
+    ax[0].text(n, i+0.1, '*A*+#', va='bottom', ha='center', rotation='vertical', size='xx-large')
+    
+ax[1].plot(d1['0'], marker='.')
+for n,i in enumerate(d1['0']):
+    ax[1].text(n, i+0.1, '*A*+#', va='bottom', ha='center', rotation=0, size='xx-large')
+```
+
+[![text_annotate.png](https://i.loli.net/2019/06/05/5cf7a9709382214470.png)](https://i.loli.net/2019/06/05/5cf7a9709382214470.png)
+
+
 ## 2. Seaborn plot
 
 ### Set color list instead of seaborn default
