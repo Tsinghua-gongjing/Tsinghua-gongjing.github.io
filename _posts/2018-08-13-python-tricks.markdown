@@ -176,3 +176,14 @@ array([  1.79769313e+308,  -1.79769313e+308,   0.00000000e+000,
 # 设置copy=False，原来数组的值会被替换
 np.nan_to_num(x, copy=False)
 ```
+
+### 核查文件夹是否存在否则创建
+
+As discussed [here](https://stackoverflow.com/questions/273192/how-can-i-safely-create-a-nested-directory):
+
+```python
+import os
+def check_dir_or_make(d):
+    if not os.path.exists(d):
+        os.makedirs(d)
+```
