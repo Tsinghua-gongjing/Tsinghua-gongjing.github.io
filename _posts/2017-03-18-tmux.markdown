@@ -11,3 +11,11 @@ tags: [linux, tmux]
 
 * `Ctl + b + <`: 是在外部跳到左边的panel
 * `Ctl + b + b + <`: 是在内部跳到左边的panel。（字母输入两次）
+
+## 更新`config`文件
+
+有时候想修改config设置，比如不同的快捷键等，可以按照如下步骤：
+
+- 修改文件：~/.tmux.conf。现在使用的文件可在[这里](https://github.com/Tsinghua-gongjing/blog_codes/blob/master/files/tmux.conf)下载到，同时使用``和`Ctl+b`作为前置键。
+- 进入tmux终端
+- 敲击`: source-file ~/.tmux.conf`

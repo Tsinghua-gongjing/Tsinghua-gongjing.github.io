@@ -160,3 +160,19 @@ plt.title('title',**csfont)
 plt.xlabel('xlabel', **hfont)
 plt.show()
 ```
+
+### 将array里面的NA值替换为其他实数值
+
+可以使用numpy的函数[nan\_to\_num](https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.nan_to_num.html)：`numpy.nan_to_num(x, copy=True)]`
+
+```python
+x = np.array([np.inf, -np.inf, np.nan, -128, 128])
+
+# 默认copy=True，不改变原来数组的值
+np.nan_to_num(x)
+array([  1.79769313e+308,  -1.79769313e+308,   0.00000000e+000,
+        -1.28000000e+002,   1.28000000e+002])
+        
+# 设置copy=False，原来数组的值会被替换
+np.nan_to_num(x, copy=False)
+```

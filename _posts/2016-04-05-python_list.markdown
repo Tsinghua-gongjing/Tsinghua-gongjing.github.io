@@ -70,6 +70,13 @@ def list_pct(ls):
     return ls_pct
 ```
 
+### remove NA value of a list
+
+```python
+def list_remove_na(ls):
+	return [i for i in ls if not np.isnan(i)]
+```
+
 ## qucik cheatsheet
 
 source: [Python Crash Course - Cheat Sheets](https://ehmatthes.github.io/pcc/cheatsheets/README.html)

@@ -296,7 +296,7 @@ plt.show()
 
 ![](https://i.stack.imgur.com/Hn6IW.png)
 
-Based on repo `[statannot](https://github.com/webermarcolivier/statannot)`, which work for seaborn `boxplot` only:
+Based on [repo]((https://github.com/webermarcolivier/statannot)) `statannot`, which works for seaborn `boxplot` only:
 
 ```python
 import matplotlib.pyplot as plt
