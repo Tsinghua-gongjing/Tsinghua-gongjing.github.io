@@ -273,6 +273,49 @@ for n,i in enumerate(d1['0']):
 
 [![text_annotate.png](https://i.loli.net/2019/06/05/5cf7a9709382214470.png)](https://i.loli.net/2019/06/05/5cf7a9709382214470.png)
 
+### add statistical test p-value
+
+As discussed [here](https://stackoverflow.com/questions/36578458/how-does-one-insert-statistical-annotations-stars-or-p-values-into-matplotlib/37518947):
+
+Based on manual setup:
+
+```python
+import seaborn as sns, matplotlib.pyplot as plt
+
+tips = sns.load_dataset("tips")
+sns.boxplot(x="day", y="total_bill", data=tips, palette="PRGn")
+
+# statistical annotation
+x1, x2 = 2, 3   # columns 'Sat' and 'Sun' (first column: 0, see plt.xticks())
+y, h, col = tips['total_bill'].max() + 2, 2, 'k'
+plt.plot([x1, x1, x2, x2], [y, y+h, y+h, y], lw=1.5, c=col)
+plt.text((x1+x2)*.5, y+h, "ns", ha='center', va='bottom', color=col)
+
+plt.show()
+```
+
+![](https://i.stack.imgur.com/Hn6IW.png)
+
+Based on repo `[statannot](https://github.com/webermarcolivier/statannot)`, which work for seaborn `boxplot` only:
+
+```python
+import matplotlib.pyplot as plt
+import seaborn as sns
+from statannot import add_stat_annotation
+
+sns.set(style="whitegrid")
+df = sns.load_dataset("tips")
+
+x = "day"
+y = "total_bill"
+order = ['Sun', 'Thur', 'Fri', 'Sat']
+ax = sns.boxplot(data=df, x=x, y=y, order=order)
+add_stat_annotation(ax, data=df, x=x, y=y, order=order,
+                    boxPairList=[("Thur", "Fri"), ("Thur", "Sat"), ("Fri", "Sun")],
+                    test='Mann-Whitney', textFormat='star', loc='outside', verbose=2)
+```
+
+![](https://i.stack.imgur.com/Rp1yB.png)
 
 ## 2. Seaborn plot
 
