@@ -34,10 +34,10 @@ softmax函数（归一化的指数函数）："squashes"(maps) a K-dimensional v
 
 ### softmax vs logistic
 
-   - 参考[这里](logistic函数和softmax函数)
+   - 参考[这里：logistic函数和softmax函数](https://www.cnblogs.com/maybe2030/p/5678387.html)
    - logistic： 二分类问题，基于**多项式分布**
    - softmax：多分类问题，基于**伯努利分布**
-   - 因此logistic是softmax函数的一个特例，就是当K=2时的情况。所以在逻辑回归那里，也有softmax regression（多元逻辑回归）用语多分类问题，我在[这里](https://tsinghua-gongjing.github.io/posts/CS229-06-logistic-regression.html)也记录了一点。
+   - 因此logistic是softmax函数的一个特例，就是当K=2时的情况。所以在逻辑回归那里，也有softmax regression（多元逻辑回归）用于多分类问题，我在[这里](https://tsinghua-gongjing.github.io/posts/CS229-06-logistic-regression.html)也记录了一点。
    - 在多分类里面，也可以使用多个one-vs-all的逻辑回归，达到多元回归的目的，这种操作和直接的softmax回归有什么不同？softmax回归输出的类是唯一互斥的，但是多个逻辑回归的输出类别不一定是互斥的。
 
 
