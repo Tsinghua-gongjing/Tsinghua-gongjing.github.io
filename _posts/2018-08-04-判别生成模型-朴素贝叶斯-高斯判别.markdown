@@ -1,0 +1,63 @@
+---
+layout: post
+category: "machinelearning"
+title:  "判别生成模型、朴素贝叶斯、高斯判别分析"
+tags: [python, machine learning]
+---
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+## 生成式模型 vs 判别式模型
+
+对于监督学习，其最终目标都是在给定样本时，预测其最可能的类别，即优化目标总是：$$\begin{align}\arg \max_yp(y\|x)\end{align}$$。
+
+求解上述优化目标总的可分为两类：
+   
+   - **判别式模型（Discriminant Model）**：直接学习模型得到$$p(y\|x)$$，即根据数据集学习参数模型：$$p(y\|x; \theta)$$，那么在预测的时候直接根据新样本的x特征值计算y值（所属的类别的概率）。此类包含：1）线性回归模型，2）逻辑回归模型，3）决策树模型 等
+   - wiki: a generative model is a model of the conditional probability of the observable X, given a target y, symbolically,{P(X\|Y=y)}.
+   
+   - **生成式模型（Generative Model）**：利用贝叶斯法则，对上述的优化目标进行转换。
+   - wiki: a discriminative model is a model of the conditional probability of the target Y, given an observation x, symbolically,{P(Y\|X=x)}
+   - 贝叶斯公式: $$p(y\|x)=\frac {p(x,y)}{p(x)}=\frac {p(x\|y)p(y)}{p(x)}$$ 
+   - 代入上面的优化目标：$$\begin{align}\arg \max_yp(y\|x)&=\arg \max_y\frac {p(x\|y)p(y)}{p(x)}\\&=\arg  \max_yp(x\|y)p(y)\end{align} (给定数据x时，p(x)是常量可不考虑)$$
+   - 此时模型的求解目标不是$$p(y\|x)$$，而是$$p(x\|y)$$和$$p(y)$$
+
+### 例子
+
+目标：判别一个动物是大象(y=1)还是狗(y=0)
+
+判别式模型：
+   - 【训练】考虑动物的所有特征，学习模式$$p(y\|x; \theta)$$
+   - 【预测】基于学习的模型，判定是大象还是狗
+   
+生成式模型：
+   - 【训练1】训练所有的类别为大象的数据，学习模型1：$$p(x\|y=1)和p(y=1)$$
+   - 【训练2】训练所有的类别为狗的数据，学习模型2：$$p(x\|y=0)和p(y=0)$$
+   - 【预测】用模型1和2分别预测，可能性大的即为最终的预测类别
+
+## 高斯判别分析
+
+高斯判别分析（Gaussian discriminant analysismodel, GDA）：
+
+- 用于连续空间，即随机变量具有连续值特征
+- 假设$$p(x\|y)$$是服从高斯分布的，这是一个概率分布 [![GDA.png](https://i.loli.net/2019/06/10/5cfe55a616ea810591.png)](https://i.loli.net/2019/06/10/5cfe55a616ea810591.png)
+
+
+## 朴素贝叶斯
+
+- 用于学习离散值随机变量
+- 对于很多问题，比如邮件文本分类，如果认为单词之间是相互独立的，那么参数空间会很大，而且通常这个假设是错的（too naive）。[![naive_bayes.png](https://i.loli.net/2019/06/10/5cfe5e2d14bf588121.png)](https://i.loli.net/2019/06/10/5cfe5e2d14bf588121.png)
+
+
+## 参考
+
+* [判别模型、生成模型和高斯判别模型](http://zhouyichu.com/machine-learning/Discriminative-Generative-GDA/)
+* [机器学习之高斯判别分析以及朴素贝叶斯算法](https://zhuanlan.zhihu.com/p/39318156)
+* [Generative Learning Algorithm](https://air-yan.github.io/machine%20learning/Generative-Learning-Algorithm/)
+
+
+
+
+
