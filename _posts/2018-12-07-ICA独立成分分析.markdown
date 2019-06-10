@@ -29,7 +29,8 @@ tags: [python, machine learning]
 
 3、ICA vs PCA：
    - ICA：样本数据由独立非高斯分布的隐含因子产生，隐含因子个数等于特征数，更适合用来还原信号
-   - PCA：K个正交的特征，更适合降维
+   - PCA：K个正交的特征，更适合降维 [![ICA_vs_PCA.png](https://i.loli.net/2019/06/10/5cfe1958d4f5597241.png)](https://i.loli.net/2019/06/10/5cfe1958d4f5597241.png)
+
 
 ## 参考
 
