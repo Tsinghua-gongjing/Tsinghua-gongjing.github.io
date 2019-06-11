@@ -21,25 +21,46 @@ tags: [python, machine learning]
 
 ### 如何选取划分特征？
 
-信息增益：划分数据集之前之后信息发生的变化
+信息增益(Information Gain)：划分数据集之前之后信息发生的变化，比如可以看熵值的变化，在每一个状态时具有一个熵值。
 
-信息和熵值(参见下图的上半部分)：![](https://i.loli.net/2019/05/16/5cdcd20b9068b64379.png)
+信息和熵值(Entropy)(参见下图的上半部分)：![](https://i.loli.net/2019/05/16/5cdcd20b9068b64379.png)
+
+下面是一个例子，比较不同的特征进行数据分隔时的信息增益大小：[![info_gain.png](https://i.loli.net/2019/06/11/5cff64e6dfe8514609.png)](https://i.loli.net/2019/06/11/5cff64e6dfe8514609.png)
 
 ### 建树步骤
 
-- 将所有的特征看成一个一个的节点；
-- 遍历每个特征，进行分割计算，计算划分之后所有子节点的’纯度’信息，比如信息增值（熵值），选取最好的特征进行分割，从而将数据划分为不同的子节点；
+- 将所有的特征看成一个一个的节点（每次都是选取一个特征进行判断从而分支）；
+- 遍历每个特征，进行分割计算，计算每个特征划分前后的信息增值（比如熵值之差）。选取最好的特征（增益最大的、熵值最小的）进行分割，从而将数据划分为不同的子节点；
 - 对子节点分别递归执行上一步，直到每个最终的子节点都足够’纯’或者都属于同一类别为止。
 
 - 递归结束条件：1）遍历完所有的属性，2）每个分支下的所有实例归属同一类。
 
 ### 损失函数
 
-![](https://img-blog.csdnimg.cn/2019041416293471.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDMyNzY1Ng==,size_16,color_FFFFFF,t_70)
+在经典的ID3中，每次选取的分隔特征都是信息增益最大的，这个可以保证最后的分类效果达到最好，其损失函数值也是最小的。具体的，其损失函数很像最大似然估计函数：
+
+![](https://scs.hosted.panopto.com/Panopto/Pages/Viewer/Thumb.aspx?eventTargetPID=58fdbb33-bd0f-4c51-b887-0109c299bb2b&sessionPID=07ad6a3f-7219-4e00-83ff-a8bd01397476&number=14&isPrimary=false&absoluteTime=13167774858.409775)
 
 ## 实现
 
 ### Python源码版本
+
+计算给定数据集的香秾熵值：1）统计数据集label的count数，2）转换为概率，3）概率乘以对数概率并加和：
+
+```python
+def calcShannonEnt(dataSet):
+    numEntries = len(dataSet)
+    labelCounts = {}
+    for featVec in dataSet: #the the number of unique elements and their occurance
+        currentLabel = featVec[-1]
+        if currentLabel not in labelCounts.keys(): labelCounts[currentLabel] = 0
+        labelCounts[currentLabel] += 1
+    shannonEnt = 0.0
+    for key in labelCounts:
+        prob = float(labelCounts[key])/numEntries
+        shannonEnt -= prob * log(prob,2) #log base 2
+    return shannonEnt
+```
 
 划分数据集：对于给定的数据集，循环其每一个特征，计算特征对应的香农熵，选取其中熵值最小（信息增益最大）的特征作为划分的特征：
 
@@ -63,9 +84,40 @@ def chooseBestFeatureToSplit(dataSet):
     return bestFeature                      #returns an integer
 ```
 
+### sklearn版本
+
+对于`iris`数据集应用决策树，过程中会搜索选取不同的特征及其阈值，以作为分隔的特征（节点）：
+
+```python
+from sklearn.datasets import load_iris
+from sklearn import tree
+
+# Load in our dataset
+iris_data = load_iris()
+
+# Initialize our decision tree object
+classification_tree = tree.DecisionTreeClassifier()
+
+# Train our decision tree (tree induction + pruning)
+classification_tree = classification_tree.fit(iris_data.data, iris_data.target)
+
+import graphviz 
+dot_data = tree.export_graphviz(classification_tree, out_file=None, 
+                     feature_names=iris.feature_names,  
+                     class_names=iris.target_names,  
+                     filled=True, rounded=True,  
+                     special_characters=True)  
+graph = graphviz.Source(dot_data)  
+graph.render("iris") 
+```
+
+![](https://cdn-images-1.medium.com/max/1600/1*fYqvum2ZQQalD_t05_UBug.png)
+
 ## 参考
 
 * 机器学习实战第3章
+* [Lecture 15: Tree-based Algorithms](chrome-extension://oemmndcbldboiebfnladdacbdfmadadm/http://www.stat.ucdavis.edu/~chohsieh/teaching/ECS171_Winter2018/lecture15.pdf)
+* [A Guide to Decision Trees for Machine Learning and Data Science](https://towardsdatascience.com/a-guide-to-decision-trees-for-machine-learning-and-data-science-fe2607241956)
 
 
 
