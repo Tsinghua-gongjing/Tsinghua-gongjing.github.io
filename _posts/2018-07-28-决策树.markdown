@@ -13,13 +13,29 @@ tags: [python, machine learning]
 
 决策树算法：由一个决策图和可能的结果（包括资源成本和风险）组成， 用来创建到达目标的规划。
 
-### 决策树流程图：
+### 决策树流程图
 
  - 判断模块（decision block/node）
  - 终止模块（terminating block/node）：已得出结论，可终止运行
  - 分支（branch/sub-tree）：从判断模块引出的左右箭头 ![](https://cdn-images-1.medium.com/max/1600/0*X-UrBzBeKMnoTY6H.png)
 
+### 建树步骤
+
+决策树的构建通常包含3个步骤：
+ - 【1 特征选择】：选择什么特征进行分支，不同的算法采用不同的度量策略，比如ID3是基于信息增益最大的特征，C4.5则采用信息增益比，CART使用GINI系数
+ - 【2 生成决策树】：从从上至下递归的分支生成子节点
+ - 【3 剪枝】：决策树容易过拟合，所以需要缩小数的规模
+
+建树的具体过程：
+ - 将所有的特征看成一个一个的节点（每次都是选取一个特征进行判断从而分支）；
+ - 遍历每个特征，进行分割计算，计算每个特征划分前后的信息增值（比如熵值之差）。选取最好的特征（增益最大的、熵值最小的）进行分割，从而将数据划分为不同的子节点；
+ - 对子节点分别递归执行上一步，直到每个最终的子节点都足够’纯’或者都属于同一类别为止。
+
+ - 递归结束条件：1）遍历完所有的属性，2）每个分支下的所有实例归属同一类。[![decision_tree_func.png](https://i.loli.net/2019/06/11/5cffb4a39142497590.png)](https://i.loli.net/2019/06/11/5cffb4a39142497590.png)
+
 ### 如何选取划分特征？
+
+#### ID3
 
 信息增益(Information Gain)：划分数据集之前之后信息发生的变化，比如可以看熵值的变化，在每一个状态时具有一个熵值。
 
@@ -27,13 +43,19 @@ tags: [python, machine learning]
 
 下面是一个例子，比较不同的特征进行数据分隔时的信息增益大小：[![info_gain.png](https://i.loli.net/2019/06/11/5cff64e6dfe8514609.png)](https://i.loli.net/2019/06/11/5cff64e6dfe8514609.png)
 
-### 建树步骤
+#### C4.5
 
-- 将所有的特征看成一个一个的节点（每次都是选取一个特征进行判断从而分支）；
-- 遍历每个特征，进行分割计算，计算每个特征划分前后的信息增值（比如熵值之差）。选取最好的特征（增益最大的、熵值最小的）进行分割，从而将数据划分为不同的子节点；
-- 对子节点分别递归执行上一步，直到每个最终的子节点都足够’纯’或者都属于同一类别为止。
+ID3使用信息增益最大的特征作为分隔特征，这个对于特征是有偏向性的，具有多个值的特征其信息增益也容易大从而被选做分隔特征。为了消除这个，在C4.5中引入了信息增益比：
 
-- 递归结束条件：1）遍历完所有的属性，2）每个分支下的所有实例归属同一类。
+![](https://images2015.cnblogs.com/blog/754644/201604/754644-20160411201329566-47624136.png)
+
+#### CART
+
+![](https://images2015.cnblogs.com/blog/754644/201604/754644-20160411201330863-2099447743.png)
+
+三种算法的比较：
+
+![](https://www.yingjoy.cn/wp-content/uploads/2018/03/3-1.png)
 
 ### 损失函数
 
@@ -118,6 +140,8 @@ graph.render("iris")
 * 机器学习实战第3章
 * [Lecture 15: Tree-based Algorithms](chrome-extension://oemmndcbldboiebfnladdacbdfmadadm/http://www.stat.ucdavis.edu/~chohsieh/teaching/ECS171_Winter2018/lecture15.pdf)
 * [A Guide to Decision Trees for Machine Learning and Data Science](https://towardsdatascience.com/a-guide-to-decision-trees-for-machine-learning-and-data-science-fe2607241956)
+* [三种决策树算法（ID3, CART, C4.5）及Python实现](https://www.yingjoy.cn/457.html)
+* [决策树模型 ID3/C4.5/CART算法比较](https://www.cnblogs.com/wxquare/p/5379970.html)
 
 
 
