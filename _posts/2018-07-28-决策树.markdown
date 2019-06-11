@@ -41,17 +41,20 @@ tags: [python, machine learning]
 
 信息和熵值(Entropy)(参见下图的上半部分)：![](https://i.loli.net/2019/05/16/5cdcd20b9068b64379.png)
 
+具体的计算如下：[![decision_tree_ID3.png](https://i.loli.net/2019/06/12/5cffd44bb871539604.png)](https://i.loli.net/2019/06/12/5cffd44bb871539604.png)
+
 下面是一个例子，比较不同的特征进行数据分隔时的信息增益大小：[![info_gain.png](https://i.loli.net/2019/06/11/5cff64e6dfe8514609.png)](https://i.loli.net/2019/06/11/5cff64e6dfe8514609.png)
 
 #### C4.5
 
 ID3使用信息增益最大的特征作为分隔特征，这个对于特征是有偏向性的，具有多个值的特征其信息增益也容易大从而被选做分隔特征。为了消除这个，在C4.5中引入了信息增益比：
-
-![](https://images2015.cnblogs.com/blog/754644/201604/754644-20160411201329566-47624136.png)
+  - 先计算某特征对于数据集的切割信息
+  - 然后用信息增益对于上述的切割信息进行归一化 [![decision_tree_C4.5.png](https://i.loli.net/2019/06/12/5cffd316ac0e325586.png)](https://i.loli.net/2019/06/12/5cffd316ac0e325586.png)
 
 #### CART
 
-![](https://images2015.cnblogs.com/blog/754644/201604/754644-20160411201330863-2099447743.png)
+ID3和C4.5构建的树规模较大，为了提高建树的效率，CART方法被开发出来，其使用的是GINI系数来知道特征的选择：
+ - [![decision_tree_CART.png](https://i.loli.net/2019/06/12/5cffd316a9ae128175.png)](https://i.loli.net/2019/06/12/5cffd316a9ae128175.png)
 
 三种算法的比较：
 
