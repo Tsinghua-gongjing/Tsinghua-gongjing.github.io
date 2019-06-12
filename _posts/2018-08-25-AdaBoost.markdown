@@ -1,0 +1,92 @@
+---
+layout: post
+category: "machinelearning"
+title:  "AdaBoost算法"
+tags: [python, machine learning]
+---
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+## 概述
+
+1. 集成算法（ensemble method）：又叫元算法（meta-algorithm），将不同的分类器组合起来。
+  - 集成不同的算法
+  - 同一算法在不同设置下的集成
+  - 数据集不同部分分配给不同分类器之后的集成
+2. bagging：
+  - 自举汇聚法（bootstrap aggregating）：从原始数据集选择S次以得到S个数据集。
+  - 每个数据集与原数据集大小相等，可以重复抽取。
+  - 训练：每个数据集训练一个模型，得到S个分类器模型。
+  - 预测：对于新数据，用S个分类器进行分类，然后投票，最多的分类即为最后的分类结果。
+  - 随机森林也是一种bagging方法：组合多个决策树。
+3. boosting：
+  - 类似于bagging
+  - 串行训练，每一个新的分类器都是基于已训练的分类器，尤其关注之前的分类器错误分类的那部分样本数据
+  - 所有分类器的加权求和，而bagging中的分类器的权重是相等的。boosting的分类器权重：对应分类器在上一轮中的成功度。
+  - AdaBoost（adaptive boosting，自适应boosting）：最流行的一个boosting版本。
+4. AdaBoosting:
+  - 问题：使用弱分类器和数据集构建一个强分类器？弱是说模型的效果不太好，比随机好一点。
+  - 算法过程：
+     - 权重等值初始化：每个训练样本赋值一个权重，构成向量D；
+     - 第一次训练：训练一个弱分类器
+     - 第二次训练：在同一数据集上进行训练，只是此时的权重会发生改变。降低第一次分类对的样本的权重，增加分类错的权重。![](https://cdn-images-1.medium.com/max/1600/0*paPv7vXuq4eBHZY7.png)
+ 
+     - 训练得到多个分类器，每个分类器的权重不等，权重值与其错误率相关。
+     - 错误率：$$\theta = \frac{分类错误的样本数目}{所有样本数目}$$
+     - 分类器权重：$$\alpha = \frac{1}{2} ln(\frac{1-\theta}{\theta})$$
+
+## 实现
+
+### Python源码版本
+
+构建多个单层决策树的例子，比如对于一组数据样本（包含两个类别），具有两个特征，如何区分开来？
+
+* `stumpClassify`：对于样本指定的特征，基于一个阈值，对样本进行分类，比如高于这个阈值的设置为-1（取决于判断符号`threshIneq `）
+* `buildStump`：对于样本、类别、权重D，构建一个多决策树。对样本的每一个特征进行查看，在每一个特征的取值范围内不断的尝试不同的阈值进行分类，同时不停的更新权重矩阵D，最终的目的是找到使得分类错误率最小时的特征、特征阈值、判断符号（大于还是小于，为啥这个会有影响？）。
+
+```python
+def stumpClassify(dataMatrix,dimen,threshVal,threshIneq):#just classify the data
+    retArray = ones((shape(dataMatrix)[0],1))
+    if threshIneq == 'lt':
+        retArray[dataMatrix[:,dimen] <= threshVal] = -1.0
+    else:
+        retArray[dataMatrix[:,dimen] > threshVal] = -1.0
+    return retArray
+    
+def buildStump(dataArr,classLabels,D):
+    dataMatrix = mat(dataArr); labelMat = mat(classLabels).T
+    m,n = shape(dataMatrix)
+    numSteps = 10.0; bestStump = {}; bestClasEst = mat(zeros((m,1)))
+    minError = inf #init error sum, to +infinity
+    for i in range(n):#loop over all dimensions
+        rangeMin = dataMatrix[:,i].min(); rangeMax = dataMatrix[:,i].max();
+        stepSize = (rangeMax-rangeMin)/numSteps
+        for j in range(-1,int(numSteps)+1):#loop over all range in current dimension
+            for inequal in ['lt', 'gt']: #go over less than and greater than
+                threshVal = (rangeMin + float(j) * stepSize)
+                predictedVals = stumpClassify(dataMatrix,i,threshVal,inequal)#call stump classify with i, j, lessThan
+                errArr = mat(ones((m,1)))
+                errArr[predictedVals == labelMat] = 0
+                weightedError = D.T*errArr  #calc total error multiplied by D
+                #print "split: dim %d, thresh %.2f, thresh ineqal: %s, the weighted error is %.3f" % (i, threshVal, inequal, weightedError)
+                if weightedError < minError:
+                    minError = weightedError
+                    bestClasEst = predictedVals.copy()
+                    bestStump['dim'] = i
+                    bestStump['thresh'] = threshVal
+                    bestStump['ineq'] = inequal
+    return bestStump,minError,bestClasEst
+```
+
+### sklearn版本
+
+## 参考
+
+* 机器学习实战第7章
+
+
+
+
+
