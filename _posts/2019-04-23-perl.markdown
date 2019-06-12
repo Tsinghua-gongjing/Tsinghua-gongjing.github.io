@@ -10,6 +10,8 @@ tags: [linux]
 
 ## Can't locate module
 
+<!-- more -->
+
 Example error:
 
 ```bash

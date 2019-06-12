@@ -9,6 +9,8 @@ tags: [python, machine learning]
 
 生成对抗网络（Generative Adversarial Network， GAN），属于一种生成模型，通过生成样本，以训练模型，直到模型无法区分样本来源（真实 vs 生成）为止。
 
+<!-- more -->
+
 ## 概念
 
 ### 1、网络结构

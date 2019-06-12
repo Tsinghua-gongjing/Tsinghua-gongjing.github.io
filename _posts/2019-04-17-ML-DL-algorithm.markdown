@@ -5,6 +5,10 @@ title:  "Resources of learning algorithms summary"
 tags: [python, machine learning, deep learning]
 ---
 
+这里列举了一些如何选用不同的机器学习算法的map，可以参考一下。
+
+<!-- more -->
+
 ## Choosing the right estimator @ [sklearn](https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html)
 
 ![](https://scikit-learn.org/stable/_static/ml_map.png)

@@ -9,6 +9,8 @@ tags: [python, machine learning, deep learning]
 
 卷积神经网络（Convolutional Neural Network, CNN）：一种前馈神经网络，在图像处理里面很常用。
 
+<!-- more -->
+
 ## 概念
 
 ### 1、网络结构（以LeNet5网络为例）
