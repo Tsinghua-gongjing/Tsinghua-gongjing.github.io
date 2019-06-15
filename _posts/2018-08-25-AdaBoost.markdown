@@ -28,14 +28,21 @@ tags: [python, machine learning]
   - AdaBoost（adaptive boosting，自适应boosting）：最流行的一个boosting版本。
 4. AdaBoosting:
   - 问题：使用弱分类器和数据集构建一个强分类器？弱是说模型的效果不太好，比随机好一点。
-  - 算法过程：
+5. AdaBoosting算法过程：
      - 权重等值初始化：每个训练样本赋值一个权重，构成向量D；
      - 第一次训练：训练一个弱分类器
-     - 第二次训练：在同一数据集上进行训练，只是此时的权重会发生改变。降低第一次分类对的样本的权重，增加分类错的权重。![](https://cdn-images-1.medium.com/max/1600/0*paPv7vXuq4eBHZY7.png)
+     - 第二次训练：在同一数据集上进行训练，只是此时的权重会发生改变。降低第一次分类对的样本的权重，增加分类错的权重。样本权重值更新的公式如下：[![adoboost_weight.png](https://i.loli.net/2019/06/15/5d04a207c2ca789731.png)](https://i.loli.net/2019/06/15/5d04a207c2ca789731.png)。**从这里可以看到，如果某个样本被分错了，则$$y_i * G_m(x_i)$$为负，负负得正，取指数后数值大于1，所以次样本权重值相对上一轮是增大的；如果某个样本被分对了，则$$y_i * G_m(x_i)$$为正，负正得负，取指数后数值小于1，所以次样本权重值相对上一轮是减小的。**
+     - **......**
+     - 第n次训练：此时得到的模型是前n-1个模型的权重线性组合。当模型的分类错误率达到指定阈值（一般为0）时，即可停止训练，采用此时的分类器模型。比如3次训练即达到要求的模型最终是：$$G(x)=sign[f_3(x)]=sign[\alpha_1 * G_1(x) + \alpha_2 * G_2(x) + \alpha_3 * G_3(x)]$$ ![](https://cdn-images-1.medium.com/max/1600/0*paPv7vXuq4eBHZY7.png)
  
      - 训练得到多个分类器，每个分类器的权重不等，权重值与其错误率相关。
-     - 错误率：$$\theta = \frac{分类错误的样本数目}{所有样本数目}$$
-     - 分类器权重：$$\alpha = \frac{1}{2} ln(\frac{1-\theta}{\theta})$$
+     - 错误率：$$\theta_m = \frac{分类错误的样本数目}{所有样本数目}$$，其中$$m$$是第几次的训练。错误率是每一次训练结束后，此次的分类器的错误率，需要计算，因为这关乎到此分类器在最终的分类器里的权重。
+     - 分类器权重：$$\alpha_m = \frac{1}{2} ln(\frac{1-\theta_m}{\theta_m})$$。
+6. AdaBoosting算法示例：
+   - [这里](https://blog.csdn.net/v_JULY_v/article/details/40718799)以一个10个样本的数据集（每个样本1个特征），详细的解释了如何训练AdoBoost算法，及每一轮迭代中阈值的选取，样本权重值的更新，分类器错误率的计算，分类器权重值的计算等过程，可以参考。
+7. AdaBoosting算法损失函数：
+   - 这里的$$\theta_m$$就是分类器的权重值（即上面的$$\alpha_m$$）![](https://cdn-images-1.medium.com/max/800/1*iebd6Q_Lda4yEtPTnj6u7Q.jpeg)。要求解使得该函数最小化，可以采用前向分步算法（forward stagewise）策略：从前向后，每一步只学习一个基函数及其系数。
+
 
 ## 实现
 
@@ -82,9 +89,74 @@ def buildStump(dataArr,classLabels,D):
 
 ### sklearn版本
 
+[sklearn](https://scikit-learn.org/stable/auto_examples/ensemble/plot_adaboost_twoclass.html#sphx-glr-download-auto-examples-ensemble-plot-adaboost-twoclass-py)给出了一个二分类的例子，首先生成了一个数据集，两个高斯分布混合而成的。这些样本是线性不可分的，使用AdaBoost算法，构建基于决策树的分类器，可以很好的区分开来：
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.datasets import make_gaussian_quantiles
+
+
+# Construct dataset
+X1, y1 = make_gaussian_quantiles(cov=2.,
+                                 n_samples=200, n_features=2,
+                                 n_classes=2, random_state=1)
+X2, y2 = make_gaussian_quantiles(mean=(3, 3), cov=1.5,
+                                 n_samples=300, n_features=2,
+                                 n_classes=2, random_state=1)
+X = np.concatenate((X1, X2))
+y = np.concatenate((y1, - y2 + 1))
+
+# Create and fit an AdaBoosted decision tree
+bdt = AdaBoostClassifier(DecisionTreeClassifier(max_depth=1),
+                         algorithm="SAMME",
+                         n_estimators=200)
+
+bdt.fit(X, y)
+
+plot_colors = "br"
+plot_step = 0.02
+class_names = "AB"
+
+plt.figure(figsize=(10, 5))
+
+# Plot the decision boundaries
+plt.subplot(121)
+x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
+y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
+xx, yy = np.meshgrid(np.arange(x_min, x_max, plot_step),
+                     np.arange(y_min, y_max, plot_step))
+
+Z = bdt.predict(np.c_[xx.ravel(), yy.ravel()])
+Z = Z.reshape(xx.shape)
+cs = plt.contourf(xx, yy, Z, cmap=plt.cm.Paired)
+plt.axis("tight")
+
+# Plot the training points
+for i, n, c in zip(range(2), class_names, plot_colors):
+    idx = np.where(y == i)
+    plt.scatter(X[idx, 0], X[idx, 1],
+                c=c, cmap=plt.cm.Paired,
+                s=20, edgecolor='k',
+                label="Class %s" % n)
+plt.xlim(x_min, x_max)
+plt.ylim(y_min, y_max)
+plt.legend(loc='upper right')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Decision Boundary')
+```
+
+![](https://scikit-learn.org/stable/_images/sphx_glr_plot_adaboost_twoclass_001.png)
+
 ## 参考
 
 * 机器学习实战第7章
+* [Adaboost 算法的原理与推导](https://blog.csdn.net/v_JULY_v/article/details/40718799)
+* [Boosting algorithm: AdaBoost](https://towardsdatascience.com/boosting-algorithm-adaboost-b6737a9ee60c)
 
 
 
