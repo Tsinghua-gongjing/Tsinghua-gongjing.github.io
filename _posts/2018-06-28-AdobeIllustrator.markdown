@@ -73,6 +73,12 @@ Refer to [Adobe Illustrator CC 2017 MAC中文破解版](http://www.web3.xin/soft
   - 路径：`object -> ungroup`
   - 快捷键：`shift+cmd+g`
 
+* **画透明的圆圈**：
+  - 操作：画一个圆圈，或者其他形状，设置为透明的，方便相互重叠，比如画韦恩图
+  - 方案1：直接用shaper tool手动画一个椭圆，会自动识别生成一个圆圈。设置填充为None，线条选定颜色即可。
+  - 方案2：直接用shaper tool手动画一个椭圆，会自动识别生成一个圆圈。在工作区上方有个不透明度（Opacity），可根据需要阈值进行设置，这个与上面的区别是线条也会受到这个阈值的调控，所以当设置不透明度为0（即完全透明）时，线条也是看不见的，即使设置线条很粗也没用。
+  - 方案3：直接用shaper tool手动画一个椭圆，会自动识别生成一个圆圈。在右侧工具栏使用透明（transparent）工具，这个的问题和上面的不透明度（Opacity是一样的。
+
 ## 快捷键
 
 [官方网页](https://helpx.adobe.com/illustrator/using/default-keyboard-shortcuts.html)
