@@ -452,3 +452,13 @@ montage -label '%f' * out.pdf
 # 4 columns x multiple rows
 montage *.png -mode concatenate -tile 4x out.pdf
 ```
+
+### merge multiple .pdf into one
+
+```bash
+# by default: one pdf per page
+convert *pdf merge.pdf
+
+# 和合并图片一样，可以指定行列数（-tile）
+montage *pdf -mode concatenate merge.pdf
+```
