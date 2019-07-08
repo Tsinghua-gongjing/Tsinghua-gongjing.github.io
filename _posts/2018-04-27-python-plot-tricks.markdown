@@ -177,6 +177,8 @@ Non-overlapped text based on module `adjustText` as example [here](https://stack
 # https://stackoverflow.com/questions/19073683/matplotlib-overlapping-annotations-text
 # https://github.com/Phlya/adjustText
 
+from adjustText import adjust_text
+
 texts = []
 for x, y, s in zip(xs, ys, ss):
     texts.append(plt.text(x, y, s))
