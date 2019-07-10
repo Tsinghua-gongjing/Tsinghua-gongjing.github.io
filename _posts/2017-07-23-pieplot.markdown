@@ -43,5 +43,31 @@ ax.pie(sizes, labels=labels,
        autopct=lambda(p): '{:.0f}'.format(p * total / 100), shadow=False, startangle=140)
 ```
 
+### Nested pie plots
 
+```python
+# https://matplotlib.org/3.1.0/gallery/pie_and_polar_charts/nested_pie.html#sphx-glr-gallery-pie-and-polar-charts-nested-pie-py
+
+fig, ax = plt.subplots(figsize=(6,6))
+
+size = 0.4 # 可通过此参数，调节中间空心部分大小
+
+val1 = [9251937, 8605104, 7445960, 7840986] 
+val2 = [4310065, 4020865, 3461761, 3679722] 
+
+cmap = plt.get_cmap("tab20c")
+outer_colors = cmap(np.arange(4)*4)
+# inner_colors = cmap(np.array([1, 2, 5, 6, 9, 10]))
+
+ax.pie(val1, radius=1, colors=outer_colors,
+       wedgeprops=dict(width=size, edgecolor='w'), labels=['A', 'T', 'C', 'G'],autopct='%1.2f%%')
+
+ax.pie(val2, radius=1-size,colors=outer_colors,
+       wedgeprops=dict(width=size, edgecolor='w'),autopct='%1.2f%%')
+
+ax.set(aspect="equal")
+plt.savefig(savefn)
+plt.show()
+```
+[![pie_nested.png](https://i.loli.net/2019/07/10/5d257730d4d3261212.png)](https://i.loli.net/2019/07/10/5d257730d4d3261212.png)
 
