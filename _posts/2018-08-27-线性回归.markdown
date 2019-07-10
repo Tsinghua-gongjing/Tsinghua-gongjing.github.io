@@ -1,0 +1,92 @@
+---
+layout: post
+category: "machinelearning"
+title:  "线性回归"
+tags: [python, machine learning]
+---
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+## 概述
+
+1. 基本概念：
+   - 线性回归（linear regression）：预测数值型的目标值。
+   - 回归方程（regression equation）：依据输入写出一个目标值的计算公式。
+   - 回归系数（regression weights）：方程中的不同特征的权重值。
+   - 回归：求解回归系数的过程。
+   - “回归”来历：Francis Galton在1877年，根据上一代豌豆种子的尺寸预测下一代的尺寸。没有提出回归的概念，但是采用了这个思想（或者叫研究方法）。
+   
+2. 直接求解：
+   - 找出使得误差最小的$$w$$。误差：预测值和真实值之间的差值，如果简单累加，正负将低效，一般使用平方误差。
+   - 平方误差：$$\sum_{i=1}^{m}{(y_i - {x_i}^T w)^2}$$
+   - 矩阵表示：$$(y - Xw)^T(y-Xw)$$
+   - 矩阵求导：通过对$$w$$求导（导数=$$X^T(y-Xw)$$）
+   - 导数求解：当其导数=0时，即求解得到$$w$$：$$w = (X^TX)^{-1}X^Ty$$
+   - 【注意】：$$X^TX^{-1}$$需要对矩阵求逆，所以只适用于逆矩阵存在的时候（需判断逆矩阵是否存在）。Numpy库含有求解的矩阵方法，称作普通最小二乘法（OLS，ordinary least squares）。
+
+3. 判断回归的好坏？
+   - 比如两个单独的数据集，分别做线性回归，有可能得到一样的模型（一样的回归系数），但是此时回归的效果是不不一样的，如何评估？
+   - 计算预测值和真实值之间的匹配程度，即相关系数。
+   - Numpy的函数：`corrcoef(yEstimate, yActual)` [![regression_correlation_coefficient.png](https://i.loli.net/2019/07/10/5d258c96e46ca89050.png)](https://i.loli.net/2019/07/10/5d258c96e46ca89050.png)
+
+4. 局部加权线性回归
+   - 直线拟合建模潜在问题：有可能局部数据不满足线性关系，欠拟合现象
+   - 局部调整：引入偏差，降低预测的均方误差
+   - 局部加权线性回归（Locally Weighted Linear Regression，LWLR）：给待预测点附近的每个点赋予一定权重，在这个子集（待预测点及附近的点）上基于最小均方差进行普通回归。
+   - 使用核对附近点赋予更高权重，常用的是高斯核，其对应的权重如下： $$w(i,j) = exp{(\frac{\|x^i-x\|}{-2k^2})}$$，距离预测点越近，则权重越大。这里需要指定的是参数k（唯一需要考虑的参数），决定了对附近的点赋予多大权重。 [![regression_locally_weighted.png](https://i.loli.net/2019/07/10/5d258f5b3da5d21220.png)](https://i.loli.net/2019/07/10/5d258f5b3da5d21220.png)
+   - 使用不同的k时，局部加权（平滑）的效果是不同的，当k太小时可能会过拟合：[![regression_locally_weighted2.png](https://i.loli.net/2019/07/10/5d2590d608d0a42183.png)](https://i.loli.net/2019/07/10/5d2590d608d0a42183.png)
+   - 【注意】：局部加权对于每一个预测，都需要重新计算加权值？因为输入除了x、y还需要指定预测的点（$$x_i$$），增加了计算量（但其实很多时候大部分的数据点的权重接近于0，如果可以避免这些计算，可减少运行时间）。
+
+5. 缩减系数
+   - 问题：数据特征（n）比样本数目（m）还大（矩阵X不是满秩矩阵），怎么办？前面的方法不行，因为计算$$X^TX^{-1}$$会出错
+   
+   - 岭回归（ridge regression）：在矩阵$$X^TX$$加入$$lambdaI$$使得矩阵非奇异，从而能对$$X^T + \lambdaI$$求逆矩阵。
+   
+   - lasso法：效果好、计算复杂
+   - 前向逐步回归：效果与lasso接近，实现更简单
+   
+## 实现
+
+标准回归（可直接矩阵求解）：
+
+```python
+# 注意判断矩阵是否可逆
+def standRegres(xArr,yArr):
+    xMat = mat(xArr); yMat = mat(yArr).T
+    xTx = xMat.T*xMat
+    if linalg.det(xTx) == 0.0:
+        print "This matrix is singular, cannot do inverse"
+        return
+    ws = xTx.I * (xMat.T*yMat)
+    return ws
+```
+
+局部加权线性回归：
+
+```python
+def lwlr(testPoint,xArr,yArr,k=1.0):
+    xMat = mat(xArr); yMat = mat(yArr).T
+    m = shape(xMat)[0]
+    weights = mat(eye((m)))
+    for j in range(m):                      #next 2 lines create weights matrix
+        diffMat = testPoint - xMat[j,:]     #
+        weights[j,j] = exp(diffMat*diffMat.T/(-2.0*k**2))
+    xTx = xMat.T * (weights * xMat)
+    if linalg.det(xTx) == 0.0:
+        print "This matrix is singular, cannot do inverse"
+        return
+    ws = xTx.I * (xMat.T * (weights * yMat))
+    return testPoint * ws
+```
+
+## 参考
+
+* 机器学习实战第8章
+
+
+
+
+
+
