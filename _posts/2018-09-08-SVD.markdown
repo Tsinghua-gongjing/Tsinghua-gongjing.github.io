@@ -5,6 +5,10 @@ title:  "利用SVD简化数据"
 tags: [python, machine learning]
 ---
 
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
 ## 概述
 
 1. 奇异值分解（singular value decomposition，SVD）：
@@ -16,11 +20,13 @@ tags: [python, machine learning]
    - 电影推荐：协同过滤等
 3. 矩阵分解：
    - 原始矩阵分解成多个矩阵的乘积，新的矩阵是易于处理的形式
-   - 类似于因子分解，比如12分解成两个数的乘积，有多重可能：（1，12），（2，6），（3，4）
+   - 类似于因子分解，比如12分解成两个数的乘积，有多种可能：（1，12），（2，6），（3，4）
    - 多种方式，不同分解技术有不同的性质，适合不同场景
    - 常见的是SVD
 4. SVD：
-   - 将原始数据矩阵`Data`分解成三个矩阵：U，Vy
+   - 将原始数据矩阵$$Data$$分解成三个矩阵：$$U$$，$$\sum$$，$$V^T$$
+   - $$Data$$：m x n，$$U$$：m x m，$$\sum$$：m x n,$$V^T$$：n x n
+   - $$Data_{m \times n} = U_{m \times m}\sum_{m \times n}V_{n \times n}^T$$
 
 ## 实现
 
