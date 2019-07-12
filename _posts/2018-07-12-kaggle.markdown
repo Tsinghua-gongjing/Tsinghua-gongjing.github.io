@@ -1,0 +1,70 @@
+---
+layout: post
+category: "other"
+title:  "kaggle"
+tags: [machine learning]
+---
+
+## 注册
+
+使用邮箱注册
+
+## 安装kaggle-api
+
+a. 安装python的[kaggle](https://github.com/Kaggle/kaggle-api)模块，用于管理项目：
+
+```bash
+% pip install kaggle
+DEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 won't be maintained after that date. A future version of pip will drop support for Python 2.7.
+Collecting kaggle
+  Downloading https://files.pythonhosted.org/packages/f4/de/4f22073f3afa618976ee0721b0deb72b5cde2782057e04a815a6828b53f9/kaggle-1.5.4.tar.gz (54kB)
+    100% |████████████████████████████████| 61kB 572kB/s
+Collecting urllib3<1.25,>=1.21.1 (from kaggle)
+  Downloading https://files.pythonhosted.org/packages/01/11/525b02e4acc0c747de8b6ccdab376331597c569c42ea66ab0a1dbd36eca2/urllib3-1.24.3-py2.py3-none-any.whl (118kB)
+    100% |████████████████████████████████| 122kB 1.9MB/s
+Requirement already satisfied: six>=1.10 in /Users/gongjing/usr/anaconda2/lib/python2.7/site-packages (from kaggle) (1.11.0)
+Requirement already satisfied: certifi in /Users/gongjing/usr/anaconda2/lib/python2.7/site-packages (from kaggle) (2018.1.18)
+Requirement already satisfied: python-dateutil in /Users/gongjing/usr/anaconda2/lib/python2.7/site-packages (from kaggle) (2.7.3)
+Requirement already satisfied: requests in /Users/gongjing/usr/anaconda2/lib/python2.7/site-packages (from kaggle) (2.14.2)
+Collecting tqdm (from kaggle)
+  Downloading https://files.pythonhosted.org/packages/9f/3d/7a6b68b631d2ab54975f3a4863f3c4e9b26445353264ef01f465dc9b0208/tqdm-4.32.2-py2.py3-none-any.whl (50kB)
+    100% |████████████████████████████████| 51kB 10.7MB/s
+Collecting python-slugify (from kaggle)
+  Downloading https://files.pythonhosted.org/packages/c1/19/c3cf1dc65e89aa999f85a4a3a4924ccac765a6964b405d487b7b7c8bb39f/python-slugify-3.0.2.tar.gz
+Collecting text-unidecode==1.2 (from python-slugify->kaggle)
+  Downloading https://files.pythonhosted.org/packages/79/42/d717cc2b4520fb09e45b344b1b0b4e81aa672001dd128c180fabc655c341/text_unidecode-1.2-py2.py3-none-any.whl (77kB)
+    100% |████████████████████████████████| 81kB 12.5MB/s
+Building wheels for collected packages: kaggle, python-slugify
+  Building wheel for kaggle (setup.py) ... done
+  Stored in directory: /Users/gongjing/Library/Caches/pip/wheels/87/ea/09/173986e395d051411b9d547a69fe96cdc26208cb1bcc3e5567
+  Building wheel for python-slugify (setup.py) ... done
+  Stored in directory: /Users/gongjing/Library/Caches/pip/wheels/16/7f/c3/6b0582283ad589d68a306da924a78c74546e010d8106b9b3a9
+Successfully built kaggle python-slugify
+Installing collected packages: urllib3, tqdm, text-unidecode, python-slugify, kaggle
+Successfully installed kaggle-1.5.4 python-slugify-3.0.2 text-unidecode-1.2 tqdm-4.32.2 urllib3-1.24.3
+You are using pip version 19.0.3, however version 19.1.1 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+pip install kaggle  5.16s user 2.41s system 36% cpu 20.634 total
+```
+
+b. 在自己的账户下（https://www.kaggle.com/<username>/account）生成API credentials文件，并放到本地：
+
+```bash
+gongjing@hekekedeiMac ~/.kaggle % pwd
+/Users/gongjing/.kaggle
+gongjing@hekekedeiMac ~/.kaggle % ls
+kaggle.json
+```
+
+## 下载数据
+
+```bash
+% kaggle competitions download -c titanic
+```
+
+## 提交结果
+
+```bash
+kaggle competitions submit -c titanic -f submission.csv -m "Message"
+```
+
