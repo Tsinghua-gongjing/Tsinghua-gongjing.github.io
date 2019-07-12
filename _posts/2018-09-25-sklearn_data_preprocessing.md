@@ -13,7 +13,7 @@ tags: [python, machine learning]
 
 如下图所示，通过6步完成数据预处理操作：
 
-![](https://github.com/Tsinghua-gongjing/100-Days-Of-ML-Code/blob/master/Info-graphs/Day%201.jpg)
+[![Day1_sklearn_data_preprocessing.jpg](https://i.loli.net/2019/07/12/5d28227f77d1689548.jpg)](https://i.loli.net/2019/07/12/5d28227f77d1689548.jpg)
 
 此例用到的[数据](https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/master/datasets/Data.csv)，[代码](https://github.com/MLEveryday/100-Days-Of-ML-Code/blob/master/Code/Day%201_Data_Preprocessing.py)。
 
