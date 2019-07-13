@@ -137,54 +137,6 @@ $$
  \begin{align}\sigma^2 = \frac{1}{n}∑(X_i-\mu)^2\end{align} 
 $$
 ```
-## LATEX常见用法
-
-[这里](https://csrgxtu.github.io/2015/03/20/Writing-Mathematic-Fomulars-in-Markdown/)也总结了一些常见的写法，可以参考一下：
-
-Greek letters:
-
-|Symbol|Script|
-|---|---|
-|$$\alpha$$|\alpha|
-|$$\beta$$|\beta|
-|$$\theta$$|\theta|
-|$$\pi$$|\pi|
-
-
-Power and indices:
-
-|Symbol|Script|
-|---|---|
-|$$k_{n+1}$$|k_{n+1}|
-|$$n^2$$|n^2|
-|$$k_n^2$$|k_n^2|
-|$$k_{n^2}$$|k_{n^2}|
-
-
-Fractions and Binomials:
-
-|Symbol|Script|
-|---|---|
-|$$\frac{n!}{k!(n-k)!}$$|\frac{n!}{k!(n-k)!}|
-|$$\binom{n}{k}$$|\binom{n}{k}|
-|$$\frac{\frac{x}{1}}{x - y}$$|\frac{\frac{x}{1}}{x - y}|
-|$$	^3/_7$$|	^3/_7|
-
-
-Roots：
-
-|Symbol|Script|
-|---|---|
-|$$\sqrt{k}$$|\sqrt{k}|
-|$$\sum_{\substack{0<i<m,0<j<n}} P(i, j)$$|\sum_{\substack{0<i<m,0<j<n}} P(i, j)|
-
-
-Sums and Integrals：
-
-|Symbol|Script|
-|---|---|
-|$$\\sum_{i=1}^{10} t_i$$|\sum_{i=1}^{10} t_i|
-|$$\sqrt[n]{k}$$|\sqrt[n]{k}|
 
 ## 在kramdown中添加html表格，带图片的
 
