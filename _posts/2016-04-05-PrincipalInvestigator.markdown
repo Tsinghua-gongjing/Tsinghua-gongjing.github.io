@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "other"
-title:  "Soft article in WeChat"
+title:  "RNA labs"
 tags: [other]
 ---
 

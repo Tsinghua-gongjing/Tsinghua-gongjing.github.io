@@ -1,6 +1,6 @@
 ---
 layout: post
-category: "other"
+category: "read"
 title:  "读后感-易中天《品三国》"
 tags: [阅读,人生]
 ---

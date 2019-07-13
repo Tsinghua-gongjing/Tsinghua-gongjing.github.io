@@ -1,6 +1,6 @@
 ---
 layout: post
-category: "other"
+category: "read"
 title:  "读后感-东野圭吾《恶意》"
 tags: [阅读,人生]
 ---

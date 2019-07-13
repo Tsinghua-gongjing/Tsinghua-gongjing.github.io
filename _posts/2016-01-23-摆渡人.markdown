@@ -1,6 +1,6 @@
 ---
 layout: post
-category: "other"
+category: "read"
 title:  "读后感-克莱儿-麦克福尔《摆渡人》"
 tags: [阅读,人生]
 ---

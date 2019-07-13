@@ -1,6 +1,6 @@
 ---
 layout: post
-category: "other"
+category: "read"
 title:  "读后感-余华《活着》"
 tags: [阅读,人生]
 ---

@@ -1,6 +1,6 @@
 ---
 layout: post
-category: "other"
+category: "read"
 title:  "读后感-东野圭吾《白夜行》"
 tags: [阅读,人生]
 ---

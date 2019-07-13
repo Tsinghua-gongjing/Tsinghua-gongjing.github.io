@@ -1,6 +1,6 @@
 ---
 layout: post
-category: "other"
+category: "read"
 title:  "观后感-《楚门的世界》"
 tags: [阅读,人生,电影]
 ---
