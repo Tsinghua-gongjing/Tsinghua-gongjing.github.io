@@ -154,3 +154,33 @@ $$
 </table>
 </div>
 ```
+
+## 网址显示乱码的问题
+
+在每个页面下方，有个链接，但是当链接含有中文时，显示出一长串的码，所以需要解析：
+
+post页面地址：
+
+```bash
+https://tsinghua-gongjing.github.io/posts/模型评估与选择.html
+
+```
+
+显示：
+
+```bash
+If you link this blog, please refer to this page, thanks! 
+Post link：https://tsinghua-gongjing.github.io/posts/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9.html
+
+```
+
+在`/_layouts/post.html`页面的代码部分：
+
+```bash
+<div style="margin:10px">
+<br/>
+<b>If you link this blog, please refer to this page, thanks!</b>
+<br/>
+<b>Post link：</b><a href="\\{{site.url}}{{page.url}}" title="{{page.name}}">{{site.url}}{{page.url}}</a>
+</div>
+```

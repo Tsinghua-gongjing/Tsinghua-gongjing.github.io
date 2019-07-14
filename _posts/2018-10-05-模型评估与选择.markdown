@@ -66,9 +66,21 @@ tags: [python, machine learning]
 	- 一个包住另一个，则性能更优，比如下面的A优于C
 	- 如果交叉，难以一般性判断，比如下面的A和B。看曲线下面积。
 	- 平衡点（break-event point。BEP）：准确率=召回率的取值，综合反映性能优劣，越大则性能越好。比如下图中BEP（C）=0.64，BEP（A）=0.8，可认为A优于C。[![P-R-curve.png](https://i.loli.net/2019/07/13/5d29dd93c418b92947.png)](https://i.loli.net/2019/07/13/5d29dd93c418b92947.png)
-	
-	- F1度量：$$F1 = \frac{2 \times P \times R}{P + R} = \frac{2 \times TP}{样本总数 + TP - TN}$$
+6. F1度量：
+	- F1 score: $$F1 = \frac{2 \times P \times R}{P + R} = \frac{2 \times TP}{样本总数 + TP - TN}$$
 	- 不同情形下，对准确率和召回率重视程度不同，所以F1有更一般的形式：$$F_\beta = \frac{(1+\beta^2) \times P \times R}{(\beta^2 \times P) + R}$$。$$\beta=1$$，标准的F1；$$\beta>1$$，召回率更大影响；$$\beta<1$$，准确率更大影响。
+7. n个混淆矩阵上综合考察准确率和召回率：
+	- 1）宏版本：
+	- 在各混淆矩阵上分别计算出准确率和召回率：(P1,R1),(P2,R2),...,(Pn,Rn)，再计算平均值，得到：
+	- 宏准确率：$$ macro-P = \frac{1}{n}\sum_{i=1}^{n}P_i $$
+	- 宏召回率：$$ macro-R = \frac{1}{n}\sum_{i=1}^{n}R_i $$
+	- 宏F1：$$ macro-F1 = \frac{2 \times macro-P \times macro-R}{macro-P + macro-R} $$
+
+	- 2）微版本：
+	- 将各混淆矩阵的对应元素进行平均，得到TP、FP、TN、FN的平均值：$$\overline{TP}, \overline{FP}, \overline{TN}, \overline{FN}, $$，再基于平均值计算，得到：
+	- 微准确率：$$ micro-P = \frac{\overline{TP}}{\overline{TP} + \overline{FP}} $$
+	- 微召回率：$$ micro-R = \frac{\overline{TP}}{\overline{TP} + \overline{FN}} $$
+	- 微F1：$$ micro-F1 = \frac{2 \times micro-P \times micro-R}{micro-P + micro-R} $$
 
 
 ### 偏差与方差
