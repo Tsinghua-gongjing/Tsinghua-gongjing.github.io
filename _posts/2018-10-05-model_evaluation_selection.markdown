@@ -9,6 +9,11 @@ tags: [python, machine learning]
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 
+### 目录
+
+- TOC
+{:toc}
+
 ### 经验误差与过拟合
 
 1. 错误率（error rate）：分类错误的样本数占样本总数。m个样本中有a个分类错误：$$E = \frac{a}{m}$$
@@ -81,9 +86,39 @@ tags: [python, machine learning]
 	- 微准确率：$$ micro-P = \frac{\overline{TP}}{\overline{TP} + \overline{FP}} $$
 	- 微召回率：$$ micro-R = \frac{\overline{TP}}{\overline{TP} + \overline{FN}} $$
 	- 微F1：$$ micro-F1 = \frac{2 \times micro-P \times micro-R}{micro-P + micro-R} $$
+8. ROC & AUC:
+	- 模型：很多情况是预测一个实数概率值，与给定阈值进行比较，高则预测为正，低则预测为负。例子：神经网络，输出值与0.5比较
+	- 根据测试排序，最前面则最可能是正，后面的最可能为负。排序质量的好坏，体现了泛化性能的好坏。
+	- ROC（receiver operating characteristic，受试者工作特征）曲线：源于二战敌机雷达信号检测。**基于预测结果进行排序，逐个把样本作为正例进行预测，计算两个量值，作为曲线的横纵坐标**。
+	- 纵轴：真正例率（True positive rate，TPR），$$TPR = \frac{TP}{TP+FN}$$
+	- 横轴：假正例率（False positive rate，FPR），$$FPR = \frac{FP}{TN+FP}$$ 
+	- 现实数据中，有限样本，曲线不能很平滑：[![ROC_AUC.png](https://i.loli.net/2019/07/14/5d2ac0db2f9cf19173.png)](https://i.loli.net/2019/07/14/5d2ac0db2f9cf19173.png)
 
+	- AUC：曲线下面积，近似计算如下，$$AUC=\frac{1}{2}\sum_{i=1}^{m-1}(x_{i+1}-x_i)(y_i+y_{i+1})$$
 
 ### 偏差与方差
+
+1. 解释泛化性能：
+	- 上面是估计的模型的泛化性能
+	- 为什么是这样的性能？解释：偏差-方差分解（bias-variance decomposition）
+2. 偏差-方差分解：
+	- 对学习算法的期望泛化错误率进行拆解
+	- 例子：回归，
+	- $$测试样本x$$
+	- $$y_D为x在数据集中的标记$$
+	- $$y为x的真实标记$$
+	- $$f(x;D)为训练D上学习的模型f在x上的预测输出$$
+	
+	- 算法期望预测：$$\overline{f}(x)=E_D[f(x;D)]$$
+	- **方差**：$$var(x)=E_D[(f(x;D)-\overline{f}(x))^2]$$，同样大小的训练集的变动所导致的学习性能的变化，刻画了数据扰动所造成的影响。
+	- **噪声**：$$\epsilon^2=E_D[(y_D-y)^2]$$，当前任务上任何学习算法所能达到的期望泛化误差的下界，刻画了学习问题本身的难度。
+	- **偏差**（bias）：$$bias^2(x)=(\overline{f}(x)-y)^2$$，期望输出与真实标记的差别，学习算法的期望预测与真实结果的偏离程度，刻画了算法本身的拟合能力。
+	- 期望泛化误差分解：$$E(f;D)=E_D[(f(x;D)-\overline{f}(x))^2] + (\overline{f}(x)-y)^2 + E_D[(y_D-y)^2]=var(x) + bias^2(x) + \epsilon^2$$，即为方差、偏差、噪声之和。
+
+	- 偏差-方差窘境（bias-variance dilemma）：偏差与方差的冲突
+	- 训练不足：拟合能力弱，训练数据的扰动不影响结果，偏差主导泛化错误率
+	- 训练充足：拟合能力强，训练数据的轻微扰动被学习到，学习模型发生显著变化，过拟合，方差主导泛化错误率 [![bias_variance.png](https://i.loli.net/2019/07/14/5d2ac78921ad484878.png)](https://i.loli.net/2019/07/14/5d2ac78921ad484878.png)
+
 
 ### 参考
 
