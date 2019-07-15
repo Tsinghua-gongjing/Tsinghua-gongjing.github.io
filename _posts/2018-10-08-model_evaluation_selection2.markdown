@@ -253,6 +253,127 @@ TimeSeriesSplit(max_train_size=None, n_splits=3)
 [0 1 2 3 4] [5]
 ```
 
+### 超参数调整
+
+#### 1. 参数 vs 超参数
+
+参考：[手把手教你区分参数和超参数](https://zhuanlan.zhihu.com/p/37476536) 其[原英文版](https://machinelearningmastery.com/difference-between-a-parameter-and-a-hyperparameter/), [超参数优化](https://www.jiqizhixin.com/graph/technologies/24d01e28-ce75-41a6-9cc2-13d921d8816f)
+
+* 参数（model parameter）:模型参数是模型内部的配置变量，其值可以根据数据进行估计。
+	- 模型在进行预测时需要它们。
+	- 它们的值定义了可使用的模型。
+	- 他们是从数据估计或获悉的。
+	- 它们通常不由编程者手动设置。
+	- 他们通常被保存为学习模型的一部分。
+	- 会随着训练进行更新，以优化从而减小损失函数值。
+
+	- 示例：
+	- 神经网络中的权重。
+	- 支持向量机中的支持向量。
+	- 线性回归或逻辑回归中的系数。
+	
+* 超参数（model hyperparameter）：模型超参数是模型外部的配置，其值无法从数据中估计，一般是手动设置的，并且在过程中用于帮助估计模型参数。
+	- 它们通常用于帮助估计模型参数。
+	- 它们通常由人工指定。
+	- 他们通常可以使用启发式设置。
+	- 他们经常被调整为给定的预测建模问题。
+	- 不直接参与到训练过程，属于配置变量，往往是恒定的。
+	- 一般我们都是通过观察在训练过程中的监测指标如损失函数的值或者测试/验证集上的准确率来判断这个模型的训练状态，并通过修改超参数来提高模型效率。
+
+	- 示例：
+	- 训练神经网络的学习速率、优化器、迭代次数、激活函数等。
+	- 用于支持向量机的C和sigma超参数。
+	- K最近邻的K。
+
+#### 2. 超参数优化
+
+构造估计器时被提供的任何参数或许都能被优化，搜索包括：
+
+* 估计器(回归器或分类器，例如 sklearn.svm.SVC())
+* 参数空间
+* 搜寻或采样候选的方法
+* 交叉验证方案
+* 计分函数
+
+#### 3. 超参数优化：网格搜索
+
+网格搜索函数：`GridSearchCV`，候选参数通过参数`param_grid`传入，参数值的所有可能组合都会被评估，以估计最佳组合。下面是文本特征提取的例子：
+
+```python
+# 设定不同的pipeline
+pipeline = Pipeline([
+    ('vect', CountVectorizer()),
+    ('tfidf', TfidfTransformer()),
+    ('clf', SGDClassifier(tol=1e-3)),
+])
+
+# 设定要搜索的参数及值空间
+parameters = {
+    'vect__max_df': (0.5, 0.75, 1.0),
+    # 'vect__max_features': (None, 5000, 10000, 50000),
+    'vect__ngram_range': ((1, 1), (1, 2)),  # unigrams or bigrams
+    # 'tfidf__use_idf': (True, False),
+    # 'tfidf__norm': ('l1', 'l2'),
+    'clf__max_iter': (20,),
+    'clf__alpha': (0.00001, 0.000001),
+    'clf__penalty': ('l2', 'elasticnet'),
+    # 'clf__max_iter': (10, 50, 80),
+}
+
+if __name__ == "__main__":
+    # find the best parameters for both the feature extraction and the classifier
+    grid_search = GridSearchCV(pipeline, parameters, cv=5,
+                               n_jobs=-1, verbose=1)
+```
+
+#### 4. 超参数优化：随机参数优化
+
+随机参数优化：
+	- 实现了参数的随机搜索
+	- 从可能的参数值的分布中进行取样
+	- 可以选择独立于参数个数和可能值的预算
+	- 添加不影响性能的参数不会降低效率
+
+```python
+# specify parameters and distributions to sample from
+param_dist = {"max_depth": [3, None],
+              "max_features": sp_randint(1, 11),
+              "min_samples_split": sp_randint(2, 11),
+              "bootstrap": [True, False],
+              "criterion": ["gini", "entropy"]}
+
+# run randomized search
+n_iter_search = 20
+random_search = RandomizedSearchCV(clf, param_distributions=param_dist,
+                                   n_iter=n_iter_search, cv=5, iid=False)
+```
+
+#### 5. 超参数搜索技巧
+
+- 指定目标量度：可以使用不同的度量参数进行评估
+
+- 指定多个指标：上面的网格搜索和随机搜索均允许指定多个评分指标
+
+```python
+X, y = make_hastie_10_2(n_samples=8000, random_state=42)
+
+scoring = {'AUC': 'roc_auc', 'Accuracy': make_scorer(accuracy_score)}
+
+gs = GridSearchCV(DecisionTreeClassifier(random_state=42),
+                  param_grid={'min_samples_split': range(2, 403, 10)},
+                  scoring=scoring, cv=5, refit='AUC', return_train_score=True)
+gs.fit(X, y)
+results = gs.cv_results_
+```
+
+- 模型选择：开发和评估，评估时在hold-out数据集上进行
+
+- 并发机制：参数设定`n_jobs=-1`即可使得计算并行进行 
+
+#### 6. 暴力搜索的替代
+
+有一些优化的参数搜索方案被开发出来，比如：`linear_model.ElasticNetCV`, `linear_model.LassoCV`
+
 ### 参考
 
 * [模型选择和评估 @sklearn 中文版](https://sklearn.apachecn.org/#/docs/29?id=_3-%e6%a8%a1%e5%9e%8b%e9%80%89%e6%8b%a9%e5%92%8c%e8%af%84%e4%bc%b0)
