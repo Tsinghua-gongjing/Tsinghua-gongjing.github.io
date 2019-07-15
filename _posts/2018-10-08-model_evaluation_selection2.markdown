@@ -430,6 +430,35 @@ array([[1. ,  0.93...,  1. ,  1. ,  0.96...],
        [1. ,  0.96...,  1. ,  1. ,  0.96...]])
 ```
 
+### 模型持久化（存储）
+
+可以使用`pickle`模块操作模型：
+
+- 保存已经训练好的模型：`s = pickle.dumps(clf)`
+- 之后直接导入使用：`clf2 = pickle.loads(s)`
+- 用于新数据的预测：`clf2.predict(X[0:1])`
+
+```python
+>>> from sklearn import svm
+>>> from sklearn import datasets
+>>> clf = svm.SVC()
+>>> iris = datasets.load_iris()
+>>> X, y = iris.data, iris.target
+>>> clf.fit(X, y)
+SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+ decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+ max_iter=-1, probability=False, random_state=None, shrinking=True,
+ tol=0.001, verbose=False)
+
+>>> import pickle
+>>> s = pickle.dumps(clf)
+>>> clf2 = pickle.loads(s)
+>>> clf2.predict(X[0:1])
+array([0])
+>>> y[0]
+0
+```
+
 ### 参考
 
 * [模型选择和评估 @sklearn 中文版](https://sklearn.apachecn.org/#/docs/29?id=_3-%e6%a8%a1%e5%9e%8b%e9%80%89%e6%8b%a9%e5%92%8c%e8%af%84%e4%bc%b0)
