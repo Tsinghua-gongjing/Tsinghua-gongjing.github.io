@@ -374,6 +374,62 @@ results = gs.cv_results_
 
 有一些优化的参数搜索方案被开发出来，比如：`linear_model.ElasticNetCV`, `linear_model.LassoCV`
 
+### 验证曲线与学习曲线
+
+1. 泛化误差=偏差+方差+噪声
+	- 偏差：不同训练集的平均误差
+	- 方差：模型对训练集的变化有多敏感
+	- 噪声：数据的属性
+2. 偏差、方差困境：
+	- 1）选择合适的学习算法和超参数【验证曲线】
+	- 2）使用更多的训练数据【学习曲线】
+3. 验证曲线：
+	- 绘制模型参数与模型性能度量值（比如训练集和验证集的准确率）之间的关系
+	- 能够判断模型是都过拟合或者欠拟合
+	- 能够判断模型的过拟合或者欠拟合是否是某个参数所导致的
+
+	- 下图是一个例子: [![validation_curve.png](https://i.loli.net/2019/07/15/5d2c12235b97487896.png)](https://i.loli.net/2019/07/15/5d2c12235b97487896.png)
+
+```python
+>>> np.random.seed(0)
+>>> iris = load_iris()
+>>> X, y = iris.data, iris.target
+>>> indices = np.arange(y.shape[0])
+>>> np.random.shuffle(indices)
+>>> X, y = X[indices], y[indices]
+
+>>> train_scores, valid_scores = validation_curve(Ridge(), X, y, "alpha",
+...                                               np.logspace(-7, 3, 3),
+...                                               cv=5)
+```
+
+4. 学习曲线：
+	- 训练样本数量和模型性能度量值（比如训练集和验证集的准确率）之间的关系
+	- 帮助我们发现从增加更多的训 练数据中能获益多少
+	- 判断模型的偏差和方差 [![bias_and_variance_training_sample_size.png](https://i.loli.net/2019/07/15/5d2c12ef2d91c47807.png)](https://i.loli.net/2019/07/15/5d2c12ef2d91c47807.png)
+	- 不同的曲线可以看出样本对模型性能的影响，比如下面的例子
+	- 左边的：当增大训练样本数目时，训练集和验证集都收敛于较低的分数，即使再增加样本数量，不会收益
+	- 右边的：当增加训练样本时，验证分数有很大提高，能够收益于样本数目的增加 [![learning_curve.png](https://i.loli.net/2019/07/15/5d2c14972701369920.png)](https://i.loli.net/2019/07/15/5d2c14972701369920.png)
+
+
+```python
+>>> from sklearn.model_selection import learning_curve
+>>> from sklearn.svm import SVC
+
+>>> train_sizes, train_scores, valid_scores = learning_curve(
+...     SVC(kernel='linear'), X, y, train_sizes=[50, 80, 110], cv=5)
+>>> train_sizes            
+array([ 50, 80, 110])
+>>> train_scores           
+array([[0.98..., 0.98 , 0.98..., 0.98..., 0.98...],
+       [0.98..., 1.   , 0.98..., 0.98..., 0.98...],
+       [0.98..., 1.   , 0.98..., 0.98..., 0.99...]])
+>>> valid_scores           
+array([[1. ,  0.93...,  1. ,  1. ,  0.96...],
+       [1. ,  0.96...,  1. ,  1. ,  0.96...],
+       [1. ,  0.96...,  1. ,  1. ,  0.96...]])
+```
+
 ### 参考
 
 * [模型选择和评估 @sklearn 中文版](https://sklearn.apachecn.org/#/docs/29?id=_3-%e6%a8%a1%e5%9e%8b%e9%80%89%e6%8b%a9%e5%92%8c%e8%af%84%e4%bc%b0)
