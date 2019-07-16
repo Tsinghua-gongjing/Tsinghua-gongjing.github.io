@@ -374,6 +374,66 @@ results = gs.cv_results_
 
 有一些优化的参数搜索方案被开发出来，比如：`linear_model.ElasticNetCV`, `linear_model.LassoCV`
 
+### 量化模型预测质量
+
+1. sklearn提供3种方法：
+	- 估计器得分的方法(Estimator score method)
+	- 评分参数(Scoring parameter)
+	- 指标函数(Metric functions)：`metrics`模块实现了针对特定目的评估预测误差的函数
+2. 评分参数(Scoring parameter):
+
+在评估模型的效果时，可以指定特定的评分策略，通过参数`scoring`进行指定：
+
+```python
+>>> from sklearn import svm, datasets
+>>> from sklearn.model_selection import cross_val_score
+>>> iris = datasets.load_iris()
+>>> X, y = iris.data, iris.target
+>>> clf = svm.SVC(probability=True, random_state=0)
+>>> cross_val_score(clf, X, y, scoring='neg_log_loss')
+array([-0.07..., -0.16..., -0.06...])
+>>> model = svm.SVC()
+>>> cross_val_score(model, X, y, scoring='wrong_choice')
+```
+
+3. 使用metric函数定义评分策略：
+	- `sklearn.metrics`模块可提供评估预测分数或者误差
+	- `_score`：预测分数值，越大越好
+	- `_error，_loss`：损失值，越小越好
+	- 为什么不在上面的`scoring`策略中指定？这些评价函数需要额外的参数，不是直接指定一个评估名称字符即可的！
+	
+4. metric函数：现有函数的非默认参数指定
+
+需要调用`make_scorer`函数把评估的量值变成一个打分对象(scoring object):
+
+```python
+>>> from sklearn.metrics import fbeta_score, make_scorer
+>>> ftwo_scorer = make_scorer(fbeta_score, beta=2)
+>>> from sklearn.model_selection import GridSearchCV
+>>> from sklearn.svm import LinearSVC
+>>> grid = GridSearchCV(LinearSVC(), param_grid={'C': [1, 10]}, scoring=ftwo_scorer)
+```
+
+5. metric函数：构建全新的自定义打分函数
+
+```python
+>>> import numpy as np
+>>> def my_custom_loss_func(y_true, y_pred):
+...     diff = np.abs(y_true - y_pred).max()
+...     return np.log1p(diff)
+
+>>> score = make_scorer(my_custom_loss_func, greater_is_better=False)
+>>> X = [[1], [1]]
+>>> y = [0, 1]
+>>> from sklearn.dummy import DummyClassifier
+>>> clf = DummyClassifier(strategy='most_frequent', random_state=0)
+>>> clf = clf.fit(X, y)
+>>> my_custom_loss_func(clf.predict(X), y)
+0.69...
+>>> score(clf, X, y)
+-0.69...
+```
+
 ### 验证曲线与学习曲线
 
 1. 泛化误差=偏差+方差+噪声
