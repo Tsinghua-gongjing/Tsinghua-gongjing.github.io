@@ -439,7 +439,7 @@ array([-0.07..., -0.16..., -0.06...])
 
 #### 6. 指定多个评估参数
 
-在几个函数（`GridSearchCV`,`Rando`）中，均有`scoring`参数，可以指定多个评估参数，可以通过列表指定名称，也可以通过字典：
+在几个函数（`GridSearchCV`,`RandomizedSearchCV`,`cross_validate`）中，均有`scoring`参数，可以指定多个评估参数，可以通过列表指定名称，也可以通过字典：
 
 ```python
 >>> scoring = ['accuracy', 'precision']
@@ -454,15 +454,29 @@ array([-0.07..., -0.16..., -0.06...])
 #### 7. 分类指标
 
 仅二分类：
-	- precision_recall_curve
-	- roc_curve
-可多分类：
-	- cohen_kappa_score
-	- confusion_matrix
-	- hinge_loss
-	- mattews_corrcoef
-可multilabel case（有多个标签的）：
-	- 
+
+- precision_recall_curve
+- roc_curve
+	
+可用于多分类：
+	
+- cohen_kappa_score
+- confusion_matrix
+- hinge_loss
+- mattews_corrcoef
+	
+可用于multilabel case（有多个标签的）：
+	
+-  accuracy_score
+-  classfication_report
+-  f1_score
+-  fbeta_score
+-  hamming_score
+-  jaccard_similarity_score
+-  log_loss
+-  precision_recall_fscore_support
+-  recall_score
+-  zero_one_loss
 
 ### 验证曲线与学习曲线
 
