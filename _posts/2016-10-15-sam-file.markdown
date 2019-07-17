@@ -63,6 +63,22 @@ samtools view -bS *bam chr1 chr2 chr3 > test.bam
 71 + 0 with mate mapped to a different chr
 71 + 0 with mate mapped to a different chr (mapQ>=5)
 
+# Count mapped reads number from sam file
+[zhangqf7@ZIO01 bowtie2_genome]$ samtools flagstat riboseq.sam
+1704656 + 0 in total (QC-passed reads + QC-failed reads)
+0 + 0 secondary
+0 + 0 supplementary
+0 + 0 duplicates
+1704656 + 0 mapped (100.00% : N/A)
+0 + 0 paired in sequencing
+0 + 0 read1
+0 + 0 read2
+0 + 0 properly paired (N/A : N/A)
+0 + 0 with itself and mate mapped
+0 + 0 singletons (N/A : N/A)
+0 + 0 with mate mapped to a different chr
+0 + 0 with mate mapped to a different chr (mapQ>=5)
+
 # for single-end data
 [zhangqf7@bnode02 decay]$ samtools view -F 0x904 RIP_h4.bam| cut -f1 | sort | uniq | wc -l
 104971

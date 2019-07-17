@@ -437,6 +437,33 @@ array([-0.07..., -0.16..., -0.06...])
 -0.69...
 ```
 
+#### 6. 指定多个评估参数
+
+在几个函数（`GridSearchCV`,`Rando`）中，均有`scoring`参数，可以指定多个评估参数，可以通过列表指定名称，也可以通过字典：
+
+```python
+>>> scoring = ['accuracy', 'precision']
+
+>>> scoring = {'accuracy': make_scorer(accuracy_score),
+...            'prec': 'precision'}
+
+>>> cv_results = cross_validate(svm.fit(X, y), X, y,
+...                             scoring=scoring, cv=5)
+```
+
+#### 7. 分类指标
+
+仅二分类：
+	- precision_recall_curve
+	- roc_curve
+可多分类：
+	- cohen_kappa_score
+	- confusion_matrix
+	- hinge_loss
+	- mattews_corrcoef
+可multilabel case（有多个标签的）：
+	- 
+
 ### 验证曲线与学习曲线
 
 #### 1. 泛化误差=偏差+方差+噪声
