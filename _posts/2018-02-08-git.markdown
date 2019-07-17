@@ -187,6 +187,31 @@ ea34578 HEAD@{2}: commit: add distributed
 cb926e7 HEAD@{3}: commit (initial): wrote a readme file
 ~~~
 
+### 撤销commit使用`git reset --soft HEAD^`，慎重使用hard模式
+
+之前遇到了一个情况是：
+
+	- 想提交修改的文件，包含一些数据大文件
+	- 执行了`add`,`commit`操作，然后准备`push`，但是不成功，因为文件太大了
+	- 当前的状态就显示有好几个`commit`，但是没有`push`，所以后面再`add commit`时出错，会先把之前的给`push`到远程
+	- 为了撤销`commit`，我执行了`git reset --hard HEAD~2`，结果就是本地的文件也恢复到了两个版本以前，因为使用的是`hard`模式
+	- 为了恢复被删除的文件，先通过`git reflog`查看所有的head号，如下：
+
+```bash
+[zhangqf7@ZIO01 .git]$ git reflog
+57c0e95 HEAD@{0}: reset: moving to HEAD~2
+237b1ff HEAD@{1}: commit: syn
+d556f75 HEAD@{2}: commit: syn
+57c0e95 HEAD@{3}: commit: syn
+a2a9919 HEAD@{4}: commit: .
+4e8c1ae HEAD@{5}: commit: add iclip_compare_with_human.py
+919612e HEAD@{6}: commit: add iclip
+4cafbac HEAD@{7}: clone: from https://github.com/Tsinghua-gongjing/zebrafish_structure
+```
+
+	- 知道哪个版本是包含自己想要的信息的，我的是`d556f75`
+	- 使用`git reset –hard d556f75`即恢复到这个版本，此时的文件也是被恢复的
+
 ### 工作原理
 
 我们修改的文件，或者新增加的文件，通过git add命令是先提交到本地的缓存区(Stage)，然后通过commit命令才是提交到具体的分支（比如默认构建的分支master）上，更新到最新的文件状态。
