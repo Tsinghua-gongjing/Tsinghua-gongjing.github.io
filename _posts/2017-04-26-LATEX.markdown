@@ -66,6 +66,7 @@ tags: [latex]
 |Symbol|Script|
 |---|---|
 |$$\overline{abc}$$|\overline{abc}|
+|$$\overline{abc} \\ a_i$$|\overline{abc} \\\ a_i，两个斜杠`\\`表示分行|
 
 ## 参考
 

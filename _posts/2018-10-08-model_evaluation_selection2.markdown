@@ -380,9 +380,9 @@ results = gs.cv_results_
 
 - 估计器得分的方法(Estimator score method)
 - 评分参数(Scoring parameter)
-- 指标函数(Metric functions)：`metrics`模块实现了针对特定目的评估预测误差的函数
+- 指标函数(Metric functions)：`metrics`模块实现了针对特定目的评估预测误差的函数 [![sklearn_model_performance_metric.png](https://i.loli.net/2019/07/18/5d2fea6a8a9ec86447.png)](https://i.loli.net/2019/07/18/5d2fea6a8a9ec86447.png)
 	
-#### 2. 评分参数(Scoring parameter)
+#### 2. 评分参数(Scoring parameter): 分类、聚类、回归
 
 在评估模型的效果时，可以指定特定的评分策略，通过参数`scoring`进行指定：
 
@@ -455,28 +455,51 @@ array([-0.07..., -0.16..., -0.06...])
 
 仅二分类：
 
-- precision_recall_curve
-- roc_curve
-	
+| Metric | Formule | 
+|:--------|:-------:|
+| precision_recall_curve   | $$precision=\frac{TP}{TP+FP}, recall=\frac{TP}{TP+FN}$$  |   
+| roc_curve   |   $$FPR=\frac{FP}{FP+TP}, TPR=\frac{TP}{TP+FN}$$ |   
+
+
 可用于多分类：
-	
-- cohen_kappa_score
-- confusion_matrix
-- hinge_loss
-- mattews_corrcoef
-	
+
+| Metric | Formule | 
+|:--------|:-------:|
+| cohen_kappa_score   | $$\kappa = (p_o - p_e) / (1 - p_e)$$ |
+| confusion_matrix   |  By definition a confusion matrix C is such that C_{i, j} is equal to the number of observations known to be in group i but predicted to be in group j.Thus in binary classification, the count of true negatives is C_{0,0}, false negatives is C_{1,0}, true positives is C_{1,1} and false positives is C_{0,1}.  |
+| hinge_loss(binary)   |  $$L_\text{Hinge}(y, w) = \max\left\{1 - wy, 0\right\} = \left\|1 - wy\right\|_+$$  |
+| hinge_loss(multi)   |  $$L_\text{Hinge}(y_w, y_t) = \max\left\{1 + y_t - y_w, 0\right\}$$  |
+| mattews_corrcoef(binary)   |  $$MCC = \frac{tp \times tn - fp \times fn}{\sqrt{(tp + fp)(tp + fn)(tn + fp)(tn + fn)}}$$，马修斯相关系数  |
+| mattews_corrcoef(multi)   |  $$MCC = \frac{c \times s - \sum_{k}^{K} p_k \times t_k}{\sqrt{(s^2 - \sum_{k}^{K} p_k^2) \times (s^2 - \sum_{k}^{K} t_k^2)}}$$  |
+
 可用于multilabel case（有多个标签的）：
-	
--  accuracy_score
--  classfication_report
--  f1_score
--  fbeta_score
--  hamming_score
--  jaccard_similarity_score
--  log_loss
--  precision_recall_fscore_support
--  recall_score
--  zero_one_loss
+
+| Metric | Formule | 
+|:--------|:-------:|
+| accuracy_score   |  $$\texttt{accuracy}(y, \hat{y}) = \frac{1}{n_\text{samples}} \sum_{i=0}^{n_\text{samples}-1} 1(\hat{y}_i = y_i)$$  |
+| classfication_report   |precision,recall,f1-score,support, accuracy,macro avg,weighted avg|
+| f1_score   | $$F_1 =  \frac{2 \times \text{precision} \times \text{recall}}{ \text{precision} + \text{recall}}$$  |
+| fbeta_score   |  $$F_\beta = (1 + \beta^2) \frac{\text{precision} \times \text{recall}}{\beta^2 \text{precision} + \text{recall}}$$  |
+| hamming_loss   |  $$L_{Hamming}(y, \hat{y}) = \frac{1}{n_\text{labels}} \sum_{j=0}^{n_\text{labels} - 1} 1(\hat{y}_j \not= y_j)$$|
+| jaccard_similarity_score   | $$J(y_i, \hat{y}_i) = \frac{\|y_i \cap \hat{y}_i\|}{\|y_i \cup \hat{y}_i\|}$$  |
+| log_loss(binary)  | $$L_{\log}(y, p) = -\log \operatorname{Pr}(y\|p) \\ = -(y \log (p) + (1 - y) \log (1 - p))$$，又被称为 logistic regression loss（logistic 回归损失）或者 cross-entropy loss（交叉熵损失） 定义在 probability estimates （概率估计）|
+| log_loss(multi)  | $$L_{\log}(Y, P) = -\log \operatorname{Pr}(Y\|P) \\ = - \frac{1}{N} \sum_{i=0}^{N-1} \sum_{k=0}^{K-1} y_{i,k} \log p_{i,k}$$ |
+| precision_recall_fscore_support   |Compute precision, recall, F-measure and support for each class  |
+| recall_score   |  $$\frac{TP}{TP+FN}$$ |
+| zero_one_loss   |  $$L_{0-1}(y_i, \hat{y}_i) = 1(\hat{y}_i \not= y_i)$$ |
+
+#### 8. 回归指标
+
+| Metric | Formule | 
+|:--------|:-------:|
+|explained_variance_score|$$explained\_{}variance(y, \hat{y}) = 1 - \frac{Var\{ y - \hat{y}\}}{Var\{y\}}$$|
+|max_error|$$\text{Max Error}(y, \hat{y}) = max(\| y_i - \hat{y}_i \|)$$|
+|mean_absolute_error|$$\text{MAE}(y, \hat{y}) = \frac{1}{n_{\text{samples}}} \sum_{i=0}^{n_{\text{samples}}-1} \left\| y_i - \hat{y}_i \right\|$$|
+|mean_squared_error |$$\text{MSE}(y, \hat{y}) = \frac{1}{n_\text{samples}} \sum_{i=0}^{n_\text{samples} - 1} (y_i - \hat{y}_i)^2.$$|
+|mean_squared_log_error|$$\text{MSLE}(y, \hat{y}) = \frac{1}{n_\text{samples}} \sum_{i=0}^{n_\text{samples} - 1} (\log_e (1 + y_i) - \log_e (1 + \hat{y}_i) )^2$$|
+|median_absolute_error|$$\text{MedAE}(y, \hat{y}) =\text{median}(\mid y_1 - \hat{y}_1 \mid, \ldots, \mid y_n -\hat{y}_n \mid)$$|
+|r2_score|$$R^2(y, \hat{y}) = 1 - \frac{\sum_{i=1}^{n} (y_i - \hat{y}_i)^2}{\sum_{i=1}^{n} (y_i - \bar{y})^2}$$|
+
 
 ### 验证曲线与学习曲线
 
