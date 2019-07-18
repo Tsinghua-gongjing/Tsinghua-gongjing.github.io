@@ -19,6 +19,7 @@ tags: [python, machine learning]
 * 模块：sklearn.feature_selection
 * 可进行特征选择和数据降维
 * 提高模型的准确度或者增强在高维数据上的性能
+* 是特征工程的一部分 [![feature_engeniering.jpg](https://i.loli.net/2019/07/18/5d30684b21b0c66789.jpg)](https://i.loli.net/2019/07/18/5d30684b21b0c66789.jpg)
 
 ### 2. 方法：移除低方差特征
 
@@ -127,3 +128,4 @@ clf.fit(X, y)
 
 * 机器学习周志华：特征选择与稀疏学习
 * [sklearn 中文](https://sklearn.apachecn.org/#/docs/14?id=_113-%e7%89%b9%e5%be%81%e9%80%89%e6%8b%a9)
+* [机器学习中，有哪些特征选择的工程方法？@知乎](https://www.zhihu.com/question/28641663)
