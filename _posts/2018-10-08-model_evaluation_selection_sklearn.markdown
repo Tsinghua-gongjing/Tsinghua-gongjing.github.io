@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "machinelearning"
-title:  "模型评估与选择2"
+title:  "sklearn: 模型评估与选择"
 tags: [python, machine learning]
 ---
 

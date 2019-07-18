@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "machinelearning"
-title:  "sklearn数据预处理"
+title:  "sklearn: 数据预处理"
 tags: [python, machine learning]
 ---
 
