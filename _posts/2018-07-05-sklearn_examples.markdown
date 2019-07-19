@@ -63,7 +63,7 @@ tags: [machine learning]
 #### The Johnson-Lindenstrauss bound for embedding with random projections
 
 - 目标：
-- 数据集：
+- 数据集：fetch_20newsgroups_vectorized
 - 模型：
 
 ---
@@ -78,11 +78,11 @@ tags: [machine learning]
 
 ---
 
-#### Explicit feature map approximation for RBF kernels
+#### Explicit feature map approximation for RBF kernels [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/plot_kernel_approximation.ipynb)
 
-- 目标：
-- 数据集：
-- 模型：
+- 目标：通过不同的特征映射(变换)近似高斯内核。
+- 数据集：digitals
+- 模型：内核近似函数`RBFSampler`, `Nystroem`
 
 ---
 
@@ -164,6 +164,260 @@ tags: [machine learning]
 
 ---
 
+### Classification
+
+---
+
+#### Recognizing hand-written digits [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/classification/plot_digits_classification.ipynb)
+
+- 目标：预测手写数字，前一半数据用于训练，预测后一半数据，画出了几个例子
+- 数据集：digital数据集
+- 模型：SVM高斯内核
+
+- 图像数据转换：`data = digits.images.reshape((n_samples, -1))`，把原来的(1797, 8, 8)数据转换为(1797, 64)维，进行训练
+- 使用了评估量：classification_report+confusion_matrix
+
+---
+
+### Clustering
+
+---
+
+#### Feature agglomeration [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/cluster/plot_digits_agglomeration.ipynb)
+
+- 目标：对于手写数字数据集，合并相似的特征，进行特征聚集。这里是将原始的数据集经过特征聚集从64变为32（reduced），基于这个数据也可以重建回原来的数据集（restored）。
+- 数据集：digitals
+- 模型：特征聚集`cluster.FeatureAgglomeration`
+
+---
+
+#### Demo of DBSCAN clustering algorithm [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/classification/plot_dbscan.ipynb)
+
+- 目标：在生成的数据集上进行DBSCAN聚类，并计算不同的评估聚类效果的统计量
+- 数据集：生成数据集，750x2
+- 模型：DBSCAN聚类
+
+---
+#### Color Quantization using K-Means [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/cluster/plot_color_quantization.ipynb)
+
+- 目标：对一个RGB图片（427x640x3），用kmeans对颜色进行聚类，得到64个新的颜色中心值，然后预测原来图片的每个像素点的新的RGB值（从这64个选取一个），然后就可以画新的只有64个颜色值所表示的图片了。实现了用64个颜色表示原来的96615个颜色的，可以极大的降低了图片存储的大小。
+- 数据集：一张图片（china.jpg），427x640x3
+- 模型：kmeans聚类
+
+---
+
+### Ensemble methods
+
+---
+
+#### Discrete versus Real AdaBoost [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/ensemble/)
+
+- 目标：
+- 数据集：
+- 模型：
+
+---
+
+#### Multi-class AdaBoosted Decision Trees [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/ensemble/)
+
+- 目标：
+- 数据集：
+- 模型：
+
+---
+
+#### Decision Tree Regression with AdaBoost [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/ensemble/)
+
+- 目标：
+- 数据集：
+- 模型：
+
+---
+
+#### Two-class AdaBoost [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/ensemble/)
+
+- 目标：
+- 数据集：
+- 模型：
+
+---
+
+###============================================================ [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/ensemble/)
+
+- 目标：
+- 数据集：
+- 模型：
+
+---
+
+#### OOB Errors for Random Forests [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/ensemble/)
+
+- 目标：
+- 数据集：
+- 模型：
+
+---
+
+#### Feature transformations with ensembles of trees [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/ensemble/)
+
+- 目标：
+- 数据集：
+- 模型：
+
+---
+
+#### Feature importances with forests of trees [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/ensemble/)
+
+- 目标：
+- 数据集：
+- 模型：
+
+---
+
+#### Pixel importances with a parallel forest of trees [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/ensemble/)
+
+- 目标：
+- 数据集：
+- 模型：
+
+---
+
+#### Plot the decision surfaces of ensembles of trees on the iris dataset [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/ensemble/)
+
+- 目标：
+- 数据集：
+- 模型：
+
+---
+
+#### Early stopping of Gradient Boosting [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/ensemble/)
+
+- 目标：
+- 数据集：
+- 模型：
+
+---
+
+#### Gradient Boosting Out-of-Bag estimates [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/ensemble/)
+
+- 目标：
+- 数据集：
+- 模型：
+
+---
+
+#### Prediction Intervals for Gradient Boosting Regression [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/ensemble/)
+
+- 目标：
+- 数据集：
+- 模型：
+
+---
+
+#### Gradient Boosting regression [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/ensemble/)
+
+- 目标：
+- 数据集：
+- 模型：
+
+---
+
+#### Gradient Boosting regularization [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/ensemble/)
+
+- 目标：
+- 数据集：
+- 模型：
+
+---
+
+#### IsolationForest example [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/ensemble/)
+
+- 目标：
+- 数据集：
+- 模型：
+
+---
+
+#### Hashing feature transformation using Totally Random Trees [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/ensemble/)
+
+- 目标：
+- 数据集：
+- 模型：
+
+---
+
+#### Comparing random forests and the multi-output meta estimator [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/ensemble/)
+
+- 目标：
+- 数据集：
+- 模型：
+
+---
+
+#### Plot the decision boundaries of a VotingClassifier [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/ensemble/)
+
+- 目标：
+- 数据集：
+- 模型：
+
+---
+
+#### Plot class probabilities calculated by the VotingClassifier [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/ensemble/)
+
+- 目标：
+- 数据集：
+- 模型：
+
+---
+
+#### Plot individual and voting regression predictions [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/ensemble/)
+
+- 目标：
+- 数据集：
+- 模型：
+
+---
+
+### Tutorial exercises
+
+---
+
+#### Digits Classification Exercise [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/exercises/plot_digits_classification_exercise.ipynb)
+
+- 目标：对digital数据进行分类预测，前90%数据集训练，后10%用于测试
+- 数据集：digital数据集
+- 模型：KNN，logistic regression
+
+---
+
+#### Cross-validation on Digits Dataset Exercise [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/exercises/plot_cv_digits.ipynb)
+
+- 目标：对digital数据使用SVM进行分类预测，并进行cross validation，所以这里不像上面的那样，自行拆分训练集和测试集。同时，还测试了模型SVC中的参数`C`(Penalty parameter C of the error term.)取不同的数值大小时，随对应的`cross_val_score`。
+- 数据集：digital数据集
+- 模型：SVM
+
+---
+
+#### SVM Exercise [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/exercises/plot_iris_exercise.ipynb)
+
+- 目标：对Iris数据进行分类预测，使用SVM模型，并尝试不同的内核（参数`kernel`指定）比较效果。
+- 数据集：Iris数据集
+- 模型：SVM的3个不同内核函数（linear线性，rbf高斯（默认），poly多项式）
+
+---
+
+#### Cross-validation on diabetes Dataset Exercise [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/exercises/plot_cv_diabetes.ipynb)
+
+- 目标：对diabetes数据进行多分类预测，使用交叉检验
+- 数据集：diabetes数据集
+- 模型：线性模型LassoCV和Lasso
+
+- 数据集[diabetes](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_diabetes.html)
+- 样本数目：442
+- 特征数目：10，-.2 < x < .2之间的实数
+- 类别数目：25 - 346，整数，所以是多分类的，不是二分类的
+
+---
 
 ### 参考
 
