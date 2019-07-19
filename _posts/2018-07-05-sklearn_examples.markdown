@@ -20,19 +20,19 @@ tags: [machine learning]
 
 ---
 
-#### Compact estimator representations
+#### Compact estimator representations [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/plot_changed_only_pprint_parameter.ipynb)
 
-- 目标：
-- 数据集：
-- 模型：
+- 目标：打印模型及参数，可以设置只打印非默认参数值的参数，否则会把全部的参数及其值打印出来。在`0.21.`及之后的版本采用，之前的版本没有。
+- 数据集：无
+- 模型：无
 
 ---
 
-#### Isotonic Regression
+#### Isotonic Regression [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/plot_isotonic_regression.ipynb)
 
-- 目标：
-- 数据集：
-- 模型：
+- 目标：在生成数据集中，用线性回归和保序回归对数据进行拟合。保序回归不假设其预测是线性的，所以可以预测非线性的关系。
+- 数据集：随机生成的二维数据点
+- 模型：Isotonic regression（保序回归），线性回归
 
 ---
 
@@ -44,19 +44,19 @@ tags: [machine learning]
 
 ---
 
-#### Multilabel classification
+#### Multilabel classification [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/plot_multilabel.ipynb)
 
-- 目标：
-- 数据集：
-- 模型：
+- 目标：对于多label的数据集先进行降维（PCA非监督降维，CCA是监督的降维），再进行分类，多标签的可以训练多个分类器。
+- 数据集：随机产生
+- 模型：PCA、CCA用于降维，OneVsRestClassifier的两个SVC线性内核的分类器
 
 ---
 
-#### Comparing anomaly detection algorithms for outlier detection on toy datasets
+#### Comparing anomaly detection algorithms for outlier detection on toy datasets [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/plot_anomaly_comparison.ipynb)
 
-- 目标：
-- 数据集：
-- 模型：
+- 目标：评估不同的异常检测的算法
+- 数据集：随机产生的二维数据，从单一的到多modal的分布
+- 模型：robust covariance，one-class SVM，isolation forest，local outliner factor
 
 ---
 
@@ -68,11 +68,13 @@ tags: [machine learning]
 
 ---
 
-#### Comparison of kernel ridge regression and SVR
+#### Comparison of kernel ridge regression and SVR [[notebook]](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/plot_kernel_ridge_regression.ipynb)
 
-- 目标：
-- 数据集：
-- 模型：
+- 目标：比较在随机数据上，核岭回归和SVR的效果
+- 数据集：随机产生
+- 模型：kernel ridge regression（KRR，核脊回归）vs SVR
+- KRR：Ridge Regression(RR，脊回归)的kernel版本，与Support Vector Regression(SVR，支持向量回归)类似。引入kernel的RR，也就是KRR，能够处理非线性数据，即，将数据映射到某一个核空间，使得数据在这个核空间上线性可分。
+- SVR：支持向量回归
 
 ---
 
