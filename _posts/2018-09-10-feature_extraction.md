@@ -228,6 +228,40 @@ array([[1, 1, 1, 0, 1, 1, 1, 0],
 
 * 缺点：破坏文档的内部结构（含义）
 
+#### 8. 图像特征提取
+
+* 函数：`extract_patches_2d`，从图像二维数组或沿第三轴颜色信息提取patch
+* 函数：`reconstruct_from_patches_2d`，从所有patch重建图像
+
+```python
+>>> import numpy as np
+>>> from sklearn.feature_extraction import image
+
+>>> one_image = np.arange(4 * 4 * 3).reshape((4, 4, 3))
+>>> one_image[:, :, 0]  # R channel of a fake RGB picture
+array([[ 0,  3,  6,  9],
+ [12, 15, 18, 21],
+ [24, 27, 30, 33],
+ [36, 39, 42, 45]])
+
+>>> patches = image.extract_patches_2d(one_image, (2, 2), max_patches=2,
+...     random_state=0)
+>>> patches.shape
+(2, 2, 2, 3)
+>>> patches[:, :, :, 0]
+array([[[ 0,  3],
+ [12, 15]],
+
+ [[15, 18],
+ [27, 30]]])
+>>> patches = image.extract_patches_2d(one_image, (2, 2))
+>>> patches.shape
+(9, 2, 2, 3)
+>>> patches[4, :, :, 0]
+array([[15, 18],
+ [27, 30]])
+```
+
 ### 参考
 
 * [sklearn 中文](https://sklearn.apachecn.org/#/docs/39?id=_52-%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96)
