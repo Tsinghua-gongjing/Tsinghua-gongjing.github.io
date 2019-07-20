@@ -145,7 +145,7 @@ print vectorizer2.fit_transform(corpus).toarray()
 * 向量化：将文本文档集合转换为数字集合特征向量
 * 词集模型：只考虑单词出现与否，不考虑频率
 * 稀疏：得到的文本矩阵很多特征值为0，通常大于99%
-* **类：`CountVectorizer`，词切分+频数统计，用法参见上面的例子**
+* **类：`CountVectorizer`，词切分+频数统计，用法参见上面的例子**，同时注意文本文件的编码方式，一般是`utf-8`编码，如果是其他编码，需要通过参数`encoding`进行指定。
 
 #### 5. Tf-idf项加权
 
@@ -197,6 +197,36 @@ array([[0.81940995, 0.        , 0.57320793],
 <4x9 sparse matrix of type '<... 'numpy.float64'>'
  with 19 stored elements in Compressed Sparse ... format>
 ```
+
+#### 6. 应用实例
+
+* 监督学习：使用稀疏特征对文档进行分类 [notebook](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/text/plot_document_classification_20newsgroups.ipynb)
+* 非监督学习：kmeans对文档进行聚类 [notebook](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/text/plot_document_clustering.ipynb)
+* 松弛聚类：非负矩阵发现语料库的主题 [notebook](https://github.com/Tsinghua-gongjing/sklearn/blob/master/auto_examples_jupyter/applications/plot_topics_extraction_with_nmf_lda.ipynb)
+
+#### 7. n-gram表示
+
+* 词语表示限制：无法捕获短语或多词表达，忽略单词顺序依赖，单词拼写错误
+* 构建n-gram集合，不是简单的uni-gram集合
+
+下面的例子中，单词words和wprds想表达相同意思，只是拼写错误，通过2-gram分析可以把他们的相同特征提取到：
+
+```python
+>>> ngram_vectorizer = CountVectorizer(analyzer='char_wb', ngram_range=(2, 2))
+>>> counts = ngram_vectorizer.fit_transform(['words', 'wprds'])
+>>> ngram_vectorizer.get_feature_names() == (
+...     [' w', 'ds', 'or', 'pr', 'rd', 's ', 'wo', 'wp'])
+True
+>>> counts.toarray().astype(int)
+array([[1, 1, 1, 0, 1, 1, 1, 0],
+ [1, 1, 0, 1, 1, 1, 0, 1]])
+```
+
+* 类`CountVectorizer`参数`analyzer`指定
+* `analyzer='char_wb'`：只能是每个单词内的
+* `analyzer='char'`：可以跨单词创建n-gram
+
+* 缺点：破坏文档的内部结构（含义）
 
 ### 参考
 
