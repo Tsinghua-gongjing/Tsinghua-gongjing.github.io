@@ -9,6 +9,11 @@ tags: [python, machine learning]
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 
+### 目录
+
+- TOC
+{:toc}
+
 ## 概述
 
 决策树算法：由一个决策图和可能的结果（包括资源成本和风险）组成， 用来创建到达目标的规划。
@@ -17,7 +22,7 @@ tags: [python, machine learning]
 
  - 判断模块（decision block/node）
  - 终止模块（terminating block/node）：已得出结论，可终止运行
- - 分支（branch/sub-tree）：从判断模块引出的左右箭头 ![](https://cdn-images-1.medium.com/max/1600/0*X-UrBzBeKMnoTY6H.png)
+ - 分支（branch/sub-tree）：从判断模块引出的左右箭头 [![decision_tree_branch.png](https://i.loli.net/2019/07/22/5d35aad8ea6c234105.png)](https://i.loli.net/2019/07/22/5d35aad8ea6c234105.png)
 
 ### 建树步骤
 
@@ -58,7 +63,7 @@ ID3和C4.5构建的树规模较大，为了提高建树的效率，CART方法被
 
 三种算法的比较：
 
-![](https://www.yingjoy.cn/wp-content/uploads/2018/03/3-1.png)
+[![decision_tree_comparison.png](https://i.loli.net/2019/07/22/5d35ab5097e1894078.png)](https://i.loli.net/2019/07/22/5d35ab5097e1894078.png)
 
 ### 损失函数
 
@@ -136,7 +141,7 @@ graph = graphviz.Source(dot_data)
 graph.render("iris") 
 ```
 
-![](https://cdn-images-1.medium.com/max/1600/1*fYqvum2ZQQalD_t05_UBug.png)
+[![decision_tree_case.png](https://i.loli.net/2019/07/22/5d35ab994ae8945014.png)](https://i.loli.net/2019/07/22/5d35ab994ae8945014.png)
 
 ## 参考
 
