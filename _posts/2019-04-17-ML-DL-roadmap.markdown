@@ -40,13 +40,16 @@ tags: [python, machine learning, deep learning]
 
 #### 【基础】3. 统计学习
 
-![](/assets/ML-roadmap/statistical_learning.png)
+![](/assets/ML-roadmap/statistical_learning_1.png)
+![](/assets/ML-roadmap/statistical_learning_2.png)
 
 ---
 
 #### 【算法】1. 监督学习
 
-![](/assets/ML-roadmap/supervised_learning.png)
+![](/assets/ML-roadmap/supervised_learning_1.png)
+![](/assets/ML-roadmap/supervised_learning_2.png)
+![](/assets/ML-roadmap/supervised_learning_3.png)
 
 ---
 
