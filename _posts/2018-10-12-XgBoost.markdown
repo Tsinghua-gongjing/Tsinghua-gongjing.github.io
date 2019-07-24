@@ -1,0 +1,82 @@
+---
+layout: post
+category: "machinelearning"
+title:  "Xgboost"
+tags: [python, machine learning]
+---
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+### 目录
+
+- TOC
+{:toc}
+
+---
+
+### XGBoost 简介
+
+* XGBoost：Extreme Gradient Boosting，极限梯度提升
+* 2014年诞生
+* 大规模并行boosted tree的工具：复合树（tree ensemble）模型
+* 专注于梯度提升算法
+* 优良的学习效果及高效的训练速度
+* 2015 kaggle比赛，29个获胜，17个使用XGBoost库，11个使用神经网络
+* 解决监督学习问题
+
+---
+
+### GBDT：梯度提升决策树
+
+* XGBoost实现的是通用的tree boosting算法，次方法的代表是GBDT
+* GBDT训练原理：
+	* 使用训练集和真实值训练一棵树，用这棵树预测训练集，得到预测值
+	* 计算预测值和真实值之间的残差
+	* 训练第二颗树，此时不使用真实值作为标准答案，而使用残差作为标准答案，得到这颗树的预测值
+	* 计算此时的预测值和真实值之间的残差
+	* 以此类推
+* GBDT预测：对于新的样本，每棵树否有一个预测值，将这些值相加，即得到最终预测值。
+* GBDT核心：
+	* 第二颗树开始，拟合的是前面预测值的残差
+	* 可一步步逼近真值
+	* 使用了平方损失作为损失函数： $$l(y_i, \hat{y_i})=(y_i - \hat{y_i})^2$$ 
+	* 如果使用其他损失，则残差不能再保证逼近真值
+
+	* 方案：从平方损失推广到二阶可导的损失？
+	* XGBoost
+
+---
+
+### XGboost：GBDT的推广
+
+GBDT是XGboost的一个特例：
+
+* XGBoost：将任意的损失函数做泰勒展开到第二阶，使用前两阶作为改进的残差
+* 可证明：GBDT使用的残差是泰勒展开到一阶的结果
+* GBDT是XGBoost的一个特例
+
+XGBoost：引入正则化项
+
+* 防止模型过拟合，一般需引入正则化项
+* 决策树的复杂度：树的深度
+* XGBoost的复杂度：叶子节点的个数
+* 加入L2正则化，平滑各叶子节点的预测值
+
+支持列抽样
+
+* 每棵树训练时，不使用所有特征
+
+---
+
+### 参考
+
+* [KAGGLE ENSEMBLING GUIDE](https://mlwave.com/kaggle-ensembling-guide/)
+* [XGBoost简介](https://blog.csdn.net/wuxiaosi808/article/details/77985345)
+* chen tianqi: [Introduction to Boosted Trees](https://xgboost.readthedocs.io/en/latest/tutorials/model.html), 中文版翻译：[XGBoost入门系列第一讲](https://zhuanlan.zhihu.com/p/27816315)，
+
+
+
+
+

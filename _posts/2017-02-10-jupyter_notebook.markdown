@@ -75,3 +75,12 @@ $ ssh -N -f -L localhost:9987:localhost:9988 zhangqf7@166.111.152.116 -p 12000
 # type url: localhost:9987
 # may need token
 ```
+
+### 自动生成目录
+
+主要是参考这里 [为Jupyter Notebook添加目录](https://zhuanlan.zhihu.com/p/24029578)：
+
+```python
+# 安装后重启
+~/anaconda3/bin/conda install -c conda-forge jupyter_contrib_nbextensions
+```
