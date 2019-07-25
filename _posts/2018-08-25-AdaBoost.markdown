@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "machinelearning"
-title:  "AdaBoost算法"
+title:  "集成算法和AdaBoost"
 tags: [python, machine learning]
 ---
 
@@ -9,12 +9,22 @@ tags: [python, machine learning]
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 
-## 概述
+### 目录
+
+- TOC
+{:toc}
+
+### 集成算法
 
 1. 集成算法（ensemble method）：又叫元算法（meta-algorithm），将不同的分类器组合起来。
   - 集成不同的算法
   - 同一算法在不同设置下的集成
-  - 数据集不同部分分配给不同分类器之后的集成
+  - 数据集不同部分分配给不同分类器之后的集成 [![ensemble_learning.png](https://i.loli.net/2019/07/25/5d391cbfb658847953.png)](https://i.loli.net/2019/07/25/5d391cbfb658847953.png)
+
+---
+
+### bagging vs boosting
+
 2. bagging：
   - 自举汇聚法（bootstrap aggregating）：从原始数据集选择S次以得到S个数据集。
   - 每个数据集与原数据集大小相等，可以重复抽取。
@@ -25,7 +35,12 @@ tags: [python, machine learning]
   - 类似于bagging
   - 串行训练，每一个新的分类器都是基于已训练的分类器，尤其关注之前的分类器错误分类的那部分样本数据
   - 所有分类器的加权求和，而bagging中的分类器的权重是相等的。boosting的分类器权重：对应分类器在上一轮中的成功度。
-  - AdaBoost（adaptive boosting，自适应boosting）：最流行的一个boosting版本。
+  - AdaBoost（adaptive boosting，自适应boosting）：最流行的一个boosting版本。[![boosting_vs_bagging.png](https://i.loli.net/2019/07/25/5d391e8dcab9221527.png)](https://i.loli.net/2019/07/25/5d391e8dcab9221527.png)
+
+---
+
+### AdaBoosting
+
 4. AdaBoosting:
   - 问题：使用弱分类器和数据集构建一个强分类器？弱是说模型的效果不太好，比随机好一点。
 5. AdaBoosting算法过程：
@@ -43,10 +58,9 @@ tags: [python, machine learning]
 7. AdaBoosting算法损失函数：
    - 这里的$$\theta_m$$就是分类器的权重值（即上面的$$\alpha_m$$）![](https://cdn-images-1.medium.com/max/800/1*iebd6Q_Lda4yEtPTnj6u7Q.jpeg)。要求解使得该函数最小化，可以采用前向分步算法（forward stagewise）策略：从前向后，每一步只学习一个基函数及其系数。
 
+---
 
-## 实现
-
-### Python源码版本
+### AdaBoost：Python源码版本
 
 构建多个单层决策树的例子，比如对于一组数据样本（包含两个类别），具有两个特征，如何区分开来？
 
@@ -87,7 +101,9 @@ def buildStump(dataArr,classLabels,D):
     return bestStump,minError,bestClasEst
 ```
 
-### sklearn版本
+---
+
+### AdaBoost：sklearn版本
 
 [sklearn](https://scikit-learn.org/stable/auto_examples/ensemble/plot_adaboost_twoclass.html#sphx-glr-download-auto-examples-ensemble-plot-adaboost-twoclass-py)给出了一个二分类的例子，首先生成了一个数据集，两个高斯分布混合而成的。这些样本是线性不可分的，使用AdaBoost算法，构建基于决策树的分类器，可以很好的区分开来：
 
@@ -152,9 +168,12 @@ plt.title('Decision Boundary')
 
 ![](https://scikit-learn.org/stable/_images/sphx_glr_plot_adaboost_twoclass_001.png)
 
-## 参考
+---
+
+### 参考
 
 * 机器学习实战第7章
+* [决策树、GBDT、XGBoost和LightGBM之GBDT](https://blog.csdn.net/linxid/article/details/80147136)
 * [Adaboost 算法的原理与推导](https://blog.csdn.net/v_JULY_v/article/details/40718799)
 * [Boosting algorithm: AdaBoost](https://towardsdatascience.com/boosting-algorithm-adaboost-b6737a9ee60c)
 
