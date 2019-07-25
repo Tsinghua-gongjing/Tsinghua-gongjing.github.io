@@ -14,12 +14,93 @@ tags: [python, machine learning]
 - TOC
 {:toc}
 
+---
+
 ### 集成算法
 
-1. 集成算法（ensemble method）：又叫元算法（meta-algorithm），将不同的分类器组合起来。
+---
+
+#### 例子：股票推荐
+
+问题：多个朋友推荐股票的走势，分别是$$g_1, g_2, ..., g_t$$，如何选择（如何确定$$g_t(x)$$）？
+
+方案：
+
+| 编号| 做法 |类别| 
+|:--------|:-------:|:-------:|
+|   1 | 从T个选择最信任的对股票预测能力最强的一个  |validation，犯错最小模型|
+|   2 | 都比较厉害，同时考虑T个朋友建议，投票表决  | uniformly |
+|   3 | 水平不一，同时考虑T个朋友建议，投票表决，但是投票权重不一样  |non-uniformly|
+|   4 | 水平不一，同时考虑T个朋友建议，投票表决，但是投票权重不固定  | conditionally |
+
+以上每种选择其实对应一个模型：![](http://redstonewill.com/wp-content/uploads/2018/07/2-12.png)
+
+---
+
+#### 集成算法效果更好
+
+例子：平面上有需分类的点，如果只用一条水平或竖直直线进行分类，无论如何达不到最佳分类效果。可使用集体智慧，及多条线的组合，比如图中的折线（一条水平线+两条竖直线），即可将点完全分开。
+
+* ![](http://redstonewill.com/wp-content/uploads/2018/07/3-10.png)
+
+为什么效果更好：
+
+* 将不同的模型均匀结合，提高power，相当于特征转换
+* 正则化效果：比如有多个模型选择，但是各种组合最后得到的是比较中庸、合适的（比如下图有很多不同的选择，但是黑色的是组合后最好的）
+
+| 特征转换 | 正则化 | 
+|:--------|:-------:|
+| ![](http://redstonewill.com/wp-content/uploads/2018/07/6-10.png)   | ![](http://redstonewill.com/wp-content/uploads/2018/07/6-10.png)   |
+
+---
+
+#### 回归：多模型平均比单一模型效果更好的证明
+
+在回归问题中，计算单个模型与真实值的差异，经过换算，可以表示为如下，即单个模型的差距是总的模型的差距，再加一个大于0的项，所以总的模型的差距是更小的：
+
+![](http://redstonewill.com/wp-content/uploads/2018/07/9-11.png)
+
+---
+
+#### 不同类别的集成算法
+
+集成算法（ensemble method）：又叫元算法（meta-algorithm），将不同的分类器组合起来。
   - 集成不同的算法
   - 同一算法在不同设置下的集成
   - 数据集不同部分分配给不同分类器之后的集成 [![ensemble_learning.png](https://i.loli.net/2019/07/25/5d391cbfb658847953.png)](https://i.loli.net/2019/07/25/5d391cbfb658847953.png)
+
+---
+
+#### uniform blending：权重相同
+
+![](http://redstonewill.com/wp-content/uploads/2018/07/7-11.png)
+
+* 分类：每个模型权重为1，投票表决
+	* 每个$$g_t$$是一样的，此时跟选任意一个$$g_t$$效果一样
+	* 每个$$g_t$$有一些差别，投票表决
+	* 多分类，票数最多的一类
+* 回归：所有的预测值求均值
+	* 每个$$g_t$$是一样的，此时跟选任意一个$$g_t$$计算是一样的
+	* 每个$$g_t$$有一些差别，求平均能消除不同的模型效果差异很大的情况
+
+---
+
+#### linear blending: 权重不同的线性组合
+
+![](http://redstonewill.com/wp-content/uploads/2018/07/13-10.png)
+
+* 每个 g(t)的权重不同
+* 如何确定权重？误差最小化思想 ![](http://redstonewill.com/wp-content/uploads/2018/07/14-10.png)
+
+---
+
+#### stacking(any blending)：非线性组合
+
+![](http://redstonewill.com/wp-content/uploads/2018/07/18-8.png)
+
+* G(t)是g(t)的任意组合：可以是非线性的
+* 优点：提高模型复杂度，更好的预测模型
+* 缺点：过拟合的危险。采用正则化。
 
 ---
 
