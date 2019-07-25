@@ -70,11 +70,24 @@ XGBoost：引入正则化项
 
 ---
 
+### XGBoost vs GBDT
+
+* GBDT以CART作为基分类器，xgboost还支持线性分类器（相当于带L1和L2正则项的逻辑回归或者线性回归）
+* GBDT只用一阶导数信息，xgboost同时使用一阶和二阶导数（二阶泰勒展开）
+* xgboost引入了正则项，可防止模型过拟合
+* 缩减（shrinkage）：迭代完一次后，将叶子节点的权重乘以该系数，以削减每棵树的影响。相当于学习速率。
+* xgboost支持列抽样，借鉴随机森林的做法，降低过拟合，减少计算量。
+* 缺失值处理。xgboost可自动学习出缺失值的分裂方向。
+* xgboost支持并行。boosting是一个串行结构，学习一个，再学习另一个。所以这里的并行不是tree学习的并行，是在特征粒度上的。
+
+---
+
 ### 参考
 
 * [KAGGLE ENSEMBLING GUIDE](https://mlwave.com/kaggle-ensembling-guide/)
 * [XGBoost简介](https://blog.csdn.net/wuxiaosi808/article/details/77985345)
-* chen tianqi: [Introduction to Boosted Trees](https://xgboost.readthedocs.io/en/latest/tutorials/model.html), 中文版翻译：[XGBoost入门系列第一讲](https://zhuanlan.zhihu.com/p/27816315)，
+* chen tianqi: [Introduction to Boosted Trees](https://xgboost.readthedocs.io/en/latest/tutorials/model.html), 中文版翻译：[XGBoost入门系列第一讲](https://zhuanlan.zhihu.com/p/27816315)
+* [XGBoost浅入浅出@wepon](http://wepon.me/2016/05/07/XGBoost%E6%B5%85%E5%85%A5%E6%B5%85%E5%87%BA/)
 
 
 
