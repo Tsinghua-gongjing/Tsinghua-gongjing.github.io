@@ -26,6 +26,7 @@ tags: [python, machine learning]
 	* **将数据集中的样本划分为若干个不想交的子集，每个子集称为一个簇（cluster）**
 	* 可做为单独过程：寻找数据内在的分布结构
 	* 其他学习任务的前驱过程
+	* sklearn提供的常见聚类算法：[![sklearn_clustering_comparison.png](https://i.loli.net/2019/07/11/5d26d407e017395009.png)](https://i.loli.net/2019/07/11/5d26d407e017395009.png) 
 
 ---
 
@@ -73,6 +74,9 @@ tags: [python, machine learning]
 	* 对称性：$$dist(x_i,x_j)=dist(x_j,x_i)$$
 	* 直递性：$$dist(x_i,x_j) \leq dist(x_i,x_k)dist(x_k,x_j)$$
 * 不同的度量：[![clustering_distance.png](https://i.loli.net/2019/07/26/5d3aa0bde649774167.png)](https://i.loli.net/2019/07/26/5d3aa0bde649774167.png)
+* 还有其他的距离计算方式，比如：
+	* 內积距离
+	* 余弦距离
 
 ---
 
@@ -114,6 +118,10 @@ tags: [python, machine learning]
 * 密度聚类：density-based clustering
 * 基础：假设聚类结构能通过样本分布的紧密程度确定
 * 样本密度 -》样本的可连接性，基于可连接样本扩展聚类簇，得到最终聚类结果
+* 聚类方法：
+	* DBSCAN
+	* OPTICS
+	* DIANA：自顶向下
 
 #### DBSCAN
 
