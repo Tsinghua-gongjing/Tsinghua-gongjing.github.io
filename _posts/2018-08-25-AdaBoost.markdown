@@ -73,6 +73,45 @@ tags: [python, machine learning]
 * 每个基分类器$$h_i$$有：$$P(h_i(x) \neq f(x))=\epsilon$$ [![bagging_error.png](https://i.loli.net/2019/07/25/5d39ac83cfd6283860.png)](https://i.loli.net/2019/07/25/5d39ac83cfd6283860.png)
 * **随着集成中个体分类器数目T的增大，集成的错误率将指数级下降，最终趋向于0.**
 
+
+误差-分歧（ambiguity）分解：
+
+* 好：误差大小
+* 不同：模型之间的分歧或者单个模型与整体模型的分歧
+
+* 分歧：个体学习器在样本x上的不一致性
+* 单个学习器的分歧：$$A(h_i\|x)=(h_i(x)-H(x))^2$$
+* 集成学习器的分歧：$$\overline{A}(h\|x)=\sum_{i=1}^Tw_i(h_i\|x)=\sum_{i=1}^Tw_i(h_i(x)-H(x))^2$$
+
+* 误差
+* 单个学习器的误差：$$E(h_i\|x)=(f(x)-h_i(x))^2$$
+* 集成学习器的误差：$$E(H\|x)=(f(x)-H(x))^2$$
+
+* 个体学习器泛化误差的加权平均：$$\overline{E}=\sum_{i=1}^Tw_iE_i$$
+* 个体学习器的加权分歧值：$$\overline{A}=\sum_{i=1}^Tw_iA_i$$
+* 集成泛化误差：$$E=\overline{E} - \overline{A}$$
+* **个体学习器的准确性越高（上面的$$\overline{E}$$越小）、多样性越大（上面的$$\overline{A}$$越大），则集成越好（上面的$$E$$越小）**
+
+---
+
+#### 学习器多样性的度量
+
+[![ensemble_diversity_measure.png](https://i.loli.net/2019/07/26/5d3a6fe77a34e57418.png)](https://i.loli.net/2019/07/26/5d3a6fe77a34e57418.png)
+
+---
+
+#### 学习器多样性的增强
+
+有不同的方法可以增强学习器的多样性：
+
+* 核心思路：引入随机性
+	* 数据样本扰动：采样法
+	* 输入属性扰动：不同的子空间提供不同视角，随机子空间算法
+	* 输出表示扰动：对输出表示进行操纵，比如变动类标记，或者调制转换等
+	* 算法参数扰动：学习算法的参数设置差异
+
+	* 随机森林：使用了数据样本扰动和输入属性扰动
+
 ---
 
 #### 回归：多模型平均比单一模型效果更好的证明
@@ -86,9 +125,15 @@ tags: [python, machine learning]
 #### 不同类别的集成算法
 
 集成算法（ensemble method）：又叫元算法（meta-algorithm），将不同的分类器组合起来。
+  
+* 个体学习器的生成方式进行分类：
+	* 串行（序列化方法）：个体学习器间存在强依赖关系。代表：boosting
+	* 并行：个体学习器间不存在强依赖关系。代表：bagging，随机森林 [![ensemble_learning.png](https://i.loli.net/2019/07/25/5d391cbfb658847953.png)](https://i.loli.net/2019/07/25/5d391cbfb658847953.png)
+
+* 集成方式进行分类：
   - 集成不同的算法
   - 同一算法在不同设置下的集成
-  - 数据集不同部分分配给不同分类器之后的集成 [![ensemble_learning.png](https://i.loli.net/2019/07/25/5d391cbfb658847953.png)](https://i.loli.net/2019/07/25/5d391cbfb658847953.png)
+  - 数据集不同部分分配给不同分类器之后的集成 
 
 ---
 
@@ -125,14 +170,51 @@ tags: [python, machine learning]
 
 ---
 
-### bagging vs boosting
+#### 如何得到不同的$$g_t$$
+
+* 如何得到不同的$$g_t$$，以用于模型的融合
+* 不同的方法：
+	* 选取不同的模型
+	* 设置同一模型的不同参数
+	* 算法的随机性
+	* 选择不同的数据样本 ![](http://redstonewill.com/wp-content/uploads/2018/07/20-4.png)
+	
+---
+
+#### $$g_t$$的结合策略
+
+* 平均法：数值型输出（**回归**类型）
+	* 简单平均：每个学习器认为权重是一样的
+	* 加权平均：每个学习器有一个权重
+* 投票法（voting）：类别输出（**分类**任务）
+	* 绝对多数投票法：若某标记得票过半数，则预测为该标记；**否则拒绝预测**。
+	* 相对多数投票法：预测为得票最多的标记，若同时多个标记有相同最高票，随机选择一个。
+	* 加权投票法：类似加权平均，每个学习器有自己的权重，预测为得票最多的标记，若同时多个标记有相同最高票，随机选择一个。
+
+	* 每个学习器的输出类型
+	* 类标记：属于0或1类别，硬投票
+	* 类概率：输出某类的概率，软投票
+* 学习法
+	* 训练数据很多
+	* 学习法：通过另一个学习器来进行结合
+	* 代表：stacking
+	* 初级学习器：个体学习器。相同则是同质的，不同则是异质的。
+	* 次级学习器（元学习器）：用于结合的学习器
+
+### bagging vs random forest vs boosting
 
 2. bagging：
-  - 自举汇聚法（bootstrap aggregating）：从原始数据集选择S次以得到S个数据集。
+  - 自举汇聚法（**B**ootstrap **agg**regat**ing**）：从原始数据集选择S次以得到S个数据集。
   - 每个数据集与原数据集大小相等，可以重复抽取。
   - 训练：每个数据集训练一个模型，得到S个分类器模型。
-  - 预测：对于新数据，用S个分类器进行分类，然后投票，最多的分类即为最后的分类结果。
-  - 随机森林也是一种bagging方法：组合多个决策树。
+  - 预测：对于新数据，用S个分类器进行分类，然后投票，最多的分类即为最后的分类结果。若分类预测时出现两个类同样的票，最简单的做法是随机选择一个。
+3. bagging vs 随机森林：
+  - 随机森林也是一种bagging方法：组合多个决策树。**但是在bagging基础上，在决策树的训练中引入了随机属性选择**。推荐选择的k值：$$k=log_2d$$，d是属性（特征）数目。
+  - 随机森林的收敛性与bagging相似。
+  - 起始性能差，因为引入了属性扰动，个体学习器的性能往往会降低。
+  - 个体学习器数目增加，会收敛到更低的泛化误差
+  - 随机森林的训练效果常常优于bagging：引入了属性选择，相当于考察的子集，而bagging则是全部属性
+  - 下图比较的就是两者的泛化能力随着基学习器数目（集成规模）的变化：[![bagging_vs_randomforest.png](https://i.loli.net/2019/07/26/5d3a5f4fa642255027.png)](https://i.loli.net/2019/07/26/5d3a5f4fa642255027.png)
 3. boosting：
   - 类似于bagging
   - 串行训练，每一个新的分类器都是基于已训练的分类器，尤其关注之前的分类器错误分类的那部分样本数据
@@ -144,6 +226,7 @@ tags: [python, machine learning]
 ### AdaBoosting
 
 4. AdaBoosting:
+  - 加性模型（additive model）：集学习器的线性组合
   - 问题：使用弱分类器和数据集构建一个强分类器？弱是说模型的效果不太好，比随机好一点。
 5. AdaBoosting算法过程：
      - 权重等值初始化：每个训练样本赋值一个权重，构成向量D；
@@ -275,6 +358,7 @@ plt.title('Decision Boundary')
 ### 参考
 
 * 机器学习实战第7章
+* 机器学习周志华第8章
 * [决策树、GBDT、XGBoost和LightGBM之GBDT](https://blog.csdn.net/linxid/article/details/80147136)
 * [Adaboost 算法的原理与推导](https://blog.csdn.net/v_JULY_v/article/details/40718799)
 * [Boosting algorithm: AdaBoost](https://towardsdatascience.com/boosting-algorithm-adaboost-b6737a9ee60c)
