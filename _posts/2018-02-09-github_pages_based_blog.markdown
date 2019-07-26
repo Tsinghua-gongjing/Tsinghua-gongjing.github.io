@@ -108,6 +108,10 @@ clone的这个模板没有评论部分的代码，看了一下原来的网站，
 ![bed](/assets/bed_file_format_example.jpeg)
 ```
 
+## 图片托管在github上
+
+参考这篇文章：[PicGo+GitHub图床，让Markdown飞](https://juejin.im/entry/5c4ec5aaf265da614420689f)，可以实现截图、上传到github自己建立的repo下，然后生成markdown链接，提升了记录的效率。软件下载在这里：[PicGo@github](https://github.com/Molunerfinn/PicGo/releases)
+
 ## 更换网站tab图片
 
 设计一个图片后，上传到[favicon](http://www.favicon.cc/)生成，对应的icon文件，放在root目录下即可。（如果更换后，加载没有更新，需要清理一下网站的缓存）
