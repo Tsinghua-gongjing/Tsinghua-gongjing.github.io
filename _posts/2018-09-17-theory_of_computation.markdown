@@ -102,13 +102,39 @@ PAC学习中的H的复杂度
 
 增长函数：
 	* growth function
-	* 给定假设空间H
+	* 给定假设空间H和数据集$${x_1,x_2,...,x_m}$$，H中的每个假设h都能对样本进行标记（预测），标记结果是：$$h\|D={h(x_1),h(x_2),...,h(x_m)}$$，随着m的增大，H中的所有假设的标记可能结果数目也增大。![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190728235131.png)
+	* **增长函数：假设空间H对m个样本所能赋予的标记的最大可能结果数。**
+	* 标记的最大可能结果数越多，H的表示能力越强，**反应假设空间的复杂度**。
+
+对分：
+
+* dichotomy
+* m个样本，最多有2^m个可能结果（二分类问题）
+* H中的假设对D中样本赋予标记的每种可能结果称为对D的一种”对分“
 
 
-对分：dichotomy
+打散：
 
+* shattering
+* 若假设空间H能实现数据集D行的所有对分，即2^m，则称样本集D能被假设空间H打散。
 
-* 打散：shattering
+VC维：![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190728235909.png)
+
+* VC(H)=d：表明存在大小为d的样本集能被假设空间H打散，但不是说所有样本集大小为d的样本集都能被打散
+* VC的定义与数据分布D无关，只与样本集的大小有关
+* 数据分布未知时仍然能够计算样假设空间的VC维
+* 计算方法：
+	* **若存在大小为d的数据集能被H打散，但是不存在任何大小为d+1的样本集被H打散，则H的VC维是d。**
+* 示例：![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190729000518.png)
+* VC维与增长函数有密切关系
+* 基于VC维的泛化误差界是分布无关、数据独立的
+
+---
+
+### Rademacher复杂度
+
+* 
+
 
 
 ---
