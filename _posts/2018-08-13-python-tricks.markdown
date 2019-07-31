@@ -187,3 +187,26 @@ def check_dir_or_make(d):
     if not os.path.exists(d):
         os.makedirs(d)
 ```
+
+### 把df中的某一列按照特定字符分隔成多列
+
+As discussed [here](https://cmdlinetips.com/2018/11/how-to-split-a-text-column-in-pandas/):
+
+```python
+df = pd.DataFrame({'Name': ['Steve_Smith', 'Joe_Nadal', 
+                           'Roger_Federer'],
+                 'Age':[32,34,36]})
+                 
+# Age	Name
+# 0	32	Steve_Smith
+# 1	34	Joe_Nadal
+# 2	36	Roger_Federer
+
+df[['First','Last']] = df.Name.str.split("_",expand=True,)
+# expand需要设置为True，负责报错说原来df没有“first”，“last”列
+
+# Age	Name	First	Last
+# 0	32	Steve_Smith	Steve	Smith
+# 1	34	Joe_Nadal	Joe	Nadal
+# 2	36	Roger_Federer	Roger	Federer
+```
