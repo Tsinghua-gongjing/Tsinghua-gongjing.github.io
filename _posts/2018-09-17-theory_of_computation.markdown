@@ -101,10 +101,11 @@ PAC学习中的H的复杂度
 	* 常见方案：考虑假设空间的VC维
 
 增长函数：
-	* growth function
-	* 给定假设空间H和数据集$${x_1,x_2,...,x_m}$$，H中的每个假设h都能对样本进行标记（预测），标记结果是：$$h\|D={h(x_1),h(x_2),...,h(x_m)}$$，随着m的增大，H中的所有假设的标记可能结果数目也增大。![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190728235131.png)
-	* **增长函数：假设空间H对m个样本所能赋予的标记的最大可能结果数。**
-	* 标记的最大可能结果数越多，H的表示能力越强，**反应假设空间的复杂度**。
+	
+* growth function
+* 给定假设空间H和数据集$${x_1,x_2,...,x_m}$$，H中的每个假设h都能对样本进行标记（预测），标记结果是：$$h\|D={h(x_1),h(x_2),...,h(x_m)}$$，随着m的增大，H中的所有假设的标记可能结果数目也增大。![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190728235131.png)
+* **增长函数：假设空间H对m个样本所能赋予的标记的最大可能结果数。**
+* 标记的最大可能结果数越多，H的表示能力越强，**反应假设空间的复杂度**。
 
 对分：
 
@@ -133,9 +134,16 @@ VC维：![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/maste
 
 ### Rademacher复杂度
 
-* 
+* VC维的泛化误差界：分布无关、数据独立，普适性强，但是得到的泛化误差界通常较松
+* Rademacher复杂度：Rademancher complexity，另一种刻画假设空间复杂度的途径。一定程度考虑了数据分布。具体参考书籍。
 
+---
 
+### 稳定性
+
+* VC维、Rademacher复杂度：与具体学习算法无关，所有学习算法都适用
+* 若希望获得与算法有关的结果：
+	* 稳定性：考察的是算法在输入发生变化时，输出是否发生较大的变化 [![20190731152415](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190731152415.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190731152415.png)
 
 ---
 
