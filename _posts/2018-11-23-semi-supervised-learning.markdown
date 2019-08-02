@@ -65,6 +65,27 @@ tags: [python, machine learning]
 * 可基于EM算法进行极大似然估计
 * 不同的**潜在模型**（人为经验等进行的），对应不同的学习器
 
+为什么未标记样本可以使用上？
+
+* 例子：高斯混合分布的分类 
+* 预测时的最大化后验概率（对应应该分的类别）：[![20190802100852](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190802100852.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190802100852.png)
+* EM算法求解参数并预测：[![20190802101850](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190802101850.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190802101850.png)
+* 推广：
+	* 将这里的混合高斯换为其他的模型，比如混合专家模型、朴素贝叶斯模型，可推导得到其他的生成式半监督学习方法
+* 关键：
+	* 模型假设必须正确，即假设的生成模型必须和真实数据分布吻合，否则使用未标记数据会降低泛化性能
+	* 现实中难以做出准确假设，借助领域知识
+
+---
+
+### 半监督SVM
+
+* 半监督SVM：semi-supervised support vector machine，S3VM
+* SVM的推广
+* SVM：寻找最大间隔划分超平面
+* S3VM：寻找能将两类有标记样本分开，且穿过数据低密度区域的划分超平面
+	* 基本假设：低密度分隔low-density separation 
+
 ---
 
 ### 参考
@@ -75,3 +96,4 @@ tags: [python, machine learning]
 
 
 
+====
