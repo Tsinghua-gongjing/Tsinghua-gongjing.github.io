@@ -90,6 +90,15 @@ Refer to [Adobe Illustrator CC 2017 MAC中文破解版](http://www.web3.xin/soft
   - 【文字 -> 文字】：类似于上面的【填充 -> 填充】操作，只不过对象全部换为文字，可以吸取文字的大小、颜色、字体等熟悉。
   - 【吸取界面之外的颜色】：按下`V键`，切换到`选择工具`，单击待填充对象，然后按下`I键`，切换到`吸管工具`，鼠标变为一支吸管，**按住鼠标左键不放，将光标移到AI界面之外的任意目标颜色处，释放鼠标**，即可将吸取的颜色填充到需要改变颜色的图像上面。
 
+ * **设置同一行换行文字间距**:
+   - 选中要设置的文字，然后调成文本属性（`command+t`），设置文字：`VA加下划线`的，即可调整间距。可参考[这里](https://sunny0731.pixnet.net/blog/post/42051571-ai%E6%AA%94-%E5%AD%97%E5%85%83%E9%96%93%E8%B7%9D%E3%80%81%E6%AE%B5%E8%90%BD%E8%A1%8C%E8%B7%9D%E8%AA%BF%E6%95%B4) [![20190806115213](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190806115213.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190806115213.png)
+
+* **文本框自动换行**：
+  - 如果是正常的文字，是不能自动换行的。需要`画`一个文本框，具体就是：选中文本按钮，在画布中拖出一个一定长宽的文本框，那么这个框里面的文字是会自动换行的。
+
+* **设置不同行文字间距（段落间距）**：
+   - 选中要设置的文字段落，然后选择`段落(Paragraph)`属性，在这里可以设置文字的对齐方式，一般选择中间的两段对齐，多余行左对齐。在下方可以设置段落间距（类似于word里面的行间距）。 [![20190806115847](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190806115847.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190806115847.png)
+
 ## 快捷键
 
 [官方网页](https://helpx.adobe.com/illustrator/using/default-keyboard-shortcuts.html)
