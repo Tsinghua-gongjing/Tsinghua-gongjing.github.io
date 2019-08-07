@@ -1,0 +1,64 @@
+---
+layout: post
+category: "other"
+title:  "kramdown用法"
+tags: [kramdown]
+---
+
+- TOC
+{:toc}
+
+---
+
+### 参考
+
+* [官方quickref](https://kramdown.gettalong.org/quickref.html)
+
+---
+
+### 常见用法
+
+---
+
+#### 表格
+
+```
+| Header1 | Header2 | Header3 |
+|:--------|:-------:|--------:|
+| cell1   | cell2   | cell3   |
+| cell4   | cell5   | cell6   |
+```
+
+| Header1 | Header2 | Header3 |
+|:--------|:-------:|--------:|
+| cell1   | cell2   | cell3   |
+| cell4   | cell5   | cell6   |
+
+---
+
+#### 指定文字的颜色
+
+```
+# 颜色是seaborn的，可直接指定：red,blue,green等
+**设置为红色的（加粗版本）**{: style="color: #C44E52"}
+*设置为红色的（斜体版本）*{: style="color: #C44E52"}
+**设置为绿色的**{: style="color: #55A868"}
+**设置为蓝色的**{: style="color: #4C72B0"}
+```
+
+* **设置为红色的**{: style="color: #C44E52"}
+* *设置为红色的（斜体版本）*{: style="color: #C44E52"}
+* **设置为绿色的**{: style="color: #55A868"}
+* **设置为蓝色的**{: style="color: #4C72B0"}
+
+---
+
+#### block: 使用`>`符号
+
+```
+> 会用竖线把该段文字放在一起
+```
+
+> 会用竖线把该段文字放在一起
+
+---

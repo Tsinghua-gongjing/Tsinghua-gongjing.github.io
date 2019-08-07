@@ -10,10 +10,13 @@ tags: [AI, plot]
 - TOC
 {:toc}
 
+---
 
 ## Install:
 
 Refer to [Adobe Illustrator CC 2017 MAC中文破解版](http://www.web3.xin/soft/53.html)
+
+---
 
 ## AI 官方用户指南 (中文版)
 
@@ -25,6 +28,8 @@ Refer to [Adobe Illustrator CC 2017 MAC中文破解版](http://www.web3.xin/soft
 
 * [工具](https://helpx.adobe.com/cn/illustrator/using/tools.html)
 
+---
+
 #### 工作区
 
 * [自定义工作区](https://helpx.adobe.com/content/help/cn/zh-Hans/illustrator/using/customizing-workspace.html)
@@ -32,6 +37,8 @@ Refer to [Adobe Illustrator CC 2017 MAC中文破解版](http://www.web3.xin/soft
 * [“属性”面板](https://helpx.adobe.com/content/help/cn/zh-Hans/illustrator/using/properties-panel.html)
 
 * [画板](https://helpx.adobe.com/content/help/cn/zh-Hans/illustrator/using/using-multiple-artboards.html)
+
+---
 
 #### 绘图
 
@@ -48,6 +55,7 @@ Refer to [Adobe Illustrator CC 2017 MAC中文破解版](http://www.web3.xin/soft
 
 * [调整路径段](https://helpx.adobe.com/content/help/cn/zh-Hans/illustrator/using/adjust-path-segments.html)
 
+---
 
 ## 常规操作
 
@@ -98,6 +106,8 @@ Refer to [Adobe Illustrator CC 2017 MAC中文破解版](http://www.web3.xin/soft
 
 * **设置不同行文字间距（段落间距）**：
    - 选中要设置的文字段落，然后选择`段落(Paragraph)`属性，在这里可以设置文字的对齐方式，一般选择中间的两段对齐，多余行左对齐。在下方可以设置段落间距（类似于word里面的行间距）。 [![20190806115847](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190806115847.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190806115847.png)
+
+---
 
 ## 快捷键
 
