@@ -8,7 +8,11 @@ tags: [grep, awk, sed]
 - TOC
 {:toc}
 
+---
+
 ### grep的用法
+
+---
 
 #### 同时匹配多个pattern中的某一个 (OR)
 

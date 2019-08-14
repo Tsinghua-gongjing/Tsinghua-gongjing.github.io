@@ -5,12 +5,19 @@ title:  "Tmux: 终端复用"
 tags: [linux, tmux]
 ---
 
+- TOC
+{:toc}
+
+---
+
 ## 会话嵌套
 
 在本地使用tmux打开了会话，在会话中登陆了服务器，然后打开了服务器上的tmux会话。如果本地和服务器上对于快捷键的设置是一样的，那么输入快捷键时只能被外部的会话捕捉到。可以通过对快捷键字母输入两次的方式将命令传入到内层的会话，比如：
 
 * `Ctl + b + <`: 是在外部跳到左边的panel
 * `Ctl + b + b + <`: 是在内部跳到左边的panel。（字母输入两次）
+
+---
 
 ## 更新`config`文件
 
@@ -19,3 +26,5 @@ tags: [linux, tmux]
 - 修改文件：~/.tmux.conf。现在使用的文件可在[这里](https://github.com/Tsinghua-gongjing/blog_codes/blob/master/files/tmux.conf)下载到，同时使用``和`Ctl+b`作为前置键。
 - 进入tmux终端
 - 敲击`: source-file ~/.tmux.conf`
+
+---

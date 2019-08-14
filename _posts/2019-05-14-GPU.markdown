@@ -8,6 +8,8 @@ tags: [linux]
 - TOC
 {:toc}
 
+---
+
 ## 查看GPU使用情况
 
 使用命令`nvidia-smi`:
@@ -44,6 +46,8 @@ Tue May 14 09:47:51 2019
 +-----------------------------------------------------------------------------+
 ```
 
+---
+
 ## 指定设备运行
 
 GPU是动态创建的，默认不指定设备时，会占用所有的设备，但是可能需求并没有这么多。通常的做法是指定端口，有两种方式：
@@ -60,4 +64,6 @@ CUDA_VISABLE_DEVICES=1 python script.py
 if GPU_device: 
 	os.environ['CUDA_VISIBLE_DEVICES'] = GPU_device
 ```
+
+---
 

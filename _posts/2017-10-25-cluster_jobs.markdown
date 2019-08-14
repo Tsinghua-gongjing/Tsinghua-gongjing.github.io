@@ -8,15 +8,15 @@ tags: [linux]
 - TOC
 {:toc}
 
+---
+
 ## IBM对于各命令的解释
 
 * [bsub](https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_command_ref/bsub.1.html): Submits a job to LSF
 * [bjobs](https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.2/lsf_command_ref/bjobs.1.html): displays and filters information about LSF jobs
 * [bqueues](https://www.ibm.com/support/knowledgecenter/en/SSETD4_9.1.3/lsf_command_ref/bqueues.1.html): displays information about queues
 
-
-
-
+---
 
 ## 查看运行的任务
 
@@ -31,6 +31,8 @@ JOBID   USER    STAT  QUEUE      FROM_HOST   EXEC_HOST   JOB_NAME   SUBMIT_TIME
 734117  zhangqf7 RUN   Z-ZQF      loginview02 5*node522   Fastqc_raw.13 Apr 23 10:58
 734212  zhangqf7 RUN   Z-ZQF      loginview02 5*node531   Fastqc_raw.21 Apr 23 10:58
 ```
+
+---
 
 ## 提交含有脚本参数的任务
 
@@ -48,6 +50,8 @@ fileout=/Share/home/zhangqf5/gongjing/rerun/${sample}
 bsub -q Z-ZQF -oo $bsub_out -eo $bsub_err "Rscript test.R -f $filein -o $fileout"
 ```
 
+---
+
 ## 查看集群队列使用情况
 
 ```bash
@@ -57,4 +61,6 @@ TEST             60  Open:Active       -    -    -    -     0     0     0     0
 TEST 1          60  Open:Active     460    -    -    -   380   380     0     0
 TEST 2          60  Open:Active     380    -    -    -   680   580   100     0
 ```
+
+---
 

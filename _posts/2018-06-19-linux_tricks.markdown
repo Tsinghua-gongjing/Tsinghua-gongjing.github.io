@@ -8,6 +8,8 @@ tags: [linux]
 - TOC
 {:toc}
 
+---
+
 ## Rename multiple filenames [reference](https://www.tecmint.com/rename-multiple-files-in-linux/)
 
 ```bash
@@ -55,6 +57,8 @@ $ rename --version
 rename (util-linux-ng 2.17.2)
 ```
 
+---
+
 ## Drop specific columns [linuxconfig](https://linuxconfig.org/how-to-remove-columns-from-csv-based-on-column-number-using-bash-shell)
 
 ```bash
@@ -82,6 +86,8 @@ rename (util-linux-ng 2.17.2)
 30
 30
 ```
+
+---
 
 ## Mac OS general compress/decompress command line tool
 ```bash
@@ -123,6 +129,8 @@ Available options:
 -help (-h)                              Display this information.
 ```
 
+---
+
 ## Iterate over two arrays [stackoverflow](https://stackoverflow.com/questions/17403498/iterate-over-two-arrays-simultaneously-in-bash)
 
 ```bash
@@ -135,6 +143,8 @@ for ((i=0;i<${#array[@]};++i)); do
     printf "%s is in %s\n" "${array[i]}" "${array2[i]}"
 done
 ```
+
+---
 
 ## GCC version
 
@@ -156,6 +166,8 @@ This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 Written by Roland McGrath and Ulrich Drepper.
 ```
+
+---
 
 ## Print every two lines as one line
 
@@ -199,6 +211,8 @@ Written by Roland McGrath and Ulrich Drepper.
 666808
 ```
 
+---
+
 ## Update file soft link
 
 Use option `-sfn` of `ln` command as discussed [here](https://serverfault.com/questions/389997/how-to-override-update-a-symlink):
@@ -207,6 +221,8 @@ Use option `-sfn` of `ln` command as discussed [here](https://serverfault.com/qu
 ln -sfn {path/to/file-name} {link-name}
 ```
 
+---
+
 ## install software instead of default dir
 
 ```bash
@@ -214,3 +230,5 @@ ln -sfn {path/to/file-name} {link-name}
 make
 make install
 ```
+
+---
