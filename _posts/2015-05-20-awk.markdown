@@ -8,7 +8,11 @@ tags: [grep, awk, sed]
 - TOC
 {:toc}
 
+---
+
 ## Basic usage
+
+---
 
 ### check common elements in two files of specific fields
 
@@ -16,12 +20,16 @@ tags: [grep, awk, sed]
 awk 'NR==FNR{a[$1];next} $1 in a{print $1}' file1 file2
 ```
 
+---
+
 ### split string into a array, return length of the array
 
 ```bash
 awk 'BEGIN{info="it is a test";lens=split(info,tA," ");print length(tA),lens;}'
 4 4
 ```
+
+---
 
 ### by default awk array is not sorted, use *asort*
 
@@ -40,6 +48,8 @@ awk 'BEGIN{info="it is a test";split(info,tA," ");asort(tA);for(k in tA){print k
 4 test
 ```
 
+---
+
 ### check element in a array 
 
 ```bash
@@ -48,6 +58,8 @@ a a1
 b b1
 ```
 
+---
+
 ### delete element in an array
 
 ```bash
@@ -55,21 +67,53 @@ awk 'BEGIN{tB["a"]="a1";tB["b"]="b1";delete tB["a"];for(k in tB){print k,tB[k];}
 b b1
 ```
 
-### swap two variables [stackoverflow](https://stackoverflow.com/questions/11967776/swap-two-columns-awk-sed-python-perl)
+---
+
+### swap two variables 
+
+source: [stackoverflow](https://stackoverflow.com/questions/11967776/swap-two-columns-awk-sed-python-perl)
 
 ```bash
 awk ' { t = $1; $1 = $2; $2 = t; print; } ' input_file
 ```
 
-### set output filed separator [stackoverflow](https://stackoverflow.com/questions/20844666/setting-the-output-field-separator-in-awk)
+---
+
+### set output filed separator 
+
+source: [stackoverflow](https://stackoverflow.com/questions/20844666/setting-the-output-field-separator-in-awk)
 
 ```bash
 # swap two columns, also keep tab as separator
 awk 'BEGIN{FS="\t";OFS="\t";}{if($2>$3){t=$2;$2=$3;$3=t};if($5>$6){t=$5;$5=$6;$6=t;};print}' HEK293T.bedpe > HEK293T.sort.bedpe
 ```
 
-### print only last column [stackexchange](https://unix.stackexchange.com/questions/17064/how-to-print-only-last-column)
+---
+
+### print only last column 
+
+source: [stackexchange](https://unix.stackexchange.com/questions/17064/how-to-print-only-last-column)
 
 ```bash
 awk '{print $NF}' inputfile
+```
+
+---
+
+### take absolute value
+
+source: [Unix & Linux](https://unix.stackexchange.com/questions/220588/how-to-take-the-absolute-value-using-awk)
+
+```bash
+# https://unix.stackexchange.com/questions/220588/how-to-take-the-absolute-value-using-awk
+
+# define function: abs
+$ echo "2 3"|awk '{print $1-$2}'
+-1
+$ echo "2 3"|awk 'function abs(v) {return v < 0 ? -v : v} {print abs($1-$2)}'
+1
+
+# round way: call sqrt function
+$ echo "2 3"|awk '{print sqrt(($1-$2)^2)}'
+1
 ```
