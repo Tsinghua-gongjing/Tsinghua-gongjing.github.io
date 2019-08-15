@@ -252,7 +252,7 @@ tags: [python, machine learning]
 * 话题模型：
 	* 一族生成式有向图模型
 	* 处理离散的数据，文本集合、信息检索、自然语言处理
-	* 隐狄利克雷分配模型：典型代表，latent dirichlet allocation
+	* **隐狄利克雷分配模型LDA**：典型代表，latent dirichlet allocation
 * 词：
 	* word
 	* 待处理数据的基本离散单元
@@ -273,7 +273,12 @@ tags: [python, machine learning]
 	* 统计可获得词频向量，但是不知道谈论哪些话题，不知道每篇文档与哪些话题有关
 * LDA：
 	* 生成式模型的角度看待文档和话题
-	* 每篇文档包含多个话题：$$\Theta_t$$
+	* 每篇文档包含多个话题：$$\Theta_{t,k}$$表示文档t中包含话题k的比例，进而通过下面的步骤由话题生成文档t:
+	* 根据参数为$$\alpha$$的狄利克雷分布随机采样一个话题分布$$\Theta_t$$
+	* 按如下步骤生成文档中的N个词：
+		* 根据$$\Theta_t$$进行话题指派，得到文档t中词n的话题$$z_{t,n}$$
+		* 根据指派的话题所对应的词频分布$$\beta_k$$随机采样生成词 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/LDA.png)
+
 
 ---
 
