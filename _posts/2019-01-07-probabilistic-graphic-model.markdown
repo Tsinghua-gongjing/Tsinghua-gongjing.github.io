@@ -269,7 +269,11 @@ tags: [python, machine learning]
 	* 具体表示为一系列相关的词，以及他们在该概念下出现的概率
 
 * LDA生成过程：[![20190815212815](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190815212815.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190815212815.png)
-* 
+* 现实任务：
+	* 统计可获得词频向量，但是不知道谈论哪些话题，不知道每篇文档与哪些话题有关
+* LDA：
+	* 生成式模型的角度看待文档和话题
+	* 每篇文档包含多个话题：$$\Theta_t$$
 
 ---
 
