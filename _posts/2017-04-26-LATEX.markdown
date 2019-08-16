@@ -67,6 +67,11 @@ tags: [latex]
 |---|---|
 |$$\overline{abc}$$|\overline{abc}|
 |$$\overline{abc} \\ a_i$$|\overline{abc} \\\ a_i，两个斜杠`\\`表示分行|
+|$$\cdot$$，$$\cdot\cdot\cdot$$|\cdot，\cdot\cdot\cdot，位于中心的点|
+|$$\bigoplus$$|\bigoplus|
+|$$\leftarrow$$, $$\rightarrow$$|\leftarrow, \rightarrow|
+|$$\longleftarrow$$, $$\longrightarrow$$|\longleftarrow, \longrightarrow，长的版本|
+|$$\wedge$$|\wedge，可表示并且，逻辑字符|
 
 ## 参考
 
