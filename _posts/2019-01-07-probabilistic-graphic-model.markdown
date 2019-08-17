@@ -256,7 +256,7 @@ tags: [python, machine learning]
 * 词：
 	* word
 	* 待处理数据的基本离散单元
-	* 文本处理：一个词济源市一个英文单词
+	* 文本处理：一个词就是一个英文单词
 * 文档：
 	* document
 	* 待处理的数据对象
@@ -279,6 +279,17 @@ tags: [python, machine learning]
 		* 根据$$\Theta_t$$进行话题指派，得到文档t中词n的话题$$z_{t,n}$$
 		* 根据指派的话题所对应的词频分布$$\beta_k$$随机采样生成词 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/LDA.png)
 
+* 示例：[这个post](https://towardsdatascience.com/end-to-end-topic-modeling-in-python-latent-dirichlet-allocation-lda-35ce4ed6b3e0)举了一个例子，在python中如何进行LDA分析，这里是重新跑的[notebook]()：
+	* 目标：分析1987-2016年间发表在NIPS上的文章的文本内容（共6560篇文档），获取话题
+	* 工具：sklearn（CountVectorizer统计文本、LatentDirichletAllocation进行LDA分析），pyLDAvis模块进行话题结果的可视化
+	
+	* 问题：
+	* 【1】文本的前期处理不够干净，比如通过词云图，很多无用的符号（et,al,ie,example）是没有去掉的。当然，最后提取的话题的靠前的term也不包含这些。
+	* 【2】执行的速度有点慢
+	* 【3】这里直接指定的话题数目是5，没有采用评估量作为依据进行挑选（说会在后续的post给出）
+	* 【4】如何基于话题结果对每篇文章assign类型？
+	* 【5】跑出来的结果不太一样，比如其topic 0是：”model learning network neural figure time state networks using image
+“，但我这里是”learning data algorithm function set training problem 10 error kernel“。随机数的设定。
 
 ---
 
