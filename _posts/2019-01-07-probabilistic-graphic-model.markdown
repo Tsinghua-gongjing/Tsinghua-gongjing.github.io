@@ -279,7 +279,7 @@ tags: [python, machine learning]
 		* 根据$$\Theta_t$$进行话题指派，得到文档t中词n的话题$$z_{t,n}$$
 		* 根据指派的话题所对应的词频分布$$\beta_k$$随机采样生成词 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/LDA.png)
 
-* 示例：[这个post](https://towardsdatascience.com/end-to-end-topic-modeling-in-python-latent-dirichlet-allocation-lda-35ce4ed6b3e0)举了一个例子，在python中如何进行LDA分析，这里是重新跑的[notebook]()：
+* 示例：[这个post](https://towardsdatascience.com/end-to-end-topic-modeling-in-python-latent-dirichlet-allocation-lda-35ce4ed6b3e0)举了一个例子，在python中如何进行LDA分析，这里是重新跑的[notebook](https://github.com/Tsinghua-gongjing/blog_codes/blob/master/notebooks/Introduction_to_Topic_Modeling.ipynb)：
 	* 目标：分析1987-2016年间发表在NIPS上的文章的文本内容（共6560篇文档），获取话题
 	* 工具：sklearn（CountVectorizer统计文本、LatentDirichletAllocation进行LDA分析），pyLDAvis模块进行话题结果的可视化
 	
