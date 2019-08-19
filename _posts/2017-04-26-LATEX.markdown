@@ -72,6 +72,9 @@ tags: [latex]
 |$$\leftarrow$$, $$\rightarrow$$|\leftarrow, \rightarrow|
 |$$\longleftarrow$$, $$\longrightarrow$$|\longleftarrow, \longrightarrow，长的版本|
 |$$\wedge$$|\wedge，可表示并且，逻辑字符|
+|$$w^{[l]}=\begin{bmatrix}1.5 & 0 \\0 & 1.5\end{bmatrix}$$|`w^{[l]}=\begin{bmatrix}1.5 & 0\\0 & 1.5\end{bmatrix}`，矩阵表示|
+|$$w^{[l]}=\begin{matrix}1.5 & 0 \\0 & 1.5\end{matrix}$$|`w^{[l]}=\begin{matrix}1.5 & 0\\0 & 1.5\end{matrix}`，矩阵表示|
+|$$w^{[l]}=\begin{pmatrix}1.5 & 0 \\0 & 1.5\end{pmatrix}$$|`w^{[l]}=\begin{pmatrix}1.5 & 0\\0 & 1.5\end{pmatrix}`，矩阵表示|
 
 ## 参考
 
