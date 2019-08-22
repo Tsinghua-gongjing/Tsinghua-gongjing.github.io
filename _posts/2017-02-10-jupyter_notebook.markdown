@@ -8,7 +8,11 @@ tags: [python, jupyter, notebok]
 - TOC
 {:toc}
 
+---
+
 ## jupyter notebook的配置
+
+---
 
 ### 新建配置文件
 
@@ -35,6 +39,8 @@ ipython_config.py 这个文件是配置ipython的；
 
 ipython_kernel_config.py 这个文件是配置notebook的；
 
+---
+
 ### 编辑配置文件
 
 加载常用模块，matplot设置成inline
@@ -58,6 +64,8 @@ c.InteractiveShellApp.exec_lines = [
 c.IPKernelApp.matplotlib = 'inline'
 ~~~
 
+---
+
 ### Connect notebook server
 
 ```bash
@@ -76,6 +84,8 @@ $ ssh -N -f -L localhost:9987:localhost:9988 zhangqf7@166.111.152.116 -p 12000
 # may need token
 ```
 
+---
+
 ### 自动生成目录
 
 主要是参考这里 [为Jupyter Notebook添加目录](https://zhuanlan.zhihu.com/p/24029578)：
@@ -84,3 +94,21 @@ $ ssh -N -f -L localhost:9987:localhost:9988 zhangqf7@166.111.152.116 -p 12000
 # 安装后重启
 ~/anaconda3/bin/conda install -c conda-forge jupyter_contrib_nbextensions
 ```
+
+---
+
+### 添加R kernel
+
+参考这里：[在jupyter notebook中使用R语言](https://blog.csdn.net/ICERON/article/details/82743930)
+
+```R
+install.packages(c('repr', 'IRdisplay', 'evaluate', 'crayon', 'pbdZMQ', 'devtools', 'uuid', 'digest'))
+devtools::install_github('IRkernel/IRkernel')
+
+# 只在当前用户下安装(在集群上安装)
+IRkernel::installspec()
+# 或者是在系统下安装
+IRkernel::installspec(user = FALSE)
+```
+
+比如是在集群上安装的，之后打开jupyter-lab后，可以看到启动界面多了一个R的选择：[![20190822095638](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190822095638.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190822095638.png)
