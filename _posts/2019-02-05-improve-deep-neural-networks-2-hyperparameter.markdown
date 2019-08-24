@@ -155,11 +155,138 @@ tags: [python, machine learning]
 	* 均值和方差是有一些噪声的：因为只是某一个mini-batch所计算出来的
 	* **结果：在隐藏层的激活值上增加了噪音**。标准偏差的缩放和减去均值带来的额外噪音。
 	* dropout：也是增加噪音，隐藏单元已一定的概率乘以0或者1，应用较大的mini-batch可以减少正则化效果。
-	* 分析：标准偏差的缩放和减去均值带来的额外噪音。使得后部分的神经元不过度依赖于任何一个隐藏单元，所有有轻微的正则化效果。效果没有dropout那么强。
+	* 分析：标准偏差的缩放和减去均值带来的额外噪音。使得后部分的神经元不过度依赖于任何一个隐藏单元，所有有轻微的正则化效果。效果没有dropout那么强。![](http://www.ai-start.com/dl2017/images/0feb6ee8af40238fc1374131bc517e35.png)
 
 ---
 
-### 
+### 测试时的batch归一化
+
+* 训练：以mini-batch的形式进行
+* 测试：不能讲一个mini-batch的样本同时处理，因为每次只是预测一个样本（此时均值和方差没有意义）。
+* **方法：为了将神经网络运用于测试，需要单独估算平均值和方差**
+	* 原理：使用指数加权平均对均值和方差进行追踪，以计算指数加权平均值
+	* 具体：对于某一层l，有很多歌mini-batch，没有每一个mini-batch都可以计算均值和方差。然后使用指数加权平均计算均值和方差，这个均值和方差就是在测试的时候用到的。![](http://www.ai-start.com/dl2017/images/9e64b0cb330797ece66c0a56958bfcca.png)
+
+---
+
+### Softmax回归
+
+* 二分类：标记是0和1
+* softmax回归：
+	* 多分类的一种
+	* 不止识别两个分类
+* 例子：
+	* 识别图片中的是猫、够、小鸡![](http://www.ai-start.com/dl2017/images/e36d502aa68bf9e1a118f5d13e24b134.png)
+	* 输出：一个向量，表示了每一个类别的概率 ![](http://www.ai-start.com/dl2017/images/e65ba7b81d0b02d021c33bf0094f4059.png)
+* 为什么能做到多分类？
+	* softmax层+输出层实现
+	* softmax：多所有元素求幂，然后每个求幂元素的除以总的幂元素和(归一化)，得到对应的幂指数数值的概率 ![](http://www.ai-start.com/dl2017/images/08e51a30d97c877410fed7f7dbe1203f.png)
+	* 求幂指数概率的过程可看成是一个激活函数
+	* softmax激活函数：将所有可能的输出归一化，所以输入一个向量，输出也是一个向量，能够实现多分类
+* softmax分类器：
+	* 还能干什么？实现多类的线性划分
+	* 例子：没有中间隐藏层的网络，输入层+softmax层+输出层
+	* 可以看到，当类别数=3时，一个softmax层可以实现线性决策边界的划分。同样的，对于其他能够两两之间线性分隔的，都可以在多分类的情况下呗softmax分类器区分开来。![](http://www.ai-start.com/dl2017/images/1dc4bf21b6e38cbe9bdfb729ed969c99.png)
+	* 在类别数目C=5或者6的时候，也是可以实现的 ![](http://www.ai-start.com/dl2017/images/7207527be03bc1daec77afb6c29b8533.png)
+
+---
+
+### 训练一个softmax分类器
+
+* softmax vs hardmx:
+	* softmax: 指数归一化，输出的是概率向量，更为温和的映射
+	* hardmax：观察向量中的元素，最大的元素置为1，其他元素置为0. 
+	* 比如下面，对于softamx计算出来的向量，对应的hardmax向量则是：[1 0 0 0] ![](http://www.ai-start.com/dl2017/images/b433ed42cdde6c732820c57eebfb85f7.png)
+* softmax回归 vs logistic回归：
+	* 前者是将逻辑回归的激活函数推广到C类
+	* 当C=2时，softmax实际上变回了逻辑回归 ![](http://www.ai-start.com/dl2017/images/36802969e1acc8b96bb19506d391efe4.png)
+* 单个样本损失函数：
+	* 形式：$$L(\hat{y}, y)=-\sum_{i=1}^{10}  y_l log{\hat{y}_j}$$
+	* 例子：如果真实标签是[0 1 0 0]，表示一个猫的照片。输出向量 a=[0.3 0.2 0.1 0.4]，从概率来看，在猫的概率值不是最大的，所以在这个样本的预测上效果不好。
+	* 直接从损失函数理解：因为y1,y3,y4都=0，只有y2=1，所以$$L(\hat{y}, y)=-y_2log(\hat{y}_2)=-log(\hat{y}_2)$$，如果要损失函数越小，则对应的预测值$$\hat{y}_2$$应该越大越好，就是预测为第2类（猫）的概率值越大越好。
+	* **损失函数：找到训练集中的真实类别，然后使该类别相应的概率尽可能的高。**
+* 多样本的损失：
+	* 整个训练集损失的总和：![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190825002407.png)
+* 梯度下降最小化损失函数：
+	* 反向传播求导
+	* 导数：$$dz^{[l]}=\hat{y}-y)$$，导数还是一个C维的向量 ![](http://www.ai-start.com/dl2017/images/c357c15e4133152bd8bb262789e71765.png)
+
+---
+
+### 深度学习框架
+
+* 从零开始实现模型不现实
+* 框架：通过提供比数值线性代数库更高程度的抽象化，使得在开发深度学习应用时更加高效
+* 如何选择框架：
+	* **便于编程**
+	* **运行速度**
+	* **真的是开源的，能有良好的管理**
+	* ![](http://www.ai-start.com/dl2017/images/acb3843cd1085b0742f39677289890a0.png)
+
+---
+
+### TensorFlow
+
+* 损失函数最小化：$$Jw=w^2-10w+25$$
+
+```python
+import numpy as np
+import tensorflow as tf
+​
+w = tf.Variable(0,dtype = tf.float32)
+#接下来，让我们定义参数w，在TensorFlow中，你要用tf.Variable()来定义参数
+​
+#定义损失函数：
+cost = tf.add(tf.add(w**2,tf.multiply(- 10.,w)),25)
+​
+​# 使用梯度下降进行训练
+​#(让我们用0.01的学习率，目标是最小化损失)。
+train = tf.train.GradientDescentOptimizer(0.01).minimize(cost)
+
+​
+#最后下面的几行是惯用表达式:
+init = tf.global_variables_initializer()
+session = tf.Session() #这样就开启了一个TensorFlow session。
+session.run(init) #来初始化全局变量。
+​
+#然后让TensorFlow评估一个变量，我们要用到:
+session.run(w)
+​#上面的这一行将w初始化为0，并定义损失函数，我们定义train为学习算法，它用梯度下降法优化器使损失函数最小化，但实际上我们还没有运行学习算法
+
+print(session.run(w))
+​# 0
+​
+​session.run(train)
+​print(session.run(w))
+​# 0.1
+​
+​for i in range(1000):
+	session.run(train)
+print(session.run(w))
+# 4.9999
+# 结果很接近5了
+```
+
+* 定义cost函数的不同方式：
+	* 使用符号：add，multiply等
+	* 写公式：直接 ![](http://www.ai-start.com/dl2017/images/43a90dbd043662008d46f168def244b6.png)
+
+* placeholder:
+	* 之后会赋值的**变量**
+	* 告诉tf，会稍后为x提供数值
+	* 数据的占位:这里是对于损失函数的系数，直接使用一个向量x进行占位，所以在写损失函数的时候从x里面取值。然后再把定义的值feed到x
+	* 很方便的对更改系数值，相当于是一个函数了，比如把系数改为其他的值，那么此时最小化的是另外一个损失函数了，但是我们大体的代码是不便的。 ![](http://www.ai-start.com/dl2017/images/c93322e2d42219cd37fb579170abada9.png)
+
+* 使用with进行session的打开：
+	* 更方便清理
+	* 更常用 ![](http://www.ai-start.com/dl2017/images/3642c894eee19fce479efa42b027b56f.png)
+* tf核心：
+	* 计算损失函数，然后自动计算导数，及最小化损失
+	* 相当于建立计算图
+	* 通过计算损失，实现前向传播
+	* 不需要明确实现反向传播
+
+---
 
 ### 参考
 
