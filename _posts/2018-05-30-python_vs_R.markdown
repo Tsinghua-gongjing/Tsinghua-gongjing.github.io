@@ -340,3 +340,42 @@ loaded via a namespace (and not attached):
 [52] compiler_3.5.1
 ```
 ---
+
+### 查看当前bioconductor的版本
+
+有时候需要指定的bioconductor版本，才能正确的运行程序。因为不同的版本其安装的包的版本不同，如果不同版本差异很大，经常是容易报错的。比如最近遇到的这个：[scRNAseq_workflow_benchmark](https://github.com/Novartis/scRNAseq_workflow_benchmark)，其强调说的`bioconductor`版本是3.5，如果是其他版本，跑出来报错，尤其是通过其安装的包`scater`，差异很大，已知运行不成功。
+
+```R
+> tools:::.BioC_version_associated_with_R_version() 
+[1] ‘3.5’
+```
+
+---
+
+### 从bioconductor安装指定版本的包
+
+比如可能要安装低版本的包，需要先在bioconductor中找到对应的，然后指定安装url：
+
+```R
+# 比如：安装低版本的scater
+# 这里没有成功，因为还有几个其他依赖的包安装不成功
+install_version('scater', version='1.4.0',repos = "https://bioconductor.org/packages/3.5/bioc")
+```
+
+---
+
+### 从source文件安装包
+
+```R
+# 先下载源文件，一般是压缩的
+install.packages('/Share2/home/zhangqf5/gongjing/software/mvoutlier_2.0.9.tar.gz', repos = NULL, type="source")
+```
+
+---
+
+### 移除安装包
+
+```R
+# https://stat.ethz.ch/R-manual/R-devel/library/utils/html/remove.packages.html
+remove.packages(pkgs, lib)
+```
