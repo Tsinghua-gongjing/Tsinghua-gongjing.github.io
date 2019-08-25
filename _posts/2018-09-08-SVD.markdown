@@ -14,6 +14,7 @@ tags: [python, machine learning]
 1. 奇异值分解（singular value decomposition，SVD）：
    - 提取信息的强大工具，将数据映射到低维空间，以小得多的数据表示原始数据（去除噪声和冗余）。
    - 属于矩阵分解的一种，将数据矩阵分解成多个独立部分的过程。
+   - [SVD奇异值分解及其意义](https://shartoo.github.io/SVD-decomponent/)这篇文章详细解释了SVD的意义及几个应用例子的直观展示，可以参考一下。
 2. 应用：
    - 信息检索：隐性语义索引（latent semantic indexing，LSI）或者隐性语义分析（latent semantic analysis，LSA）。文档矩阵包含文档和词语，应用SVD，可构建多个奇异值，这些奇异值就代表了文档的主题概念，有助于更高效的文档搜索。
    - 推荐系统：简单版本是直接计算用户之间的相似性，应用SVD可先构建主题空间，然后计算在该空间下的相似度。
