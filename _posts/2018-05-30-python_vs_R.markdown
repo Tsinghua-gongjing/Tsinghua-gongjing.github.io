@@ -379,3 +379,33 @@ install.packages('/Share2/home/zhangqf5/gongjing/software/mvoutlier_2.0.9.tar.gz
 # https://stat.ethz.ch/R-manual/R-devel/library/utils/html/remove.packages.html
 remove.packages(pkgs, lib)
 ```
+
+---
+
+### 设置包的加载路径
+
+在集群上，有的时候自己的目录下面安装了包，但是在系统调用的时候可能没有加载进来，可能是因为libpath中的路径存在问题，导致一些依赖包的顺序不对，所以不能正常的调用：
+
+```R
+# 系统路径是在前的
+# 直接调用时，依赖的包是系统的R安装的
+# 与用户的R版本不一致，出现问题
+> .libPaths()
+[1] "/Share/home/zhangqf5/R/x86_64-pc-linux-gnu-library/3.3"
+[2] "/Share/home/zhangqf/usr/R-3.3.0/lib64/R/library"
+[3] "/Share/home/zhangqf/usr/R-3.3.2/lib64/R/library"
+[4] "/Share/home/zhangqf5/software/R/3.5.1/lib64/R/library"
+> library(mvoutlier)
+Loading required package: sgeostat
+Error: package or namespace load failed for ‘mvoutlier’:
+ package ‘rrcov’ was installed by an R version with different internals; it needs to be reinstalled for use with this R version
+>
+
+
+# 更换lib顺序，使得用户的libpath优先调用
+> .libPaths("/Share/home/zhangqf5/software/R/3.5.1/lib64/R/library")
+>
+> library(mvoutlier)
+sROC 0.1-2 loaded
+>
+```
