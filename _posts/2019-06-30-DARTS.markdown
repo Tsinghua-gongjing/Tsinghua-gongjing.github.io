@@ -65,6 +65,74 @@ tags: [genomics, plot]
 
 相关的代码已经放在[ Xinglab/DARTS ](https://github.com/Xinglab/DARTS)上面了，可以参考。
 
+* [Darts_DNN@github](https://github.com/Xinglab/DARTS/tree/master/Darts_DNN)
+* [Darts_BHT@github](https://github.com/Xinglab/DARTS/tree/master/Darts_BHT)
+* [Darts_BHT&DNN@readoc](https://darts-bht.readthedocs.io/en/latest/)
+* [Trained models and related files@sourceforge](https://sourceforge.net/projects/rna-darts/files/resources/DNN/v0.1.0/)：有很多文件需要从这里下载，包含四个不同的模型：SE(skipped exons)，RI(retained introns)，A5SS(alternative 5' splice sites)，A3SS(alternative 3' splice sites)。根据自己要预测的事件类型，选取对应的已训练的模型参数和文件。不同类型事件的序列特征数目不同，RBP表达特征数目是相同的。
+
+DNN predict commad:
+
+```bash
+➜  bin git:(master) ✗ python Darts_DNN predict -h
+usage: Darts_DNN predict [-h] -i INPUT -o OUTPUT [-t {SE,A5SS,A3SS,RI}]
+                         [-e EXPR [EXPR ...]] [-m MODEL]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -i INPUT              Input feature file (*.h5) or Darts_BHT output (*.txt)
+  -o OUTPUT             Output filename
+  -t {SE,A5SS,A3SS,RI}  Optional, default SE: specify the alternative splicing
+                        event type. SE: skipped exons, A3SS: alternative 3
+                        splice sites, A5SS: alternative 5 splice sites, RI:
+                        retained introns
+  -e EXPR [EXPR ...]    Optional, required if input is Darts_BHT output;
+                        Folder path for Kallisto expression files; e.g '-e
+                        Ctrl_rep1,Ctrl_rep2 KD_rep1,KD_rep2'
+  -m MODEL              Optional, default using current version model in user
+                        home directory: Filepath for a specific model
+                        parameter file
+```
+
+DNN prediction:
+
+```bash
+# 需要先下载model文件：master.dl.sourceforge.net/project/rna-darts/resources/DNN/v0.1.0/trainedParam/A5SS-trainedParam-EncodeRoadmap.h5
+
+Darts_DNN predict -i darts_bht.flat.txt -e RBP_tpm.txt -o pred.txt -t A5SS
+```
+
+darts_bht.flat.txt:
+
+```
+➜  test_data git:(master) ✗ head darts_bht.flat.txt
+ID      I1      S1      I2      S2      inc_len skp_len mu.mle  delta.mle       post_pr
+chr1:-:10002681:10002840:10002738:10002840:9996576:9996685      581     0       462     0       155     99      1       0       0
+chr1:-:100176361:100176505:100176389:100176505:100174753:100174815      28      0       49      2       126     99      1       -0.0493827160493827     0.248
+chr1:-:109556441:109556547:109556462:109556547:109553537:109554340      2       37      0       81      119     99      0.0430341230167355      -0.0430341230167355     0.188
+chr1:-:11009680:11009871:11009758:11009871:11007699:11008901    11      2       49      4       176     99      0.755725190839695       0.117542135892979       0.329333333333333
+chr1:-:11137386:11137500:11137421:11137500:11136898:11137005    80      750     64      738     133     99      0.0735580941766509      -0.0129207126090368     0
+chr1:-:113247674:113247790:113247721:113247790:113246265:113246428      159     1862    127     1958    145     99      0.0550902772187827      -0.0126831240261882     0
+chr1:-:1139413:1139616:1139434:1139616:1139223:1139348  980     106     24      2       119     99      0.884944451538756       0.0240073464719553      0.128666666666667
+chr1:-:115166127:115166264:115166180:115166264:115165607:115165720      17      0       32      1       151     99      1       -0.0454956312142212     0.287333333333333
+chr1:-:11736865:11737005:11736904:11737005:11736102:11736197    22      1532    26      1544    137     99      0.0102705812451076      0.00175172587953396     0
+```
+
+RBP_tpm.txt:
+
+```
+➜  test_data git:(master) ✗ head RBP_tpm.txt
+        thymus  adipose
+RPS11   2678.83013      2531.887535
+ERAL1   14.350975       13.709394
+DDX27   18.2573 14.02368
+DEK     32.463558       14.520312
+PSMA6   102.332592      77.089475
+TRIM56  4.519675        6.14762566667
+TRIM71  0.082009        0.0153936666667
+UPF2    7.150812        5.23628033333
+FARS2   6.332831        7.291382
+```
+
 ---
 ### 参考
 
