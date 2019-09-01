@@ -1,0 +1,76 @@
+---
+layout: post
+category: "genomics"
+title:  "深度学习助力RNA可变剪切的预测"
+tags: [genomics, plot]
+---
+
+### 目录
+
+- TOC
+{:toc}
+
+---
+
+### 背景
+
+* 可变剪切事件的检测需要很好的测序丰度
+* 现在有大量的公共RNAseq数据集，是可以提供可变剪切的信息的
+* 对于低coverage的样本，其可变剪切事件通常是检测不出来的。有效的检测可变剪切事件，以及不同样本间的差异，没有特别好的方法
+
+---
+
+### 模型
+
+* DARTS：**D**eep-learning **A**ugmented **R**NAseq analysis of **T**ranscript **S**plicing
+* 模型：
+	* 包含两个部分：
+	* **DNN**：基于序列特征和RBP的表达量特征，学习差异可变剪切的潜在模型。该模型作为大规模数据集的先验知识用于新样本的推断。
+	* **BHT**：贝叶斯假设检验模块。这里包含了两个，一个是BHT(flat)，是之前他们的预测剪切事件的工具（如rMATS）的升级版，这里主要用来对于大规模的公共数据集（如ENCODE、Roadmap）进行分析，得到其剪切事件的结果，构建一个具有label的数据集用于DNN训练。还有一个模块是BHT(info)，把要分析的新的样本作为样本特征，DNN的预测作为先验知识，对新样本的可变剪切进行分析。[![20190901141834](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190901141834.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190901141834.png)
+	* a）模型的基本框架
+	* b）在DNN模型中，用到的特征，包括序列特征(cis)，和RBP表达量的特征(trans)
+	* c）DNN训练时，使用的数据集。这里关注的是差异可变剪切，所以用的都是shRNA KD vs control的样本对，两个不同的细胞系(K562+HepG2)
+	* d）模型效果的比较。图中的DNN是在单个数据集上训练的，DARTS-DNN是随着横轴增大，在对应数目上的数据集上训练的。还测试另外的模型：逻辑回归，随机森林，还有一个直接预测PSI然后取两个条件的差值的方式。综合来看，DARTS-DNN效果是最好的，但是需要在多个数据集上进行训练。
+
+---
+
+### 效果评估
+
+* BHT(info)的效果比BHT(flat)效果要好（下图a），因为前者同时引入了DNN的先验知识
+* 同时在ENCODE+Roadmap上进行训练效果是最好的，比单独的数据来源都要好（下图b） [![20190901142641](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190901142641.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190901142641.png)
+
+---
+
+### 应用测试
+
+* 应用说明部分举了几个例子 [![20190901143018](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190901143018.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190901143018.png)
+
+* 应用1：EMT过程
+	* 7个时间点，都和第0天比较，看差异可变剪切的变化
+	* DNN训练来源不同，可以分为不同的模型，可以看到整合的来源最后预测的效果是最好的（图a）
+	
+	* DARTS-DNN rescue
+	* 使用两个模型：BHT(flat)、DARTS-DNN，比较第6天和第0天得到差异可变剪切，再看在exon-intron junction区域的motif的富集（图b）
+	
+	* 使用两个不同的系统去看EMT过程
+	* 但是分别得到的效果是高度正相关的，说明模型的鲁棒性（图c）
+
+* 应用2：RASL-seq低表达量转录本
+	* 特异的，检测低表达的转录本的差异可变剪切事件
+	* 对于图d，这么来看。首先用BHT(flat)直接去预测，得到了差异剪切(RNA-seq differential)的和不变的(RNA-seq unchanged)，累计曲线显示前者比后者的score大很多，符合预期。接下来用DARTS-DNN辅助预测，能够预测到一些新的，就是图中的预测的差异剪切(predicted differential)和不变的(predicted unchanged)，可以看到这两个的趋势跟上面的是一致的，也就是差异的score比不变的大很多。单独看对应类型的（比如RNA-seq differential vs predicted differential），其曲线也是很接近的。在补充材料里面，其实看了这两个类型的转录本的表达量水平，发现新增预测到的其实表达量是更低的（如下图的ab，分别看的是表达量水平和read coverage）。由此说明，对于低表达量的转录本，DARTS也是可以很好的检测到差异可变剪切事件的。[![20190901144332](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190901144332.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190901144332.png)
+
+---
+
+### 代码
+
+相关的代码已经放在[ Xinglab/DARTS ](https://github.com/Xinglab/DARTS)上面了，可以参考。
+
+---
+### 参考
+
+* [How Does a New Computational Method Transform Public Big Data Into Knowledge of Transcript Splicing](https://blog.research.chop.edu/how-does-a-new-computational-method-transform-public-big-data-into-knowledge-of-transcript-splicing)
+* [New computational tool harnesses big data, deep learning to reveal dark matter of the transcriptome](https://www.sciencedaily.com/releases/2019/03/190325173301.htm)
+* [用深度学习预测可变剪切](https://www.cnblogs.com/leezx/p/11426877.html)
+* [邢毅团队利用深度学习强化RNA可变剪接分析的准确性](https://mp.weixin.qq.com/s/tDibnLLA9vUFb2auksSFGA)
+
+---
