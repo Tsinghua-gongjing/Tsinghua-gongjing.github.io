@@ -8,6 +8,8 @@ tags: [python]
 - TOC
 {:toc}
 
+---
+
 ### Calculate distance between two intervals [stackoverflow](https://stackoverflow.com/questions/16843409/finding-integer-distance-between-two-intervals)
 
 ```python
@@ -31,6 +33,8 @@ def solve(r1, r2):
 1
 ```
 
+---
+
 ### Sort a column by specific order in a df [stackoverflow](https://stackoverflow.com/questions/23482668/sorting-by-a-custom-list-in-pandas)
 
 ```python
@@ -43,12 +47,15 @@ df['column'].cat.set_categories(sorter, inplace=True)
 df.sort_values(["column"], inplace=True)
 ```
 
+---
+
 ### [Free online jupyter](https://jupyter.org/try)
 
 [![online_jupyter_free.jpeg](https://i.loli.net/2018/08/31/5b88bd74ed303.jpeg)](https://i.loli.net/2018/08/31/5b88bd74ed303.jpeg)
 
 A free Python/R notebook can also be created online at [https://rdrr.io/](https://rdrr.io/).
 
+---
 
 ### Normalize data frame by row/column sum [stackoverflow](https://stackoverflow.com/questions/35678874/normalize-rows-of-pandas-data-frame-by-their-sums/35679163)
 
@@ -80,6 +87,8 @@ t.div(t.sum(axis=0), axis=1)
 2	0.500000	0.416667	0.380952
 ```
 
+---
+
 ### Write multiple df to one sheet with multiple tab [stackoverflow](https://stackoverflow.com/questions/32957441/putting-many-python-pandas-dataframes-to-one-excel-worksheet)
 
 
@@ -90,6 +99,8 @@ def dfs_tabs(df_list, sheet_list, file_name):
         dataframe.to_excel(writer, sheet_name=sheet, startrow=0 , startcol=0, index=False)   
     writer.save()
 ```
+
+---
 
 ### 根据df某一列的值，找到其最大值所对应的index
 
@@ -115,6 +126,8 @@ Name: 2, dtype: object
 print (df.ix[df.favcount.idxmax(), 'sn'])
 c
 ```
+
+---
 
 ### 设置画图时使用Helvetica字体
 
@@ -161,6 +174,23 @@ plt.xlabel('xlabel', **hfont)
 plt.show()
 ```
 
+---
+
+### 画图时支持中文
+
+画图时，如果需要使用中文label，需要设置，主要参考[这里](https://www.zhihu.com/question/25404709)：
+
+* 1、下载`SimHei`黑体字体[文件](https://link.zhihu.com/?target=http%3A//www.fontpalace.com/font-details/SimHei/)
+* 2、将下载的`.tff`文件放到`matplotlib`包的路径下，路径为：`matplotlib/mpl-data/fonts/ttf`，可以使用`pip show matplotlib`查看包安装的位置
+* 3、修改配置文件：`matplotlibrc`，一般在`matplotlib/mpl-data/`这个下面。
+	* font.family : sans-serif
+	* font.sans-serif : SimHei, Bitstream Vera Sans, Lucida Grande, Verdana, Geneva, Lucid, Arial, Helvetica, Avant Garde, sans-serif
+	* axes.unicode_minus:False
+* 4、删除`/Users/gongjing/.matplotlib`下面缓存的字体文件
+* 5、再直接调用即可`plt.rcParams["font.family"] = "SimHei"`
+
+---
+
 ### 将array里面的NA值替换为其他实数值
 
 可以使用numpy的函数[nan\_to\_num](https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.nan_to_num.html)：`numpy.nan_to_num(x, copy=True)]`
@@ -177,6 +207,8 @@ array([  1.79769313e+308,  -1.79769313e+308,   0.00000000e+000,
 np.nan_to_num(x, copy=False)
 ```
 
+---
+
 ### 核查文件夹是否存在否则创建
 
 As discussed [here](https://stackoverflow.com/questions/273192/how-can-i-safely-create-a-nested-directory):
@@ -187,6 +219,8 @@ def check_dir_or_make(d):
     if not os.path.exists(d):
         os.makedirs(d)
 ```
+
+---
 
 ### 把df中的某一列按照特定字符分隔成多列
 
@@ -210,3 +244,5 @@ df[['First','Last']] = df.Name.str.split("_",expand=True,)
 # 1	34	Joe_Nadal	Joe	Nadal
 # 2	36	Roger_Federer	Roger	Federer
 ```
+
+----
