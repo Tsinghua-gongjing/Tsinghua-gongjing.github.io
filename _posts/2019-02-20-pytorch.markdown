@@ -5,6 +5,17 @@ title:  "pytorch"
 tags: [python, machine learning]
 ---
 
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+### 目录
+
+- TOC
+{:toc}
+
+---
+
 ## 概述
 
 pytorch: 基于python的科学计算包
@@ -12,12 +23,16 @@ pytorch: 基于python的科学计算包
  - 替代numpy，利用GPU性能进行计算
  - 高灵活性、速度快的深度学习平台 
 
+---
+
 ## 基本概念
 
 3层抽象：
  - tensor：imprerative array, but runs on GPU
  - variable: node in a graph, store data and gradient 
  - module: a neural network layer, store state or learnable weights
+
+---
 
 ### 张量（tensor）：类似于numpy里面的数组array，在GPU上可实现加速计算。
 
@@ -99,9 +114,13 @@ print(b.grad_fn)
 
 [![autogradient.jpeg](https://i.loli.net/2019/05/16/5cdc3b0b1440323808.jpeg)](https://i.loli.net/2019/05/16/5cdc3b0b1440323808.jpeg)
 
+---
+
 ## 示例: 手写数字识别的LeNet5卷积神经网络
 
 ![](https://cuijiahua.com/wp-content/uploads/2018/01/dl_3_4.jpg)
+
+---
 
 ### 准备数据
 
@@ -119,6 +138,8 @@ root = './data'
 if not os.path.exists(root):
     os.mkdir(root)
     
+# 这里的0.5，1.0是对数据进行归一化时使用的mean和variance
+# 在MNIST里面，图片的均值和方差分别是：0.1307，0.3081，所以这里提供的值不是对的
 trans = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,), (1.0,))])
 # if not exist, download mnist dataset
 train_set = dset.MNIST(root=root, train=True, transform=trans, download=True)
@@ -136,6 +157,8 @@ test_loader = torch.utils.data.DataLoader(
                 shuffle=False)
 ```
 
+---
+
 ### 定义网络
 
 ```python
@@ -148,6 +171,7 @@ class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
         # 输入图像channel：1；输出channel：6；5x5卷积核
+        # 这里构建的网络的padding是1，但是真实的一般使用的是2（外层补上两圈0），输入是32x32
         self.conv1 = nn.Conv2d(1, 6, 5)
         self.conv2 = nn.Conv2d(6, 16, 5)
         # an affine operation: y = Wx + b
@@ -156,17 +180,22 @@ class Net(nn.Module):
         self.fc3 = nn.Linear(84, 10)
 
     def forward(self, x):
-        # 2x2 Max pooling
+        # 2x2 Max pooling, 先卷积，然后调用relu激活函数，再最大值池化操作
         x = F.max_pool2d(F.relu(self.conv1(x)), (2, 2))
         # If the size is a square you can only specify a single number
+        # 第二次卷积+池化操作
         x = F.max_pool2d(F.relu(self.conv2(x)), 2)
+        # 重新塑形,将多维数据重新塑造为二维数据，256*400
         x = x.view(-1, self.num_flat_features(x))
+        #第一个全连接
         x = F.relu(self.fc1(x))
         x = F.relu(self.fc2(x))
         x = self.fc3(x)
         return x
 
     def num_flat_features(self, x):
+        # x.size()返回值为(256, 16, 5, 5)，size的值为(16, 5, 5)，256是batch_size
+        # x.size返回的是一个元组，size表示截取元组中第二个开始的数字
         size = x.size()[1:]  # 除去批大小维度的其余维度
         num_features = 1
         for s in size:
@@ -206,6 +235,8 @@ torch.nn.Conv2d(in_channels, out_channels, kernel_size, stride=1, padding=0, dil
 # bias (bool, optional) – If True, adds a learnable bias to the output. Default: True
 ```
 
+---
+
 ### 定义损失函数和优化器
 
 ```python
@@ -220,6 +251,8 @@ optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
 最好是直接调用优化器，但是最基础的也可手动指定更新（不推荐）：
 
 [![pytorch_optimizer.jpeg](https://i.loli.net/2019/05/16/5cdc3b0b1b8f387251.jpeg)](https://i.loli.net/2019/05/16/5cdc3b0b1b8f387251.jpeg)
+
+---
 
 ### 训练网络：
 
@@ -263,6 +296,8 @@ print('Finished Training')
 # Finished Training
 ```
 
+---
+
 ### 评估模型
 
 ```python
@@ -282,16 +317,21 @@ print('Accuracy of the network on the 10000 test images: %d %%' % (
 # Accuracy of the network on the 10000 test images: 55 %
 ```
 
+---
+
 ## cheatsheet
 
 * [Pytorch official](https://pytorch.org/tutorials/beginner/ptcheat.html) : https://pytorch.org/tutorials/beginner/ptcheat.html
 * [Pytorch_Tutorial](https://web.cs.ucdavis.edu/~yjlee/teaching/ecs289g-winter2018/Pytorch_Tutorial.pdf) : https://web.cs.ucdavis.edu/~yjlee/teaching/ecs289g-winter2018/Pytorch_Tutorial.pdf
+
+---
 
 ## 参考
 
 * [DEEP LEARNING WITH PYTORCH: A 60 MINUTE BLITZ](https://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html)
 * [PyTorch 深度学习: 60 分钟极速入门](https://pytorch.apachecn.org/docs/1.0/#/deep_learning_60min_blitz)
 
+---
 
 
 
