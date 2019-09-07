@@ -5,17 +5,32 @@ title:  "GAN"
 tags: [python, machine learning]
 ---
 
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+### 目录
+
+- TOC
+{:toc}
+
+---
+
 ## 概述
 
 生成对抗网络（Generative Adversarial Network， GAN），属于一种生成模型，通过生成样本，以训练模型，直到模型无法区分样本来源（真实 vs 生成）为止。
 
 <!-- more -->
 
+---
+
 ## 概念
 
 ### 1、网络结构
 
 ![](https://pic4.zhimg.com/v2-5ca6a701d92341b8357830cc176fb8a3_1200x500.jpg)
+
+---
 
 ### 2、概念说明
 
@@ -37,6 +52,8 @@ tags: [python, machine learning]
   - 相对熵衡量两个分布的相似性，[这里](http://ufldl.stanford.edu/tutorial/unsupervised/Autoencoders/)在讨论autoencoder的时候也说了，两个分布越相近时，熵值越小。这里是固定其中的一个值p=0.2，当q取不同的值时，相对熵（KL散度）的大小，从图中可以看出，当q取和p相等的值（分布一样）时，熵值最小。 ![](http://ufldl.stanford.edu/tutorial/images/KLPenaltyExample.png)
 
 具体在GAN中，损失函数如下：[![GAN_loss.png](https://i.loli.net/2019/05/16/5cdcd73a204c291144.png)](https://i.loli.net/2019/05/16/5cdcd73a204c291144.png)
+
+---
 
 ## 示例：MNIST手写识别
 
@@ -219,12 +236,15 @@ pytorch实现版本:
 # https://github.com/BeierZhu/GAN-MNIST-Pytorch/blob/master/main.py
 ```
 
+---
+
 ## 参考
 
 * [通俗理解生成对抗网络GAN](https://zhuanlan.zhihu.com/p/33752313)
 * [GAN笔记——理论与实现](https://www.cnblogs.com/fydeblog/p/9439024.html)
 * [一文搞懂交叉熵在机器学习中的使用，透彻理解交叉熵背后的直觉](https://blog.csdn.net/tsyccnh/article/details/79163834)
 
+---
 
 
 

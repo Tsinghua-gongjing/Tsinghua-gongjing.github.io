@@ -5,11 +5,24 @@ title:  "RNN"
 tags: [python, machine learning]
 ---
 
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+### 目录
+
+- TOC
+{:toc}
+
+---
+
 ## 概述
 
 循环神经网络（Recurrent neural network，RNN）：a class of artificial neural network where connections between nodes form a directed graph along a temporal sequence （from wiki）。 
 
 <!-- more -->
+
+---
 
 ## 概念
 
@@ -19,24 +32,28 @@ tags: [python, machine learning]
   - 现实场景很多是不一定的？比如根据上下文预测后续的单词，股票价格的走势预测等，都是有影响的。
   - 更好的处理序列问题，拥有记忆的能力，这样模型的输出就取决于**【当前的输入】**和**【记忆】**。
 
+---
+
 ### 网络结构
 
 结构类似于传统的神经网络，包括输入层、隐藏层和输出层，只是这里的隐藏层的值是取决于输入和上一次的隐藏层的值：
 
- - Xt：t时刻的输入
- - Ot：t时刻的输出
- - St：t时刻的记忆（t时刻隐藏层的值？）
- - U：输入层到隐藏层的权重矩阵
- - V：隐藏层到输出层的权重矩阵
- - W：隐藏层上一次的值到这一次的输入时的权重矩阵
+ - 参数$$X_t$$：t时刻的输入
+ - 参数$$O_t$$：t时刻的输出
+ - 参数$$S_t$$：t时刻的记忆（t时刻隐藏层的值？）
+ - 参数$$U$$：输入层到隐藏层的权重矩阵
+ - 参数$$V$$：隐藏层到输出层的权重矩阵
+ - 参数$$W$$：隐藏层上一次的值到这一次的输入时的权重矩阵
  - 【注意1】：从这里看出，类似于卷积神经网络，**权重矩阵U、V、W都是共享的**，极大的降低了所需训练的参数，减小了计算量。
- - 【注意2】：St不能捕捉t时间点之前所有时间点的信息。
+ - 【注意2】：$$S_t$$不能捕捉t时间点之前所有时间点的信息。
 
 ![](https://pic2.zhimg.com/80/v2-b0175ebd3419f9a11a3d0d8b00e28675_hd.jpg)
 
 上面的结构展开是按照时间线展开的，下面这个是按照网络展开的：
 
 ![](https://pic3.zhimg.com/80/v2-9e50e23bd3dff0d91b0198d0e6b6429a_hd.jpg)
+
+---
 
 ### 损失函数
 
@@ -49,6 +66,8 @@ tags: [python, machine learning]
 我们一般采用反向传播算法（BP）求解最优参数，但是在RNN里采用的是BPTT（back-propagation through time），它和反向传播算法的区别，也就是RNN和其他网络的区别，即RNN是具有记忆的，所以求导的时候也是依赖于之前的时间节点的。
 
 注意：BPTT基本原理类似于BP，BP是按照层来反向传播，BPTT按照时间进行反向传播。
+
+---
 
 ## 示例：根据字符预测相加的数值
 
@@ -230,6 +249,8 @@ for iteration in range(1, 200):
         print(guess)
 ```
 
+---
+
 ## 参考
 
 * [一文搞懂RNN（循环神经网络）基础篇](https://zhuanlan.zhihu.com/p/30844905)
@@ -237,7 +258,7 @@ for iteration in range(1, 200):
 * [Fundamentals of Deep Learning – Introduction to Recurrent Neural Networks](https://www.analyticsvidhya.com/blog/2017/12/introduction-to-recurrent-neural-networks/)
 * [从循环神经网络（RNN）到LSTM网络](https://blog.csdn.net/diligent_321/article/details/53365621)
 
-
+---
 
 
 

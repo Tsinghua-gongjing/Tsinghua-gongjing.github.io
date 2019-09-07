@@ -5,13 +5,28 @@ title:  "keras"
 tags: [python, machine learning]
 ---
 
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+### 目录
+
+- TOC
+{:toc}
+
+---
+
 ## 概述
 
 Keras: means horn in Greek。用python编写的，是高层的封装器，可以调用不同的后台，比如tensorflow，CNTK，Theano。目的就是为了更快的构建机器学习模型。
 
+---
+
 ## 基本概念
 
 基本的数据结构：`model`，构建网络层用的。最简单的模型是`Sequential`，线性堆叠的层。
+
+---
 
 ### 构建模型
 
@@ -64,6 +79,8 @@ model.add(Dense(32, input_shape=(16,)))
 model.add(Dense(32))
 ```
 
+---
+
 ### 编译模型 
 
 基于网络编译模型`.compile()`，编译模型函数`.compile()`包含3个参数：
@@ -85,7 +102,9 @@ model.compile(loss=keras.losses.categorical_crossentropy,
               optimizer=keras.optimizers.SGD(lr=0.01, momentum=0.9, nesterov=True))
 ```
 
-### 训练模型：
+---
+
+### 训练模型
 
 ```python
 # x_train and y_train are Numpy arrays --just like in the Scikit-Learn API.
@@ -94,6 +113,8 @@ model.fit(x_train, y_train, epochs=5, batch_size=32)
 # 手动batch训练
 model.train_on_batch(x_batch, y_batch)
 ```
+
+---
 
 ### 评估模型
 
@@ -106,6 +127,8 @@ loss_and_metrics = model.evaluate(x_test, y_test, batch_size=128)
 ```python
 classes = model.predict(x_test, batch_size=128)
 ```
+
+---
 
 ## 示例：Multilayer Perceptron (MLP) for multi-class softmax classification
 
@@ -143,9 +166,13 @@ model.fit(x_train, y_train,
 score = model.evaluate(x_test, y_test, batch_size=128)
 ```
 
+---
+
 ## cheatsheet
 
 [![keras_cheatsheet.png](https://i.loli.net/2019/05/15/5cdbb6cb0067534410.png)](https://i.loli.net/2019/05/15/5cdbb6cb0067534410.png)
+
+---
 
 ## 参考
 
@@ -155,5 +182,5 @@ score = model.evaluate(x_test, y_test, batch_size=128)
 * [keras-cheat-sheet](https://www.datacamp.com/community/blog/keras-cheat-sheet)
 
 
-
+---
 

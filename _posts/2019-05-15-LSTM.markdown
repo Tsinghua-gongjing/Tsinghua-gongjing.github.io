@@ -1,0 +1,140 @@
+---
+layout: post
+category: "machinelearning"
+title:  "LSTM"
+tags: [python, machine learning]
+---
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+### 目录
+
+- TOC
+{:toc}
+
+---
+
+### RNN
+
+* 背景：传统神经网络不具有记忆功能
+	* 记忆：比如人的思考是基于记忆的知识的
+* 方案：RNN
+	* 将信息持久化
+	* 可以解决网络的记忆功能
+	* RNN可以看做是同一个网络的多个副本，每一份都将信息传递到下一个副本
+	
+	* RNN环式结构展开为链式：![](https://www.yunaitong.cn/media/14585445702525/14585464218639.png)
+	* 链式结构展示了RNN与序列和列表的密切关系
+	* 语音识别、语言建模、翻译、图片标题取的很好效果
+
+---
+
+### RNN不能解决长期依赖问题
+
+* RNN核心：将以前的信息连接到当前任务中
+* 缺点：不能保留更远的上下文信息
+* 简单例子：
+	* 输入：“the clouds are in the xxx”
+	* 预测：xxx
+	* RNN：可以训练得很好预测出来，根据上下文，很容易
+	* 特点：**当前位置与相关信息所在位置之间的距离相对较小**
+* 复杂例子：
+	* 输入：“I grew up in France... I speak fluent xxx”
+	* 预测：xxx
+	* RNN：可以训练得很好预测出来，根据上下文，不能很好的预测出来
+	* 特点：**相关信息和需要该信息的位置之间的距离可能非常的远，此时需要更多的上下文信息才能很好的预测**
+* **随着距离的增大，RNN对于将这些信息连接起来无能为力** 
+	* 比如根据x0,x1预测h3，可以做到；但是预测h(t)时刻的，如果要用到x0,x1的信息，RNN就很难了。[![20190907164525](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190907164525.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190907164525.png) 
+
+---
+
+### LSTM：长短期记忆网络
+
+* LSTM：long short term memory networks
+	* 可学习到长期依赖关系
+	* 目前有很多改进的版本
+	* 在许多问题上效果很好
+* RNN vs LSTM结构：
+	* RNN：重复模块结构简单，只有一个tanh层
+	* LSTM：也具有链状结构，但是其重复模块复杂，包含4个神经网络，并且相互之间的交互非常特别 [![20190907165353](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190907165353.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190907165353.png)
+* 核心：元胞状态
+	* 图中横穿整个元胞顶部的水平线
+	* 像传送带，直接穿过整个链
+	* 只有一些较小的线性交互
+	* 能对元胞状态添加或者删除信息：通过门的结构控制
+	* **门：选择性让信息通过的方法，由一个sigmoid神经网络层和一个元素级相乘操作组成** [![20190907170543](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190907170543.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190907170543.png)
+
+---
+
+### LSTM步骤
+
+* 总共分4个：
+	* 遗忘门：决定我们将要从元胞状态中扔掉哪些信息
+	* 输入门：决定我们将会把哪些新信息存储到元胞状态中
+	* 更新元胞状态：取代遗忘的信息
+	* 输出门：基于目前的元胞状态，并且会加入一些过滤 [![20190907171306](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190907171306.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190907171306.png)
+
+---
+
+### LSTM的变种
+
+* GRU模型：Gated Recurrent Unit
+	* 将遗忘门和输入门合并成为单一的“更新门(Update Gate)”
+	* 将元胞状态(Cell State)和隐状态(Hidden State)合并
+	* 比标准的LSTM模型更简化
+	* 越来越流行 ![](https://www.yunaitong.cn/media/14585445702525/14585667357562.png)
+
+---
+
+### pytorch实现单向LSTM
+
+使用单向LSTM：
+
+```python
+nn = nn.LSTM(input_size=10, hidden_size=20, num_layers=2)#(input_size,hidden_size,num_layers)
+input = torch.randn(5, 3, 10)#(seq_len, batch, input_size)
+h0 = torch.randn(2, 3, 20) #(num_layers,batch,output_size)
+c0 = torch.randn(2, 3, 20) #(num_layers,batch,output_size)
+output, (hn, cn) = rnn(input, (h0, c0))
+
+output.shape #(seq_len, batch, output_size)
+torch.Size([5, 3, 20])
+hn.shape #(num_layers, batch, output_size)
+torch.Size([2, 3, 20])
+cn.shape #(num_layers, batch, output_size)
+torch.Size([2, 3, 20])
+```
+
+[![20190907172256](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190907172256.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190907172256.png)
+
+---
+
+### pytorch实现双向LSTM
+
+```python
+rnn = nn.LSTM(input_size=10, hidden_size=20, num_layers=2,bidirectional=True)#(input_size,hidden_size,num_layers)
+input = torch.randn(5, 3, 10)#(seq_len, batch, input_size)
+h0 = torch.randn(4, 3, 20) #(num_layers,batch,output_size)
+c0 = torch.randn(4, 3, 20) #(num_layers,batch,output_size)
+output, (hn, cn) = rnn(input, (h0, c0))
+
+output.shape #(seq_len, batch, output_size*2)
+torch.Size([5, 3, 40])
+hn.shape #(num_layers*2, batch, output_size)
+torch.Size([4, 3, 20])
+cn.shape #(num_layers*2, batch, output_size)
+torch.Size([4, 3, 20])
+```
+
+![](http://ai2-s2-public.s3.amazonaws.com/figures/2017-08-08/f7bdb849dafe17c952bfd88b879e01f74cf59d78/4-Figure3-1.png)
+
+---
+
+### 参考
+
+* [理解 LSTM 网络](https://www.yunaitong.cn/understanding-lstm-networks.html)
+* [lstm理解与使用(pytorch为例)](https://blog.csdn.net/qq_16949707/article/details/84845552)
+
+---

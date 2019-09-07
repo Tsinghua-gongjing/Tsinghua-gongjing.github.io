@@ -5,11 +5,24 @@ title:  "CNN"
 tags: [python, machine learning, deep learning]
 ---
 
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+### 目录
+
+- TOC
+{:toc}
+
+---
+
 ## 概述
 
 卷积神经网络（Convolutional Neural Network, CNN）：一种前馈神经网络，在图像处理里面很常用。
 
 <!-- more -->
+
+---
 
 ## 概念
 
@@ -17,12 +30,16 @@ tags: [python, machine learning, deep learning]
 
 ![](https://cuijiahua.com/wp-content/uploads/2018/01/dl_3_4.jpg)
 
+---
+
 ### 2、概念说明
 
   - 卷积（convolution）：使用滤波器（固定权重的一组神经元）与数据做內积（元素相乘再求和）
   - 卷积核（convolution kenerl）：上面的滤波器，每个含有多个权重，这就是需要训练的参数
   - 卷积层（convolutional layer）：进行卷积计算的层
   - 池化层（pooling layer）：通常在卷积层后面，是一种非线性向下采样的方法，主要是减少网络的参数从而减小计算量，有最大池化、平均池化等。
+
+---
 
 ### 3、卷积计算说明
 
@@ -44,6 +61,7 @@ tags: [python, machine learning, deep learning]
  - **参数（权重）共享**：数据窗口滑动，导致输入在变化，但中间滤波器的权重（即每个神经元连接数据窗口的权重）是固定不变的。这种特征能极大的减少需要训练的参数，[下图](https://arxiv.org/pdf/1706.09077.pdf)是一个比较：[![CNN_as_NN.jpeg](https://i.loli.net/2019/05/22/5ce4252b0cd7473792.jpeg)](https://i.loli.net/2019/05/22/5ce4252b0cd7473792.jpeg)
  - 这个的出发点是：图片具有[静态（stationary）的特征](http://ufldl.stanford.edu/tutorial/supervised/FeatureExtractionUsingConvolution/)，就是说在一个部分学习的特征可以在其他的部分使用。所以对于大的图片（比如96x96），我们可以先取其上面的小的部分（比如8x8）进行训练学习，然后将学习的特征应用于其他的部分，卷积时参数的共享就是这个得体现。
 
+---
 
 ### 4、激励函数
 
@@ -52,13 +70,19 @@ tags: [python, machine learning, deep learning]
  - 激活函数的总结([Activation function](https://en.wikipedia.org/wiki/Activation_function) & [Activation Functions in Neural Networks](https://towardsdatascience.com/activation-functions-neural-networks-1cbd9f8d91d6))：
  - ![](https://cdn-images-1.medium.com/max/800/1*p_hyqAtyI8pbt2kEl6siOQ.png)
 
+---
+
 ### 5、池化层
 
  - 减小网络参数（如果参数超过3M，模型就容易过拟合的）
  - 图片的静态性：可用不同位置的聚合特征来描述大的图片
  - 不同的pooling方法：max，mean等 ![](https://qph.fs.quoracdn.net/main-qimg-cf2833a40f946faf04163bc28517959c)
 
+---
+
 ## 示例：LeNet5网络解析
+
+---
 
 ### 模型解读 
 
@@ -78,6 +102,8 @@ C1是卷积层，
  - 训练参数：（5x5+1) x 6=156。每个卷积核5*5=25个unit参数和一个bias参数，一共6个卷积核。
  - 连接数：（5x5+1）x6x28x28 =122304
  - 注意：有122304个连接，但是我们只需要学习156个参数，因为卷积核的**权值共享**。
+
+---
 
 ### 模型实现
 
@@ -149,12 +175,16 @@ class LeNet5(nn.Module):
         return output
 ```
 
+---
+
 ## 参考
 
 * [CNN笔记：通俗理解卷积神经网络](https://blog.csdn.net/v_JULY_v/article/details/51812459)
 * [网络解析（一）：LeNet-5详解](https://cuijiahua.com/blog/2018/01/dl_3.html)
 * [Activation function](https://en.wikipedia.org/wiki/Activation_function)
 * [Activation Functions in Neural Networks](https://towardsdatascience.com/activation-functions-neural-networks-1cbd9f8d91d6)
+
+---
 
 
 

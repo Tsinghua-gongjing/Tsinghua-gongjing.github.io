@@ -5,6 +5,17 @@ title:  "Auto encoder"
 tags: [python, machine learning]
 ---
 
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+### 目录
+
+- TOC
+{:toc}
+
+---
+
 ## 概述
 
 自编码（auto encoder）：把输入数据进行一个压缩和解压缩的过程，对高维数据的一个低维表示，同时最大限度的保留原始数据信息。
@@ -27,7 +38,11 @@ tags: [python, machine learning]
    - 容易过拟合
 4、可视化：通过可视化，可以看到不同的神经元是学习到图像不同的位置和角度的特征。下图是100个神经元的隐藏层可视化： ![](http://ufldl.stanford.edu/tutorial/images/ExampleSparseAutoencoderWeights.png)
 
+---
+
 ## 实现
+
+---
 
 ### keras版本
 
@@ -101,6 +116,9 @@ plt.scatter(encoded_imgs[:, 0], encoded_imgs[:, 1], c=y_test)
 plt.colorbar()
 plt.show()
 ```
+
+---
+
 ### pytorch版本
 
 [这里](https://morvanzhou.github.io/tutorials/machine-learning/torch/4-04-autoencoder/)给出了一个pytorch的版本，编码部分是4个网络层，最后降至3维，因为要想在3维空间进行可视化。
@@ -176,7 +194,9 @@ for epoch in range(EPOCH):
         optimizer.step()                    # apply gradients
 ```
 
-## tensorflow版本
+---
+
+### tensorflow版本
 
 ```python
 # Parameter
@@ -269,6 +289,7 @@ with tf.Session() as sess:
     plt.show()
 ```
 
+---
 
 ## 参考
 
@@ -278,7 +299,7 @@ with tf.Session() as sess:
 * [Autoencoder 自编码](https://morvanzhou.github.io/tutorials/machine-learning/keras/2-6-autoencoder/)
 * [AutoEncoder (自编码/非监督学习)](https://morvanzhou.github.io/tutorials/machine-learning/torch/4-04-autoencoder/)
 
-
+---
 
 
 
