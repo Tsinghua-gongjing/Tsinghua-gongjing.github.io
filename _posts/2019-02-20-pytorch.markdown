@@ -235,6 +235,38 @@ torch.nn.Conv2d(in_channels, out_channels, kernel_size, stride=1, padding=0, dil
 # bias (bool, optional) – If True, adds a learnable bias to the output. Default: True
 ```
 
+上面还使用到了`view`函数，用于对数组进行reshape，类似于numpy里面的`resize`函数。作用：把原先tensor的数据排成一个一维的数据，然后按照view提供的参数转换为其他维度的张量。
+
+```python
+# 【1】即使原始的张量维度不一样，但是提供的view参数一致，那么转换后的张量也是一样的
+a=torch.Tensor([[[1,2,3],[4,5,6]]])
+b=torch.Tensor([1,2,3,4,5,6])
+
+print(a.view(1,6))
+print(b.view(1,6))
+
+# tensor([[1., 2., 3., 4., 5., 6.]]) 
+
+# 【2】从2x3转换为3x2
+a=torch.Tensor([[[1,2,3],[4,5,6]]])
+print(a.view(3,2))
+
+# tensor([[1., 2.],
+#        [3., 4.],
+#        [5., 6.]])
+
+# 【3】view的参数不能为空，用-1代替未知的
+# -1表示自动推断的
+# 比如：原始是2x3=6的，现在view第一个参数是1，转换为二维的，那么-1自动推断此维度为6，所以转换后的张量是1x6
+a = torch.Tensor(2,3)
+print(a)
+# tensor([[0.0000, 0.0000, 0.0000],
+#        [0.0000, 0.0000, 0.0000]])
+print(a.view(1,-1))
+# tensor([[0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000]])
+
+```
+
 ---
 
 ### 定义损失函数和优化器
