@@ -262,6 +262,326 @@ print(tag_scores)
 #         [-2.3956, -0.1101, -4.3304]], grad_fn=<LogSoftmaxBackward>)
 ```
 
+---
+
+### MNIST数据集上LSTM和CNN的效果对比
+
+使用RNN LSTM也可以对图片进行分类：
+
+* 输入：图片（28x28），转换后的特征，28个连续的序列，每一个是28维的一个向量？
+
+
+代码：
+
+```python
+# CNN：https://github.com/pytorch/examples/blob/master/mnist/main.py
+# RNN LSTM：https://github.com/yunjey/pytorch-tutorial/blob/master/tutorials/02-intermediate/recurrent_neural_network/main.py
+
+from __future__ import print_function
+import argparse
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import torch.optim as optim
+from torchvision import datasets, transforms
+
+
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+class Net(nn.Module):
+    def __init__(self):
+        super(Net, self).__init__()
+        self.conv1 = nn.Conv2d(1, 20, 5, 1)
+        self.conv2 = nn.Conv2d(20, 50, 5, 1)
+        self.fc1 = nn.Linear(4*4*50, 500)
+        self.fc2 = nn.Linear(500, 10)
+
+    def forward(self, x):
+        x = F.relu(self.conv1(x))
+        x = F.max_pool2d(x, 2, 2)
+        x = F.relu(self.conv2(x))
+        x = F.max_pool2d(x, 2, 2)
+        x = x.view(-1, 4*4*50)
+        x = F.relu(self.fc1(x))
+        x = self.fc2(x)
+        return F.log_softmax(x, dim=1)
+
+class RNN(nn.Module):
+    def __init__(self, input_size, hidden_size, num_layers, num_classes):
+        super(RNN, self).__init__()
+        self.hidden_size = hidden_size
+        self.num_layers = num_layers
+        self.lstm = nn.LSTM(input_size, hidden_size, num_layers, batch_first=True)
+        self.fc = nn.Linear(hidden_size, num_classes)
+    
+    def forward(self, x):
+        # Set initial hidden and cell states 
+        h0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).to(device) 
+        c0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).to(device)
+        
+        # Forward propagate LSTM
+        out, _ = self.lstm(x, (h0, c0))  # out: tensor of shape (batch_size, seq_length, hidden_size)
+        
+        # Decode the hidden state of the last time step
+        out = self.fc(out[:, -1, :])
+        return out
+
+# model = RNN(input_size, hidden_size, num_layers, num_classes).to(device)
+    
+def train(args, model, device, train_loader, optimizer, epoch):
+    model.train()
+    for batch_idx, (data, target) in enumerate(train_loader):
+        data, target = data.to(device), target.to(device)
+        optimizer.zero_grad()
+        output = model(data)
+        loss = F.nll_loss(output, target)
+        loss.backward()
+        optimizer.step()
+        if batch_idx % args.log_interval == 0:
+            print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
+                epoch, batch_idx * len(data), len(train_loader.dataset),
+                100. * batch_idx / len(train_loader), loss.item()))
+
+def train_LSTM(args, model, device, train_loader, optimizer, epoch, sequence_length, input_size):
+    model.train()
+    criterion = nn.CrossEntropyLoss()
+    for batch_idx, (data, target) in enumerate(train_loader):
+        data = data.reshape(-1, sequence_length, input_size).to(device)
+        target = target.to(device)
+        optimizer.zero_grad()
+        output = model(data)
+        # loss = F.nll_loss(output, target) # if use nll_loss for LSTM, will be negative number
+        loss = criterion(output, target)
+        loss.backward()
+        optimizer.step()
+        if batch_idx % args.log_interval == 0:
+            print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
+                epoch, batch_idx * len(data), len(train_loader.dataset),
+                100. * batch_idx / len(train_loader), loss.item()))
+            
+def test(args, model, device, test_loader):
+    model.eval()
+    test_loss = 0
+    correct = 0
+    with torch.no_grad():
+        for data, target in test_loader:
+            data, target = data.to(device), target.to(device)
+            output = model(data)
+            test_loss += F.nll_loss(output, target, reduction='sum').item() # sum up batch loss
+            pred = output.argmax(dim=1, keepdim=True) # get the index of the max log-probability
+            correct += pred.eq(target.view_as(pred)).sum().item()
+
+    test_loss /= len(test_loader.dataset)
+
+    print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n'.format(
+        test_loss, correct, len(test_loader.dataset),
+        100. * correct / len(test_loader.dataset)))
+
+def test_LSTM(args, model, device, test_loader, sequence_length, input_size):
+    model.eval()
+    test_loss = 0
+    correct = 0
+    criterion = nn.CrossEntropyLoss()
+    with torch.no_grad():
+        for data, target in test_loader:
+            data = data.reshape(-1, sequence_length, input_size).to(device)
+            target = target.to(device)
+            output = model(data)
+            # test_loss += F.nll_loss(output, target, reduction='sum').item() # sum up batch loss
+            test_loss += criterion(output, target)
+            pred = output.argmax(dim=1, keepdim=True) # get the index of the max log-probability
+            correct += pred.eq(target.view_as(pred)).sum().item()
+
+    test_loss /= len(test_loader.dataset)
+
+    print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n'.format(
+        test_loss, correct, len(test_loader.dataset),
+        100. * correct / len(test_loader.dataset)))
+    
+def main():
+    # Training settings
+    parser = argparse.ArgumentParser(description='PyTorch MNIST Example')
+    parser.add_argument('--batch-size', type=int, default=64, metavar='N',
+                        help='input batch size for training (default: 64)')
+    parser.add_argument('--test-batch-size', type=int, default=1000, metavar='N',
+                        help='input batch size for testing (default: 1000)')
+    parser.add_argument('--epochs', type=int, default=10, metavar='N',
+                        help='number of epochs to train (default: 10)')
+    parser.add_argument('--lr', type=float, default=0.01, metavar='LR',
+                        help='learning rate (default: 0.01)')
+    parser.add_argument('--momentum', type=float, default=0.5, metavar='M',
+                        help='SGD momentum (default: 0.5)')
+    parser.add_argument('--no-cuda', action='store_true', default=False,
+                        help='disables CUDA training')
+    parser.add_argument('--seed', type=int, default=1, metavar='S',
+                        help='random seed (default: 1)')
+    parser.add_argument('--log-interval', type=int, default=10, metavar='N',
+                        help='how many batches to wait before logging training status')
+    
+    parser.add_argument('--save-model', action='store_true', default=False,
+                        help='For Saving the current Model')
+    args = parser.parse_args()
+    use_cuda = not args.no_cuda and torch.cuda.is_available()
+
+    torch.manual_seed(args.seed)
+
+#     device = torch.device("cuda" if use_cuda else "cpu")
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+    kwargs = {'num_workers': 1, 'pin_memory': True} if use_cuda else {}
+    train_loader = torch.utils.data.DataLoader(
+        datasets.MNIST('../../data', train=True, download=True,
+                       transform=transforms.Compose([
+                           transforms.ToTensor(),
+                           transforms.Normalize((0.1307,), (0.3081,))
+                       ])),
+        batch_size=args.batch_size, shuffle=True, **kwargs)
+    test_loader = torch.utils.data.DataLoader(
+        datasets.MNIST('../../data', train=False, transform=transforms.Compose([
+                           transforms.ToTensor(),
+                           transforms.Normalize((0.1307,), (0.3081,))
+                       ])),
+        batch_size=args.test_batch_size, shuffle=True, **kwargs)
+
+
+    # CNN
+#     model = Net().to(device)
+#     optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum)
+#     for epoch in range(1, args.epochs + 1):
+#         train(args, model, device, train_loader, optimizer, epoch)
+#         test(args, model, device, test_loader)
+    
+    # RNN LSTM
+    sequence_length = 28
+    input_size = 28
+    hidden_size = 128
+    num_layers = 2
+    num_classes = 10
+    model = RNN(input_size=input_size, hidden_size=hidden_size, num_layers=num_layers, num_classes=num_classes).to(device) # RNN LSTM
+#     optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum)
+    # SGD works not well for LSTM
+    optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
+    for epoch in range(1, args.epochs + 1):
+        train_LSTM(args, model, device, train_loader, optimizer, epoch, sequence_length, input_size)
+        test_LSTM(args, model, device, test_loader, sequence_length, input_size)
+
+    if (args.save_model):
+        torch.save(model.state_dict(),"mnist_cnn.pt")
+        
+if __name__ == '__main__':
+    main()
+
+
+```
+
+效果，这里只是测试一下，所以设置了`epoch=2`，使用更大的值时，效果应该都分别有提升。
+
+```python
+# CNN
+➜  LSTM git:(master) ✗ CUDA_VISIBLE_DEVICES=3 python mnist.py
+Train Epoch: 1 [0/60000 (0%)]   Loss: 2.300039
+Train Epoch: 1 [640/60000 (1%)] Loss: 2.213470
+Train Epoch: 1 [1280/60000 (2%)]        Loss: 2.170460
+Train Epoch: 1 [1920/60000 (3%)]        Loss: 2.076699
+...
+Train Epoch: 1 [57600/60000 (96%)]      Loss: 0.117136
+Train Epoch: 1 [58240/60000 (97%)]      Loss: 0.191664
+Train Epoch: 1 [58880/60000 (98%)]      Loss: 0.204842
+Train Epoch: 1 [59520/60000 (99%)]      Loss: 0.064107
+
+Test set: Average loss: 0.1015, Accuracy: 9661/10000 (97%)
+
+Train Epoch: 2 [0/60000 (0%)]   Loss: 0.145626
+Train Epoch: 2 [640/60000 (1%)] Loss: 0.119849
+Train Epoch: 2 [1280/60000 (2%)]        Loss: 0.101394
+Train Epoch: 2 [1920/60000 (3%)]        Loss: 0.068628
+...
+Train Epoch: 2 [57600/60000 (96%)]      Loss: 0.037703
+Train Epoch: 2 [58240/60000 (97%)]      Loss: 0.166170
+Train Epoch: 2 [58880/60000 (98%)]      Loss: 0.035417
+Train Epoch: 2 [59520/60000 (99%)]      Loss: 0.069601
+Test set: Average loss: 0.0610, Accuracy: 9829/10000 (98%)
+
+# RNN LSTM
+➜  LSTM git:(master) ✗ CUDA_VISIBLE_DEVICES=2 python mnist.py
+Train Epoch: 1 [0/60000 (0%)]   Loss: -0.016249
+Train Epoch: 1 [640/60000 (1%)] Loss: -0.056388
+Train Epoch: 1 [1280/60000 (2%)]        Loss: -0.091170
+Train Epoch: 1 [1920/60000 (3%)]        Loss: -0.088119
+...
+Train Epoch: 1 [57600/60000 (96%)]      Loss: -161.295212
+Train Epoch: 1 [58240/60000 (97%)]      Loss: -165.509781
+Train Epoch: 1 [58880/60000 (98%)]      Loss: -168.507706
+Train Epoch: 1 [59520/60000 (99%)]      Loss: -168.760498
+
+Test set: Average loss: -171.4964, Accuracy: 1135/10000 (11%)
+
+Train Epoch: 2 [0/60000 (0%)]   Loss: -172.674515
+Train Epoch: 2 [640/60000 (1%)] Loss: -172.516800
+Train Epoch: 2 [1280/60000 (2%)]        Loss: -179.091690
+Train Epoch: 2 [1920/60000 (3%)]        Loss: -181.107941
+...
+Train Epoch: 2 [57600/60000 (96%)]      Loss: -406.059845
+Train Epoch: 2 [58240/60000 (97%)]      Loss: -407.615234
+Train Epoch: 2 [58880/60000 (98%)]      Loss: -407.243866
+Train Epoch: 2 [59520/60000 (99%)]      Loss: -412.519165
+
+Test set: Average loss: -414.2386, Accuracy: 1135/10000 (11%)
+```
+
+可以看到，上面的loss为负值，说明程序出现了问题，原因是使用的优化器不够好，我们可以选用Adam优化器，而不是SGD。
+
+```bash
+➜  LSTM git:(master) ✗ CUDA_VISIBLE_DEVICES=2 python mnist.py --batch-size 100 --test-batch-size 100 --lr 0.01 --epochs 2
+Train Epoch: 1 [0/60000 (0%)]   Loss: 2.306968
+Train Epoch: 1 [1000/60000 (2%)]        Loss: 2.027250
+Train Epoch: 1 [2000/60000 (3%)]        Loss: 1.387051
+Train Epoch: 1 [3000/60000 (5%)]        Loss: 1.275983
+Train Epoch: 1 [4000/60000 (7%)]        Loss: 1.040894
+...
+Train Epoch: 1 [56000/60000 (93%)]      Loss: 0.130190
+Train Epoch: 1 [57000/60000 (95%)]      Loss: 0.231418
+Train Epoch: 1 [58000/60000 (97%)]      Loss: 0.111383
+Train Epoch: 1 [59000/60000 (98%)]      Loss: 0.119482
+
+Test set: Average loss: 0.0011, Accuracy: 9673/10000 (97%)
+
+Train Epoch: 2 [0/60000 (0%)]   Loss: 0.136026
+Train Epoch: 2 [1000/60000 (2%)]        Loss: 0.137714
+Train Epoch: 2 [2000/60000 (3%)]        Loss: 0.075271
+Train Epoch: 2 [3000/60000 (5%)]        Loss: 0.187317
+Train Epoch: 2 [4000/60000 (7%)]        Loss: 0.048653
+...
+Train Epoch: 2 [56000/60000 (93%)]      Loss: 0.072240
+Train Epoch: 2 [57000/60000 (95%)]      Loss: 0.142520
+Train Epoch: 2 [58000/60000 (97%)]      Loss: 0.048884
+Train Epoch: 2 [59000/60000 (98%)]      Loss: 0.139993
+
+Test set: Average loss: 0.0009, Accuracy: 9732/10000 (97%)
+```
+
+直接执行参考脚本效果如下：
+
+```bash
+# RNN LSTM：https://github.com/yunjey/pytorch-tutorial/blob/master/tutorials/02-intermediate/recurrent_neural_network/main.py
+➜  LSTM git:(master) ✗ CUDA_VISIBLE_DEVICES=2 python main.py
+Epoch [1/2], Step [100/600], Loss: 0.5705
+Epoch [1/2], Step [200/600], Loss: 0.3457
+Epoch [1/2], Step [300/600], Loss: 0.1618
+Epoch [1/2], Step [400/600], Loss: 0.1454
+Epoch [1/2], Step [500/600], Loss: 0.1483
+Epoch [1/2], Step [600/600], Loss: 0.1474
+Epoch [2/2], Step [100/600], Loss: 0.0638
+Epoch [2/2], Step [200/600], Loss: 0.0776
+Epoch [2/2], Step [300/600], Loss: 0.0269
+Epoch [2/2], Step [400/600], Loss: 0.0607
+Epoch [2/2], Step [500/600], Loss: 0.0225
+Epoch [2/2], Step [600/600], Loss: 0.1379
+Test Accuracy of the model on the 10000 test images: 97.1 %
+```
+
+---
+
 ### 参考
 
 * [理解 LSTM 网络](https://www.yunaitong.cn/understanding-lstm-networks.html)
