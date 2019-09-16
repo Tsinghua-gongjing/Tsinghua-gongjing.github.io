@@ -43,3 +43,49 @@ ssh -Y username@remoteIP -L 8007:localhost:8007
 
   `http://localhost:8007/?token=442494e19571582585464518668825f6ae1e4d4c3bdfc070`
 
+
+---
+
+## 端口映射查看训练过程
+
+主要是参考[利用多重映射从本地查看集群的tensorboard](https://blog.csdn.net/mieleizhi0522/article/details/90291224)，这里使用的是TensorBoardx：
+
+[![20190916201701](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190916201701.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190916201701.png)
+
+* 其中实线是smooth过后的值，背后的shaddow是原始的值，可以把鼠标放在上面，查看每个epoch上的loss值。
+* 这里是定义了几个不太的loss值，所以有不同的变量曲线。
+* 写的步骤：1）定义writer；2）每个epoch获取loss值；3）将loss值添加到变量
+
+```python
+writer = SummaryWriter()
+    
+    min_loss,min_epoch,min_prediction = 100,0,0
+    for epoch in range(1, args.epochs + 1):
+        train_loss = train_LSTM(args, model, device, train_loader, optimizer, epoch, sequence_length, input_size)
+        validate_loss,prediction_all = validate_LSTM(args, model, device, validate_loader, sequence_length, input_size)
+        
+        if validate_loss['train_nonull_validate_nonull'] < min_loss:
+            min_loss = validate_loss['train_nonull_validate_nonull']
+            min_epoch = epoch
+            min_prediction = prediction_all
+            
+            with open(save_prediction, 'w') as SAVEFN:
+                print("Write prediction: epoch:{}, loss:{}".format(min_epoch, min_loss))
+                for i in min_prediction:
+                    SAVEFN.write(','.join(map(str,i))+'\n')
+            
+            best_model = copy.deepcopy(model)
+        
+        writer.add_scalar('Train/loss', train_loss, epoch)
+        writer.add_scalar('Validation/train_nonull_validate_nonull', 
+                          validate_loss['train_nonull_validate_nonull']*args.batch_size, epoch)
+        writer.add_scalar('Validation/train_hasnull_validate_nonull', 
+                          validate_loss['train_hasnull_validate_nonull']*args.batch_size, epoch)
+        writer.add_scalar('Validation/train_hasnull_validate_hasnull', 
+                          validate_loss['train_hasnull_validate_hasnull']*args.batch_size, epoch)
+        writer.add_scalar('Validation/train_hasnull_validate_onlynull', 
+                          validate_loss['train_hasnull_validate_onlynull']*args.batch_size, epoch)
+        
+    writer.close()
+```
+
