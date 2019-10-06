@@ -69,9 +69,79 @@ tags: [python, machine learning]
 
 ### Padding
 
+* 直接卷积的缺点：
+	* **输出缩小**。每次卷积操作之后，图像就会缩小，比如从开始的6x6变为4x4，最后变为1x1等。
+	* **丢掉了图像边缘位置的许多信息**。在角落或者边缘区域的像素点在输出中采用较少。
+* 解决上述问题：
+	* 卷积前填充
+	* p是填充数量，习惯用0进行填充。填充后的输出：(n+2p-f+1)x(n+2p-f+1)，此时输出的图像和原来可能更接近了。
+	* 边缘发挥小作用的缺点也被弱化。
+* 填充像素p：
+	* Valid卷积：不填充。输出：(n-f+1)x(n-f+1)
+	* Same卷积：填充后输出大小和输入大小一样。输出：(n+2p-f+1)x(n+2p-f+1)，此时前后大小相等有：n+2p-f+1=n => p=(f-1)/2。所以当f为奇数时，选择合适的填充p大小，可以使得卷积前后大小相等。 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191006235909.png)
+* 为什么过滤器通常是奇数？
+	* 习惯：f通常为奇数。
+	* 如果f是偶数，只能使用一些不对称的填充
+	* 奇数过滤器有一个中心点，便于指出过滤器的位置
+
 ---
 
 ### 卷积步长
+
+* 基本操作：步幅（stride）
+* 例子：一个7x7的图像，使用一个3x3的过滤器，步幅f=2，padding=0 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191007000228.png)
+* 公式：
+	* 输出：$$(\frac{n+2p-f}{s}+1) \times (\frac{n+2p-f}{s}+1)$$
+* 如果商不为整数怎么办？
+	* 向下取整：对z进行地板除
+	* 惯例：只有上面的每一个篮框完全包括在图像或填充完的图像内部时，才对它进行运算。如有有任意的一个篮框移动到了外面，那么就不要进行相乘操作。
+	* 输出维度总结：![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191007000749.png)
+
+---
+
+### 三维卷积
+
+* 过滤器是三维的，对应RGB三个通道
+* 例子：
+	* 输入：6x6x3的图像
+	* 过滤器：3x3x3
+	* 输出：4x4x1.注意不是4x4x3，对于每一个过滤器立方体，总共有27个数字，这27个数字对应相乘然后求和得到一个数字，称为新图像的一个元素。 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191007004352.png)
+	* 应用：比如如果绿色和蓝色通道全为0，红色通道设置一个垂直检测器，那么整个三维的过滤器就是一个只对红色通道有用的垂直边界检测器。![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191007004755.png)
+* 多过滤器：
+	* 一个三维立体过滤器实现一个特征检测
+	* 同时使用多个过滤器检测到不同的特征 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191007004935.png)
+* 输出维度：
+	* 输入：n x n x nc(通道数)
+	* 卷积：f x f x nc，惯例nc是相等的
+	* padding：0
+	* stride：1
+	* 输出：(n-f+1) x (n-f+1) x nc'，nc'是下一层的通道数，也就是使用的过滤器的个数。
+
+---
+
+### 单层卷积网络
+
+* 如何构建卷积？
+* 根据输入图像，卷积得到卷积值，然后经过激活函数。
+* 示例：a0到a1的演变：
+	* 先执行线性函数
+	* 所有元素相乘做卷积：运用线性函数再加上偏差
+	* 应用激活函数ReLU ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191007005816.png)
+* 参数个数？
+	* 输入：1000x1000x3
+	* 过滤器：10个3x3x3的
+	* 参数：每一个过滤器是28个参数（3x3x3+1偏差），10个过滤器就是280个参数。【参数个数与输入图像的大小是无关的】
+	* 不管输入图片大小，参数都很少，这是卷积神经网络的避免过拟合的特性。
+* 卷积层各种标记：
+	* 输入
+	* 过滤器大小
+	* padding
+	* stride
+	* 过滤器数目
+	* 输出：通道数量就是此层中过滤器的数量  ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191007010453.png)
+* 如何确定权重参数？
+	* 参数就是每个过滤器的数值的权重 
+	* 数据拟合
 
 ---
 
