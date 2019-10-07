@@ -16,11 +16,29 @@ tags: [python, machine learning]
 
 ---
 
-### 为什么要进行实例探究
-
----
-
 ### 经典网络
+* CNN网络的发展历史：![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191008000340.png)
+* LeNet-5:
+	* 识别手写数字
+	* 针对灰度图像进行训练
+	* 大约6万个参数
+	* 模式：一个或多个卷积层后面跟着一个池化层，然后又是若干个卷积层再接一个池化层，然后使全连接层，最后是输出。这种排列方式很常用。 
+	* 非线性处理：使用sigmoid函数和tanh函数，而不是ReLU函数 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191007233832.png)
+* AlexNet：
+	* 以第一作者Alex Krizhevsky的名字命名
+	* 与LeNet-5很多相似处，大得多
+	* 含有约6000万个参数 
+	* 使用ReLU激活函数，使得其表现更加出色的另一个原因 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191007234258.png)
+* VGG-16：
+	* 没有特别多的超参数
+	* 只需要专注于构建卷积层的简单网络
+	* 优点是简化了神经网络结构（相对一致的网络结构）
+	* 缺点是：需要训练的特征数量非常巨大
+	* 包含16个卷积层和全连接层
+	* 约1.38亿个参数，但是结构不复杂
+	* 亮点：随着网络的加深，图像的高度和宽度都在以一定的规律不断缩小，每次池化后刚好缩小一半，而通道数量在不断增加，而且刚好也是在每组卷积操作后增加一倍。 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191007234442.png)
+
+
 
 ---
 
