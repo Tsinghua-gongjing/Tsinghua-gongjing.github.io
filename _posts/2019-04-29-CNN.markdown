@@ -80,6 +80,20 @@ tags: [python, machine learning, deep learning]
 
 ---
 
+### 6、卷积层尺寸之间的关系
+
+这里以AlexNet模型的第一个卷积层为例：
+
+[![20191007134916](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191007134916.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191007134916.png)
+
+---
+
+### 7、标准卷积 vs 1x1卷积 vs 全连接
+
+[![20191007135428](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191007135428.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191007135428.png)
+
+---
+
 ## 示例：LeNet5网络解析
 
 ---
@@ -183,6 +197,7 @@ class LeNet5(nn.Module):
 * [网络解析（一）：LeNet-5详解](https://cuijiahua.com/blog/2018/01/dl_3.html)
 * [Activation function](https://en.wikipedia.org/wiki/Activation_function)
 * [Activation Functions in Neural Networks](https://towardsdatascience.com/activation-functions-neural-networks-1cbd9f8d91d6)
+* [CNN中卷积层的计算细节](https://blog.csdn.net/dcrmg/article/details/79652487)
 
 ---
 
