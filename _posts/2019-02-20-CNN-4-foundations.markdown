@@ -145,6 +145,95 @@ tags: [python, machine learning]
 
 ---
 
+### 简单卷积网络示例
+
+* 通常一个卷积神经网络包含3层：
+	* 卷积层：CONV
+	* 池化层：POOL
+	* 全连接层：FC
+* 一个简单的卷积网络示例：
+	* 这里是展示了几个卷积层
+	* 通过不同的卷积层之后图片的大小、每个卷积的设置等 [![20191007125635](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191007125635.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191007125635.png)
+	* 【输入-卷积层1】：
+		* 输入：39x39x3
+		* 卷积大小：f=3
+		* 步幅：s=1
+		* 填充：p=0.（不填充，属于valid卷积）
+		* 卷积数目：10
+		* 输出：37x37x10，37=(n+2p-f)/s + 1 = (39+0-3)/1 + 1=37, 10是使用10个过滤器，所以输出会有10个通道（三维堆叠，每一层是一个过滤器）
+	* 【卷积层1-卷积层2】：
+		* 输入：37x37x10
+		* 卷积大小：f=5
+		* 步幅：s=2
+		* 填充：p=0.（不填充，属于valid卷积）
+		* 卷积数目：20
+		* 输出：17x17x20，37=(n+2p-f)/s + 1 = (37+0-5)/2 + 1=17, 20是使用20个过滤器，所以输出会有20个通道（三维堆叠，每一层是一个过滤器）
+	* 【卷积层2-卷积层3】：
+		* 输入：17x17x20
+		* 卷积大小：f=5
+		* 步幅：s=2
+		* 填充：p=0.（不填充，属于valid卷积）
+		* 卷积数目：40
+		* 输出：7x7x40，37=(n+2p-f)/s + 1 = (17+0-5)/2 + 1=7, 40是使用40个过滤器，所以输出会有40个通道（三维堆叠，每一层是一个过滤器）
+	* 经过3个卷积之后，为图片提取7x7x40=1960个特征。可对提取的特征进行处理，比如展开向量，然后过逻辑回归或者softmax回归等。
+
+---
+
+### 池化层
+
+* 池化层：
+	* 缩减模型大小
+	* 提高计算速度
+	* 提高所提取特征的鲁棒性
+* 输出大小：
+	* 公式和前面的卷积一样
+	* 池化也是需要顶一个过滤器的大小、步幅、填充的
+	* 输出大小即：(n+2p-f)/s + 1 
+	* 计算神经网络某层的静态属性，**没有参数需要学习，只有一组超参数（过滤器大小f和步幅s）** [![20191007130923](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191007130923.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191007130923.png)
+* **最大池化**：
+	* 在任何一个象限内提取到某个特征，保留其最大值
+	* 很少用到超参数padding，p=0最常用
+* 三维池化：
+	* 输入是三维的，那么输出也是三维的
+	* 对每个通道分别执行池化操作 [![20191007131241](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191007131241.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191007131241.png)
+* **平均池化**：
+	* 选取每个过滤器的平均值
+	* 不太常用 [![20191007131601](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191007131601.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191007131601.png)
+
+---
+
+### CNN示例
+
+* 常见模式：
+	* 一个或者多个卷积层跟随一个池化层
+	* 然后一个或者多个卷积层再跟随一个池化层
+	* 然后是几个全连接层
+	* 最后是一个softmax
+* 一个跟LeNet5很像的CNN：[![20191007132118](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191007132118.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191007132118.png)
+	* Layer1：一个卷积+一个池化。也有的把他们作为单独的层。
+	* 计算神经网络多少层：通常只统计具有权重和参数的层，池化层没有权重和参数（只有超参数）
+	* 尽量不要自己设置超参数，而是查看文献中别人采用了哪些超参数
+* 激活值形状、大小、参数数量：
+	* 比如上面的网络，可以列出下表 [![20191007132442](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191007132442.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191007132442.png)
+	* 随着神经网络加深，激活值尺寸会逐渐变小
+	* 池化层和最大池化层没有参数
+	* 卷积层的参数相对较少
+
+---
+
+### 为什么使用卷积？
+
+* 卷积层 vs 全连接层：
+	* 参数共享：适用于图片的某个区域的检测器，也是用于图片的其他区域进行特征检测
+	* 稀疏连接：卷积后的某个元素值，只与原来图像中的某些个数值有关（fxf个），而与其他的像素值无关 [![20191007132945](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191007132945.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191007132945.png)
+* 优点：
+	* 减少参数
+	* 使用更小的训练集训练
+	* 预防过拟合
+	* 善于捕捉平移不变：移动有限个像素，鉴定的猫依旧清晰可见
+
+---
+
 ### 参考
 
 * [第一周 卷积神经网络](http://www.ai-start.com/dl2017/html/lesson4-week1.html)
