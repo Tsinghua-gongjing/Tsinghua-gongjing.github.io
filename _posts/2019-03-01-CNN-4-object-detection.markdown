@@ -118,6 +118,57 @@ tags: [python, machine learning]
 
 ---
 
+### Bounding Box预测
+
+* 滑动窗口检测：不能输出最精确的边界框
+* YOLO算法：
+	* You Only Look Once
+	* 更精确的边界框
+	* 思路：使用精细的网格（比如19x19）将图像分隔开，对于每一个小的网格，使用前面的分类和定位算法，那么对于每一个网格，可以得到一个八维的向量（Pc，c1，c2，c3，bx, by，bh，bw）。所以整个图片就得到一个19x19x8的向量。就能够知道在哪个网格中是有汽车的，且是包含了更准确的一个边界框。![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191008234445.png)
+	* 例子：上面是3x3的网格，最后知道在网格4和6中是有汽车的
+	* 注意：**对象是按照其中点所在网格算的**，比如网格5包含有左侧汽车的一部分，但是因为此汽车的中点是在网格4中，所以此汽车分配与网格4，而不是网格5。
+* 坐标表示：
+	* 之前滑动窗口坐标是相对于整个图片的
+	* YOLO这里是相对于每个网格的
+	* 网格坐上是（0，0），右下是（1，1），宽度和高度是相对于此网格的比例，是0-1之间的值。 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191008235354.png)
+* 优点：
+	* 网格精细得多，多个对象分配到同一个网格的概率小很多
+	* 可以具有任意宽高比
+	* 输出更精确的坐标
+	* 不会受到滑动窗口分类器的步长大小限制
+	* 一次卷积运算：效率很高
+
+---
+
+### 交并比
+
+* 交并比：
+	* Intersection Over Union
+	* 计算两个**边界框交集和并集之比**
+	* 评价对象检测算法是否精确 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191009002413.png)
+	* 一般取：IoU>=0.5，认为检测正确
+	* 0.5是约定的值，也可以采取其他更严格的值
+
+---
+
+### 非极大抑制
+
+* 非极大抑制：non-max suppression
+	* 算法对同一个对象做出多次检测
+	* 可以确保对每个对象只检测一次
+	* 疑问：但是不是中点所在的网格才算吗？检测多次有什么影响呢？中点所在的那个网格并不是概率最大的？
+	* 理论上是只有一个格子，但是实践中会有多个格子觉得存在检测的对象 
+	* **只输出概率最大的分类结果，但是抑制很接近但不是最大的其他预测结果** ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191009003914.png)
+* 直观理解：
+	* 对于某些重叠的box，只取概率最大的
+	* 其他重叠的则被抑制而不输出
+	* 比如下面例子中：对于右边的车子，有几个box说检测到了，但是概率是不一样的，只留取最大的（高亮），其他的都被抑制掉（变暗）![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191009004118.png)
+* 具体算法：
+	* 丢掉预测概率很低的一些边界，比如Pc<=0.6的
+	* 对剩下的，选取概率最大的边界框（高亮）丢掉与此边界框高度重合的其他边界框（比如IoU>=0.5的）![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191009004550.png)
+
+---
+
 ### 参考
 
 * [第三周 目标检测](http://www.ai-start.com/dl2017/html/lesson4-week3.html)
