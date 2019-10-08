@@ -232,3 +232,13 @@ make install
 ```
 
 ---
+
+## 脚本中获得当前路径及文件夹名称
+
+```bash
+# get full path
+work_space=$(pwd)
+
+# get dir name instead of full path
+work_dir_name=${PWD##*/}
+```
