@@ -169,6 +169,60 @@ tags: [python, machine learning]
 
 ---
 
+### Anchor boxes
+
+* 目的：处理两个对象出现在同一个格子的情况
+* 算法：
+	* 不使用：根据每个对象所在的中点分配给对应的格子。输出：比如是3x3x8，8个长度的向量表征所在格子
+	* 使用：根据每个对象所在的中点分配给对应的格子，且分配给与所在格子有最大交并比的anchor box。输出：3x3x16，比如有两个anchor box，前8个表示第一个anchor box的信息，后8个表示第二个anchor box的信息 [![20191009100710](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191009100710.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191009100710.png)
+* 例子：
+	* 2个anchor box：1个是行人，1个是汽车形状
+	* 对于箭头所指的网格（编号2），汽车和行人对象的中点都在此网格中。且此对象与两个anchor box均有很高的交并比，所以在这两个都是有信息的。
+	* 对于右下角的那个格子，只有汽车，没有行人，那么此时y的表示同样包含两个anchor box的部分，但是对于第一个anchor box（行人形状）是没有信息的（问号”？“表示）[![20191009101343](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191009101343.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191009101343.png)
+* 注意：
+	* 假如同一个格子有3个对象怎么办？一般处理不好，除非最开始定义多个anchor box
+	* 两个对象分配到一个格子，且他们anchor box形状一样
+	* 两个对象中点处在同一个格子中的概率很低，尤其是当格子数目很大的时候
+	* anchor box形状指定：手工指定，选择5-10个覆盖想要检测的对象的各种形状；更高级的是使用k-均值算法自动选择anchor box
+	
+---
+
+### YOLO算法
+
+* 算法输出是包含anchor box信息的，所以在训练集的label中也是要包含这部分信息的
+* 训练：
+	* 构造训练集，人为标注
+	* 比如对于下面的格子1，什么也没有，其label对应的两个anchor box类别为0，其他边界的信息都以问号表示
+	* 对于下面的格子2，只有汽车，其label对应的第一个anchor box为0，边界是问号；第二个anchor box是1，且有具体边界 [![20191009105529](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191009105529.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191009105529.png)
+* 预测：
+	* 构建好了模型，怎么对新图片进行预测？
+	* 分好格子，每个格子运行神经网络（一次的卷积实现）
+	* 但是此时对于没有anchor box信息的，输出的边界是一些噪音值，而不是问号 [![20191009105722](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191009105722.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191009105722.png)
+* 预测后的非极大抑制处理：
+	* 对于获得的结构需要进行非极大抑制处理
+	* 注意：**每个类别分别做非极大抑制** [![20191009105858](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191009105858.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191009105858.png)
+	* 例子：从1到2，是丢掉预测概率很低的类别的边界；从2到3，是对于剩下的边界，每个类别单独非极大抑制处理 [![20191009110031](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191009110031.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191009110031.png)
+
+---
+
+### 候选区域
+
+* 候选区域：
+	* 使用某种算法求出候选区域，对每个候选区域运行一下分类器
+	* 为什么？**图片很多的地方没有任何对象，在这些区域进行检测（滑窗或者卷积）是在浪费时间**
+* 如何挑选候选区域？
+	* **图像分割算法**：使用图像分割算法，得到一些可能存在对象的区域
+	* 代表：R-CNN（带区域的卷积网络）
+	* 对于挑选的区域，使用滑窗 [![20191009110921](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191009110921.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191009110921.png)
+* R-CNN变种：
+	* R-CNN还是太慢了
+	* Fast R-CNN：R-CNN的卷积实现，显著提升了速度
+	* Faster R-CNN：使用碱基神经网络实现图像分割，获取候选区域，而不是使用更传统的分割算法获取候选区域，算法快很多
+	* 大多数快R-CNN还是比YOLO算法慢很多 [![20191009111223](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191009111223.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191009111223.png)
+* 吴：认为一步做完的类似YOLO算法长远是更有希望的
+	
+---
+
 ### 参考
 
 * [第三周 目标检测](http://www.ai-start.com/dl2017/html/lesson4-week3.html)
