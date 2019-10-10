@@ -138,7 +138,7 @@ tags: [python, machine learning]
 
 * 给定C和S，生成G。那么需要有一个函数去评价G的好坏！
 * 关于G的函数：
-	* 表示：$$J(G)=\alphaJ_{content}(C,G)+\betaJ_{style}(S, G)$$
+	* 表示：$$J(G)=\alpha J_{content}(C,G)+\beta J_{style}(S, G)$$
 	* 内容代价：度量生成图片G与内容图片C的内容有多相似
 	* 风格代价：度量生成图片G的风格与图片S的风格的相似度
 	* 两者之间的权重由两个超参数与来确定
@@ -163,6 +163,45 @@ tags: [python, machine learning]
 	* 定义：$$J_{content}(C,G)=\frac{1}{2}\|a^{[l][C]}-a^{[l][G]}\|^2$$，两个激活值按元素相减，然后取平方
 
 ---
+
+### 风格代价函数
+
+* 图片风格：
+	* 一个图片输入到神经网络中
+	* 选择某一层l
+	* 风格：l层中各个通道之间激活项的相关系数 [![20191010111502](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191010111502.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191010111502.png)
+* 通道间相关系数的**计算**？
+	* 某一层l是含有多个通道的
+	* 每一通道相当于含有多个神经元（激活项）
+	* 可计算任意两个通道之间激活项值的相关系数
+	* 例子：比如下图左边某一层l中，有nc个通道，任取两个通道（编号1和2的），那么每个通道有nh x nw个激活项，可以计算这两个通道之间的相关系数。 [![20191010111826](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191010111826.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191010111826.png)
+* 通道间相关系数表示什么**含义**？
+	* 上面图片例子
+	* 编号1通道提取的特征是右边的编号3，垂直纹理特征
+	* 编号2通道提取的特征是右边的编号4，橙色区域的特征
+	* 如果相关（相关系数大），表示两个特征相关，说明图片中有垂直纹理的地方很大概率也是橙色的
+	* 如果不相关（相关系数小），表示两个特征不相关，说明图片中有垂直纹理的地方很大概率不是橙色的
+	* 表示：**每个通道测量的特征在各个位置同时出现或者不出现的概率**
+* 风格矩阵：
+	* 通道1：激活项值
+	* 通道2：激活项值 [![20191010114031](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191010114031.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191010114031.png)
+	* 激活值：$$a_{i,j,k}^{[l]}$$，这是第k通道，高度=i，宽度=j处的激活项
+	* 第l层：$$G^{[l](s)}, n_c^{[l]} \times n_c^{[l]}$$，第l层（通道）的所有激活值
+	* 两个通道的相关系数：两个通道上的激活项进行相乘在相加（非标准的互相关函数，因为没有减去平均数，而是直接相乘）
+* 如何评估风格图像和生成图像的风格是否相近？
+	* 风格图像：风格矩阵
+	* 生成图像：风格矩阵
+	* 有了两个图像的风格矩阵之后，就可以评估这两个矩阵的相似性了
+	* 计算：矩阵对应元素相减的平方和（类似于mse）[![20191010131323](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191010131323.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191010131323.png)
+* 风格代价函数：
+	* S、G风格矩阵的误差平方和 [![20191010131603](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191010131603.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191010131603.png)
+
+---
+
+### 一维和三维卷积
+
+* 卷积操作可推广到1维或者3维
+* 输出大小的公式还是同样的使用，只是维度变了，对应的维度计算即可 [![20191010133058](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191010133058.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191010133058.png)
 
 ---
 
