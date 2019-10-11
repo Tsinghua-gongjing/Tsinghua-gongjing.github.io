@@ -184,6 +184,42 @@ tags: [python, machine learning]
 
 ---
 
+### 情感分类
+
+* 情感分类任务：
+	* 看一段文本，分辨这个人是否喜欢他们在讨论的这个东西
+	* 挑战：标记的训练集没有那么多
+* 例子：
+	* 餐馆评价
+	* x：评价的一段话，y：给出的几颗星（评价等级）![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191011234539.png)
+* 简单模型：
+	* 某一个评价作为例子
+	* 对于此评价的每个单词，通过独热编码向量和嵌入矩阵转换为嵌入向量
+	* 嵌入向量相加取平均。这个能保证最后取得维度是一样的，比如次特征向量是300维的，那么取平均之后还是300维的，且不受输入句子长度的影响。
+	* 平均后的向量输入softmax分类器
+	* 输出y：5个可能的结果的概率值 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191011234835.png)
+	* 此处：【平均值运算单元】，把所有单词的意思给平均起来使用
+	* 问题：**没有考虑词序，也就是一句话如果打乱顺序，最后的词向量平均表示是一样的，但是可能意思是不同的**
+* RNN版本模型：
+	* 每个单词通过独热编码向量和嵌入矩阵转换为嵌入向量
+	* 嵌入向量作为时序序列传到RNN模型中
+	* 属于多对一的模型，在最后一步才计算一个特征表示，用于预测输出
+	* 此时就考虑了句子的具体含义，效果更好 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191011235219.png)
+
+---
+
+### 词嵌入除偏
+
+* bias：是指学习到的东西存在性别、种族、性取向等方面的偏见。因为现在这些模型越来越多的参与到决策，所以需要排除这些偏见的影响。
+* 例子：
+	* 可能学到man是程序员，但是woman是家庭主妇，这就是带有性别偏见的 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191011235505.png)
+* 消除偏见：
+	* 鉴定bias：比如有一些SUV算法，对一些词语进行聚类，不同的维度（偏见、不偏见）。如果在偏见轴大的，就是属于有偏见的。
+	* 中和：对于不确切的词可以处理一下，避免偏见。
+	* 均衡：有一些词保证它们只在一个维度是有差异的，比如grandmothers和grandfathers只在性别有差异，其他特征保证相等（在坐标抽上的距离是相当的）。![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191011235907.png)
+
+---
+
 ### 参考
 
 * [第二周 自然语言处理与词嵌入](http://www.ai-start.com/dl2017/html/lesson5-week2.html)
