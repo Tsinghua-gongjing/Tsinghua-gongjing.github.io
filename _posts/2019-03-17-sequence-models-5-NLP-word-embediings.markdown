@@ -123,8 +123,8 @@ tags: [python, machine learning]
 * 模型：
 	* 词汇表：10000
 	* 上下文词：独热向量*嵌入矩阵E得到其嵌入向量
-	* 嵌入向量输入softmax单元，预测不同目标词的概率：$$p(t\|c)=\frac{e^{{\theta}_t^T e_c}}{\sum_{j=1}^{10000}e^{{\theta}_t^T e_c}}$$
-	* 参数：$$\{theta}_t$$，与输出t有关的参数，即某个词t与标签相符的概率
+	* 嵌入向量输入softmax单元，预测不同目标词的概率：$$p(t\|c)=\frac{e^{ {\theta}_t^T e_c}}{\sum_{j=1}^{10000}e^{ {\theta}_t^T e_c}}$$
+	* 参数：$${\theta}_t$$，与输出t有关的参数，即某个词t与标签相符的概率
 	* 这里的输入是x（上下文词），预测的是y（目标词）：这里y是一个10000的向量，所有可能目标词的概率。[![20191011172741](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191011172741.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191011172741.png)
 	* 理解：输入一个词，预测其前面或者后面是什么词
 * 问题：
