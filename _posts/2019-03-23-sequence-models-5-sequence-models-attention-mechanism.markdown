@@ -125,6 +125,107 @@ tags: [python, machine learning]
 
 ---
 
+### Bleu得分
+
+* 问题：当有同样好的多个答案时，怎样评估一个机器翻译系统？
+* BLEU得分：
+	* 给定一个机器生成的翻译，自动计算一个分数来衡量机器翻译的好坏
+	* bilingual evaluation understudy：双语评估替补
+	* 相当于一个候选者，代替人类来评估机器翻译的每一个输出结果
+* 评估：
+	* 机器翻译的精确度：输出的结果中的每一个词是否出现在参考中
+	* 下面例子：MT（机器翻译）输出，输出长度为7，每个词the都出现在参考中，所以精确度=7/7。
+	* 显然不是一个好的翻译
+	* 引入**计分上限**：这个词在参考句子中出现的最多次数，比如这里the在参考中出现最多的是2次，所以其上限是2.
+	* 改良后的精确度评估：2/7。分母：单词总的出现次数，分子：单词出现的计数，考虑上限。 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191014011103.png)
+* 二元词组的BLEU得分：
+	* 上面的其实是考虑的单个单词
+	* 其实句子还可考虑二元或者三元的词组得分
+	* 列出机器翻译中所有的二元词组
+	* 统计每个二元词组在机器翻译中出现的次数（count）
+	* 统计每个二元词组在参考中出现的考虑上限的计数（the clipped count）。比如这里的the cat在参考中最多出现1次，所以其截取计数是1而不是2.
+	* 改良后的精度：截取计数和/计数和 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191014011608.png)
+* 任意元词组的BLEU得分公式化：
+	* 一元、二元、三元词组等
+	* 每一个，就可以计算其改良后的精度：n元词组的countclip之和除以n元词组的出现次数之和 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191014011829.png)
+* 最终BLEU得分：
+	* 把不同元词组的得分加起来
+	* 不是直接相加，是进行指数的乘方运算翻译	
+	* 引入了一个惩罚因子BP：因为短的翻译可能会更容易得到一个更高精度的，但是我们不想要那么短的翻译 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191014012027.png)
+	* 有用的单一实数评估指标，用于评估生成文本的算法，判断输出的结果是否与人工写出的参考文本的含义相似
+
+---
+
+### 注意力模型直观理解
+
+* 长句的问题：
+	* 基本模型：编码解码模型，读完一整个句子，再翻译
+		* 对短句子效果好，有比较高的Bleu分数
+		* 对长的句子表现变差，记忆长句子比较困难
+	* 人的翻译过程：看一部分，翻译一部分，一直这样下去
+	* 所以在基本的RNN中，对于长句会有一个巨大的下倾
+	* 下倾：衡量了神经网络记忆一个长句子的能力 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191014005843.png)
+* 注意力模型：
+	* 在生成第t个英文词时，计算要花多少注意力在第t个发语词上面 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191014010011.png)
+
+---
+
+### 注意力模型
+
+* 注意力模型：让神经网络只注意到一部分的输入句子，所以当生成句子的时候，更像人类翻译。![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191014010244.png)
+* 计算注意力：
+	* 使用对数形式，保证值的加和为1 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191014010338.png)
+	* 缺点：话费三次方的时间
+	* 一般输出的句子不会太长，三次方也许是可以接受的
+
+---
+
+### 语音识别
+
+* 语音视频问题：
+	* 输入：一个音频片段x
+	* 输出：自动生成文本y
+	* 处理步骤：原始音频片段 =》 生成一个声谱图 =》识别系统 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191014002840.png)
+* 音位模型：
+	* 曾经是通过音位来构建
+	* 音位：人工设计的基本单元
+	* 用音位表示音频数据
+* 端到端的模型：
+	* 现在使用的
+	* 输入音频片段
+	* 直接输出音频的文本
+
+	* 需要很大的数据集：可能长达300小时
+	* 学术界：甚至达到3000小时
+	* 商业系统：超过1万小时的也有
+* 注意力模型：
+	* 在输入音频的不同时间帧上，可以用一个注意力模型 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191014003030.png)
+* CTC损失函数模型：
+	* CTC：connectionist temporal classification
+	* 比如输入一个10秒的音频，特征是100赫兹（每秒有100个样本），那么这个音频就有1000个输入
+	* 当有1000个输入时，对应的文本输出应该是没有1000个的。那怎么办？
+	* 引入空白符，用下划线”_“表示，比如”h_eee___“,"____qqq"等。
+	* CTC基本规则：将空白符之间的重复的字符折叠起来。
+	* CTC输出：可以强制输出1000个字符，但是包含空白符，它们是可以折叠的，最后uniq的字符会很少。![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191014003736.png)
+
+---
+
+### 触发字检测
+
+* 触发字检测系统：
+	* 通过声音来唤醒
+	* 不同的设备厂商有不同的触发字 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191014001622.png)
+* 检测算法：
+	* 处于发展阶段，最好的算法是什么尚无定论
+	* RNN结构：
+	* 计算音频片段的声谱图特征，得到特征向量
+	* 特征向量输入到RNN中
+	* 定义目标标签：在某个触发字的位置设为标签为1，说到触发字之前的位置设置标签为0。一段时间后，又说了触发字，此点设为标签1.
+	* 缺点：构建的是一个很不平衡的训练集，因为0比1的数量多很多。![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191014002052.png)
+	* 解决：简单粗暴的，在固定的一段时间内输出多个1，而不是仅在一个时间步上输出1。可稍微提高1与0的比例。
+
+---
+
 ### 参考
 
 * [第三周 序列模型和注意力机制](http://www.ai-start.com/dl2017/html/lesson5-week3.html)
