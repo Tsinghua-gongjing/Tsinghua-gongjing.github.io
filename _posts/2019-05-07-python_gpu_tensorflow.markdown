@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "python"
-title:  "Python version"
+title:  "Install GPU based tensorflow"
 tags: [plot]
 ---
 
