@@ -185,6 +185,63 @@ tags: [python, machine learning]
 * BN：加速训练速度，有效防止梯度消失与梯度爆炸，具有防止过拟合的效果
 * 构建网络时最好加上这两个组件
 
+---
+
+### 案例：人脸特征点检测
+
+这篇文章([Using convolutional neural nets to detect facial keypoints tutorial](http://danielnouri.org/notes/2014/12/17/using-convolutional-neural-nets-to-detect-facial-keypoints-tutorial/))是14年获得kaggle人脸特征点检测第二名的post，详细的描述了如何构建模型并一步步的优化，里面的一些思路其实很直接干脆，可以参考一下。
+
+* 任务：人脸特征点检测
+* 样本：7049个96x96的灰度图像，15个特征点坐标（15x2=30个坐标值）
+* 探索：
+	* 全部特征点都有label的样本有多少？
+	* 每个特征点对应的有label的样本有多少？
+* 预处理：
+	* 灰度图像归一化：[0,1]
+	* 坐标值(y值)归一化：[-1,1]
+* 构建简单的单层网络【net1】，发现是过拟合的（训练集的loss比验证集的loss低很多）
+* 网络过于简单？使用卷积神经网络【net2】。卷积神经网络效果好很多此时对应的训练集和验证集的loss都比【net1】低很多，且loss比较平滑，但是模型还是过拟合的。
+	* ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191016001832.png)
+* 预防过拟合？使用更多的数据，这里是kaggle提供的数据集，没办法获得更多的数据，又是图像数据，可以使用数据增强【net3】。
+	* 比如最简单的是图像水平翻转
+	* 这里检测特征点，注意翻转前后特征点也要变化，比如原来的左眼左角，水平翻转之后变成了右眼的右角。
+	* 这里的翻转不需要重新生成数据集，可在load batch数据时做 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191016002714.png)transformation转换(很方便)
+* 网络本身的可调参数，比如学习率或者动量大小，之前用的是默认值，是否还有优化的余地？学习率和动量的动态变化，对于上面的网络都进行这两个参数修改的尝试：卷积+学习率/动量【net4】，卷积+数据增强+学习率/动量【net5】
+	* 学习率：开始学习使用大的学习率，然后在训练过程中慢慢较小。比如：回家先坐火车，快到家门时改用走路。
+	* 动量大小：在训练过程中增加动量的大小 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191016002623.png)
+* dropout【net6】是否能进一步减小过拟合？
+	* 一定要先训练得好，最好过拟合，然后再做正则化
+	* 注意此时训练集和验证集的loss的比值，前者是带有dropout计算出来的loss，后者的loss是没有的
+* 增大训练的次数似乎可以降低loss【net7】？
+	* dropout之后，其实loss可以进一步减小的
+	
+```
+Name  |   Description    |  Epochs  |  Train loss  |  Valid loss
+-------|------------------|----------|--------------|--------------
+ net1  |  single hidden   |     400  |    0.002244  |    0.003255
+ net2  |  convolutions    |    1000  |    0.001079  |    0.001566
+ net3  |  augmentation    |    3000  |    0.000678  |    0.001288
+ net4  |  mom + lr adj    |    1000  |    0.000496  |    0.001387
+ net5  |  net4 + augment  |    2000  |    0.000373  |    0.001184
+ net6  |  net5 + dropout  |    3000  |    0.001306  |    0.001121
+ net7  |  net6 + epochs   |   10000  |    0.000760  |    0.000787
+```
+
+* 单独的训练？
+	* 上面训练时是并行的，同时检测15个特征点
+	* 只使用了15个特征点都有坐标值的样本，其他数据（70%）都被丢掉了，这是很影响最后模型的泛化效果的，尤其是当去预测测试集样本的时候
+	* 可以每个特征点单独进行分类器训练，就使用上面最好的模型，此时对应的样本数目也是更多的
+	* 这里用了一个训练时设置的字典型变量，遍历特征点训练，可以参考
+	* 此时，对于每个特征，可能需要训练的次数不用那么多，那么可以设置early stopping（这里n=200）
+	* 最后拿到了2.17的RMSE，直接飙升到底2名 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191016003534.png)
+* 使用pre-train的模型？
+	* 网络参数的初始化也很重要
+	* 可以使用上面训练好的网络，比如net6或者net7的参数进行初始化
+	* 这也是一个正则化的效果
+	* 此时的RMSE降低了一点到2.13，仍然是第2名 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191016003820.png)
+
+---
+
 ## 参考
 
 * [总结知乎深度学习调参技巧](https://blog.csdn.net/m0_37644085/article/details/88956758)
