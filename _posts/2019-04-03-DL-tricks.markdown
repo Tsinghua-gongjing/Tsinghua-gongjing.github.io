@@ -121,11 +121,11 @@ tags: [python, machine learning]
 * 可防止过拟合，人力成本最低的Ensemble
 * 加dropout，加BN，加Data argumentation
 * dropout可以随机的失活一些神经元，从而不参与训练
-* 例子【[PyTorch笔记8-Dropout](https://blog.csdn.net/u014532743/article/details/78453990)】：
+* 例子【[Dropout 缓解过拟合](https://morvanzhou.github.io/tutorials/machine-learning/torch/5-03-dropout/)】：
 	* 任务：拟合数据点（根据x值预测y值）
 	* 构建过拟合网络，比如这里使用了2层，每层节点数=200的网络
 	* 使用dropout和不使用dropout，看拟合的效果
-	* 可以看到，对于过拟合（应该把训练集也画出来）的情况下，使用dropout，能够降低在测试集上的loss，和真实值预测的更贴近 [![20191018141005](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191018141005.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191018141005.png)
+	* 可以看到，对于过拟合（模型对训练集拟合得很好）的情况下，使用dropout，能够降低在测试集上的loss，和真实值预测的更贴近。[![20191018141520](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191018141520.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191018141520.png)
 
 ---
 
