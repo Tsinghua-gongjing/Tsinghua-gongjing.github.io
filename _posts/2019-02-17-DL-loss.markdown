@@ -1,0 +1,157 @@
+---
+layout: post
+category: "machinelearning"
+title:  "损失函数"
+tags: [python, machine learning]
+---
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+### 目录
+
+- TOC
+{:toc}
+
+---
+
+## 什么是损失函数
+
+* 估量模型的预测值f(x)与真实值Y的不一致程度
+* 损失函数越小，一般就代表模型的鲁棒性越好
+* 损失函数指导模型的学习
+
+---
+
+## 分类损失函数
+
+---
+
+### 0-1 loss
+
+* 公式：$$L(y_i, f(x_i)) = \begin{cases}
+0& y_i = f(x_i)\\
+1& y_i \neq f(x_i)
+\end{cases}$$
+
+* 直接比较预测值和真实值是否相等
+* 预测和标签相等，值为0(预测很准，loss很小)，值为1(预测很不准，loss很大)
+* 缺点：无法对x进行求导，所以在深度学习的反向传播中，不能被直接使用（一般用于启发新的loss）
+
+---
+
+### 交叉熵
+
+* 熵：物理学上表示一个热力学系统的无序程度
+* 信息熵：
+	* 信息的量化度量，由香农提出
+	* **对数函数**表示对不确定性的测量
+	* 熵越高，表示能传输的信息越多，熵越少，表示传输的信息越少。熵 =》信息量
+	* 原理：每个信息都存在冗余，冗余的大小与符号的出现概率或者不确定性有关。出现概率大，则不确定性小，可用对数函数表征。
+* 为什么对数函数？
+	* 不确定性必须是出现概率的单调递减函数
+	* 离散的独立事件，其总的不确定性等于各自不确定性之和
+	* 不确定性：$$f=log(\frac{1}{p})=-log(p)$$
+* 信息熵：
+	* 单个符号的不确定性的统计平均
+	* 公式：$$-\sum_{i=0}^{n} p_ilog(p_i)$$
+* 分类交叉熵：
+	* 所有样本在每个类别的信息熵的总和
+	* 公式：$$l(f, y)=-\sum_{i}^{n}\sum_{j}^{m}y_{ij}logf(x_{ij})$$
+	* 参数 `n`：样本数量
+	* 参数 `m`：类别数量
+	* 参数 $$y_{ij}$$：第`i`个样本属于分类`j`的标签，它是0或者1
+	* 参数 $$f(x_{ij})$$：样本`i`预测为`j`分类的概率
+
+---
+
+### softmax loss
+
+* 如果上面的$$f(x_{ij})$$是softmax概率的形式（指数概率），此时就是softmax with cross-entropy loss，简称softmax loss
+* softmax loss是交叉熵的一个特例
+* 分类分割任务
+* 不平衡样本：weighted softmax loss， focal loss
+* 蒸馏学习的soft softmax loss
+
+---
+
+### KL散度
+
+* 估计两个分布的相似性
+* 公式：$$D_{kl}(p\|q) = \sum_{i} p_i log(\frac{p_i}{q_i})$$
+* 当p和q处处相等时，上式才=0，即分布相同
+* 变形：$$D_{kl}(p\|q) = \sum_{i} (p_i logp_i - p_i logq_i) = -l(p,p) + l(p,q)$$
+* `l(p,p)`: `p`的熵，当一个分布一定时，熵为常数值
+* `l(p,q)`: `p`和`q`的交叉熵
+* **KL散度和交叉熵相差一个常数值**，所以用哪个作为loss都是可以的
+* 注意：KL的非对称性，$$D_{kl}(p\|q) \neq D_{kl}(q\|p)$$
+
+---
+
+### hinge loss
+
+* 主要用于SVM，解决间距最大化问题
+* 公式：$$l(f(x), y) = max(0, 1-yf(x)) = \begin{cases}
+0& y_i = f(x_i)\\
+1& y_i \neq f(x_i)
+\end{cases}$$
+
+---
+
+### 指数损失与逻辑损失
+
+* 指数形式，梯度比较大，主要用于Adaboost集成学习中
+* 公式：$$l(f(x), y) = e^{-\beta y f(x)}$$
+* 取对数形式：$$l(f(x), y) = \frac{1}{ln2} ln(1+e^{-yf(x)})$$，梯度相对平缓
+
+---
+
+## 回归损失函数
+
+---
+
+### L1 loss
+
+* 以绝对误差作为距离
+* Mean absolute loss，MAE
+* 具有稀疏性，常作为正则项添加到其他loss中，可以惩罚较大的值
+* 问题：梯度在零点不平滑，导致会跳过极小值
+
+---
+
+### L2 loss
+
+* 欧氏距离：以误差的平方作为距离
+* Mean Squared Loss/Quadratic Loss，MSE loss
+* 公式：$$L2=MSE=\frac{1}{n} \sum_{1}^n(y_i - \overline{y_i})$$
+* 也常常作为正则项
+* 当预测值与目标值相差很大时, 梯度容易爆炸，因为梯度里包含了x−t。
+
+---
+
+### smooth L1 loss | MSE | 均方差 | 平方损失
+
+* L1/L2 局限：
+	* L1：梯度不平滑
+	* L2：容易梯度爆炸
+	* 新的综合两者有点的loss
+* 公式：$$smooth_{L1} (x) = \begin{cases}
+0.5x^2& , \|x\| < 1\\
+\|x\|-0.5& , otherwise
+\end{cases}$$
+* 当x较小时，等价于L2 loss，保持平滑
+* 当x较大时，等价于L1 loss，可以限制数值的大小
+
+---
+
+## 参考
+
+* [深度学习中常用的损失函数](https://zhuanlan.zhihu.com/p/60302475)
+* [机器学习-损失函数](http://www.csuldw.com/2016/03/26/2016-03-26-loss-function/)
+
+
+---
+
+
+
