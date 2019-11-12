@@ -43,5 +43,7 @@ tags: [python, machine learning]
 |统计学习方法(李航)|[pdf@seafile](https://cloud.tsinghua.edu.cn/d/b1886d10ac1c45e4af83/)|
 |Machine Learning Yearing(吴恩达)|[pdf@seafile](https://cloud.tsinghua.edu.cn/d/b1886d10ac1c45e4af83/)|
 |Troubleshooting DNN(Josh Tobin)|[pdf@seafile](https://cloud.tsinghua.edu.cn/d/b1886d10ac1c45e4af83/)|
+|动手深度学习|[英文](https://d2l.ai/), [中文(MXNet)](http://zh.d2l.ai/), [中文(pytorch)](http://tangshusen.me/Dive-into-DL-PyTorch/#/)|
+|PyTorch深度学习|[packtpub](https://www.packtpub.com/big-data-and-business-intelligence/deep-learning-pytorch?utm_source=github&utm_medium=repository&utm_campaign=9781788624336), [notebook@github](https://github.com/PacktPublishing/Deep-Learning-with-PyTorch)|
 
 ---
