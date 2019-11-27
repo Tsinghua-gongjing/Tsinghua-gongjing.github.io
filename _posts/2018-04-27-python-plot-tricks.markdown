@@ -319,6 +319,20 @@ add_stat_annotation(ax, data=df, x=x, y=y, order=order,
 
 ![](https://i.stack.imgur.com/Rp1yB.png)
 
+### joint reg plot with R/p-value
+
+```python
+g = sns.jointplot(x='m1',y='m2',data=df,kind='kde', xlim=(0.0,0.5), ylim=(0.0,0.5), height=8, ratio=5)
+sns.regplot(df['m1'],df['m2'], scatter=False, ax=g.ax_joint)
+
+r,p = stats.pearsonr(df['m1'],df['m2'])
+s = 'R = {:.2f}\nP = {:.2e}\nN = {}'.format(r,p,df.shape[0])
+g.ax_joint.text(0.05, 0.9, s, ha='left', va='top', size=20, transform=g.ax_joint.transAxes)
+```
+
+[![20191127155119](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191127155119.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191127155119.png)
+
+
 ## 2. Seaborn plot
 
 ### Set color list instead of seaborn default
