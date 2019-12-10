@@ -242,3 +242,45 @@ work_space=$(pwd)
 # get dir name instead of full path
 work_dir_name=${PWD##*/}
 ```
+
+---
+
+## ImportError: /lib64/libc.so.6: version `GLIBC_2.14' not found
+
+```bash
+### https://zhuanlan.zhihu.com/p/40444240
+
+# 检查系统含有的GLIBC版本
+$ strings /lib64/libc.so.6 |grep GLIBC
+
+GLIBC_2.2.5
+GLIBC_2.2.6
+GLIBC_2.3
+GLIBC_2.3.2
+GLIBC_2.3.3
+GLIBC_2.3.4
+GLIBC_2.4
+GLIBC_2.5
+GLIBC_2.6
+GLIBC_2.7
+GLIBC_2.8
+GLIBC_2.9
+GLIBC_2.10
+GLIBC_2.11
+GLIBC_2.12
+GLIBC_PRIVATE
+
+# 下载、安装
+$ wget https://ftp.gnu.org/gnu/glibc/glibc-2.14.tar.gz
+$ tar zxf glibc-2.14.tar.gz
+$ cd glibc-2.14
+$ mkdir build
+$ cd build
+$ ../configure --prefix=/opt/glibc-2.14
+$ make -j4
+$ make install
+
+
+# 添加到LD_LIBRARYPATH
+$ export LD_LIBRARY_PATH=/opt/glibc-2.14/lib:$LD_LIBRARY_PATH
+```

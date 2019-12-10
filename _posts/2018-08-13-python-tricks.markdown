@@ -246,3 +246,60 @@ df[['First','Last']] = df.Name.str.split("_",expand=True,)
 ```
 
 ----
+
+### 在`df`中使用`cut`进行分`bin`，获得对应的`bin值`
+
+```python
+# 将数据分成10组
+bins = 10
+df = pd.DataFrame.from_dict({'value':[i/10 for i in range(10+1)]})
+df['bins'] = pd.cut(df['value'], bins=bins)
+df
+
+value	bins
+0	0.0	(-0.001, 0.1]
+1	0.1	(-0.001, 0.1]
+2	0.2	(0.1, 0.2]
+3	0.3	(0.2, 0.3]
+4	0.4	(0.3, 0.4]
+5	0.5	(0.4, 0.5]
+6	0.6	(0.5, 0.6]
+7	0.7	(0.6, 0.7]
+8	0.8	(0.7, 0.8]
+9	0.9	(0.8, 0.9]
+10	1.0	(0.9, 1.0]
+
+# 通过以value_counts()的index获得唯一的bin
+# 打印：此时每一个i是interval对象
+for i in list(df['bins'].value_counts().index):
+    print(i)
+(-0.001, 0.1]
+(0.9, 1.0]
+(0.8, 0.9]
+(0.7, 0.8]
+(0.6, 0.7]
+(0.5, 0.6]
+(0.4, 0.5]
+(0.3, 0.4]
+(0.2, 0.3]
+(0.1, 0.2]
+
+# interval对象不能通过index进行取值
+i[0]
+
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-46-3aa51af8ff05> in <module>()
+----> 1 i[0]
+
+TypeError: 'pandas._libs.interval.Interval' object does not support indexing
+
+# interval对象有特定的属性进行取值等操作
+# closed, left, right, closed_left, closed_right, mid, open_left, open_right
+
+i.left
+0.1
+
+i.right
+0.2
+```
