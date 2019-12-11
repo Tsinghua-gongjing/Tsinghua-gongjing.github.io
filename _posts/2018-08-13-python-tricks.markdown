@@ -303,3 +303,22 @@ i.left
 i.right
 0.2
 ```
+
+---
+
+### 更改pip安装包的源
+
+国内有一些镜像，在安装时使用这些镜像会加快下载的速度，可参考[这里](https://blog.csdn.net/xuezhangjun0121/article/details/81664260)。
+
+临时修改（安装时指定）：
+
+```bash
+pip install scrapy -i https://pypi.tuna.tsinghua.edu.cn/simple
+```
+
+永久修改（安装源写入配置文件`~/.pip/pip.conf`）：
+
+```bash
+[global]
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+```
