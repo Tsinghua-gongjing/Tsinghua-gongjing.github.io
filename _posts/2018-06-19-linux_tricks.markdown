@@ -284,3 +284,72 @@ $ make install
 # 添加到LD_LIBRARYPATH
 $ export LD_LIBRARY_PATH=/opt/glibc-2.14/lib:$LD_LIBRARY_PATH
 ```
+
+---
+
+## `ssh`免密码登录
+
+网上教程很多，随便参考，比如[这里](https://www.linuxdashen.com/ssh-key%EF%BC%9A%E4%B8%A4%E4%B8%AA%E7%AE%80%E5%8D%95%E6%AD%A5%E9%AA%A4%E5%AE%9E%E7%8E%B0ssh%E6%97%A0%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95)：
+
+在自己的Linux系统上生成SSH密钥和公钥
+
+```bash
+➜  ~ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/gongjing/.ssh/id_rsa):
+/home/gongjing/.ssh/id_rsa already exists.
+Overwrite (y/n)? y
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/gongjing/.ssh/id_rsa.
+Your public key has been saved in /home/gongjing/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:RWPGrhUHIbbp9DvzJX2cUOrzyFyibEdd8qU/7Mi5KUU gongjing@omnisky
+The key's randomart image is:
++---[RSA 2048]----+
+|        o.Bo     |
+|       . Bo..    |
+|        +..o   . |
+|       o oo  E+ o|
+|        So. .o.+o|
+|        .  ..+ooo|
+|          + ++++o|
+|          .*=+X+.|
+|          .o+Xoo.|
++----[SHA256]-----+
+```
+
+将SSH公钥上传到Linux服务器(写在对方的`~/.ssh/authorized_keys`中)
+
+```bash
+➜  ~ ssh-copy-id gongjing@10.10.91.12
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/gongjing/.ssh/id_rsa.pub"
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+gongjing@10.10.91.12's password:
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   "ssh 'gongjing@10.10.91.12'"
+and check to make sure that only the key(s) you wanted were added.
+```
+
+如果`id_rsa`之前是其他用户（比如root）创建的，有可能会出现权限错误：
+
+```bash
+➜  ~ ssh gongjing@10.10.91.12
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@         WARNING: UNPROTECTED PRIVATE KEY FILE!          @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Permissions 0755 for '/home/gongjing/.ssh/id_rsa' are too open.
+It is required that your private key files are NOT accessible by others.
+This private key will be ignored.
+Load key "/home/gongjing/.ssh/id_rsa": bad permissions
+gongjing@10.10.91.12's password:
+```
+
+此时可以更改权限，使得文件`id_rsa`只有自己可读写(参考[这里](https://stackoverflow.com/questions/9270734/ssh-permissions-are-too-open-error))：
+
+```bash
+chmod 600 ~/.ssh/id_rsa
+```
