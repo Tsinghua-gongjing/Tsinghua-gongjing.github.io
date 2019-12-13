@@ -445,6 +445,18 @@ plt.tight_layout()
 
 [![heatmap_matrix_symmetry.png](https://i.loli.net/2018/08/23/5b7eaa39414e5.png)](https://i.loli.net/2018/08/23/5b7eaa39414e5.png)
 
+### Change NULL value color in heatmap
+
+参考[这里](https://stackoverflow.com/questions/52399990/change-color-of-missing-values-in-seaborn-heatmap)直接设置背景颜色即可:
+
+```python
+fig,ax=plt.subplots(figsize=(10,20))
+g = sns.heatmap(df_3, xticklabels=False, yticklabels=False, cmap="summer")
+g.set_facecolor('black')
+```
+
+[![20191213150148](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191213150148.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191213150148.png)
+
 
 ## 3. Inkscape
 
