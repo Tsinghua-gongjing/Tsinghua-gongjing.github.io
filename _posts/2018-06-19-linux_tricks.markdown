@@ -245,6 +245,27 @@ work_dir_name=${PWD##*/}
 
 ---
 
+## 获取脚本参数
+
+参考[这里](https://stackoverflow.com/questions/3811345/how-to-pass-all-arguments-passed-to-my-bash-script-to-a-function-of-mine/3816747):
+
+```bash
+# 这里第一个参数是GPU ID，第2个及之后的参数是要训练的文件夹名称（遍历训练）
+for i in "${@:2}"
+do
+echo "process: "$i", with GPU: "$1
+cd $expr/$i
+bash train.sh $1
+done
+
+# $1: 第一个参数
+# "${@:2}": 第二个及之后的所有参数
+# "$@": 获得所有参数
+# "${@:3:4}": 第3个参数开始的4个参数，即$3,$4,$5,$6
+```
+
+---
+
 ## ImportError: /lib64/libc.so.6: version `GLIBC_2.14' not found
 
 ```bash
