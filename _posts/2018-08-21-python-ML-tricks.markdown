@@ -98,3 +98,17 @@ time CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=1 python $script_dir/main.py
 
 ---
 
+### 数据并行时报错：NN module weights are not part of single contiguous chunk of memory
+
+参考[这里](https://discuss.pytorch.org/t/dataparallel-issue-with-flatten-parameter/8282)
+
+```python
+# 之前
+out1, _ = self.lstm(x, (h0, c0)) 
+
+# 之后
+self.lstm.flatten_parameters()
+out1, _ = self.lstm(x, (h0, c0)) 
+```
+
+---
