@@ -5,6 +5,17 @@ title:  "Python machine learning tricks"
 tags: [python, machine learning, tricks]
 ---
 
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+### 目录
+
+- TOC
+{:toc}
+
+---
+
 ### Extract clusters from seaborn clustermap [stackoverflow](https://stackoverflow.com/questions/27924813/extracting-clusters-from-seaborn-clustermap)
 
 ```python
@@ -63,4 +74,27 @@ sns.clustermap(df, row_linkage=row_linkage, col_linkage=col_linkage,
 				  cmap=cmap, row_colors=[row_colors])
 ```
 
+---
+
+### 指定运行的CPU数目
+
+在新版本的pytorch里面，在运行程序时可能默认使用1个CPU的全部核，导致其他用户不能正常使用，可通过指定参数`OMP_NUM_THREADS=1`设置运行时使用的核数，下面是加和不加时的CPU监视截图：
+
+不指定：
+
+[![20191218105451](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191218105451.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191218105451.png)
+
+指定：
+
+[![20191218110256](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191218110256.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191218110256.png)
+
+可以看到，在指定时，只使用了1个核，此时的CPU使用率是100%左右；在不指定时，CPU使用率到达了3600%，此时默认使用了36个核。具体命令如下：
+
+```bash
+# CUDA_VISIBLE_DEVICES: 指定GPU核
+# OMP_NUM_THREADS: 指定使用的CPU核数
+time CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=1 python $script_dir/main.py
+```
+
+---
 
