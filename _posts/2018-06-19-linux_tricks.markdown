@@ -353,3 +353,20 @@ gongjing@10.10.91.12's password:
 ```bash
 chmod 600 ~/.ssh/id_rsa
 ```
+
+---
+
+### rsync同步文件
+
+使用方法可参考[这里](https://www.digitalocean.com/community/tutorials/how-to-use-rsync-to-sync-local-and-remote-directories-on-a-vps)：
+
+* 参数`-a`：迭代同步，子目录、文件链接等都会同步
+* 参数`-P`：显示同步进度，速率、已完成、剩余等
+
+```bash
+# 同步文件夹
+rsync -aP download_20191204 gongjing@10.10.91.12:/home/gongjing/
+
+# 同步文件
+rsync -aP ./Untitled.ipynb gongjing@10.10.91.12:/home/gongjing/scripts
+```
