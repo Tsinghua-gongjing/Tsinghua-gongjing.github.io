@@ -112,3 +112,16 @@ out1, _ = self.lstm(x, (h0, c0))
 ```
 
 ---
+
+### 为什么RNN/LSTM很慢
+
+在最近搭建的LSTM模型中，即使使用上了GPU，运行花费时间还是很长。模型不是很大，一个卷积层+一个resblock+一个LSTM，序列长度为100，使用双向的LSTM，两层、hidden size是128，基本运行需要10+h小时的时间，每一个epoch花费接近3min。有一些关于为什么LSTM运行很慢的文章（比如知乎帖子[rnn为什么训练速度慢](https://www.zhihu.com/question/292024466)），可以参考一下，主要是：
+
+* 每一个时间点的计算，依赖于上一时间点，不能并行
+* 计算量大。计算复杂度：O(seq_len)，序列越长越明显，且RNN内部使用的是全连接结构。
+* 每个时间点还有1个memory I/O的操作
+
+最近有个SRU的模块，可以实现如CNN级别的速度训练RNN网络，在[github](https://github.com/asappresearch/sru)上star数目还挺高的，可以参考一下。
+
+---
+
