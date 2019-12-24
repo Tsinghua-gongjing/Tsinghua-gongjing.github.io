@@ -409,3 +409,27 @@ Error: package or namespace load failed for ‘mvoutlier’:
 sROC 0.1-2 loaded
 >
 ```
+
+---
+
+### 移除已经导入的包
+
+有时候会遇到这种问题，先导入了module1，module1默认是导入module2(v1)的，接下来要导入module3，module3是依赖于module2(v2)的，因为v2和v1版本不同，所以使得不能正常导入module2。此时可以先把module1 deattach掉，然后专门的导入module2：
+
+比如下面先导入了模块`m6ALogisticModel`，其默认导入`ggplot2`，接下来导入`caret`，但是其依赖的`ggplot2`版本不同，所以导入时报错：
+
+```R
+> library(caret)
+Loading required package: ggplot2
+Error in value[[3L]](cond) :
+  Package ‘ggplot2’ version 3.1.0 cannot be unloaded:
+ Error in unloadNamespace(package) : namespace ‘ggplot2’ is imported by ‘m6ALogisticModel’ so cannot be unloaded
+```
+
+可以先将`m6ALogisticModel`移除（参考[这里](https://stackoverflow.com/questions/6979917/how-to-unload-a-package-without-restarting-r)），再导入:
+
+```R
+> detach("package:m6ALogisticModel", unload=TRUE)
+> library(caret)
+Loading required package: ggplot2
+```
