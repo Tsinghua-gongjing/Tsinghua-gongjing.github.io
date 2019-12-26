@@ -252,6 +252,10 @@ Name  |   Description    |  Epochs  |  Train loss  |  Valid loss
 
 * [总结知乎深度学习调参技巧](https://blog.csdn.net/m0_37644085/article/details/88956758)
 * [深度学习调参技巧](https://zhuanlan.zhihu.com/p/51556033)
+* [A Recipe for Training Neural Networks @Karpathy](https://karpathy.github.io/2019/04/25/recipe/)
+* [Must Know Tips/Tricks in Deep Neural Networks (by Xiu-Shen Wei)](https://pdfs.semanticscholar.org/688a/3745525ad64b72e14dce36df44d69637fda0.pdf)
+* [Training Tips for the Transformer Model](https://arxiv.org/abs/1804.00247)
+* [Bag of Tricks for Image Classification with Convolutional Neural Networks](https://arxiv.org/abs/1812.01187)
 
 
 ---
