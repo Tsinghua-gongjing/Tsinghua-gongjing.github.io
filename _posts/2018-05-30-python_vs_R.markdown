@@ -433,3 +433,14 @@ Error in value[[3L]](cond) :
 > library(caret)
 Loading required package: ggplot2
 ```
+
+---
+
+### df中取不含某列列名的其他列
+
+参考[这里](https://stackoverflow.com/questions/12868581/list-all-column-except-for-one-in-r)：
+
+```R
+# 提取training df中列名称不为class的其他列
+Training.predictor.Gendata = training[,!names(training) %in% c("class")]
+```
