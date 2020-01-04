@@ -377,7 +377,7 @@ chmod 600 ~/.ssh/id_rsa
 
 ---
 
-### rsync同步文件
+## rsync同步文件
 
 使用方法可参考[这里](https://www.digitalocean.com/community/tutorials/how-to-use-rsync-to-sync-local-and-remote-directories-on-a-vps)：
 
