@@ -24,4 +24,4 @@ tags: [genomics, machine learning]
 
 * [Awesome Machine Learning for Healthcare @github](https://github.com/XiaoleiZ/awesome-list-machine-learning-healthcare)
 * [Deep Learning in Healthcare and Computational Biology](https://github.com/prasadseemakurthi/Deep-Neural-Networks-HealthCare)
-* [A curated list of ML|NLP resources for healthcare](https://github.com/isaacmg/healthcare_ml)
+* [A curated list of ML,NLP resources for healthcare](https://github.com/isaacmg/healthcare_ml)
