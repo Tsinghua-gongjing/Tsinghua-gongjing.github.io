@@ -71,6 +71,8 @@ My study focus on RNA molecules, major including RNA secondary structure and RNA
 Publication
 -----------
 
+* Xiaocheng Weng\*, **Jing Gong\***, Yi Chen\*, Tong Wu\*, Fang Wang, Shixi Yang, Yushu Yuan, Guanzheng Luo, Kai Chen, Lulu Hu, Honghui Ma, Pingluan Wang, Qiangfeng Cliff Zhang<sup>#</sup>, Xiang Zhou<sup>#</sup> and Chuan He<sup>#</sup>. [Keth-seq for transcriptome-wide RNA structure mapping](https://www.nature.com/articles/s41589-019-0459-3). Nature Chemical Biology. 2020 [pdf]() 
+
 * Ying Liu\*, Yajing Fu\*, Qian Wang, Mushan Li, Zheng Zhou, Deemah Dabbagh, Chunyan Fu, Hang Zhang, Shuo Li, Tengjiang Zhang, **Jing Gong**, Xiaohui Kong, Weiwei Zhai, Jiaming Su, Jianping Sun, Yonghong Zhang, Xiao-Fang Yu, Zhen Shao, Feng Zhou<sup>#</sup>, Yuntao Wu<sup>#</sup> and Xu Tan<sup>#</sup>. [Proteomic profiling of HIV-1 infection of human CD4+ T cells identifies PSGL-1 as an HIV restriction factor](https://www.ncbi.nlm.nih.gov/pubmed/30833724). Nature Microbiology. 2019 [PDF](https://github.com/Tsinghua-gongjing/blog_codes/blob/master/files/publications/Proteomic%20profiling%20of%20HIV-1%20infection%20of%20human%20CD4%2B%20T%20cells%20identifies%20PSGL-1%20as%20an%20HIV%20restriction%20factor.pdf)
 
 * Yanyan Ju\*, **Jing Gong**\*, Yucheng T. Yang<sup>#</sup>, and Qiangfeng Cliff Zhang<sup>#</sup>. [Investigation of RNA‐RNA Interactions Using The RISE Database](https://currentprotocols.onlinelibrary.wiley.com/doi/abs/10.1002/cpbi.58). Current protocols in bioinformatics. 2018 [PDF](https://github.com/Tsinghua-gongjing/blog_codes/blob/master/files/publications/Investigation%20of%20RNA-RNA%20Interactions%20Using%20The%20RISE%20Database.pdf)
