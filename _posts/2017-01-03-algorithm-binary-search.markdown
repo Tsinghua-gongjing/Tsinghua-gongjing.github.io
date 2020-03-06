@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "python"
-title:  "Algorithm: simple & binary search"
+title:  "Algorithm: 穷举、二分查找"
 tags: [python, scipy]
 ---
 

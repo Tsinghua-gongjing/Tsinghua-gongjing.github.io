@@ -1,7 +1,7 @@
 ---
 layout: post
 category: "python"
-title:  "Algorithm: time complexity"
+title:  "Algorithm: 时间复杂度"
 tags: [python, scipy]
 ---
 
