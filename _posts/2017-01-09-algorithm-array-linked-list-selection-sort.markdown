@@ -2,7 +2,7 @@
 layout: post
 category: "python"
 title:  "Algorithm: 数组、链表、选择排序"
-tags: [python, scipy]
+tags: [python, algorithm, sort]
 ---
 
 ### 内存的工作原理

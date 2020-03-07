@@ -2,7 +2,7 @@
 layout: post
 category: "python"
 title:  "旅行商问题"
-tags: [python, scipy]
+tags: [python, algorithm]
 ---
 
 ## 问题背景

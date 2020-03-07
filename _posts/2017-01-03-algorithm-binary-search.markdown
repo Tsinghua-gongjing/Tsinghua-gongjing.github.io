@@ -2,7 +2,7 @@
 layout: post
 category: "python"
 title:  "Algorithm: 穷举、二分查找"
-tags: [python, scipy]
+tags: [python, algorithm, search]
 ---
 
 ## 问题背景

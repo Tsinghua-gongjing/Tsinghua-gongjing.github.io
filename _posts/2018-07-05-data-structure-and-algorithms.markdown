@@ -2,7 +2,7 @@
 layout: post
 category: "python"
 title:  "Data structure and algorithms"
-tags: [python, scipy]
+tags: [python, algorithm]
 ---
 
 ### 数据结构与算法

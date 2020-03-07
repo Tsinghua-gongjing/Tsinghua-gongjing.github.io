@@ -2,7 +2,7 @@
 layout: post
 category: "python"
 title:  "Algorithm: 时间复杂度"
-tags: [python, scipy]
+tags: [python, algorithm]
 ---
 
 ---
