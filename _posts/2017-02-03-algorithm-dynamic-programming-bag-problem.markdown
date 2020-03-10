@@ -2,7 +2,7 @@
 layout: post
 category: "python"
 title:  "Algorithm: 动态规划算法与背包问题"
-tags: [python, algorithm, graph, search]
+tags: [python, algorithm, dynamic programming]
 ---
 
 - TOC
