@@ -5,6 +5,10 @@ title:  "Algorithm: 递归与栈"
 tags: [python, algorithm]
 ---
 
+- TOC
+{:toc}
+
+---
 ### 递归 
 
 * 例子：在一堆盒子中找钥匙

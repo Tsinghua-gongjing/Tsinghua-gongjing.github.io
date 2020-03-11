@@ -5,6 +5,10 @@ title:  "Algorithm: 穷举、二分查找"
 tags: [python, algorithm, search]
 ---
 
+- TOC
+{:toc}
+
+---
 ## 问题背景
 
 查找问题：
@@ -65,6 +69,6 @@ print(binary_search(my_list, -1)) # => None
 
 ---
 
-### 参考
+## 参考
 
 * [算法图解第一章](https://github.com/egonSchiele/grokking_algorithms/tree/master/01_introduction_to_algorithms/python)

@@ -5,6 +5,11 @@ title:  "Algorithm: 数组、链表、选择排序"
 tags: [python, algorithm, sort]
 ---
 
+- TOC
+{:toc}
+
+---
+
 ### 内存的工作原理
 
 * 计算机：很多抽屉的集合体，每个抽屉都有地址

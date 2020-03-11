@@ -5,7 +5,12 @@ title:  "旅行商问题"
 tags: [python, algorithm]
 ---
 
-## 问题背景
+- TOC
+{:toc}
+
+---
+
+### 问题背景
 
 描述：给定一系列城市和每对城市之间的距离，求解访问每一座城市一次并回到起始城市的最短回路。
 
@@ -16,7 +21,7 @@ tags: [python, algorithm]
 
 ---
 
-## 借助itertools暴力破解
+### 借助itertools暴力破解
 
 ```python
 import itertools

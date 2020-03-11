@@ -5,6 +5,11 @@ title:  "Algorithm: 分治法与快速排序"
 tags: [python, algorithm, sort]
 ---
 
+- TOC
+{:toc}
+
+---
+
 ### 分治法
 
 * divide & conquer

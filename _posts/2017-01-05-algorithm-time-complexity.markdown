@@ -5,6 +5,9 @@ title:  "Algorithm: 时间复杂度"
 tags: [python, algorithm]
 ---
 
+- TOC
+{:toc}
+
 ---
 
 ## 时间复杂度
@@ -59,7 +62,7 @@ tags: [python, algorithm]
 
 ---
 
-### 参考
+## 参考
 
 * [算法图解第一章](https://github.com/egonSchiele/grokking_algorithms/tree/master/01_introduction_to_algorithms/python)
 * [常用算法时间复杂度](https://blog.csdn.net/l975764577/article/details/39399077)
