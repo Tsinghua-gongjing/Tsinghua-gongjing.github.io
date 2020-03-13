@@ -5,6 +5,8 @@ title:  "Algorithm: 散列表(hash)"
 tags: [python, algorithm]
 ---
 
+### 目录
+
 - TOC
 {:toc}
 
