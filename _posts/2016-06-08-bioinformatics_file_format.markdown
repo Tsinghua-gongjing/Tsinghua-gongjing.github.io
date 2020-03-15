@@ -5,6 +5,17 @@ title:  "Common file format in bioinformatics"
 tags: [genomics, bioinformatics, format]
 ---
 
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+### 目录
+
+- TOC
+{:toc}
+
+---
+
 ### bed file
 
 Full description can be accessed at [UCSC bed](http://genome.ucsc.edu/FAQ/FAQformat#format1), here are example from [bedtools introduction](https://bedtools.readthedocs.io/en/latest/content/general-usage.html#bed-format) :
@@ -25,3 +36,51 @@ columns: 12 (some are optional correspond to different style)
 12. **blockStarts** - A comma-separated list of block starts.
 
 ![bed](/assets/bed_file_format_example.jpeg)
+
+---
+
+### wig & bigwig file
+
+* UCSC bigWig Track Format: https://genome.ucsc.edu/goldenpath/help/bigWig.html
+* for dense, continuous data
+* bigWig: 
+	* indexed binary
+	* faster display performance
+
+
+```bash
+# convert .bw to .wig
+bigWigToWig bigWigExample.bw out.wig
+
+# large bedgraph to .bw
+bedGraphToBigWig in.bedGraph chrom.sizes myBigWig.bw
+```
+
+Example:
+
+```
+$ head AGN001508.bedGraph AGN001508.wig
+==> AGN001508.bedGraph <==
+chr1    1720    1752    2.99808
+chr1    6751    6760    2.99808
+chr1    6891    6916    2.99808
+chr1    13926   13969   2.99808
+chr1    14504   14537   2.99808
+chr1    14545   14555   2.99808
+chr1    14555   14584   5.99616
+chr1    14584   14586   2.99808
+chr1    14586   14588   5.99616
+chr1    14588   14596   2.99808
+
+==> AGN001508.wig <==
+#bedGraph section chr1:1720-25052994
+chr1    1720    1752    2.99808
+chr1    6751    6760    2.99808
+chr1    6891    6916    2.99808
+chr1    13926   13969   2.99808
+chr1    14504   14537   2.99808
+chr1    14545   14555   2.99808
+chr1    14555   14584   5.99616
+chr1    14584   14586   2.99808
+chr1    14586   14588   5.99616
+```
