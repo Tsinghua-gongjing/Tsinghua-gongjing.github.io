@@ -107,6 +107,11 @@ Refer to [Adobe Illustrator CC 2017 MAC中文破解版](http://www.web3.xin/soft
 * **设置不同行文字间距（段落间距）**：
    - 选中要设置的文字段落，然后选择`段落(Paragraph)`属性，在这里可以设置文字的对齐方式，一般选择中间的两段对齐，多余行左对齐。在下方可以设置段落间距（类似于word里面的行间距）。 [![20190806115847](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190806115847.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190806115847.png)
 
+* **整个画板变为灰色网格？**
+	* 因为其默认的快捷键是`shift+cmd+D`
+	* 有时候想想设置元素大小，使用快捷键`shift+option+cmd+d`，但是不小心点错了
+	* 具体效果可以参考这里：[ai画板与背景整个变成灰色格子了？](https://zhidao.baidu.com/question/1796240806630924787)
+
 ---
 
 ## 快捷键
