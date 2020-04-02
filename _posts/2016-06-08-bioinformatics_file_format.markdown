@@ -84,3 +84,18 @@ chr1    14555   14584   5.99616
 chr1    14584   14586   2.99808
 chr1    14586   14588   5.99616
 ```
+
+---
+
+### blastn outfput format6
+
+```
+➜  seq_similarity head -3 outputfile_E10
+ENST00000380087:1800-1900       ENST00000330735:600-700 100.00  66      0       0       166       35      100     1e-29   122
+ENST00000380087:1800-1900       ENST00000330735:700-800 100.00  34      0       0       67100     1       34      6e-12   63.9
+ENST00000557530:200-300 ENST00000348956:500-600 100.00  93      0       0       1       938       100     1e-44   172
+```
+
+![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20200402202147.png)
+
+---
