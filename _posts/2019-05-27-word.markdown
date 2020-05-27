@@ -1,0 +1,23 @@
+---
+layout: post
+category: "other"
+title:  "Word常见用法"
+tags: [word]
+---
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+- TOC
+{:toc}
+
+---
+
+## mac word 常见用法
+
+### 取消超链接
+
+选中或全选，然后按：
+`command（⌘）+ shift（⇧）+ fn + F9`
+
