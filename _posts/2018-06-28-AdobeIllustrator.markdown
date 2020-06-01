@@ -112,6 +112,13 @@ Refer to [Adobe Illustrator CC 2017 MAC中文破解版](http://www.web3.xin/soft
 	* 有时候想想设置元素大小，使用快捷键`shift+option+cmd+d`，但是不小心点错了
 	* 具体效果可以参考这里：[ai画板与背景整个变成灰色格子了？](https://zhidao.baidu.com/question/1796240806630924787)
 
+* **更改画布大小**
+	* 在右侧artboard里面选择画布
+	* artboard界面中，右上角列表按钮下拉，选择`artboard options`
+	* 设置宽和高
+	* 也可以在顶部断则`Document Setup`，有`edit board`选项，也可设置
+	* 具体可以参考这里：[ai怎么调整画布尺寸? ai设置画布大小的两种方法](https://www.jb51.net/Illustrator/454077.html)
+
 ---
 
 ## 快捷键
