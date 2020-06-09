@@ -119,6 +119,11 @@ Refer to [Adobe Illustrator CC 2017 MAC中文破解版](http://www.web3.xin/soft
 	* 也可以在顶部断则`Document Setup`，有`edit board`选项，也可设置
 	* 具体可以参考这里：[ai怎么调整画布尺寸? ai设置画布大小的两种方法](https://www.jb51.net/Illustrator/454077.html)
 
+* **统一多个长方形的大小**
+	* 选择要选取的多个长方形
+	* 先把这些选择的对象转换为形状：`对象` => `形状` => `转换为形状`
+	* 然后设置形状的长宽，即可统一所有的大小
+
 ---
 
 ## 快捷键
