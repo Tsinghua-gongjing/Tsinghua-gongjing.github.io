@@ -88,6 +88,8 @@ bsub -q Z-ZQF -eo run.err -oo run.out -w "done(323228)" bash sampling.sh
 
 ### 提交任务在某个任务完成之后再执行(任务名称)
 
+可参考[这里的例子](https://stackoverflow.com/questions/12094035/lsf-get-id-of-submitted-job)
+
 ```bash
 # map
 for seed in 1234 #1234 40 9988 17181790 81910 625178 1 7829999 9029102 918029109
