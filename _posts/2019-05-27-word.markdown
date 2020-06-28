@@ -27,3 +27,8 @@ tags: [word]
 
 命令：`⌘ + 8 `
 
+---
+
+### 更改所有的英文字符为指定字体
+
+参考[怎样更改word中所有英文字体](https://jingyan.baidu.com/article/6079ad0e6438f728ff86dbab.html)：按住ctrl+a全选文字，然后右键点击，选择“字体”，在`西文字体`栏目设置想要的字体，比如Times New Roman。可以看到，所有英文字体格式已经改变，但是中文字体没有。
