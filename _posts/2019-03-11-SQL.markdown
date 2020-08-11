@@ -1,0 +1,15 @@
+---
+layout: post
+category: "linux"
+title:  "SQL速查表"
+tags: [linux, SQL]
+---
+
+- TOC
+{:toc}
+
+参考：[SQL 速查表.pdf](https://download.csdn.net/download/horses/11225231)
+
+[![20200811153048](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20200811153048.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20200811153048.png)
+
+[![20200811153308](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20200811153308.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20200811153308.png)
