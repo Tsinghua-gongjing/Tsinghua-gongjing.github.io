@@ -8,7 +8,7 @@ tags: [linux, SQL]
 - TOC
 {:toc}
 
-### 表1 (table_1)
+#### 表1 (table_1)
 
 |company|id|age|salary|sex|
 |---|---|---|---|---|
@@ -83,3 +83,138 @@ limit 10
 #### 条件函数 case when
 
 ```bash
+# 将salary转换为收入区间进行分组
+# case函数格式：
+# case when condition1 value1 condition2 value2 ... else NULL end
+
+select id,
+(case when CAST(salary as float)<50000 then '0-5万'
+when CAST(salary as float)>=50000 and CAST(salary as float)<100000 then '5-10万'
+when CAST(salary as float)>=100000 and CAST(salary as float)<200000 then '10-20万'
+when CAST(salary as float)>=100000 then '20万以上'
+else NULL and from table_1
+```
+
+---
+
+#### 字符串
+
+##### 拼接 concat
+
+```bash
+# 将A和B拼接返回
+select concat('www', 'iteblog', 'com') from iteblog
+```
+
+---
+
+##### 切分 split
+
+```bash
+# 将字符串按照“，”切分，并返回数组
+select split("1,2,3", ",") as value_array from table_1
+
+# 切分后赋值
+select value_array[0],value_array[1],value_array[2] from (select split("1,2,3", ",") as value_array from table_1) t
+```
+
+---
+
+##### 提取子字符串
+
+```bash
+#  substr（str,0,len) : 截取从0位开始长度为len的字符串
+select substr('abcde', 3, 2) from iteblog # cd
+```
+
+---
+
+#### 分组排序 row_number()
+
+```bash
+# 按照字段salary倒序排序
+select *,row_number() over (order by salary desc) as row_num from table_1
+
+# 按照字段deptid分组后再按照salary倒序编号
+select *,row_number() over (partition by deptid order by salary desc) as rank from table_1
+
+# rank：总数不变，排序相同时会重复，会出现1，1，3这种
+# dense_rank：总数减小，排序相同时重复，出现1，1，2这种
+# row_number()：排序相同时不重复，会根据顺序排序 
+```
+
+---
+
+#### 根据数值列取top，percentile
+
+```bash
+# 获得income字段top10%的阈值
+select percentile(CAST(salary as int), 0.9) as income_top10p_threshold from table_1
+
+# 获取income字段的10个百分位点
+select percentile(CAST(salary as int), array(0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9)) as income_top10p_thresholds from table_1
+
+```
+
+---
+
+
+#### 时间函数
+
+```bash
+# 转换为时间格式数据
+select to_date('1970-01-01 00:00:00') as start_time from table_1
+
+# 计算数据到当前时间的天数差
+select datediff ('2016-12-30','2016-12-29') # 1
+
+# datediff(enddate,stratdate)：计算两个时间的时间差（day)
+# date_sub(stratdate,days) ：返回开始日期startdate减少days天后的日期
+# date_add(startdate,days) ：返回开始日期startdate增加days天后的日期
+```
+
+---
+
+#### 练习
+
+```bash
+例：有3个表S，C，SC：
+S（SNO，SNAME）代表（学号，姓名）
+C（CNO，CNAME，CTEACHER）代表（课号，课名，教师）
+SC（SNO，CNO，SCGRADE）代表（学号，课号，成绩）
+
+问题：
+1. 找出没选过“黎明”老师的所有学生姓名。
+
+select sname from s where SNO not in 
+(
+select SNO from SC where CNO in 
+	(
+	select distinct CNO from C where CTEACHER == '黎明'
+	)
+)
+
+2. 列出2门以上（含2门）不及格学生姓名及平均成绩。
+
+select s.sname, avg_grade from s
+join
+(select sno from sc where scgrade < 60 group by sno having count(*) >= 2) t1
+on s.sno = t1.sno
+join
+(select sno, avg(scgrade) as avg_grade from sc group by sno ) t2
+on s.sno = t2.sno;
+
+3. 既学过1号课程又学过2号课所有学生的姓名。
+
+select SNAME from
+(select SNO from SC where CNO = 1) a
+join 
+(select SNO from SC where CNO = 2) b
+on a.sno = b.sno
+```
+
+---
+
+#### 参考
+
+* [SQL \| 数据分析面试必备SQL语句+语法](https://cloud.tencent.com/developer/article/1603982)
