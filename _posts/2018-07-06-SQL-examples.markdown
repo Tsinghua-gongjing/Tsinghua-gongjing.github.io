@@ -269,6 +269,25 @@ C. select A.user_id from A left join B on A.order_id = B.order_id and B.goods_id
 
 ---
 
+
+```bash
+# 使用SQL语句建个存储过程proc_stu，然后以student表中的学号Stu_ID为输入参数@s_no，返回学生个人的指定信息
+
+CREATE PROCEDURE [stu].[proc_student]
+@s_no AS int
+AS
+BEGIN
+select * from stu.student where Stu_ID=@s_no
+END
+
+CREATE PROCEDURE [stu].[proc_student]
+@s_no  int
+AS
+BEGIN
+select * from stu.student where Stu_ID=@s_no
+END
+```
+
 #### 易错题
 
 * 下面哪个字符最可能导致sql注入？A： 单引号，B：/， C：双引号，D：$。 SQL注入的关键是单引号的闭合，因此选单引号。
@@ -301,6 +320,11 @@ C. select A.user_id from A left join B on A.order_id = B.order_id and B.goods_id
 	* 系统资源不足
 	* 进程运行推进的顺序不合适
 	* 资源分配不当
+
+* where分组前过滤，having分组后过滤，两者不冲突，可同时使用
+* having子句必须与groupby子句同时使用，不能单独使用
+* group by限定分组条件，对应列进行分组，相同值的被分为一组。当一个sql语句没有groupby时，整张表会自成一组
+* 没有聚合函数的使用也可以用having过滤
 
 ---
 
