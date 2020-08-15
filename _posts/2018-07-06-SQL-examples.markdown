@@ -200,6 +200,17 @@ select datediff ('2016-12-30','2016-12-29') # 1
 
 ---
 
+#### drop、delete、truncate
+
+* drop：完全删除表，包括表结构
+* delete：只删除表数据，保留表结构，而且可以加where，只删除一行或者多行
+* truncate：只删除表数据，保留表结构，不能加where
+
+* 清理表数据的速度，truncate一般比delete更快
+* truncate只删除表的数据不删除表的结构
+
+---
+
 #### 练习
 
 ```bash
@@ -238,6 +249,58 @@ join
 on a.sno = b.sno
 ```
 
+```bash
+# table A
+Order_id     User_id    Add_time
+11701245001 10000    1498882474
+11701245002 10001    1498882475
+
+# table B
+id     Order_id     goods_id price
+1   11701245001    1001     10
+2   11701245001    1002     20
+3   11701245002    1001     10
+
+购买过goods_id 为1001的用户user_id:
+A. select a.user_id from A a, B b where a.order_id = b.order_id and b.goods_id = '1001'
+B. select user_id from A where order_id in (select order_id from B where goods_id = '1001')
+C. select A.user_id from A left join B on A.order_id = B.order_id and B.goods_id = '1001'
+```
+
+---
+
+#### 易错题
+
+* 下面哪个字符最可能导致sql注入？A： 单引号，B：/， C：双引号，D：$。 SQL注入的关键是单引号的闭合，因此选单引号。
+* select * from user_table where username='xxx' and password='xxx' or '1'='1'，查询到所有用户信息，是单引号导致逻辑发生变化，达到恶意攻击的效果
+
+* SQL主要四部分：
+	* 数据定义：DDL，data definition language。定义SQL模式、基本表、视图和索引的创建和撤销操作。
+	* 数据操纵：DML，data manipulation language。数据查询和更新。更新分为插入、删除和修改。
+	* 数据控制：DCL，data control language。对表和视图的授权，完整性规则的描述，事务控制等。 
+	* 事务控制语言：TCL，transaction control language。SQL语句嵌入在宿主语言程序中使用的规则。
+
+* 关系型数据库：
+	* 可以表示实体间的1：1，1：n，m：n关系
+	* 关系数据模型：使用表格表示实体和实体之间关系的数据模型
+	* 可以多对多
+
+* SQL与C语言处理记录的方式是不同的。当将SQL语句嵌入到C语言程序时，为了协调两者而引入：游标。不是堆或者栈或者缓冲区。
+	* 游标：系统开设的一个数据缓冲区，存放SQL语句的执行结果集。每个游标有一个名字，用户可以用SQL语句逐一从游标中获取记录，赋值给主变量，交由主语言处理。
+
+* insert into：向表格中插入新的行
+* select into：从一个表格中选取数据，然后把数据插入到另一个表中。通常用于创建表的备份或者对记录进行存档。
+
+* 关系数据库事务的基本特征：ACID
+	* 原子性：atomic，事务的操作作为整体执行，要么全部执行，要么全部失败
+	* 一致性：consistency，数据在事务执行之前和之后，处于一致的状态
+	* 隔离性：isolation，多个事务之间是隔离的，互不影响
+	* 永久性：durability，一旦事务提交了，对数据库的修改是永久性的
+
+* 数据库及线程发生死锁的原理：
+	* 系统资源不足
+	* 进程运行推进的顺序不合适
+	* 资源分配不当
 
 ---
 
