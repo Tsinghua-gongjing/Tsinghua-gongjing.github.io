@@ -33,6 +33,31 @@ select count(distinct id) from table_1
 # 优化版本的统计不同id个数
 select count(*) from
 (select distinct id from table_1) tb
+
+# count(*): 包括所有列，相当于行数，不忽略值为NULL的
+# count(1)：与count(*)一样。
+# count(列名)：值包含列名所在列，统计时会忽略NULL
+# count时需要看所在列是否可能存在空值NULL
+
+# 例子
+CREATE TABLE `score` (
+   `id` int(11) NOT NULL AUTO_INCREMENT,
+   `sno` int(11) NOT NULL,
+   `cno` tinyint(4) NOT NULL,
+   `score` tinyint(4) DEFAULT NULL,
+   PRIMARY KEY (`id`)
+ ) ;
+ 
+A.SELECT sum(score) / count(*) FROM score WHERE cno = 2;
+B.SELECT sum(score) / count(id) FROM score WHERE cno = 2;
+C.SELECT sum(score) / count(sno) FROM score WHERE cno = 2;
+D.SELECT sum(score) / count(score) FROM score WHERE cno = 2;
+E.SELECT sum(score) / count(1) FROM score WHERE cno = 2;
+F.SELECT avg(score) FROM score WHERE cno = 2;
+
+# ABCE：sum(score)除以行数
+# DF：sum(score)除以score不为NULL的行数
+# avg(score)：会忽略空值
 ```
 
 ---
@@ -212,6 +237,7 @@ join
 (select SNO from SC where CNO = 2) b
 on a.sno = b.sno
 ```
+
 
 ---
 
