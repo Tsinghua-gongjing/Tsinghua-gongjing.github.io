@@ -75,6 +75,10 @@ select max(age), min(age), avg(age) from table_1
 group by id
 ```
 
+* 聚合函数：
+	* 作为窗口函数时，与专用窗口函数用法相同，但是函数后括号不能为空，需指定聚合的列名
+	* 截止到本行数据，统计数据是多少，或者每一行数据对整体统计数据的影响
+
 ---
 
 #### 筛选 where/having
@@ -122,6 +126,37 @@ else NULL and from table_1
 
 ---
 
+#### 窗口函数
+
+* 场景：每组内排名
+	* 每个部门按照业绩来排名
+	* 找出每个部门排名前N的员工
+* 窗口函数：
+	* OLAP函数，online analytical processing（联机分析处理）
+	* 可对数据库数据进行实时分析处理
+* 基本语法：
+
+```bash
+<窗口函数> over (partition by <用于分组的列名>
+		         order by <用于排序的列名>)
+```
+
+* 专用窗口函数：rank、dense_rank、row_number。**注意：函数后面的括号不需要任何参数，保持()空着就行。**
+* 聚合函数：sum、avg、count、max、min
+* 原则上只能写在select子句中，是对where或者group by子句处理后的结构进行操作
+
+* group by  vs partition by：
+	* group by：分组汇总后改变了表的行数，一行只有一个类别
+	* partition by：不会改变原表中的函数
+
+* 为什么叫窗口函数？
+	* partition by分组后的结果称为窗口，表示范围的意思
+	* 功能1：同时具有分组和排序的功能
+	* 功能2：不减少原表的函数
+	* 语法：<窗口函数> over (partition by 分组列名 order by 排序列名)
+
+---
+
 #### 字符串
 
 ##### 拼接 concat
@@ -163,9 +198,9 @@ select *,row_number() over (order by salary desc) as row_num from table_1
 # 按照字段deptid分组后再按照salary倒序编号
 select *,row_number() over (partition by deptid order by salary desc) as rank from table_1
 
-# rank：总数不变，排序相同时会重复，会出现1，1，3这种
-# dense_rank：总数减小，排序相同时重复，出现1，1，2这种
-# row_number()：排序相同时不重复，会根据顺序排序 
+# rank：总数不变，排序相同时会重复，会出现1，1，3这种。并列名次会占用下一名次位置。
+# dense_rank：总数减小，排序相同时重复，出现1，1，2这种。并列名次不会占用下一名次位置。
+# row_number()：排序相同时不重复，会根据顺序排序，不考虑并列名次的情况。 
 ```
 
 ---
