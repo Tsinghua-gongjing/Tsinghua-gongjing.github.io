@@ -229,9 +229,27 @@ select to_date('1970-01-01 00:00:00') as start_time from table_1
 select datediff ('2016-12-30','2016-12-29') # 1
 
 # datediff(enddate,stratdate)：计算两个时间的时间差（day)
-# date_sub(stratdate,days) ：返回开始日期startdate减少days天后的日期
+# date_sub(stratdate, interval 2 day) ：返回开始日期startdate减少days天后的日期
 # date_add(startdate,days) ：返回开始日期startdate增加days天后的日期
 ```
+
+重要的内置MySQL日期函数（[链接](https://www.w3school.com.cn/sql/sql_dates.asp)）：
+
+|函数|功能|
+|---|---|
+|now()|返回当前的日期和时间|
+|curdate()|返回当前的日期|
+|curtime()|返回当前的时间|
+|date()|提取日期，日期/时间表达式的日期部分|
+|extract()|返回日期/时间的单独部分|
+|date_add()|给日期添加指定的时间间隔|
+|date_sub()|从日期减去指定的时间间隔|
+|datediff()|返回两个日期之间的天数|
+|date_format()|用不同的格式显示日期/时间|
+|day()|取时间字段的天值|
+|month()|取时间字段的月值|
+|year()|取时间字段的年值|
+
 
 ---
 
