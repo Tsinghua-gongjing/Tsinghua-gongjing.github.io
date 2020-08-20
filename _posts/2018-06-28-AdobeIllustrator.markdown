@@ -124,6 +124,11 @@ Refer to [Adobe Illustrator CC 2017 MAC中文破解版](http://www.web3.xin/soft
 	* 先把这些选择的对象转换为形状：`对象` => `形状` => `转换为形状`
 	* 然后设置形状的长宽，即可统一所有的大小
 
+* **调整一段文字的行间距**
+	* 选择要调整的文字
+	* MAC下面：`option+→`:扩展字间距，`option+←`:缩小字间距，`option+↑`:缩小行距，`option+↓`:扩展行距
+	* 参考[这里](https://jingyan.baidu.com/article/20095761b59d46cb0721b4e9.html)
+
 ---
 
 ## 快捷键
