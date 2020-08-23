@@ -14,15 +14,21 @@ tags: [python, machine learning]
 - TOC
 {:toc}
 
+---
+
 ## 概述
 
 决策树算法：由一个决策图和可能的结果（包括资源成本和风险）组成， 用来创建到达目标的规划。
+
+---
 
 ### 决策树流程图
 
  - 判断模块（decision block/node）
  - 终止模块（terminating block/node）：已得出结论，可终止运行
  - 分支（branch/sub-tree）：从判断模块引出的左右箭头 [![decision_tree_branch.png](https://i.loli.net/2019/07/22/5d35aad8ea6c234105.png)](https://i.loli.net/2019/07/22/5d35aad8ea6c234105.png)
+
+---
 
 ### 建树步骤
 
@@ -38,7 +44,11 @@ tags: [python, machine learning]
 
  - 递归结束条件：1）遍历完所有的属性，2）每个分支下的所有实例归属同一类。[![decision_tree_func.png](https://i.loli.net/2019/06/11/5cffb4a39142497590.png)](https://i.loli.net/2019/06/11/5cffb4a39142497590.png)
 
+---
+
 ### 如何选取划分特征？
+
+---
 
 #### ID3
 
@@ -50,11 +60,15 @@ tags: [python, machine learning]
 
 下面是一个例子，比较不同的特征进行数据分隔时的信息增益大小：[![info_gain.png](https://i.loli.net/2019/06/11/5cff64e6dfe8514609.png)](https://i.loli.net/2019/06/11/5cff64e6dfe8514609.png)
 
+---
+
 #### C4.5
 
 ID3使用信息增益最大的特征作为分隔特征，这个对于特征是有偏向性的，具有多个值的特征其信息增益也容易大从而被选做分隔特征。为了消除这个，在C4.5中引入了信息增益比：
   - 先计算某特征对于数据集的切割信息
   - 然后用信息增益对于上述的切割信息进行归一化 [![decision_tree_C4.5.png](https://i.loli.net/2019/06/12/5cffd316ac0e325586.png)](https://i.loli.net/2019/06/12/5cffd316ac0e325586.png)
+
+---
 
 #### CART
 
@@ -65,13 +79,19 @@ ID3和C4.5构建的树规模较大，为了提高建树的效率，CART方法被
 
 [![decision_tree_comparison.png](https://i.loli.net/2019/07/22/5d35ab5097e1894078.png)](https://i.loli.net/2019/07/22/5d35ab5097e1894078.png)
 
+---
+
 ### 损失函数
 
 在经典的ID3中，每次选取的分隔特征都是信息增益最大的，这个可以保证最后的分类效果达到最好，其损失函数值也是最小的。具体的，其损失函数很像最大似然估计函数：
 
 ![](https://scs.hosted.panopto.com/Panopto/Pages/Viewer/Thumb.aspx?eventTargetPID=58fdbb33-bd0f-4c51-b887-0109c299bb2b&sessionPID=07ad6a3f-7219-4e00-83ff-a8bd01397476&number=14&isPrimary=false&absoluteTime=13167774858.409775)
 
+---
+
 ## 实现
+
+---
 
 ### Python源码版本
 
@@ -114,6 +134,8 @@ def chooseBestFeatureToSplit(dataSet):
     return bestFeature                      #returns an integer
 ```
 
+---
+
 ### sklearn版本
 
 对于`iris`数据集应用决策树，过程中会搜索选取不同的特征及其阈值，以作为分隔的特征（节点）：
@@ -143,6 +165,8 @@ graph.render("iris")
 
 [![decision_tree_case.png](https://i.loli.net/2019/07/22/5d35ab994ae8945014.png)](https://i.loli.net/2019/07/22/5d35ab994ae8945014.png)
 
+---
+
 ## 参考
 
 * 机器学习实战第3章
@@ -150,6 +174,8 @@ graph.render("iris")
 * [A Guide to Decision Trees for Machine Learning and Data Science](https://towardsdatascience.com/a-guide-to-decision-trees-for-machine-learning-and-data-science-fe2607241956)
 * [三种决策树算法（ID3, CART, C4.5）及Python实现](https://www.yingjoy.cn/457.html)
 * [决策树模型 ID3/C4.5/CART算法比较](https://www.cnblogs.com/wxquare/p/5379970.html)
+
+---
 
 
 
