@@ -86,6 +86,23 @@ tags: [python, machine learning]
 
 [![adaboost_tree3.png](https://i.loli.net/2019/07/23/5d36f4071d5b343209.png)](https://i.loli.net/2019/07/23/5d36f4071d5b343209.png)
 
+---
+
+#### sklearn调用AdaBoost
+
+```python
+from sklearn.model_selection import cross_val_score
+from sklearn.datasets import load_iris
+from sklearn.ensemble import AdaBoostClassifier
+
+X, y = load_iris(return_X_y=True)
+clf = AdaBoostClassifier(n_estimators=100)
+scores = cross_val_score(clf, X, y, cv=5)
+scores.mean()
+```
+
+---
+
 ### 梯度上升决策树
 
 * 把上面的概念都合并起来，得到一个新的算法：梯度上升决策树。
