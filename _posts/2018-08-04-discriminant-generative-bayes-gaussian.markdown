@@ -9,6 +9,8 @@ tags: [python, machine learning]
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 
+---
+
 ## 生成式模型 vs 判别式模型
 
 对于监督学习，其最终目标都是在给定样本时，预测其最可能的类别，即优化目标总是：$$\begin{align}\arg \max_yp(y\|x)\end{align}$$。
@@ -24,6 +26,8 @@ tags: [python, machine learning]
    - 代入上面的优化目标：$$\begin{align}\arg \max_yp(y\|x)&=\arg \max_y\frac {p(x\|y)p(y)}{p(x)}\\&=\arg  \max_yp(x\|y)p(y)\end{align} (给定数据x时，p(x)是常量可不考虑)$$
    - 此时模型的求解目标不是$$p(y\|x)$$，而是$$p(x\|y)$$和$$p(y)$$
 
+---
+
 ### 例子
 
 目标：判别一个动物是大象(y=1)还是狗(y=0)
@@ -37,6 +41,8 @@ tags: [python, machine learning]
    - 【训练2】训练所有的类别为狗的数据，学习模型2：$$p(x\|y=0)和p(y=0)$$
    - 【预测】用模型1和2分别预测，可能性大的即为最终的预测类别
 
+---
+
 ## 高斯判别分析
 
 高斯判别分析（Gaussian discriminant analysismodel, GDA）：
@@ -44,6 +50,7 @@ tags: [python, machine learning]
 - 用于连续空间，即随机变量具有连续值特征
 - 假设$$p(x\|y)$$是服从高斯分布的，这是一个概率分布 [![GDA.png](https://i.loli.net/2019/06/10/5cfe55a616ea810591.png)](https://i.loli.net/2019/06/10/5cfe55a616ea810591.png)
 
+---
 
 ## 朴素贝叶斯
 
@@ -55,6 +62,8 @@ tags: [python, machine learning]
   - P(A)是A的先验概率
   - P(B\|A)是已知A发生后B的条件概率，即B的后验概率。
   - P(B)是B的先验概率。
+
+---
 
 ### 文本/邮件分类
 
@@ -176,6 +185,8 @@ def bagOfWords2VecMN(vocabList, inputSet):
     return returnVec
 ```
 
+---
+
 ### sklearn版本
 
 参考这里的[文档](https://scikit-learn.org/stable/tutorial/text_analytics/working_with_text_data.html):
@@ -231,6 +242,8 @@ predicted = text_clf.predict(docs_test)
 np.mean(predicted == twenty_test.target) 
 ```
 
+---
+
 ## 参考
 
 * [判别模型、生成模型和高斯判别模型](http://zhouyichu.com/machine-learning/Discriminative-Generative-GDA/)
@@ -238,6 +251,7 @@ np.mean(predicted == twenty_test.target)
 * [Generative Learning Algorithm](https://air-yan.github.io/machine%20learning/Generative-Learning-Algorithm/)
 * 机器学习实战第四章
 
+---
 
 
 
