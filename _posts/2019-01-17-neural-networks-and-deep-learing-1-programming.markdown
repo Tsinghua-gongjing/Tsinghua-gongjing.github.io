@@ -18,7 +18,7 @@ tags: [python, machine learning]
 
 ### 二分类
 
-* 神经网络：对于m个样本，通常不用for循环去便利整个训练集
+* 神经网络：对于m个样本，通常不用for循环去遍历整个训练集
 * 神经网络的训练过程：
 	* 前向传播：forward propagation
 	* 反向传播：backward propagation
@@ -44,8 +44,8 @@ tags: [python, machine learning]
 	* 图片识别是否是猫
 	* 尝试：$$\hat y=w^Tx+b$$，线性函数，对二分类不是好的算法，因为是想“让预测值$$\hat y$$表示实际值$$y$$等于1的可能性”，所以$$\hat y$$应该在【0，1】之间。
 * sigmoid函数：
-	* 当z很大时，整体值接近于1（1/1+0）
-	* 当z很小时，整体值接近于0（1/1+很大的数）
+	* 当z很大时，整体值接近于1（1/(1+0))
+	* 当z很小时，整体值接近于0（1/(1+很大的数))
 	* ![](http://www.ai-start.com/dl2017/images/7e304debcca5945a3443d56bcbdd2964.png)
 * 让机器学习参数$$w$$及$$b$$，使得$$\hat y$$称为对$$y=1$$这一情况的概率的一个很好的估计。
 

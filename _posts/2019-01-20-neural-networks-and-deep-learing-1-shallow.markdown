@@ -56,7 +56,7 @@ tags: [python, machine learning]
 
 ### 激活函数
 
-* 通常情况：tanh函数或者双正切函数总体上都由于sigmoid函数
+* 通常情况：tanh函数或者双正切函数总体上都优于sigmoid函数
 * tanh函数：是sigmoid函数向下平移和伸缩后的结果
 * 优化算法说明：基本不用sigmoid函数，tanh函数在所有场合都优于sigmoid函数
 	* 例外：二分类问题，输出层是0或者1，需要使用sigmoid函数
