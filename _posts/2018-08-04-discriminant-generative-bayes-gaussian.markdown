@@ -26,6 +26,15 @@ tags: [python, machine learning]
    - 代入上面的优化目标：$$\begin{align}\arg \max_yp(y\|x)&=\arg \max_y\frac {p(x\|y)p(y)}{p(x)}\\&=\arg  \max_yp(x\|y)p(y)\end{align} (给定数据x时，p(x)是常量可不考虑)$$
    - 此时模型的求解目标不是$$p(y\|x)$$，而是$$p(x\|y)$$和$$p(y)$$
 
+| | 判别模型 | 生成模型 |
+|:--------:|:-------|:--------|
+|关注点   |关注各类的边界   |关注每一类的分布，不关注决策边界的位置   |
+|优点   |1.能得到类之间的差异信息<br>2.学习简单   |1.研究类内部问题更加灵活<br>2.更适合增量学习<br>3.对数据不完整适应更好，更鲁棒   |
+|缺点   |1.不能得到每一类的特征（可以告诉你的是1还是2，但是没有办法把整个场景描述出来）<br>2.变量关系不清晰、不可视   |1.学习计算相对复杂 <br>2.更倾向于得到false positive，尤其是对比较近的事物分类（比如牛和马）   |
+|举例   |LR、SVM、KNN、traditional neural network、conditional random field   |naive bayes、mixtures of mutinomial/gaussians/experts、HMMs、Sigmoidal belief networks、bayesian networks、markov random fields   |
+
+
+
 ---
 
 ### 例子
