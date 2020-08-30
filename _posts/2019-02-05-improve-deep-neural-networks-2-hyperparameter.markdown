@@ -154,18 +154,18 @@ tags: [python, machine learning]
 	* 每个mini-batch上进行归一化，由均值和方差进行缩放
 	* 均值和方差是有一些噪声的：因为只是某一个mini-batch所计算出来的
 	* **结果：在隐藏层的激活值上增加了噪音**。标准偏差的缩放和减去均值带来的额外噪音。
-	* dropout：也是增加噪音，隐藏单元已一定的概率乘以0或者1，应用较大的mini-batch可以减少正则化效果。
-	* 分析：标准偏差的缩放和减去均值带来的额外噪音。使得后部分的神经元不过度依赖于任何一个隐藏单元，所有有轻微的正则化效果。效果没有dropout那么强。![](http://www.ai-start.com/dl2017/images/0feb6ee8af40238fc1374131bc517e35.png)
+	* dropout：也是增加噪音，隐藏单元以一定的概率乘以0或者1，应用较大的mini-batch可以减少正则化效果。
+	* 分析：标准偏差的缩放和减去均值带来的额外噪音。使得后部分的神经元不过度依赖于任何一个隐藏单元，所以有轻微的正则化效果。效果没有dropout那么强。![](http://www.ai-start.com/dl2017/images/0feb6ee8af40238fc1374131bc517e35.png)
 
 ---
 
 ### 测试时的batch归一化
 
 * 训练：以mini-batch的形式进行
-* 测试：不能讲一个mini-batch的样本同时处理，因为每次只是预测一个样本（此时均值和方差没有意义）。
+* 测试：不能将一个mini-batch的样本同时处理，因为每次只是预测一个样本（此时均值和方差没有意义）。
 * **方法：为了将神经网络运用于测试，需要单独估算平均值和方差**
 	* 原理：使用指数加权平均对均值和方差进行追踪，以计算指数加权平均值
-	* 具体：对于某一层l，有很多歌mini-batch，没有每一个mini-batch都可以计算均值和方差。然后使用指数加权平均计算均值和方差，这个均值和方差就是在测试的时候用到的。![](http://www.ai-start.com/dl2017/images/9e64b0cb330797ece66c0a56958bfcca.png)
+	* 具体：对于某一层l，有很多个mini-batch，每一个mini-batch都可以计算均值和方差。然后使用指数加权平均计算均值和方差，这个均值和方差就是在测试的时候用到的。![](http://www.ai-start.com/dl2017/images/9e64b0cb330797ece66c0a56958bfcca.png)
 
 ---
 
@@ -180,13 +180,13 @@ tags: [python, machine learning]
 	* 输出：一个向量，表示了每一个类别的概率 ![](http://www.ai-start.com/dl2017/images/e65ba7b81d0b02d021c33bf0094f4059.png)
 * 为什么能做到多分类？
 	* softmax层+输出层实现
-	* softmax：多所有元素求幂，然后每个求幂元素的除以总的幂元素和(归一化)，得到对应的幂指数数值的概率 ![](http://www.ai-start.com/dl2017/images/08e51a30d97c877410fed7f7dbe1203f.png)
+	* softmax：对所有元素求幂，然后每个求幂元素的除以总的幂元素和(归一化)，得到对应的幂指数数值的概率 ![](http://www.ai-start.com/dl2017/images/08e51a30d97c877410fed7f7dbe1203f.png)
 	* 求幂指数概率的过程可看成是一个激活函数
 	* softmax激活函数：将所有可能的输出归一化，所以输入一个向量，输出也是一个向量，能够实现多分类
 * softmax分类器：
 	* 还能干什么？实现多类的线性划分
 	* 例子：没有中间隐藏层的网络，输入层+softmax层+输出层
-	* 可以看到，当类别数=3时，一个softmax层可以实现线性决策边界的划分。同样的，对于其他能够两两之间线性分隔的，都可以在多分类的情况下呗softmax分类器区分开来。![](http://www.ai-start.com/dl2017/images/1dc4bf21b6e38cbe9bdfb729ed969c99.png)
+	* 可以看到，当类别数=3时，一个softmax层可以实现线性决策边界的划分。同样的，对于其他能够两两之间线性分隔的，都可以在多分类的情况下被softmax分类器区分开来。![](http://www.ai-start.com/dl2017/images/1dc4bf21b6e38cbe9bdfb729ed969c99.png)
 	* 在类别数目C=5或者6的时候，也是可以实现的 ![](http://www.ai-start.com/dl2017/images/7207527be03bc1daec77afb6c29b8533.png)
 
 ---
