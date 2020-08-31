@@ -98,7 +98,7 @@ tags: [python, machine learning]
 * 如何使用逻辑回归？
 	* 输入是两个图片，对应两个编码的特征向量
 	* 这两个特征向量之间是有关系的
-	* 可以**使用对应特征索性的差值**，输入到逻辑回归单元
+	* 可以**使用对应特征属性的差值**，输入到逻辑回归单元
 	* 也可以使用其他的变换，比如x平方相似度输入到逻辑单元
 	* 最后的输出是0（不同人）或者1（同一人） [![20191009212125](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191009212125.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191009212125.png)
 * 训练集：

@@ -48,10 +48,10 @@ tags: [python, machine learning]
 	* 学习词嵌入的算法会考察非常大的文本集
 * 词嵌入做迁移学习：
 	* 基于大量的文本集中学习词嵌入。下载文本集或者训练好的模型。
-	* 把词模型迁移到新的只有少量标注训练集的任务中。比如下载的训练好的模型对每个词是300维向量表示，那么久可以用这个来表示自己的数据集，而摒弃比如说one-hot编码的方式。
+	* 把词模型迁移到新的只有少量标注训练集的任务中。比如下载的训练好的模型对每个词是300维向量表示，那么就可以用这个来表示自己的数据集，而摒弃比如说one-hot编码的方式。
 	* 自行选择是否微调模型。如果上一步中自己有很多的数据，可以微调，如果数据很少，不必微调。
 	* 应用：命名实体识别、文本摘要、文本解析、指代消解，非常标准的NLP任务中 
-	* 在语言模型、机器翻译用的少，因为这种任务中数据集很大。迁移学习在任务数据量很少你的时候比较适用。[![20191011132706](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191011132706.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191011132706.png)
+	* 在语言模型、机器翻译用的少，因为这种任务中数据集很大。迁移学习在任务数据量很少的时候比较适用。[![20191011132706](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191011132706.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191011132706.png)
 * 词嵌入 vs 人脸编码：
 	* 词嵌入：只有固定的词汇表，一些没出现过的单词记为未知
 	* 人脸编码：用向量表示人脸，未来涉及到海量的人脸照片
