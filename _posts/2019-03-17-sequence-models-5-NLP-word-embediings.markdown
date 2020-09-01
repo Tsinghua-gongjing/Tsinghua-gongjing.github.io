@@ -145,6 +145,7 @@ tags: [python, machine learning]
 定义的模型：
 
 ```python
+class CBOW(nn.Module):
     def __init__(self, vocab_size, embd_size, context_size, hidden_size):
         super(CBOW, self).__init__()
         self.embeddings = nn.Embedding(vocab_size, embd_size)
