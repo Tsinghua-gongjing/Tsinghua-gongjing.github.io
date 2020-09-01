@@ -99,7 +99,7 @@ tags: [python, machine learning]
 	* B越小，考虑的选择越少，找到的句子可能不好，但是计算代价越小
 	* 例子中使用的是3，实践中是偏小的
 	* 在产品中可设置到10，100可能是偏大的
-	* 束宽1变为3，模型的效果可能有所提升；束宽1000变为3000，模型的效果可能没有哦太多提升。
+	* 束宽1变为3，模型的效果可能有所提升；束宽1000变为3000，模型的效果可能没有太多提升。
 
 ---
 
@@ -116,7 +116,7 @@ tags: [python, machine learning]
 	
 	* 做法：使用RNN模型计算两个概率，一个是在给定x下，人的翻译的条件概率：$$P(y^*\|x)$$；一个是在给定x下，算法的翻译的条件概率：$$P(\overline{y}\|x)$$
 	* 判断：如果$$P(y^*\|x)$$大于$$P(\overline{y}\|x)$$，真实的人的翻译比算法选择的更好，但是最后搜索算法选择了现在的$$\overline{y}$$，说明是集束搜索算法出现了问题。
-	* 判断：如果$$P(y^*\|x)$$小于$$P(\overline{y}\|x)$$，其实的情况是真实的人的翻译比算法选择的更好，但是算法确计算出前者概率更小，算法也确实是输出了基于RNN的更好的$$P(\overline{y}\|x)$$，所以算法没有问题，是RNN模型本身不够好。[![20191013172455](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191013172455.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191013172455.png)
+	* 判断：如果$$P(y^*\|x)$$小于$$P(\overline{y}\|x)$$，真实的情况是真实的人的翻译比算法选择的更好，但是算法却计算出前者概率更小，算法也确实是输出了基于RNN的更好的$$P(\overline{y}\|x)$$，所以算法没有问题，是RNN模型本身不够好。[![20191013172455](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191013172455.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191013172455.png)
 * 误差分析：
 	* 遍历数据集或者挑选一些例子
 	* 对于每个例子，用RNN模型计算上面提到的概率值
@@ -175,7 +175,7 @@ tags: [python, machine learning]
 * 注意力模型：让神经网络只注意到一部分的输入句子，所以当生成句子的时候，更像人类翻译。![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191014010244.png)
 * 计算注意力：
 	* 使用对数形式，保证值的加和为1 ![](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191014010338.png)
-	* 缺点：话费三次方的时间
+	* 缺点：花费三次方的时间
 	* 一般输出的句子不会太长，三次方也许是可以接受的
 
 ---
