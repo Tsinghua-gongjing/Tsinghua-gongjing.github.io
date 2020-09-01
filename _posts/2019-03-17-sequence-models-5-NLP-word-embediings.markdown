@@ -117,7 +117,7 @@ tags: [python, machine learning]
 
 * Skip-Gram：
 	* 抽取上下文和目标配对，来构造一个监督学习问题
-	* 随机选取一个词错位上下文词（context）
+	* 随机选取一个词作为上下文词（context）
 	* 在一定词距内选另一个词，比如前后5或者10个词，在这个范围内随机选取词（目标词，Target）
 	* 构造监督学习问题：根据上下文词，预测一定词距内随机选择的某个目标词 [![20191011170414](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191011170414.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191011170414.png)
 * 模型：
@@ -140,6 +140,37 @@ tags: [python, machine learning]
 * Skip-Gram vs CBOW：
 	* skip-gram：输入一个词，预测其前面或者后面是什么词。从目标字词推测出原始语句。【造句】
 	* CBOW：continuous bag-of-words model，获得中间词两边的上下文，然后预测中间的词。从原始语句推测目标字词。【完形填空】[![20191011194428](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191011194428.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191011194428.png)
+* 参考这里[word2vec-pytorch/word2vec.ipynb](https://github.com/jojonki/word2vec-pytorch/blob/master/word2vec.ipynb)看两种模型的具体实现
+
+定义的模型：
+
+```python
+    def __init__(self, vocab_size, embd_size, context_size, hidden_size):
+        super(CBOW, self).__init__()
+        self.embeddings = nn.Embedding(vocab_size, embd_size)
+        self.linear1 = nn.Linear(2*context_size*embd_size, hidden_size)
+        self.linear2 = nn.Linear(hidden_size, vocab_size)
+        
+    def forward(self, inputs):
+        embedded = self.embeddings(inputs).view((1, -1))
+        hid = F.relu(self.linear1(embedded))
+        out = self.linear2(hid)
+        log_probs = F.log_softmax(out)
+        return log_probs
+
+class SkipGram(nn.Module):
+    def __init__(self, vocab_size, embd_size):
+        super(SkipGram, self).__init__()
+        self.embeddings = nn.Embedding(vocab_size, embd_size)
+    
+    def forward(self, focus, context):
+        embed_focus = self.embeddings(focus).view((1, -1))
+        embed_ctx = self.embeddings(context).view((1, -1))
+        score = torch.mm(embed_focus, torch.t(embed_ctx))
+        log_probs = F.logsigmoid(score)
+    
+        return log_probs
+```
 
 ---
 
@@ -166,6 +197,42 @@ tags: [python, machine learning]
 	* 方案1：根据词出现的频率进行采样。the、an这类词会很高频。
 	* 方案2：均匀随机抽样，对于英文单词的分布非常没有代表性。
 	* 方案3：根据这个频率值来选取，$$P(w_i)=\frac{f(w_i)^{\frac{3}{4}}}{\sum_{j=1}^{100000}f(w_i)^{\frac{3}{4}}}$$。通过词频的3/4次方的计算，使其处于完全独立的分布和训练集的观测分布两个极端之间。
+
+对于skim-gram和CBOW两种模型，根据给定的text数据生成训练数据的方式：
+
+```python
+# context window size is two
+def create_cbow_dataset(text):
+    data = []
+    for i in range(2, len(text) - 2):
+        context = [text[i - 2], text[i - 1],
+                   text[i + 1], text[i + 2]]
+        target = text[i]
+        data.append((context, target))
+    return data
+
+def create_skipgram_dataset(text):
+    import random
+    data = []
+    for i in range(2, len(text) - 2):
+        data.append((text[i], text[i-2], 1))
+        data.append((text[i], text[i-1], 1))
+        data.append((text[i], text[i+1], 1))
+        data.append((text[i], text[i+2], 1))
+        # negative sampling
+        for _ in range(4):
+            if random.random() < 0.5 or i >= len(text) - 3:
+                rand_id = random.randint(0, i-1)
+            else:
+                rand_id = random.randint(i+3, len(text)-1)
+            data.append((text[i], text[rand_id], 0))
+    return data
+
+cbow_train = create_cbow_dataset(text)
+skipgram_train = create_skipgram_dataset(text)
+print('cbow sample', cbow_train[0])
+print('skipgram sample', skipgram_train[0])
+```
 
 ---
 
