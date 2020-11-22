@@ -65,3 +65,45 @@ SELECT * FROM (
 |HAVING|组级过滤|否|
 |ORDER BY|输出排序顺序|否|
 |LIMIT|要检索的行数|否|
+
+---
+
+### `LIMIT`的用法
+
+* 用法：`select * from tableName limit i,n`
+* `i`：查询结果的索引值，默认从n开始
+* `n`：查询结果返回的数量
+
+```sql
+--检索前10行数据，显示1-10条数据
+select * from Customer LIMIT 10;
+
+--检索从第2行开始，累加10条id记录，共显示id为2....11
+select * from Customer LIMIT 1,10;
+
+--检索从第6行开始向前加10条数据，共显示id为6,7....15
+select * from Customer limit 5,10;
+
+--检索从第7行开始向前加10条记录，显示id为7,8...16
+select * from Customer limit 6,10;
+```
+
+---
+
+### `OFFSET`的用法
+
+* 用法：`OFFSET n`
+* `n`：表示跳过n个记录
+* 注意：当 limit和offset组合使用的时候，limit后面只能有一个参数，表示要取的的数量，offset表示要跳过的数量。
+
+```sql
+-- 跳过第一个记录
+select * from article OFFSET 1
+
+-- 跳过第一个记录，提取接下来的3个记录
+-- 当LIMIT和OFFSET联合使用的时候，limit后面只能有一个参数
+select * from article LIMIT 3 OFFSET 1
+
+-- 跳过第一个记录，从index=1开始，提取接下来的3个记录
+select* from article LIMIT 1,3
+```
