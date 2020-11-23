@@ -112,3 +112,13 @@ IRkernel::installspec(user = FALSE)
 ```
 
 比如是在集群上安装的，之后打开jupyter-lab后，可以看到启动界面多了一个R的选择：[![20190822095638](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190822095638.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20190822095638.png)
+
+---
+
+### df禁用科学计数法
+
+有时在显示df（比如head，describe），数字会以科学计数法的方式展现，而不知道具体的比如百分比数字大小，可以设置禁用科学计数法表示：
+
+```python
+pd.set_option('display.float_format',lambda x : '%.2f' % x)
+```
