@@ -122,3 +122,14 @@ IRkernel::installspec(user = FALSE)
 ```python
 pd.set_option('display.float_format',lambda x : '%.2f' % x)
 ```
+
+---
+
+### 显示df而不是print
+
+通过下面的display命令可以将df显示为带有表格的table，而不是直接打印print(df)的效果：
+
+```python
+from IPython.display import display
+display(df)
+```
