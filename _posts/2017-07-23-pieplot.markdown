@@ -59,6 +59,7 @@ cmap = plt.get_cmap("tab20c")
 outer_colors = cmap(np.arange(4)*4)
 # inner_colors = cmap(np.array([1, 2, 5, 6, 9, 10]))
 
+# edgecolor='w' 可以设置不同的patch之间有白线，看起来更美观一些？
 ax.pie(val1, radius=1, colors=outer_colors,
        wedgeprops=dict(width=size, edgecolor='w'), labels=['A', 'T', 'C', 'G'],autopct='%1.2f%%')
 

@@ -332,6 +332,15 @@ g.ax_joint.text(0.05, 0.9, s, ha='left', va='top', size=20, transform=g.ax_joint
 
 [![20191127155119](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191127155119.png)](https://raw.githubusercontent.com/Tsinghua-gongjing/blog_codes/master/images/20191127155119.png)
 
+### set ylabel on the right
+
+参考[这里](https://stackoverflow.com/questions/13369888/matplotlib-y-axis-label-on-right-side)
+
+```python
+ax.yaxis.set_label_position("right")
+ax.yaxis.tick_right()
+```
+
 
 ## 2. Seaborn plot
 

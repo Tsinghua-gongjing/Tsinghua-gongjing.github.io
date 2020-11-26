@@ -231,6 +231,20 @@ fig.show()
 
 [![kmeans_demo_iris.png](https://i.loli.net/2019/07/11/5d26dea82e05316661.png)](https://i.loli.net/2019/07/11/5d26dea82e05316661.png)
 
+选择合适的K，可参考[这里](https://www.cnblogs.com/wuchuanying/p/6264025.html)：
+
+```python
+from sklearn.cluster import KMeans
+from sklearn import metrics
+from nested_dict import nested_dict
+
+silhouette_score_dict = nested_dict(1, int)
+for k in range(3, 15):
+    kmeans_model = KMeans(n_clusters=k, random_state=0).fit(df_select_01)
+    silhouette_score = metrics.silhouette_score(df_select_01, kmeans_model.labels_,metric='euclidean')
+    print(k, silhouette_score)
+    silhouette_score_dict[k] = silhouette_score
+```
 ---
 
 ### 参考
