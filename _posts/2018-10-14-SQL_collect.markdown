@@ -107,3 +107,52 @@ select * from article LIMIT 3 OFFSET 1
 -- 跳过第一个记录，从index=1开始，提取接下来的3个记录
 select* from article LIMIT 1,3
 ```
+
+---
+
+### `case...when...`用法
+
+条件表达式函数：
+
+```sql
+CASE WHEN condition THEN result
+ 
+[WHEN...THEN...]
+ 
+ELSE result
+ 
+END
+```
+
+例子：
+
+```sql
+SELECT
+    STUDENT_NAME,
+    (CASE WHEN score < 60 THEN '不及格'
+        WHEN score >= 60 AND score < 80 THEN '及格' ---不能连续写成 60<=score<80
+        WHEN score >= 80 THEN '优秀'
+        ELSE '异常' END) AS REMARK
+FROM
+    TABLE
+```
+
+---
+
+### 计算每个类别的数目及占比
+
+参考这里：[Percentage from Total SUM after GROUP BY SQL Server](https://stackoverflow.com/questions/46909494/percentage-from-total-sum-after-group-by-sql-server)：
+
+```sql
+--- count based
+--- 要加和的是总entry数目
+SELECT
+ t.device_model,
+ COUNT(t.device_model) AS num,
+ COUNT(t.device_model)/SUM(COUNT(t.device_model)) OVER () AS Percentage
+ 
+ --- sum based
+ --- 要加和是另外一列
+ SELECT P.PersonID, SUM(PA.Total),
+       SUM(PA.Total) * 100.0 / SUM(SUM(PA.Total)) OVER () AS Percentage
+```
