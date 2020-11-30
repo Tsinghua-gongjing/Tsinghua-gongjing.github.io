@@ -347,6 +347,11 @@ ax.yaxis.tick_right()
 ### Set color list instead of seaborn default
 
 ```python
+# get python default color list
+# https://stackoverflow.com/questions/42086276/get-default-line-colour-cycle
+# color_ls = plt.rcParams['axes.prop_cycle'].by_key()['color']
+
+# seaborn color list
 color_stages = sns.color_palette('Set1',n_colors=7, desat=0.8)
 my_pal = {'egg':color_stages[0], '1cell': color_stages[1], '4cell': color_stages[2], '64cell': color_stages[3], '1K': color_stages[4], 'sphere':color_stages[5], 'shield':color_stages[6]}
 
