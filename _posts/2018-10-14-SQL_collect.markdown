@@ -156,3 +156,25 @@ SELECT
  SELECT P.PersonID, SUM(PA.Total),
        SUM(PA.Total) * 100.0 / SUM(SUM(PA.Total)) OVER () AS Percentage
 ```
+
+---
+
+### hive中时间与字符串的转换
+
+参考[这里](https://blog.csdn.net/u013421629/article/details/80068090)，注意不用于直接sql中的函数:
+
+```sql
+--方法1: from_unixtime+ unix_timestamp
+--20171205转成2017-12-05 
+select from_unixtime(unix_timestamp('20171205','yyyymmdd'),'yyyy-mm-dd') from dual;
+
+--2017-12-05转成20171205
+select from_unixtime(unix_timestamp('2017-12-05','yyyy-mm-dd'),'yyyymmdd') from dual;
+
+--方法2: substr + concat
+--20171205转成2017-12-05 
+select concat(substr('20171205',1,4),'-',substr('20171205',5,2),'-',substr('20171205',7,2)) from dual;
+
+--2017-12-05转成20171205
+select concat(substr('2017-12-05',1,4),substr('2017-12-05',6,2),substr('2017-12-05',9,2)) from dual;
+```
