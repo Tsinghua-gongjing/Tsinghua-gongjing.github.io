@@ -200,3 +200,39 @@ WITH query_name1 AS (
 SELECT ...
 ```
 
+---
+
+### SQL书写规范
+
+* 所有表名、字段名全部小写，系统保留字、内置函数名、Sql保留字大写
+* 对较为复杂的sql语句加上注释
+* 注释单独成行、放在语句前面，可采用单行/多行注释。（-- 或 /* */ 方式）
+* where子句书写时，每个条件占一行，语句令起一行时，以保留字或者连接符开始，连接符右对齐
+* 多表连接时，使用表的别名来引用列
+
+参考：[SQL书写规范](https://www.cnblogs.com/yangkunlisi/archive/2011/09/14/2176773.html)
+
+---
+
+### hive使用变量
+
+```sql
+-- 获取1-2号的新设备
+-- SET时不用添加引号，使用时添加引号
+SET date1 = 20180701;
+SET date2 = 20180702;
+SET app = app_name;
+
+WITH new_did AS (
+  SELECT
+    p_date,
+    device_id
+  FROM
+    your_table
+  WHERE
+    p_date BETWEEN '${hiveconf:pdate1}'
+    AND '${hiveconf:pdate2}'
+    AND product = '${hiveconf:app}'
+    AND is_today_new = 1
+)
+```
