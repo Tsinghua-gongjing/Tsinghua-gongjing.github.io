@@ -236,3 +236,32 @@ WITH new_did AS (
     AND is_today_new = 1
 )
 ```
+
+---
+
+### hive保存与更新表
+
+```sql
+-- 设置变量名称，放在最前面
+SET pdate1 = 20200701;
+SET pdate1 = 20200702;
+
+-- DROP TABLE IF EXISTS `save_table_name`; -- 不允许有drop操作
+-- CREATE TABLE IF NOT EXISTS `save_table_name ` AS -- 建表时放在这with...as前
+WITH new_did AS (
+  -- 每日新设备
+  SELECT
+    p_date,
+    device_id
+  FROM
+    tA
+  WHERE
+    p_date BETWEEN '${hiveconf:pdate1}'
+    AND '${hiveconf:pdate2}'
+)
+
+INSERT OVERWRITE TABLE `save_table_name` -- 更新表时放在select前
+SELECT
+  tA.p_date,
+  ......
+```
