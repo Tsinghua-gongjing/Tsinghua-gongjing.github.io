@@ -178,3 +178,25 @@ select concat(substr('20171205',1,4),'-',substr('20171205',5,2),'-',substr('2017
 --2017-12-05转成20171205
 select concat(substr('2017-12-05',1,4),substr('2017-12-05',6,2),substr('2017-12-05',9,2)) from dual;
 ```
+
+---
+
+### `with as`用法
+
+* 子查询部分（subquery factoring），是用来定义一个SQL片断，该SQL片断会被整个SQL语句所用到。这个语句算是公用表表达式（CTE）
+* 尤其是多表查询，后面跟随多个join时，比如先确定需要查询哪些用户或者设备
+* 支持多个子查询
+
+```sql
+--后面就可以直接把query_name1，query_name2当做表格来用了
+WITH query_name1 AS (
+     SELECT ...
+     )
+   , query_name2 AS (
+     SELECT ...
+       FROM query_name1
+        ...
+     )
+SELECT ...
+```
+
