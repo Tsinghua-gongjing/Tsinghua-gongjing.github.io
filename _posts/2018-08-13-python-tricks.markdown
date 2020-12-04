@@ -322,3 +322,18 @@ pip install scrapy -i https://pypi.tuna.tsinghua.edu.cn/simple
 [global]
 index-url = https://pypi.tuna.tsinghua.edu.cn/simple
 ```
+
+---
+
+### 获取一列数对应的排序
+
+参考[Efficient method to calculate the rank vector of a list in Python](https://stackoverflow.com/questions/3071415/efficient-method-to-calculate-the-rank-vector-of-a-list-in-python)：
+
+```python
+import scipy.stats as ss
+ss.rankdata([3, 1, 4, 15, 92])
+# array([ 2.,  1.,  3.,  4.,  5.])
+
+ss.rankdata([1, 2, 3, 3, 3, 4, 5])
+# array([ 1.,  2.,  4.,  4.,  4.,  6.,  7.])
+```
