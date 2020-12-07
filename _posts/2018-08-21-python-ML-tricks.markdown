@@ -143,3 +143,44 @@ outliers  = [95, 338, 86, 75, 161, 183, 154] # 选择需要删除的异常值ind
 
 good_data = log_data.drop(log_data.index[outliers]).reset_index(drop = True) #删除选择的异常值
 ```
+
+---
+
+### PCA
+
+参考这里：[Feature/Variable importance after a PCA analysis](https://stackoverflow.com/questions/50796024/feature-variable-importance-after-a-pca-analysis)，下面是一个完整的函数，并给出每个特征的重要性及可解释比例：
+
+```python
+def PCA_df(df, n_components=6):
+    from sklearn.decomposition import PCA
+    pca = PCA(n_components=n_components)
+    pca.fit(df)
+    
+    df_pc = pca.transform(df)
+
+    # number of components
+    n_pcs= pca.components_.shape[0]
+
+    # get the index of the most important feature on EACH component
+    # LIST COMPREHENSION HERE
+    most_important = [np.abs(pca.components_[i]).argmax() for i in range(n_pcs)]
+    # print('feature index of importance from 1st to last', most_important)
+    
+    initial_feature_names = df.columns
+    # get the names
+    most_important_names = [initial_feature_names[most_important[i]] for i in range(n_pcs)]
+
+    # LIST COMPREHENSION HERE AGAIN
+    dic = {'PC{}'.format(i): most_important_names[i] for i in range(n_pcs)}
+
+    # build the dataframe
+    feature_importance_df = pd.DataFrame(dic.items())
+    
+    feature_importance_df.columns = ['PC', 'Names']
+    feature_importance_df['Column_index'] = most_important
+    feature_importance_df['Explained_variance_ratio'] = pca.explained_variance_ratio_
+    feature_importance_df['Singular_values'] = pca.singular_values_
+    display(feature_importance_df)
+    
+    return feature_importance_df
+```
