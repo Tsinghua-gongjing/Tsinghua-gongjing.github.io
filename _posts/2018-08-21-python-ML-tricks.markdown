@@ -125,3 +125,21 @@ out1, _ = self.lstm(x, (h0, c0))
 
 ---
 
+### 异常值处理：Tukey's Method
+
+* 计算异常值步进，即1.5倍的四分位数范围
+* 所有IQR外超过异常值步进的数据定义为异常值并去除
+
+```python
+for feature in log_data.keys():
+    Q1 = np.percentile(log_data[feature], 25)
+    Q3 = np.percentile(log_data[feature], 75)
+    step = 1.5 * (Q3 - Q1)
+
+    print("特征'{}'的异常值包括:".format(feature))
+    display(log_data[~((log_data[feature] >= Q1 - step) & (log_data[feature] <= Q3 + step))])
+
+outliers  = [95, 338, 86, 75, 161, 183, 154] # 选择需要删除的异常值index
+
+good_data = log_data.drop(log_data.index[outliers]).reset_index(drop = True) #删除选择的异常值
+```
