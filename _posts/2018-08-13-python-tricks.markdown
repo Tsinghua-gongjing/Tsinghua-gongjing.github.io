@@ -337,3 +337,15 @@ ss.rankdata([3, 1, 4, 15, 92])
 ss.rankdata([1, 2, 3, 3, 3, 4, 5])
 # array([ 1.,  2.,  4.,  4.,  4.,  6.,  7.])
 ```
+
+---
+
+### 计算df中每一列的缺失值比例
+
+参考[这里](https://stackoverflow.com/questions/51070985/find-out-the-percentage-of-missing-values-in-each-column-in-the-given-dataset):
+
+```python
+percent_missing = df.isnull().sum() * 100 / len(df)
+missing_value_df = pd.DataFrame({'column_name': df.columns,
+                                 'percent_missing': percent_missing})
+```
