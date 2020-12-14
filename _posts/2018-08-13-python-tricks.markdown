@@ -349,3 +349,67 @@ percent_missing = df.isnull().sum() * 100 / len(df)
 missing_value_df = pd.DataFrame({'column_name': df.columns,
                                  'percent_missing': percent_missing})
 ```
+
+---
+
+### 在jupyter中使用运行时间
+
+参考[Python获取代码运行时间的几种方法](https://blog.csdn.net/asialee_bird/article/details/79673860)：
+
+```python
+import time
+start =time.clock()
+#中间写上代码块
+end = time.clock()
+print('Running time: %s Seconds'%(end-start))
+```
+
+---
+
+### df中分组，将某一列合并为一行
+
+参考[这里](https://stackoverflow.com/questions/38127209/how-to-use-groupby-to-concatenate-strings-in-python-pandas)：
+
+```python
+In [326]:
+df = pd.DataFrame({'id':['a','a','b','c','c'], 'words':['asd','rtr','s','rrtttt','dsfd']})
+df
+
+Out[326]:
+  id   words
+0  a     asd
+1  a     rtr
+2  b       s
+3  c  rrtttt
+4  c    dsfd
+
+In [327]:
+df.groupby('id')['words'].apply(','.join)
+
+Out[327]:
+id
+a        asd,rtr
+b              s
+c    rrtttt,dsfd
+Name: words, dtype: object
+
+# 注意，这里是有两行，所以以id进行group之后，只剩下word
+# groupby之后是得到一个df
+# groupby()[col]是选取对应的column，但是选出的column是series，不是直接的list
+df.groupby('photo_id')['like_flag'].apply(lambda x: np.cumsum(list(x))).to_dict()
+```
+
+---
+
+### 对于数组计算累计值
+
+参考[这里](https://stackoverflow.com/questions/15889131/how-to-find-the-cumulative-sum-of-numbers-in-a-list)：
+
+```python
+import numpy as np
+
+a = [4,6,12]
+
+np.cumsum(a)
+#array([4, 10, 22])
+```
