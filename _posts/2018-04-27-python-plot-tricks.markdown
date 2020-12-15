@@ -341,6 +341,38 @@ ax.yaxis.set_label_position("right")
 ax.yaxis.tick_right()
 ```
 
+### 画双y轴的图
+
+[官网例子](https://matplotlib.org/3.1.1/gallery/subplots_axes_and_figures/two_scales.html#sphx-glr-gallery-subplots-axes-and-figures-two-scales-py)：
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Create some mock data
+t = np.arange(0.01, 10.0, 0.01)
+data1 = np.exp(t)
+data2 = np.sin(2 * np.pi * t)
+
+fig, ax1 = plt.subplots()
+
+color = 'tab:red'
+ax1.set_xlabel('time (s)')
+ax1.set_ylabel('exp', color=color)
+ax1.plot(t, data1, color=color)
+ax1.tick_params(axis='y', labelcolor=color)
+
+ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
+
+color = 'tab:blue'
+ax2.set_ylabel('sin', color=color)  # we already handled the x-label with ax1
+ax2.plot(t, data2, color=color)
+ax2.tick_params(axis='y', labelcolor=color)
+
+fig.tight_layout()  # otherwise the right y-label is slightly clipped
+plt.show()
+```
+
 
 ## 2. Seaborn plot
 
@@ -427,6 +459,19 @@ No `size` argument in `sns.heatmap` function, can only set by `plt` as discussed
 ```python
 fig,ax = plt.subplots(figsize=(10, 16))
 sns.heatmap(..., ax=ax)
+```
+
+### 设置heatmap注释数值自字体大小
+
+使用`annot_kws`字典参数，参考[这里](https://stackoverflow.com/questions/33104322/auto-adjust-font-size-in-seaborn-heatmap)：
+
+```python
+sns.heatmap(corrmat, 
+	vmin=corrmat.values.min(), 
+	vmax=1, square=True, cmap="YlGnBu", 
+	linewidths=0.1, annot=True, 
+	annot_kws={"fontsize":8})  
+
 ```
 
 ### Merge symmetry matrix value to one side 

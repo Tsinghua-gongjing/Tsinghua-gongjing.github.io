@@ -413,3 +413,27 @@ a = [4,6,12]
 np.cumsum(a)
 #array([4, 10, 22])
 ```
+
+---
+
+### 对于df指定列，找出最接近某个输入值的行
+
+参考[这里](https://stackoverflow.com/questions/30112202/how-do-i-find-the-closest-values-in-a-pandas-series-to-an-input-number)：
+
+```python
+   num
+0    1
+1    6
+2    4
+3    5
+4    2
+
+input = 3
+
+# 这里是选取的最接近的前2个，控制index可选择1个等
+df.iloc[(df['num']-input).abs().argsort()[:2]]
+
+   num
+2    4
+4    2
+```

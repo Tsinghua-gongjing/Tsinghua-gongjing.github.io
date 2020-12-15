@@ -184,3 +184,30 @@ def PCA_df(df, n_components=6):
     
     return feature_importance_df
 ```
+
+---
+
+### Python3.7sklearn包中缺失Imputer函数
+
+参考[这里](https://blog.csdn.net/qq_39954916/article/details/106109931)：
+
+```python
+import numpy as np
+import sklearn
+from sklearn import preprocessing
+from sklearn.preprocessing import Imputer
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: cannot import name 'Imputer' from 'sklearn.preprocessing' (E:\python\lib\site-packages\sklearn\preprocessing\__init__.py)
+
+# 现在
+# https://scikit-learn.org/stable/modules/impute.html#impute
+from sklearn.impute import SimpleImputer
+ 
+imp = SimpleImputer()
+imp.fit([[1, 2], 
+         [np.nan, 3], 
+         [7, 6]])
+imp.transform([[np.nan, 2], 
+               [6, np.nan]])
+```
