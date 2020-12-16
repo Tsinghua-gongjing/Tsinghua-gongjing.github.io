@@ -437,3 +437,69 @@ df.iloc[(df['num']-input).abs().argsort()[:2]]
 2    4
 4    2
 ```
+
+---
+
+### 使用模块管理工具`importlib`
+
+构建文件目录：
+
+```bash
+gongjing@bjzyx-c451:~/gj_py_func $ pwd
+/home/gongjing/gj_py_func
+
+gongjing@bjzyx-c451:~/gj_py_func $ lst
+.
+  |-list.py
+  |-file.py
+  |-dataframe.py
+  |-init.py
+  |-__pycache__
+  |  |-list.cpython-37.pyc
+  |  |-file.cpython-37.pyc
+  |  |-dataframe.cpython-37.pyc
+  |  |-load_packages.cpython-37.pyc
+  |-.ipynb_checkpoints
+  |  |-file-checkpoint.py
+  |  |-dataframe-checkpoint.py
+  |  |-list-checkpoint.py
+```
+
+调用：
+
+```python
+import importlib, sys
+if '/home/gongjing/' not in sys.path: sys.path.append('/home/gongjing/')
+
+func_df = importlib.import_module('.dataframe', package='gj_py_func')
+func_file = importlib.import_module('.file', package='gj_py_func')
+func_ls = importlib.import_module('.list', package='gj_py_func')
+
+importlib.reload(func_df)
+importlib.reload(func_file)
+importlib.reload(func_ls)
+
+# 查看模块信息，包含哪些函数
+help(func_df)
+Help on module gj_py_func.dataframe in gj_py_func:
+
+NAME
+    gj_py_func.dataframe
+
+FUNCTIONS
+    df_col_missing_pct(df)
+    
+    df_col_sum(df)
+    
+    df_norm_by_colsum(df)
+    
+    df_norm_by_rowsum(df)
+    
+    df_row_sum(df)
+    
+    load_data(fn, col_ls=None)
+
+FILE
+    /home/gongjing/gj_py_func/dataframe.py
+
+```
