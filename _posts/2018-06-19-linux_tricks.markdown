@@ -391,3 +391,34 @@ rsync -aP download_20191204 gongjing@10.10.91.12:/home/gongjing/
 # 同步文件
 rsync -aP ./Untitled.ipynb gongjing@10.10.91.12:/home/gongjing/scripts
 ```
+
+---
+
+## linux更改终端颜色
+
+参考[这里](https://blog.csdn.net/vactivx/article/details/62219349)：
+
+```bash
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+unset color_prompt force_color_prompt
+
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;33;1m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] \$ '
+```
+
+---
+
+## 常用alias
+
+```bash
+# User specific aliases and functions
+alias vb='vi ~/.bashrc'
+alias sb='source ~/.bashrc'
+alias les='less -S'
+alias wl='wc -l'
+alias lt='ls -lht'
+alias ll='ls -lh'
+```

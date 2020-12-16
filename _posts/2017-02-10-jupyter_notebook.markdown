@@ -133,3 +133,9 @@ pd.set_option('display.float_format',lambda x : '%.2f' % x)
 from IPython.display import display
 display(df)
 ```
+
+---
+
+### 快捷键
+
+* 切换不同的notebook tab: `ctl+shift+[`左切，`ctl+shift+]`右切
