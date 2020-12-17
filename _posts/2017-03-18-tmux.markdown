@@ -25,6 +25,8 @@ tags: [linux, tmux]
 
 - 修改文件：~/.tmux.conf。现在使用的文件可在[这里](https://github.com/Tsinghua-gongjing/blog_codes/blob/master/files/tmux.conf)下载到，同时使用``和`Ctl+b`作为前置键。
 - 进入tmux终端
-- 敲击`: source-file ~/.tmux.conf`
+- 敲击`: source-file ~/.tmux.conf` 或者`tmux source ~/.tmux.conf`
+- 可参考的tmux配置： [oh-my-tmux](https://github.com/gpakosz/.tmux)。这个里面可以把前后的window修改一下，默认屏蔽掉了`n,p`选择前后tab的功能.
+- 在tmux里面，可以`前置键+r`直接reload修改后的tmux配置
 
 ---
