@@ -96,6 +96,24 @@ def list_remove_na(ls):
 
 ---
 
+### shuffle a list with seed
+
+参考[这里](https://stackoverflow.com/questions/19306976/python-shuffling-with-a-parameter-to-get-the-same-result)：
+
+```python
+>>> import random
+>>> x = [1, 2, 3, 4, 5, 6]
+>>> random.Random(4).shuffle(x)
+>>> x
+[4, 6, 5, 1, 3, 2]
+>>> x = [1, 2, 3, 4, 5, 6]
+>>> random.Random(4).shuffle(x)
+>>> x
+[4, 6, 5, 1, 3, 2]
+```
+
+---
+
 ## qucik cheatsheet
 
 source: [Python Crash Course - Cheat Sheets](https://ehmatthes.github.io/pcc/cheatsheets/README.html)
