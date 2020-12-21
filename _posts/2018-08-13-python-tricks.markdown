@@ -503,3 +503,15 @@ FILE
     /home/gongjing/gj_py_func/dataframe.py
 
 ```
+
+---
+
+### 对df中缺失值进行填充
+
+参考[这里](https://stackoverflow.com/questions/13295735/how-to-replace-nan-values-by-zeroes-in-a-column-of-a-pandas-dataframe)：
+
+```python
+df.fillna({1:0}, inplace=True)
+
+df[1].fillna(0, inplace=True)
+```
