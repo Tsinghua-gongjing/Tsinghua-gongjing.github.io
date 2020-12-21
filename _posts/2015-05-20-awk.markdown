@@ -117,3 +117,17 @@ $ echo "2 3"|awk 'function abs(v) {return v < 0 ? -v : v} {print abs($1-$2)}'
 $ echo "2 3"|awk '{print sqrt(($1-$2)^2)}'
 1
 ```
+
+---
+
+### 将某个文件按照另一个文件的某一列进行排序
+
+参考[这里](https://stackoverflow.com/questions/16284572/sort-a-file-based-on-a-column-in-another-file)：
+
+```bash
+# 读取第2个文件，$1作为key，整行$0作为value值存储下来
+# 读取第1个文件，因为每个$1都存在X2里面，所以判断直接打印
+# 打印的是原先存储的值，也就是要排序的第2个文件
+# 因而可以完成按照文件1对文件2进行排序
+awk 'FNR==NR {x2[$1] = $0; next} $1 in x2 {print x2[$1]}' second first
+```
