@@ -179,3 +179,17 @@ display(df)
     ]
 }
 ```
+
+---
+
+### df显示时指定千分位符号
+
+参考[这里](https://stackoverflow.com/questions/43102734/format-a-number-with-commas-to-separate-thousands-in-python)：
+
+```python
+# for all columns
+df.head().style.format("{:,.0f}")
+
+# per column
+df.head().style.format({"col1": "{:,.0f}", "col2": "{:,.0f}"})
+```
