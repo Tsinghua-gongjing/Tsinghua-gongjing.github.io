@@ -515,3 +515,19 @@ df.fillna({1:0}, inplace=True)
 
 df[1].fillna(0, inplace=True)
 ```
+
+---
+
+### csv写文件时全为逗号隔开的
+
+参考[这里](https://stackoverflow.com/questions/1816880/why-does-csvwriter-writerow-put-a-comma-after-each-character)：
+
+```python
+if item:
+        JD = item.group()
+        csvwriter.writerow(JD)
+# J,D,",", ,C,o,l,u,m,b,i,a, ,L,a,w, ,S,c,h,o,o,l,....
+
+# one string per row
+csvwriter.writerow([JD])
+```

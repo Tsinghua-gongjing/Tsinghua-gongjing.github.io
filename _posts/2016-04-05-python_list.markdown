@@ -114,6 +114,18 @@ def list_remove_na(ls):
 
 ---
 
+### sort a list based on anther list order
+
+参考[这里](https://stackoverflow.com/questions/59480068/how-to-sort-one-list-based-on-another)：
+
+```python
+# ref: 需要参考的顺序list
+# input：需要排序的list
+[x for x in Ref if x in Input]
+```
+
+---
+
 ## qucik cheatsheet
 
 source: [Python Crash Course - Cheat Sheets](https://ehmatthes.github.io/pcc/cheatsheets/README.html)
