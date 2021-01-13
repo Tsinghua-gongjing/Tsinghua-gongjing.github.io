@@ -531,3 +531,31 @@ if item:
 # one string per row
 csvwriter.writerow([JD])
 ```
+
+---
+
+### 设置`.pythonrc`文件在打开python console时自动执行
+
+参考[这里](http://witkowskibartosz.com/blog/pythonstartup_what_it_is_and_how_to_use_it.html#.X_6cQ-kzZb8)：
+
+1, 写`.pythonrc`文件
+
+```python
+print("how_use_pythonstartup")
+```
+
+2, 设置`PYTHONSTARTUP`变量
+
+```python
+export PYTHONSTARTUP=~/.pythonrc
+```
+
+3, 打开新的console
+
+```python
+Python 2.7.6 (default, Nov 23 2017, 15:49:48)
+[GCC 4.8.4] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+how_use_pythonstartup
+>>>
+```
