@@ -138,6 +138,7 @@ display(df)
 
 ### 快捷键
 
+* code block左缩进：`shift+tab`，参考[这里](https://stackoverflow.com/questions/54700726/block-indent-jupyter-notebook)
 * 切换不同的notebook tab: `ctl+shift+[`左切，`ctl+shift+]`右切
 * 设置：`C+arrowUp`将cell上移动，`C+arrowDown`将cell上移动，`O`将cell的输出collapse，`OO`将cell的输出拓展开。首先要使用`esc`退出编辑模式，进入命令模式。
 ```python
