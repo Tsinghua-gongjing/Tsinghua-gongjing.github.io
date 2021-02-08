@@ -1,0 +1,21 @@
+---
+layout: post
+category: "other"
+title:  "Excel常见用法"
+tags: [excel]
+---
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+- TOC
+{:toc}
+
+---
+
+## mac excel 常见用法
+
+### 指定单元格求和
+
+参考[这里](https://zhidao.baidu.com/question/493490398.html)，在单元格输入`=SUM(`，然后选择需要求和的连续单元格，再按回车键即可
