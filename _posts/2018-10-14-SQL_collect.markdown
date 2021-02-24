@@ -277,3 +277,26 @@ SELECT split('919.99&usd', '&')[0],split('919.99&usd', '&')[1],split('919.99&usd
 _c0	_c1	_c2
 919.99 usd 
 ```
+
+---
+
+### 提取json array中的某个属性
+
+参考[这里](https://blog.csdn.net/fy_sun123/article/details/107056026)：
+
+```sql
+-- 字段信息
+[{"userId":89224,"contactName":"","contactPhone":"+","originPhone":"+"},
+
+{"userId":89223,"contactName":"","contactPhone":"+","originPhone":""},
+
+{"userId":89221,"contactName":"","contactPhone":"+","originPhone":"+"}]
+
+-- sql
+select user_id, get_json_object(contacts,'$[*].userId') as cons
+from XXXX 
+
+-- 提取后
+user_id	cons
+1	107521212	[8397213,85,7418687,304388953,198708241,148,111920,5285539,97773639]
+```
