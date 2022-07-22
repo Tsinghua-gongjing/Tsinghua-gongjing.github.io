@@ -145,5 +145,6 @@ print "Length of LCS is ", lcs(X, Y)
 * [图解算法第九章]()
 * [Python Program for Longest Common Subsequence](https://www.geeksforgeeks.org/python-program-for-longest-common-subsequence/)
 * [动态规划 最长公共子序列 过程图解](https://blog.csdn.net/hrn1216/article/details/51534607)
+* [Dynamic Programming - Scaler Topics](https://www.scaler.com/topics/data-structures/dynamic-programming/)
 
 ---
